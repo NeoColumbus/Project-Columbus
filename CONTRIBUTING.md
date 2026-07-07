@@ -27,15 +27,14 @@ Good first contributions:
 ## The Rules
 
 1. No consultant language.
-2. No Native cosplay.
-3. No fake official affiliation.
-4. No OSU color dependency.
-5. No beige apartment-core.
-6. No policy without beauty.
-7. No beauty without material life.
-8. AI can scaffold, humans must correct.
-9. Make it so hard people want to steal it.
-10. Better to fail as myth than succeed as oatmeal.
+2. No fake official affiliation.
+3. No OSU color dependency.
+4. No beige apartment-core.
+5. No policy without beauty.
+6. No beauty without material life.
+7. AI can scaffold, humans must correct.
+8. Make it so hard people want to steal it.
+9. Better to fail as myth than succeed as oatmeal.
 
 ## How To Submit
 

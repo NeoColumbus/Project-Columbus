@@ -43,9 +43,17 @@ A city is when the whole body starts to move.
 
 Columbus is not only a city founded in 1812. That is the legal story.
 
-Mythically, Columbus is older than Columbus. The center is older. The rivers are older. The crossing is older. The routes are older. The geometry is older.
+Mythically, Columbus is older than Columbus.
 
-Ohio already held monumental civic imagination before the modern city had a name.
+The rivers are older.
+The crossing is older.
+The routes are older.
+The center is older.
+The earthworks are older.
+
+Before the charter, Ohio already knew monumental public form: circles, lines, octagons, plazas, alignments, earth shaped into civic geometry at a scale the modern city still has to answer.
+
+That is the pressure under Full City Columbus.
 
 The first geometry was earth.
 The second geometry is city.
@@ -63,7 +71,6 @@ The second geometry is city.
 ## What This Is Not
 
 - No fake official affiliation.
-- No Native cosplay.
 - No OSU color dependency.
 - No beige apartment-core.
 - No transit shame.
