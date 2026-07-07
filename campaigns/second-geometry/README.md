@@ -2,9 +2,9 @@
 
 <!-- HUMAN NOTE: This campaign must be reviewed by people with serious knowledge of Ohio Indigenous history and by living Native voices. Keep source discipline in the notes. Keep public copy mythic. -->
 
-Ohio already knew monumental geometry.
+Columbus was monumental before Columbus was modern.
 
-The Second Geometry is the campaign that holds ancient Ohio public form beside future-city infrastructure.
+The Second Geometry is the campaign that holds the old center beside future-city infrastructure.
 
 Not as costume.
 Not as wallpaper.
@@ -84,7 +84,7 @@ That means:
 The first geometry was earth.
 The second geometry is city.
 
-Ohio was monumental before Ohio was modern.
+Columbus was monumental before Columbus was modern.
 
 The next monument is a city that works.
 

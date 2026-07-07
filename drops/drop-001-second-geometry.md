@@ -13,13 +13,17 @@ Post the signal.
 Name the break.
 Build the body.
 
-## What This Drop Is Doing
+## What Arrives
 
-Drop 001 introduces the signal mark and turns the project from a manifesto into a public artifact system.
+Drop 001 is the first flare from Neo Columbus.
 
-The goal is not to explain Full City Columbus in one paragraph.
+The old center gets a mark.
+The mark gets a wall.
+The wall gets a crowd.
+The crowd names what is broken.
+The city starts to see itself.
 
-The goal is to make the symbol show up, make people ask what it means, and give them a clean way to add their own neighborhood pressure.
+No one has to understand the whole theory before they can feel the signal.
 
 ## Core Assets
 

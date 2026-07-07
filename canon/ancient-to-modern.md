@@ -17,7 +17,7 @@ measure.
 plaza.
 sky.
 
-Ohio was monumental before Ohio was modern.
+Columbus was monumental before Columbus was modern.
 
 Not nostalgia.
 Not costume.

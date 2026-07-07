@@ -47,7 +47,7 @@ The rivers are older than the map.
 The crossing is older than the seal.
 The geometry is older than the grid.
 
-Before Columbus had a name, Ohio already knew monumental public form.
+Before Columbus had a name, this center already belonged to a landscape of monumental public form.
 
 The first geometry was earth.
 The second geometry is city.

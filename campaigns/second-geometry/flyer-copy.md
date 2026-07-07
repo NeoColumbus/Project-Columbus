@@ -7,14 +7,14 @@ THE SECOND GEOMETRY
 The first geometry was earth.
 The second geometry is city.
 
-Ohio was monumental before Ohio was modern.
+Columbus was monumental before Columbus was modern.
 
 Build the city.
 Build the second geometry.
 
 ## Version 2
 
-Ohio knew circles before Columbus knew its name.
+The center knew circles before Columbus knew its name.
 
 That means the bar is ancient.
 The city must rise to it.

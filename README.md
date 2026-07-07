@@ -2,13 +2,18 @@
 
 <!-- HUMAN NOTE: This repository begins as an AI-assisted scaffold. Treat every line as provisional. Correct the history, sharpen the language, replace weak copy, and remove anything that does not feel true on Columbus streets. -->
 
-Full City Columbus is an open-source civic myth, visual system, manifesto, and campaign engine for Columbus, Ohio.
+Columbus is not a blank growth market.
+Columbus is not a campus, a suburb, a district, a convention weekend, and a skyline photo pretending to be a city.
+
+Columbus is an old center wearing a young legal name.
+
+Full City Columbus is the open-source myth, flag system, street kit, and civic campaign for that older city waking up.
 
 Public site:
 https://neocolumbus.github.io/Project-Columbus/
 
-It is meant to inspire.
-It is meant to be forked, corrected, remixed, printed, argued with, and made better by people who give a damn.
+It is meant to be felt first.
+Then printed, forked, corrected, remixed, argued with, and made harder by people who give a damn.
 
 You do not need to be an expert to start.
 You can get the ball rolling with one sharper line, one cleaner source, one flyer, one neighborhood truth, one better image, one correction, one pull request.
@@ -19,22 +24,24 @@ It is not a city department.
 It is not a growth brochure.
 It is not a polite little logo exercise.
 
-It begins from a simple claim:
+The claim is simple:
 
 Columbus does not suck.
 Columbus is unfinished.
 
 The body exists: rivers, roads, hospitals, universities, immigrants, suburbs, towers, state power, highways, money, motion, and scale.
 
-What it lacks is the animating word.
+The body is here.
+The signal is late.
 
 ## Why This Exists
 
-Columbus has mass. It does not always have presence.
+Columbus has mass.
+It does not always have presence.
 
 People can feel a game, a district, a festival, a campus, a suburb, a restaurant row. Too often they cannot feel the whole city arrive in the room.
 
-Full City Columbus exists to make Columbus felt.
+Full City Columbus exists to make Columbus felt as one body.
 
 An event is not a city.
 A district is not a city.
@@ -44,7 +51,8 @@ A city is when the whole body starts to move.
 
 ## The Myth
 
-Columbus is not only a city founded in 1812. That is the legal story.
+Columbus is not only a city founded in 1812.
+That is the legal story.
 
 Mythically, Columbus is older than Columbus.
 
@@ -54,23 +62,39 @@ The routes are older.
 The center is older.
 The earthworks are older.
 
-Before the charter, Ohio already knew monumental public form: circles, lines, octagons, plazas, alignments, earth shaped into civic geometry at a scale the modern city still has to answer.
+Before the charter, Columbus belonged to a landscape that already knew monumental public form: circles, lines, octagons, plazas, alignments, earth shaped into civic geometry at a scale the modern city still has to answer.
 
-That is the pressure under Full City Columbus.
+That pressure did not vanish when the grid arrived.
+It moved underground.
+It became river, road, tower, route, voltage, data, crowd, hospital, school, statehouse, suburb, bus stop, blank wall, and unfinished room.
 
 The first geometry was earth.
 The second geometry is city.
 
 ## What This Is
 
-- A public language kit for Columbus.
-- A place to draft slogans, flyers, symbols, policies, and field notes.
-- A campaign engine for anti-beige civic imagination.
-- A source tree for the idea of Neo Columbus.
-- A flag and symbol system for the Second Geometry.
-- A marketing kit for Earthwork Futurism.
-- A Drop 001 street kit with posters, stickers, social frames, and field actions.
-- A place where beauty and material life have to answer each other.
+Full City Columbus is:
+
+- a public myth for Columbus
+- a flag and signal system
+- a street campaign kit
+- a civic stack for housing, transit, water, power, data, and public beauty
+- an open-source repo where the myth can be corrected, localized, printed, and rebuilt
+
+Neo Columbus is the name for the awakened city inside the official city.
+
+Earthwork Futurism is the visual language.
+
+Second Geometry is the signal:
+
+first geometry: earth
+second geometry: city
+
+Drop 001 is the first public release:
+
+Post the signal.
+Name the break.
+Build the body.
 
 ## What This Is Not
 

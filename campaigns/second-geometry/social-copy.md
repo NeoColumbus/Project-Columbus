@@ -2,7 +2,7 @@
 
 The first geometry was earth. The second geometry is city.
 
-Ohio was monumental before Ohio was modern.
+Columbus was monumental before Columbus was modern.
 
 ---
 

@@ -1,12 +1,11 @@
 # Myth
 
-<!-- HUMAN NOTE: Keep this myth as a civic frame, not a substitute for history. Keep citations and careful limits in research files. -->
+<!-- HUMAN NOTE: This file should read like myth, not a planning memo. Keep citations and careful limits in research files. -->
 
-Columbus is not becoming real.
-It is becoming legible.
+Columbus was here before Columbus knew its own name.
 
 The legal story says 1812.
-The place story starts earlier.
+The older story starts at the center.
 
 The river knew the center first.
 The crossing was here before the grid.
@@ -14,18 +13,27 @@ The geometry was here before the seal.
 
 The place is older than the name.
 
-The rivers were here.
-The crossing was here.
-The center was here.
-Ohio already knew monumental geometry.
+The rivers arrived first.
+Then the crossing.
+Then the route.
+Then the earthwork.
+Then the grid.
+Then the charter.
+Then the towers.
+Then the machine.
 
-This is pressure.
+The city did not begin when the paperwork began.
+
+The paperwork found an older pressure and called it Columbus.
 
 ## Earthwork Futurism
 
-Earthwork Futurism is the name for the pressure between ancient Ohio geometry and future-city infrastructure.
+Earthwork Futurism is what happens when old ground refuses to become beige growth.
 
-If this land already held public form at monumental scale, the modern city has no excuse for smallness.
+The first monument was earth.
+The next monument is a city that works.
+
+If the center already belonged to a landscape of monumental public form, the modern city has no excuse for smallness.
 
 The first geometry was earth.
 The second geometry is city.
@@ -35,14 +43,19 @@ The next city is us.
 
 ## Neo Columbus
 
-Neo Columbus is the awakened form of the city.
+Neo Columbus is not another city.
+It is Columbus coming awake inside itself.
 
 Old Columbus is municipal sleep, campus plus suburbs, parking-lot capital, beige growth.
 
 Neo Columbus is the whole body coming online.
 
-The old shell stays behind.
-The signal moves through.
+River to road.
+Road to bus.
+Bus to tower.
+Tower to neighborhood.
+Neighborhood to center.
+Center to signal.
 
 Columbus was always here.
 Now it arrives.

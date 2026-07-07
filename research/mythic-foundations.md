@@ -41,9 +41,9 @@ No borrowed mask.
 
 Say the stronger thing:
 
-Ohio already knew monumental public form.
-Ohio already knew civic geometry.
-Ohio already knew how to make a place feel charged.
+Columbus stands inside a region that already knew monumental public form.
+Columbus stands inside a region that already knew civic geometry.
+Columbus stands inside a region that already knew how to make a place feel charged.
 
 That is the pressure on Columbus.
 
@@ -459,7 +459,7 @@ The first city was geometry.
 
 The next city is us.
 
-Ohio was monumental before Ohio was modern.
+Columbus was monumental before Columbus was modern.
 
 The ancient city was not behind us. It was under us.
 

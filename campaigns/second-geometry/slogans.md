@@ -2,9 +2,9 @@
 
 The first geometry was earth. The second geometry is city.
 
-Ohio was monumental before Ohio was modern.
+Columbus was monumental before Columbus was modern.
 
-Ancient Ohio geometry. Future-city infrastructure.
+Ancient pressure. Future-city infrastructure.
 
 The city was beneath us the whole time.
 

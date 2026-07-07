@@ -20,9 +20,9 @@ NPS notes that Ohio's Hopewell Ceremonial Earthworks became the United States' 2
 
 ## What This Project May Say
 
-Ohio already knew monumental public form.
+Columbus stands inside a region that already knew monumental public form.
 
-Ohio already knew geometry at civic scale.
+This region already knew geometry at civic scale.
 
 Modern Columbus has no excuse for smallness.
 

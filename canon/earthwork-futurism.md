@@ -13,7 +13,7 @@ It is not sterile futurism.
 It is not museum earth tones.
 It is not tech-bro chrome.
 
-It is ancient Ohio pressure translated into modern civic signal.
+It is old ground pressure translated into modern civic signal.
 
 ## The Formula
 
