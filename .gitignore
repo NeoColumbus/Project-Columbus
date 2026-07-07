@@ -1,0 +1,24 @@
+# Local system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor folders
+.vscode/
+.idea/
+
+# Runtime and dependency folders
+node_modules/
+.venv/
+venv/
+__pycache__/
+
+# Logs and generated artifacts
+*.log
+dist/
+build/
+.cache/
+
+# Local environment files
+.env
+.env.*
