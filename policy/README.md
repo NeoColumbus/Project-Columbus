@@ -12,6 +12,8 @@ Transit is form.
 Safety is form.
 Street trees are form.
 Zoning is form.
+Compute is form.
+The data center is form.
 The bus stop is form.
 The curb is form.
 
@@ -25,9 +27,10 @@ No beauty without material life.
 
 ## Files
 
+- [civic-stack.md](civic-stack.md)
+- [ai-civic-dividend.md](ai-civic-dividend.md)
 - [housing.md](housing.md)
 - [transit.md](transit.md)
 - [public-realm.md](public-realm.md)
 - [safety.md](safety.md)
 - [design-standards.md](design-standards.md)
-
