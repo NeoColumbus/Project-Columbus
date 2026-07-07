@@ -4,6 +4,9 @@
 
 Full City Columbus is an open-source civic myth, visual system, manifesto, and campaign engine for Columbus, Ohio.
 
+Public site:
+https://neocolumbus.github.io/Project-Columbus/
+
 It is meant to inspire.
 It is meant to be forked, corrected, remixed, printed, argued with, and made better by people who give a damn.
 
@@ -122,6 +125,8 @@ Read [ROADMAP.md](ROADMAP.md).
 
 Want the first public drop?
 Open [Drop 001: Second Geometry](drops/drop-001-second-geometry.md).
+
+Hosting notes live in [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ## Open Source Invitation
 

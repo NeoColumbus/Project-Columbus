@@ -6,6 +6,9 @@ You can help even if you are new.
 
 Full City Columbus is open source because one person can start the signal, but a city has to finish it.
 
+Public site:
+https://neocolumbus.github.io/Project-Columbus/
+
 You do not need to know every tool.
 You do not need to have perfect taste.
 You do not need permission from a committee.
