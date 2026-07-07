@@ -32,6 +32,7 @@ No one has to understand the whole theory before they can feel the signal.
 - [Second Geometry flag](../site/assets/second-geometry-flag.svg)
 - [street poster set](../street-kit/posters)
 - [sticker sheet](../street-kit/sticker-sheet.svg)
+- [QR sticker](../street-kit/qr-sticker.svg)
 - [post-the-signal handbill](../street-kit/handbill-post-the-signal.svg)
 - [social squares](../social-kit/squares)
 - [social stories](../social-kit/stories)

@@ -16,7 +16,12 @@ Evidence posters:
 Companion artifacts:
 
 - [sticker-sheet.svg](sticker-sheet.svg)
+- [qr-sticker.svg](qr-sticker.svg)
 - [handbill-post-the-signal.svg](handbill-post-the-signal.svg)
+
+QR target:
+
+https://neocolumbus.github.io/Project-Columbus/
 
 ## Print Notes
 
@@ -32,5 +37,6 @@ Signal first.
 One line.
 One demand.
 One place for people to go next.
+When the object is meant to travel, give it a scan path.
 
 Never make the poster explain the whole project.

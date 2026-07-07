@@ -29,6 +29,7 @@ The next city is us.
 
 - [signal-mark.svg](signal-mark.svg)
 - [signal-mark-mono.svg](signal-mark-mono.svg)
+- [project-qr.svg](project-qr.svg)
 - [../site/assets/second-geometry-flag.svg](../site/assets/second-geometry-flag.svg)
 
 ## Usage Rules
@@ -42,6 +43,7 @@ Do not add a mascot, skyline, seal, explorer, or fake-official clutter.
 Best uses:
 
 - sticker
+- QR sticker
 - poster stamp
 - profile icon
 - field note cover
@@ -51,3 +53,13 @@ Best uses:
 - repo badge
 
 The mark should feel like people found it before they understood it.
+
+## QR Rule
+
+QR codes should point to the public site:
+
+https://neocolumbus.github.io/Project-Columbus/
+
+Use them where the artifact needs a handoff from street to repo.
+Keep the quiet zone clean.
+Do not bury the code under texture, distortion, or tiny print.
