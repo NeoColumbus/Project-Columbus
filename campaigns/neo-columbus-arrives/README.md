@@ -21,3 +21,49 @@ Old Columbus is municipal sleep, OSU plus suburbs, parking-lot capital, beige gr
 Neo Columbus is the second geometry.
 The city beneath the city.
 The word arriving in the body.
+
+## What This Builds
+
+This is the arrival campaign.
+
+Use it when the project needs pure signal:
+
+- launch copy
+- stickers
+- social posts
+- repo intro
+- flag drops
+- street posters
+- event openers
+- neighborhood versions
+
+Neo Columbus is not a separate municipality.
+It is Columbus becoming legible to itself.
+
+## Public Demands
+
+- Give the city a shared visual language.
+- Make the old place visible inside the modern city.
+- Treat the capital as a civic body, not an office function.
+- Bring myth, housing, transit, AI, downtown, and public beauty under one signal.
+- Make the project open enough for people to improve it.
+
+## First Builds
+
+- Make a "Neo Columbus Arrives" poster set.
+- Make neighborhood-specific arrival lines.
+- Pair the flag with one civic demand.
+- Create a launch thread that moves from myth to material life.
+- Make a one-page explainer for people who ask, "What is Neo Columbus?"
+
+## Poster Lines
+
+The city beneath the city is waking up.
+
+Columbus was always here.
+Now it arrives.
+
+The old shell stays behind.
+The signal moves through.
+
+Neo Columbus arrives.

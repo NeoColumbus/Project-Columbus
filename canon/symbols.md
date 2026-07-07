@@ -29,3 +29,14 @@ One axis is river.
 One axis is street.
 
 The mark should feel older than branding and newer than a zoning map.
+
+## Primary Flag
+
+The primary flag direction is documented in [flag.md](flag.md).
+
+Use the Second Geometry flag as the core civic signal:
+
+- river navy field
+- crossed civic axes
+- limestone ring
+- transit amber core

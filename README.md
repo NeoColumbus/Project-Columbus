@@ -56,6 +56,7 @@ The second geometry is city.
 - A place to draft slogans, flyers, symbols, policies, and field notes.
 - A campaign engine for anti-beige civic imagination.
 - A source tree for the idea of Neo Columbus.
+- A flag and symbol system for the Second Geometry.
 - A place where beauty and material life have to answer each other.
 
 ## What This Is Not

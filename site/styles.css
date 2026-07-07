@@ -275,6 +275,7 @@ h1 {
 .impact,
 .body-grid,
 .geometry-section,
+.flag-section,
 .civic-stack,
 .ai-dividend,
 .transit-blast,
@@ -297,6 +298,7 @@ h1 {
 .impact h2,
 .body-grid h2,
 .geometry-copy h2,
+.flag-section h2,
 .civic-stack h2,
 .ai-dividend h2,
 .transit-blast h2,
@@ -436,6 +438,58 @@ h1 {
   font-size: clamp(32px, 5vw, 82px);
   font-weight: 900;
   line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.flag-section {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.78fr) minmax(0, 1.22fr);
+  gap: clamp(28px, 6vw, 80px);
+  align-items: center;
+  background:
+    linear-gradient(135deg, rgba(232, 221, 199, 0.98), rgba(246, 240, 228, 0.9)),
+    var(--bone);
+  color: var(--black);
+}
+
+.flag-section .kicker {
+  color: var(--brick);
+}
+
+.flag-section h2 {
+  max-width: 10ch;
+}
+
+.flag-copy p:not(.kicker) {
+  max-width: 620px;
+  margin: 28px 0 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(20px, 2.6vw, 34px);
+  font-weight: 900;
+  line-height: 1.04;
+  text-transform: uppercase;
+}
+
+.flag-display {
+  margin: 0;
+}
+
+.flag-display img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  border: 4px solid var(--black);
+  background: var(--river-navy);
+  box-shadow: 18px 18px 0 var(--amber);
+}
+
+.flag-display figcaption {
+  margin-top: 18px;
+  color: var(--black);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -933,6 +987,7 @@ h1 {
 
   .body-grid,
   .geometry-section,
+  .flag-section,
   .civic-stack,
   .ai-dividend,
   .transit-blast {
@@ -981,6 +1036,7 @@ h1 {
   .impact h2,
   .body-grid h2,
   .geometry-copy h2,
+  .flag-section h2,
   .civic-stack h2,
   .ai-dividend h2,
   .transit-blast h2,

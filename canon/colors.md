@@ -33,3 +33,11 @@ Oxidized Copper carries time.
 Do not let the system collapse into one color.
 Columbus is not a beige monochrome.
 
+## Flag Defaults
+
+The primary Second Geometry flag uses:
+
+- River Navy field
+- Limestone axes and ring
+- Bronze center rule
+- Transit Amber core

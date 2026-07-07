@@ -1,5 +1,11 @@
 # Image Credits
 
+## `second-geometry-flag.svg`
+
+Original vector flag asset created for this project.
+
+It is based on the Second Geometry brand direction: river navy field, civic axes, limestone ring, and transit amber core.
+
 ## `neo-columbus-hero.png`
 
 AI-assisted photo edit based on a real Columbus photograph.

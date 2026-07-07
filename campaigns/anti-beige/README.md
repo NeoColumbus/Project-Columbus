@@ -33,3 +33,55 @@ Ground floors are not extra.
 
 Daily life deserves form.
 
+## What This Builds
+
+This campaign defends abundance without accepting civic ugliness as the price.
+
+Build more housing.
+Build more density.
+Build near transit.
+Build fast.
+
+But do not hand the city dead walls, fake materials, blank corners, hostile ground floors, and call that maturity.
+
+More homes should make Columbus more alive.
+
+## Public Demands
+
+- Ground floors with doors, windows, stoops, porches, shade, and light.
+- Corners that act like civic moments.
+- Tree canopy and stormwater treated as design, not garnish.
+- Parking hidden, reduced, shared, or made less dominant.
+- Materials that age with dignity.
+- Mixed-use corridors that feel like streets, not apartment storage.
+- Design review that protects public life without becoming anti-housing delay.
+
+## Bad Patterns
+
+- Dead first floors.
+- Fake balconies.
+- Blank utility walls on main streets.
+- Tan-on-tan boredom sold as restraint.
+- Giant curb cuts.
+- Parking lots between buildings and sidewalks.
+- Buildings that meet the street like they hate it.
+
+## First Builds
+
+- Make a field guide of beige patterns.
+- Make a "density deserves beauty" flyer.
+- Photograph one bad frontage and rewrite it as a demand.
+- Add design standards that support housing instead of blocking it.
+- Build a before/after visual language for better ordinary buildings.
+
+## Poster Lines
+
+Build housing.
+Do not insult the street.
+
+Density deserves beauty.
+
+No dead walls where life should be.
+
+Build the city.
+Do not beige it to death.

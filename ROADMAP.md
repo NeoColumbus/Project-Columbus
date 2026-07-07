@@ -12,6 +12,7 @@ This is a list of ways to make the signal stronger.
 - Turn one campaign into a printable flyer.
 - Add route-specific COTA language.
 - Add more Columbus photo sources with clean credits.
+- Test the Second Geometry flag on stickers, banners, phone avatars, and cheap print.
 - Tighten the myth copy until every line can survive being printed huge.
 - Add better sources to the research files.
 - Cut any phrase that sounds like a committee trying to sound brave.
