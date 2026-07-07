@@ -275,6 +275,7 @@ h1 {
 .impact,
 .body-grid,
 .geometry-section,
+.aesthetic-section,
 .flag-section,
 .civic-stack,
 .ai-dividend,
@@ -298,6 +299,7 @@ h1 {
 .impact h2,
 .body-grid h2,
 .geometry-copy h2,
+.aesthetic-section h2,
 .flag-section h2,
 .civic-stack h2,
 .ai-dividend h2,
@@ -438,6 +440,129 @@ h1 {
   font-size: clamp(32px, 5vw, 82px);
   font-weight: 900;
   line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.aesthetic-section {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(280px, 0.88fr) minmax(280px, 0.72fr) minmax(240px, 0.6fr);
+  gap: clamp(18px, 3vw, 36px);
+  align-items: stretch;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(5, 6, 6, 0.96), rgba(6, 22, 32, 0.92)),
+    var(--black);
+}
+
+.aesthetic-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(232, 221, 199, 0.08) 0 2px,
+      transparent 2px 42px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(244, 176, 55, 0.1) 0 2px,
+      transparent 2px 84px
+    );
+  mix-blend-mode: screen;
+}
+
+.aesthetic-copy,
+.artifact-grid,
+.poster-display {
+  position: relative;
+  z-index: 2;
+}
+
+.aesthetic-section h2 {
+  max-width: 12ch;
+}
+
+.aesthetic-copy p:not(.kicker) {
+  max-width: 680px;
+  margin: 30px 0 0;
+  color: var(--amber);
+  font-size: clamp(28px, 4.2vw, 70px);
+  font-weight: 900;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.artifact-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.artifact-grid article {
+  min-height: 164px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 14px;
+  border: 2px solid rgba(232, 221, 199, 0.66);
+  background: rgba(232, 221, 199, 0.94);
+  color: var(--black);
+}
+
+.artifact-grid article:nth-child(2n) {
+  background: var(--amber);
+}
+
+.artifact-grid span,
+.artifact-grid em {
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.artifact-grid span {
+  font-size: 12px;
+}
+
+.artifact-grid strong {
+  display: block;
+  font-size: clamp(28px, 3.4vw, 52px);
+  line-height: 0.85;
+}
+
+.artifact-grid em {
+  display: block;
+  margin-top: 14px;
+  font-size: 12px;
+  line-height: 1.16;
+}
+
+.poster-display {
+  align-self: center;
+  margin: 0;
+}
+
+.poster-display img {
+  display: block;
+  width: 100%;
+  max-height: 760px;
+  object-fit: contain;
+  border: 3px solid var(--limestone);
+  background: var(--limestone);
+  box-shadow: 14px 14px 0 var(--brick);
+}
+
+.poster-display figcaption {
+  margin-top: 16px;
+  color: var(--limestone);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -941,6 +1066,14 @@ h1 {
 }
 
 @media (max-width: 1180px) {
+  .aesthetic-section {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .aesthetic-copy {
+    grid-column: 1 / -1;
+  }
+
   .stack-grid,
   .dividend-list {
     grid-template-columns: 1fr;
@@ -987,11 +1120,16 @@ h1 {
 
   .body-grid,
   .geometry-section,
+  .aesthetic-section,
   .flag-section,
   .civic-stack,
   .ai-dividend,
   .transit-blast {
     grid-template-columns: 1fr;
+  }
+
+  .aesthetic-copy {
+    grid-column: auto;
   }
 
   .stack-head {
@@ -1036,6 +1174,7 @@ h1 {
   .impact h2,
   .body-grid h2,
   .geometry-copy h2,
+  .aesthetic-section h2,
   .flag-section h2,
   .civic-stack h2,
   .ai-dividend h2,

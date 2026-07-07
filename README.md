@@ -57,6 +57,7 @@ The second geometry is city.
 - A campaign engine for anti-beige civic imagination.
 - A source tree for the idea of Neo Columbus.
 - A flag and symbol system for the Second Geometry.
+- A marketing kit for Earthwork Futurism.
 - A place where beauty and material life have to answer each other.
 
 ## What This Is Not

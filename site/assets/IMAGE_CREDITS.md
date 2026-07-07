@@ -6,6 +6,12 @@ Original vector flag asset created for this project.
 
 It is based on the Second Geometry brand direction: river navy field, civic axes, limestone ring, and transit amber core.
 
+## `earthwork-futurism-poster.svg`
+
+Original vector poster asset created for this project.
+
+It uses the Second Geometry signal mark and the Earthwork Futurism line: old ground, new machine.
+
 ## `neo-columbus-hero.png`
 
 AI-assisted photo edit based on a real Columbus photograph.
