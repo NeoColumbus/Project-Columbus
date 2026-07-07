@@ -8,7 +8,7 @@
   </g>
   <g transform="translate(540 372)">
     <rect x="-214" y="-214" width="428" height="428" fill="#061620" stroke="#E8DDC7" stroke-width="18"/>
-    <path d="M-314 0h628M0-314v628" stroke="#F4B037" stroke-width="18"/>
+    <path d="M-314 0h628M0-300v600" stroke="#F4B037" stroke-width="18"/>
     <circle r="156" fill="none" stroke="#E8DDC7" stroke-width="30"/>
     <circle r="58" fill="#F4B037"/>
   </g>

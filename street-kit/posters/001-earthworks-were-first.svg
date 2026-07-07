@@ -9,9 +9,9 @@
     <circle r="178" fill="#E8DDC7"/>
     <circle r="136" fill="#061620"/>
     <rect x="-258" y="-13" width="516" height="26" fill="#E8DDC7"/>
-    <rect x="-13" y="-258" width="26" height="516" fill="#E8DDC7"/>
+    <rect x="-13" y="-178" width="26" height="356" fill="#E8DDC7"/>
     <rect x="-258" y="-4" width="516" height="8" fill="#B77836"/>
-    <rect x="-4" y="-258" width="8" height="516" fill="#B77836"/>
+    <rect x="-4" y="-178" width="8" height="356" fill="#B77836"/>
     <circle r="72" fill="none" stroke="#E8DDC7" stroke-width="23"/>
     <circle r="36" fill="#F4B037"/>
   </g>

@@ -12,10 +12,12 @@ Evidence posters:
 - [004-pile-of-projects.svg](posters/004-pile-of-projects.svg)
 - [005-machine-pays-tribute.svg](posters/005-machine-pays-tribute.svg)
 - [006-report-dead-wall.svg](posters/006-report-dead-wall.svg)
+- [006-report-dead-wall-qr.svg](posters/006-report-dead-wall-qr.svg)
 
 Companion artifacts:
 
 - [sticker-sheet.svg](sticker-sheet.svg)
+- [sticker-sheet-qr.svg](sticker-sheet-qr.svg)
 - [qr-sticker.svg](qr-sticker.svg)
 - [handbill-post-the-signal.svg](handbill-post-the-signal.svg)
 

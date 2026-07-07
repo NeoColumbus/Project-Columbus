@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1600" role="img" aria-labelledby="title desc">
-  <title id="title">Drop 001 Poster Sticker Set</title>
-  <desc id="desc">A no-QR sticker sheet made from the cleaned Drop 001 poster set.</desc>
+  <title id="title">Drop 001 Poster Sticker Set With QR</title>
+  <desc id="desc">A QR sticker sheet made from the cleaned Drop 001 poster set.</desc>
   <defs>
     <clipPath id="poster-sticker">
       <rect width="320" height="400" rx="14"/>
@@ -9,34 +9,45 @@
       <rect x="-14" y="-14" width="348" height="428" rx="22" fill="#F6F0E4"/>
       <rect x="-14" y="-14" width="348" height="428" rx="22" fill="none" stroke="#050606" stroke-width="6"/>
     </g>
+    <g id="qr-badge">
+      <rect width="70" height="84" fill="#F6F0E4" stroke="#050606" stroke-width="4"/>
+      <image href="../brand/project-qr.svg" x="8" y="6" width="54" height="54"/>
+      <text x="35" y="75" text-anchor="middle" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="11" letter-spacing="2">SCAN</text>
+    </g>
   </defs>
   <rect width="1200" height="1600" fill="#F6F0E4"/>
-  <text x="70" y="108" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="42" letter-spacing="3">DROP 001 / POSTER STICKER SET</text>
+  <text x="70" y="108" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="42" letter-spacing="3">DROP 001 / POSTER STICKER SET / QR</text>
 
   <g transform="translate(130 160)">
     <use href="#sticker-frame"/>
     <image href="posters/001-earthworks-were-first.svg" width="320" height="400" clip-path="url(#poster-sticker)"/>
+    <use href="#qr-badge" transform="translate(238 275)"/>
   </g>
   <g transform="translate(750 160)">
     <use href="#sticker-frame"/>
     <image href="posters/002-signal-seen-confluence.svg" width="320" height="400" clip-path="url(#poster-sticker)"/>
+    <use href="#qr-badge" transform="translate(238 128)"/>
   </g>
   <g transform="translate(130 610)">
     <use href="#sticker-frame"/>
     <image href="posters/003-center-before-seal.svg" width="320" height="400" clip-path="url(#poster-sticker)"/>
+    <use href="#qr-badge" transform="translate(238 285)"/>
   </g>
   <g transform="translate(750 610)">
     <use href="#sticker-frame"/>
     <image href="posters/004-pile-of-projects.svg" width="320" height="400" clip-path="url(#poster-sticker)"/>
+    <use href="#qr-badge" transform="translate(238 108)"/>
   </g>
   <g transform="translate(130 1060)">
     <use href="#sticker-frame"/>
     <image href="posters/005-machine-pays-tribute.svg" width="320" height="400" clip-path="url(#poster-sticker)"/>
+    <use href="#qr-badge" transform="translate(238 160)"/>
   </g>
   <g transform="translate(750 1060)">
     <use href="#sticker-frame"/>
     <image href="posters/006-report-dead-wall.svg" width="320" height="400" clip-path="url(#poster-sticker)"/>
+    <use href="#qr-badge" transform="translate(238 215)"/>
   </g>
 
-  <text x="70" y="1548" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="24" letter-spacing="4">SAME POSTERS / STICKER SCALE / NO QR</text>
+  <text x="70" y="1548" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="24" letter-spacing="4">SAME POSTERS / STICKER SCALE / QR ROUTES TO PROJECT</text>
 </svg>

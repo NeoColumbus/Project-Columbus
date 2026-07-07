@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" role="img" aria-labelledby="title desc">
-  <title id="title">Report A Dead Wall</title>
-  <desc id="desc">A Drop 001 poster asking people to report dead walls where city life should be.</desc>
+  <title id="title">Report A Dead Wall With QR</title>
+  <desc id="desc">A Drop 001 poster asking people to report dead walls, with a QR code to the public project site.</desc>
   <rect width="1080" height="1350" fill="#E8DDC7"/>
   <rect x="58" y="58" width="964" height="1234" fill="#050606"/>
   <g fill="#9D4732">
@@ -14,7 +14,7 @@
     <rect x="498" y="206" width="252" height="86"/>
     <rect x="770" y="206" width="216" height="86"/>
   </g>
-  <path d="M706 422 L872 594 L810 706 L938 858 L884 982 L962 1106" fill="none" stroke="#F4B037" stroke-width="30" stroke-linecap="square"/>
+  <path d="M706 422 L872 594 L810 706 L938 858 L872 958" fill="none" stroke="#F4B037" stroke-width="30" stroke-linecap="square"/>
   <path d="M94 382 H986" stroke="#E8DDC7" stroke-width="14"/>
   <path d="M700 348 V1128" stroke="#E8DDC7" stroke-width="8"/>
   <circle cx="700" cy="698" r="92" fill="#E8DDC7"/>
@@ -23,6 +23,11 @@
   <text x="90" y="528" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="140">REPORT</text>
   <text x="90" y="874" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="180">A DEAD</text>
   <text x="90" y="1042" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="180">WALL</text>
+  <g transform="translate(796 1008)">
+    <rect width="196" height="196" fill="#F6F0E4" stroke="#050606" stroke-width="8"/>
+    <image href="../../brand/project-qr.svg" x="18" y="14" width="160" height="160"/>
+    <text x="98" y="186" text-anchor="middle" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="26" letter-spacing="3">SCAN</text>
+  </g>
   <rect x="58" y="1216" width="964" height="76" fill="#F4B037"/>
   <text x="90" y="1268" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="30" letter-spacing="4">DENSITY DESERVES BEAUTY / DROP 001</text>
 </svg>
