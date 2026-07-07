@@ -13,7 +13,7 @@ This is a list of ways to make the signal stronger.
 - Add route-specific COTA language.
 - Add more Columbus photo sources with clean credits.
 - Test the Second Geometry flag on stickers, banners, phone avatars, and cheap print.
-- Turn the Earthwork Futurism marketing kit into real downloadable poster assets.
+- Field-test Drop 001 posters, sticker sheet, handbill, and social frames.
 - Tighten the myth copy until every line can survive being printed huge.
 - Add better sources to the research files.
 - Cut any phrase that sounds like a committee trying to sound brave.
@@ -21,6 +21,7 @@ This is a list of ways to make the signal stronger.
 ## Good First Issues
 
 - Make a flyer from [submissions/flyer-template.md](submissions/flyer-template.md).
+- Post one Drop 001 asset from [street-kit](street-kit) or [social-kit](social-kit).
 - Add one source to [research/columbus-history.md](research/columbus-history.md).
 - Add one sharper slogan to [flyers/slogans.md](flyers/slogans.md).
 - Add one neighborhood truth to a campaign file.
@@ -30,7 +31,7 @@ This is a list of ways to make the signal stronger.
 ## Bigger Builds
 
 - Create a neighborhood module system.
-- Create printable poster layouts.
+- Turn Drop 001 into export-ready PDF and PNG bundles.
 - Build a real submissions gallery.
 - Add a local photo library with licenses.
 - Build a public issue board after the repo is on GitHub.

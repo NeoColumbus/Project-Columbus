@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Machine Pays Tribute Social Square</title>
+  <desc id="desc">A social square reading The Machine Pays Tribute.</desc>
+  <rect width="1080" height="1080" fill="#050606"/>
+  <rect x="74" y="74" width="932" height="932" fill="#17352F"/>
+  <g transform="translate(540 320)">
+    <rect x="-160" y="-160" width="320" height="320" fill="#061620" stroke="#E8DDC7" stroke-width="16"/>
+    <path d="M-252 0h504M0-252v504" stroke="#F4B037" stroke-width="16"/>
+    <circle r="102" fill="none" stroke="#E8DDC7" stroke-width="24"/>
+    <circle r="46" fill="#F4B037"/>
+  </g>
+  <text x="96" y="650" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="126">THE MACHINE</text>
+  <text x="96" y="778" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="126">PAYS</text>
+  <text x="96" y="906" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="126">TRIBUTE</text>
+</svg>

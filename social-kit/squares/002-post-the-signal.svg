@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Post The Signal Social Square</title>
+  <desc id="desc">A social square reading Post The Signal.</desc>
+  <rect width="1080" height="1080" fill="#F4B037"/>
+  <rect x="66" y="66" width="948" height="948" fill="#050606"/>
+  <text x="104" y="266" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="168">POST</text>
+  <text x="104" y="428" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="168">THE</text>
+  <text x="104" y="590" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="168">SIGNAL</text>
+  <path d="M104 742h872M540 648v312" stroke="#F4B037" stroke-width="20"/>
+  <circle cx="540" cy="742" r="94" fill="#E8DDC7"/>
+  <circle cx="540" cy="742" r="56" fill="#050606"/>
+  <circle cx="540" cy="742" r="26" fill="#F4B037"/>
+  <text x="104" y="956" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="30" letter-spacing="4">NAME THE BREAK / BUILD THE BODY</text>
+</svg>

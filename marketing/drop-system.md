@@ -16,22 +16,34 @@ Each drop needs:
 ## Drop 01: Second Geometry
 
 Symbol:
-Second Geometry flag.
+Neo Columbus Signal and Second Geometry flag.
 
 Line:
-The first city was geometry. The next city is us.
+The earthworks were first. The next city is us.
+
+Action:
+Post the signal. Name the break. Build the body.
 
 Demand:
 Treat housing, transit, water, power, and public beauty as civic form.
 
 Artifacts:
 
+- signal mark
 - flag SVG
-- poster
-- sticker
-- phone wallpaper
-- social square
+- evidence poster set
+- sticker sheet
+- post-the-signal handbill
+- social squares
+- vertical story frames
+- bus stop audit card
+- dead wall report card
+- data center public test card
+- neighborhood generator
 - field note on ancient-to-modern Columbus
+
+Source:
+[../drops/drop-001-second-geometry.md](../drops/drop-001-second-geometry.md)
 
 ## Drop 02: No More Half-City
 

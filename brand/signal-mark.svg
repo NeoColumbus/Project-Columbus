@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-labelledby="title desc">
+  <title id="title">Neo Columbus Signal Mark</title>
+  <desc id="desc">A river navy civic signal with crossed axes, limestone rings, bronze rules, and an amber core.</desc>
+  <rect width="800" height="800" fill="#061620"/>
+  <path d="M0 388h800v24H0z" fill="#E8DDC7"/>
+  <path d="M388 0h24v800h-24z" fill="#E8DDC7"/>
+  <path d="M0 397h800v6H0z" fill="#B77836"/>
+  <path d="M397 0h6v800h-6z" fill="#B77836"/>
+  <circle cx="400" cy="400" r="252" fill="#E8DDC7"/>
+  <circle cx="400" cy="400" r="198" fill="#061620"/>
+  <circle cx="400" cy="400" r="116" fill="none" stroke="#E8DDC7" stroke-width="34"/>
+  <circle cx="400" cy="400" r="62" fill="none" stroke="#B77836" stroke-width="14"/>
+  <circle cx="400" cy="400" r="40" fill="#F4B037"/>
+  <circle cx="400" cy="400" r="10" fill="#E8DDC7"/>
+</svg>

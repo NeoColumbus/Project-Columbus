@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-labelledby="title desc">
+  <title id="title">The Earthworks Were First Social Square</title>
+  <desc id="desc">A social square reading The Earthworks Were First.</desc>
+  <rect width="1080" height="1080" fill="#061620"/>
+  <g transform="translate(540 314)">
+    <circle r="160" fill="#E8DDC7"/>
+    <circle r="122" fill="#061620"/>
+    <path d="M-232 0h464M0-232v464" stroke="#E8DDC7" stroke-width="20"/>
+    <path d="M-232 0h464M0-232v464" stroke="#B77836" stroke-width="6"/>
+    <circle r="62" fill="none" stroke="#E8DDC7" stroke-width="20"/>
+    <circle r="32" fill="#F4B037"/>
+  </g>
+  <text x="70" y="650" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="122">THE EARTHWORKS</text>
+  <text x="70" y="778" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="128">WERE FIRST</text>
+  <text x="70" y="934" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="34" letter-spacing="4">THE NEXT CITY IS US</text>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" role="img" aria-labelledby="title desc">
+  <title id="title">A Pile Of Projects Is Not A City</title>
+  <desc id="desc">A Drop 001 civic poster reading A Pile Of Projects Is Not A City.</desc>
+  <rect width="1080" height="1350" fill="#F4B037"/>
+  <rect x="52" y="52" width="976" height="1246" fill="#050606"/>
+  <g fill="#E8DDC7">
+    <rect x="102" y="112" width="196" height="156"/>
+    <rect x="342" y="112" width="278" height="156"/>
+    <rect x="662" y="112" width="316" height="156"/>
+    <rect x="102" y="314" width="332" height="156"/>
+    <rect x="480" y="314" width="182" height="156"/>
+    <rect x="704" y="314" width="274" height="156"/>
+  </g>
+  <path d="M92 576 H988" stroke="#F4B037" stroke-width="24"/>
+  <path d="M540 84 V586" stroke="#F4B037" stroke-width="16"/>
+  <circle cx="540" cy="586" r="78" fill="#E8DDC7"/>
+  <circle cx="540" cy="586" r="42" fill="#050606"/>
+  <circle cx="540" cy="586" r="22" fill="#F4B037"/>
+  <text x="92" y="762" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="150">A PILE</text>
+  <text x="92" y="912" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="150">OF PROJECTS</text>
+  <text x="92" y="1062" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="150">IS NOT</text>
+  <text x="92" y="1212" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="150">A CITY</text>
+  <text x="92" y="1272" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="30" letter-spacing="4">MAKE THE WHOLE BODY MOVE</text>
+</svg>

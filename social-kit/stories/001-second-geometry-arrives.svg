@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920" role="img" aria-labelledby="title desc">
+  <title id="title">Second Geometry Arrives Story</title>
+  <desc id="desc">A vertical story frame reading Second Geometry Arrives.</desc>
+  <rect width="1080" height="1920" fill="#061620"/>
+  <rect x="58" y="58" width="964" height="1804" fill="#050606"/>
+  <g transform="translate(540 510)">
+    <circle r="232" fill="#E8DDC7"/>
+    <circle r="178" fill="#061620"/>
+    <path d="M-336 0h672M0-336v672" stroke="#E8DDC7" stroke-width="26"/>
+    <path d="M-336 0h672M0-336v672" stroke="#B77836" stroke-width="8"/>
+    <circle r="94" fill="none" stroke="#E8DDC7" stroke-width="30"/>
+    <circle r="48" fill="#F4B037"/>
+  </g>
+  <text x="84" y="1040" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="150">SECOND</text>
+  <text x="84" y="1192" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="150">GEOMETRY</text>
+  <text x="84" y="1344" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="150">ARRIVES</text>
+  <text x="84" y="1570" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="42" letter-spacing="5">POST THE SIGNAL</text>
+  <text x="84" y="1640" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="42" letter-spacing="5">NAME THE BREAK</text>
+  <text x="84" y="1710" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="42" letter-spacing="5">BUILD THE BODY</text>
+</svg>

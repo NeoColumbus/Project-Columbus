@@ -16,6 +16,12 @@ The goal is to make the signal irresistible enough that people ask what it means
 
 - [drop-system.md](drop-system.md)
 - [slogan-bank.md](slogan-bank.md)
+- [../drops/drop-001-second-geometry.md](../drops/drop-001-second-geometry.md)
+- [../brand/README.md](../brand/README.md)
+- [../street-kit/README.md](../street-kit/README.md)
+- [../social-kit/README.md](../social-kit/README.md)
+- [../participation/post-the-signal.md](../participation/post-the-signal.md)
+- [../research/viral-guerrilla-marketing.md](../research/viral-guerrilla-marketing.md)
 - [../canon/earthwork-futurism.md](../canon/earthwork-futurism.md)
 - [../canon/flag.md](../canon/flag.md)
 
@@ -27,6 +33,16 @@ Demand third.
 Source trail fourth.
 
 If the first move is a paragraph, the poster already lost.
+
+## Drop 001 Law
+
+Post the signal.
+Name the break.
+Build the body.
+
+That is the entry point.
+
+The campaign should not ask people to understand the whole theory before they can participate.
 
 ## What This Should Feel Like
 

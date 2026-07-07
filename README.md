@@ -66,6 +66,7 @@ The second geometry is city.
 - A source tree for the idea of Neo Columbus.
 - A flag and symbol system for the Second Geometry.
 - A marketing kit for Earthwork Futurism.
+- A Drop 001 street kit with posters, stickers, social frames, and field actions.
 - A place where beauty and material life have to answer each other.
 
 ## What This Is Not
@@ -119,6 +120,9 @@ Start with [START_HERE.md](START_HERE.md).
 Want a first mission?
 Read [ROADMAP.md](ROADMAP.md).
 
+Want the first public drop?
+Open [Drop 001: Second Geometry](drops/drop-001-second-geometry.md).
+
 ## Open Source Invitation
 
 This project is not waiting for permission.
@@ -151,6 +155,7 @@ Argue with it.
 Make a neighborhood version.
 Make a bus-stop version.
 Make a flyer that scares the beige out of a meeting room.
+Post the signal and send back what happened.
 
 But do not drain the blood out of the language and call that maturity.
 

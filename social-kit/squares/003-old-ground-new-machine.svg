@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Old Ground New Machine Social Square</title>
+  <desc id="desc">A social square reading Old Ground New Machine.</desc>
+  <rect width="1080" height="1080" fill="#E8DDC7"/>
+  <rect x="70" y="70" width="940" height="940" fill="#17352F"/>
+  <g opacity="0.7">
+    <path d="M70 210h940M70 350h940M70 490h940M70 630h940M70 770h940M70 910h940" stroke="#4F8A74" stroke-width="5"/>
+    <path d="M210 70v940M350 70v940M490 70v940M630 70v940M770 70v940M910 70v940" stroke="#4F8A74" stroke-width="5"/>
+  </g>
+  <text x="104" y="312" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="156">OLD</text>
+  <text x="104" y="470" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="156">GROUND</text>
+  <text x="104" y="628" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="156">NEW</text>
+  <text x="104" y="786" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="156">MACHINE</text>
+  <text x="104" y="930" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="30" letter-spacing="4">EARTHWORK FUTURISM</text>
+</svg>

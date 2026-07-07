@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" role="img" aria-labelledby="title desc">
+  <title id="title">The Machine Pays Tribute</title>
+  <desc id="desc">A Drop 001 poster tying AI infrastructure to public tribute.</desc>
+  <rect width="1080" height="1350" fill="#17352F"/>
+  <g opacity="0.78">
+    <path d="M0 160h1080M0 280h1080M0 400h1080M0 520h1080M0 640h1080M0 760h1080M0 880h1080M0 1000h1080M0 1120h1080" stroke="#4F8A74" stroke-width="4"/>
+    <path d="M120 0v1350M240 0v1350M360 0v1350M480 0v1350M600 0v1350M720 0v1350M840 0v1350M960 0v1350" stroke="#4F8A74" stroke-width="4"/>
+  </g>
+  <g transform="translate(540 372)">
+    <rect x="-214" y="-214" width="428" height="428" fill="#061620" stroke="#E8DDC7" stroke-width="18"/>
+    <path d="M-314 0h628M0-314v628" stroke="#F4B037" stroke-width="18"/>
+    <circle r="156" fill="none" stroke="#E8DDC7" stroke-width="30"/>
+    <circle r="58" fill="#F4B037"/>
+  </g>
+  <rect x="64" y="64" width="952" height="80" fill="#F4B037"/>
+  <text x="98" y="118" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="34" letter-spacing="5">AI CIVIC DIVIDEND / PUBLIC TEST</text>
+  <text x="86" y="724" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="146">THE</text>
+  <text x="86" y="876" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="146">MACHINE</text>
+  <text x="86" y="1028" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="146">PAYS</text>
+  <text x="86" y="1180" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="146">TRIBUTE</text>
+  <text x="88" y="1254" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="30" letter-spacing="4">WATER / POWER / LAND / TAX / COMPUTE / DATA</text>
+</svg>

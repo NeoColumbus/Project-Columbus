@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" role="img" aria-labelledby="title desc">
+  <title id="title">Signal Seen Confluence</title>
+  <desc id="desc">A Drop 001 poster reading Signal Seen Confluence with river axes and amber signal geometry.</desc>
+  <rect width="1080" height="1350" fill="#050606"/>
+  <rect x="54" y="54" width="972" height="1242" fill="#061620"/>
+  <path d="M0 930 C220 820 350 840 540 930 S870 1034 1080 910" fill="none" stroke="#4F8A74" stroke-width="58"/>
+  <path d="M0 1008 C220 898 350 918 540 1008 S870 1112 1080 988" fill="none" stroke="#E8DDC7" stroke-width="20"/>
+  <path d="M540 54 V1296" stroke="#F4B037" stroke-width="10"/>
+  <path d="M54 656 H1026" stroke="#F4B037" stroke-width="10"/>
+  <g transform="translate(540 656)">
+    <circle r="198" fill="#E8DDC7"/>
+    <circle r="152" fill="#061620"/>
+    <circle r="78" fill="none" stroke="#E8DDC7" stroke-width="26"/>
+    <circle r="40" fill="#F4B037"/>
+  </g>
+  <rect x="54" y="54" width="972" height="116" fill="#F4B037"/>
+  <text x="92" y="126" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="38" letter-spacing="5">FIELD NOTICE / POST THE SIGNAL</text>
+  <text x="92" y="322" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="138">SIGNAL</text>
+  <text x="92" y="458" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="138">SEEN:</text>
+  <text x="92" y="1160" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="126">CONFLUENCE</text>
+  <text x="92" y="1230" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="32" letter-spacing="4">SCIOTO + OLENTANGY / THE CENTER HOLDS</text>
+</svg>

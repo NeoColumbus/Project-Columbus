@@ -1,6 +1,6 @@
 # Symbols
 
-<!-- HUMAN NOTE: Symbols must avoid tribal pattern logic and fake ancient costume. Use geometry as obligation, not wallpaper. -->
+<!-- HUMAN NOTE: Symbols must avoid costume history and fake ancient styling. Use geometry as obligation, not wallpaper. -->
 
 ## Primary Motifs
 
@@ -14,8 +14,8 @@
 
 ## Never Use
 
-- Fake tribal patterns.
-- Mascot feathers.
+- Faux-ancient pattern packs.
+- Costume props.
 - Sacred forms treated as wallpaper.
 - Columbus explorer imagery.
 - Generic skyline clip art.

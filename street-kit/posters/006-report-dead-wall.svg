@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" role="img" aria-labelledby="title desc">
+  <title id="title">Report A Dead Wall</title>
+  <desc id="desc">A Drop 001 poster asking people to report dead walls where city life should be.</desc>
+  <rect width="1080" height="1350" fill="#E8DDC7"/>
+  <rect x="58" y="58" width="964" height="1234" fill="#050606"/>
+  <g fill="#9D4732">
+    <rect x="94" y="94" width="132" height="86"/>
+    <rect x="246" y="94" width="190" height="86"/>
+    <rect x="456" y="94" width="142" height="86"/>
+    <rect x="618" y="94" width="242" height="86"/>
+    <rect x="880" y="94" width="106" height="86"/>
+    <rect x="94" y="206" width="230" height="86"/>
+    <rect x="344" y="206" width="134" height="86"/>
+    <rect x="498" y="206" width="252" height="86"/>
+    <rect x="770" y="206" width="216" height="86"/>
+  </g>
+  <path d="M146 422 L342 612 L286 720 L512 894 L470 1000 L760 1212" fill="none" stroke="#F4B037" stroke-width="30" stroke-linecap="square"/>
+  <path d="M94 382 H986" stroke="#E8DDC7" stroke-width="14"/>
+  <path d="M540 348 V1224" stroke="#E8DDC7" stroke-width="8"/>
+  <circle cx="540" cy="698" r="92" fill="#E8DDC7"/>
+  <circle cx="540" cy="698" r="60" fill="#050606"/>
+  <circle cx="540" cy="698" r="28" fill="#F4B037"/>
+  <text x="90" y="528" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="140">REPORT</text>
+  <text x="90" y="874" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="180">A DEAD</text>
+  <text x="90" y="1042" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="180">WALL</text>
+  <rect x="58" y="1216" width="964" height="76" fill="#F4B037"/>
+  <text x="90" y="1268" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="30" letter-spacing="4">DENSITY DESERVES BEAUTY / DROP 001</text>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" role="img" aria-labelledby="title desc">
+  <title id="title">The Earthworks Were First</title>
+  <desc id="desc">A Drop 001 poster with the Neo Columbus signal and the line The Earthworks Were First.</desc>
+  <rect width="1080" height="1350" fill="#E8DDC7"/>
+  <rect x="58" y="58" width="964" height="1234" fill="#061620"/>
+  <rect x="58" y="58" width="964" height="98" fill="#9D4732"/>
+  <text x="92" y="121" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="34" letter-spacing="5">DROP 001 / SECOND GEOMETRY</text>
+  <g transform="translate(540 356)">
+    <circle r="178" fill="#E8DDC7"/>
+    <circle r="136" fill="#061620"/>
+    <rect x="-258" y="-13" width="516" height="26" fill="#E8DDC7"/>
+    <rect x="-13" y="-258" width="26" height="516" fill="#E8DDC7"/>
+    <rect x="-258" y="-4" width="516" height="8" fill="#B77836"/>
+    <rect x="-4" y="-258" width="8" height="516" fill="#B77836"/>
+    <circle r="72" fill="none" stroke="#E8DDC7" stroke-width="23"/>
+    <circle r="36" fill="#F4B037"/>
+  </g>
+  <text x="92" y="725" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="150">THE</text>
+  <text x="92" y="875" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="144">EARTHWORKS</text>
+  <text x="92" y="1025" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="150">WERE</text>
+  <text x="92" y="1176" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="150">FIRST</text>
+  <rect x="58" y="1216" width="964" height="76" fill="#F4B037"/>
+  <text x="92" y="1268" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="32" letter-spacing="4">THE NEXT CITY IS US / PROJECT-COLUMBUS</text>
+</svg>

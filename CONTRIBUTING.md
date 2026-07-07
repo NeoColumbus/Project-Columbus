@@ -17,6 +17,7 @@ Start small.
 Good first contributions:
 
 - Fix one weak line.
+- Post, remix, or sharpen one Drop 001 asset.
 - Add one sourced research correction.
 - Make one bus-stop flyer.
 - Add one neighborhood-specific detail.
@@ -39,6 +40,8 @@ Good first contributions:
 ## How To Submit
 
 Use the templates in [submissions](submissions).
+
+For the first public drop, start with [drops/drop-001-second-geometry.md](drops/drop-001-second-geometry.md), [street-kit](street-kit), [social-kit](social-kit), or [participation](participation).
 
 Keep the work specific. A flyer for a bus stop should feel different from a manifesto paragraph. A neighborhood module should name actual streets, routes, buildings, missing crossings, and local beauty.
 

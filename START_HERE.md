@@ -12,6 +12,10 @@ You do not need permission from a committee.
 
 Start with one useful change.
 
+Fastest door:
+
+Open [Drop 001: Second Geometry](drops/drop-001-second-geometry.md), post one signal asset, and send back one real place, one missing piece, or one sharper line.
+
 ## Pick One Door
 
 ## 1. Add Force
@@ -62,6 +66,16 @@ One flyer can be enough:
 - a COTA flyer
 - a public-meeting flyer
 
+## 5. Run Drop 001
+
+Use the public kit:
+
+- [brand signal](brand/signal-mark.svg)
+- [street kit](street-kit/README.md)
+- [social kit](social-kit/README.md)
+- [post the signal](participation/post-the-signal.md)
+- [neighborhood generator](participation/neighborhood-generator.md)
+
 ## Git In Plain English
 
 Git is a history machine.
@@ -97,6 +111,7 @@ Then open a pull request on GitHub.
 - Add better photo credits.
 - Add better historical sources.
 - Make a printable flyer.
+- Post one Drop 001 asset and report what it needs next.
 - Cut any line that sounds like a committee wrote it.
 
 ## The Standard

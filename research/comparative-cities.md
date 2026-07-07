@@ -1,6 +1,6 @@
 # Comparative Cities
 
-<!-- HUMAN NOTE: Keep comparisons honest. Do not pretend Columbus is New York, Chicago, or Philadelphia. Study what whole-city feeling means, then translate without cosplay. -->
+<!-- HUMAN NOTE: Keep comparisons honest. Do not pretend Columbus is New York, Chicago, or Philadelphia. Study what whole-city feeling means, then translate without costume. -->
 
 ## Working Frame
 
@@ -30,4 +30,3 @@ Columbus should learn from the fact that they are legible.
 
 Borrow intensity.
 Do not borrow costume.
-

@@ -62,7 +62,7 @@ Move the whole body.
 
 ## 3. Keep The Body Housed
 
-No rent-freeze cosplay.
+No fake rent-freeze posture.
 
 Ohio law limits local rent control. Columbus has to fight through the tools it can actually use:
 

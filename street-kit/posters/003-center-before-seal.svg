@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" role="img" aria-labelledby="title desc">
+  <title id="title">The Center Was Here Before The Seal</title>
+  <desc id="desc">A Drop 001 poster reading The Center Was Here Before The Seal.</desc>
+  <rect width="1080" height="1350" fill="#9D4732"/>
+  <rect x="66" y="66" width="948" height="1218" fill="#E8DDC7"/>
+  <rect x="66" y="66" width="948" height="188" fill="#061620"/>
+  <text x="100" y="142" fill="#F4B037" font-family="Arial Black, Impact, sans-serif" font-size="34" letter-spacing="5">FULL CITY COLUMBUS / EVIDENCE 003</text>
+  <text x="100" y="216" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="28" letter-spacing="4">NOT A SEAL. A SIGNAL.</text>
+  <g transform="translate(540 488)">
+    <rect x="-342" y="-15" width="684" height="30" fill="#061620"/>
+    <rect x="-15" y="-342" width="30" height="684" fill="#061620"/>
+    <circle r="204" fill="#E8DDC7" stroke="#061620" stroke-width="26"/>
+    <circle r="142" fill="#061620"/>
+    <circle r="70" fill="none" stroke="#E8DDC7" stroke-width="24"/>
+    <circle r="38" fill="#F4B037"/>
+  </g>
+  <text x="98" y="826" fill="#050606" font-family="Impact, Arial Black, sans-serif" font-size="126">THE CENTER</text>
+  <text x="98" y="954" fill="#050606" font-family="Impact, Arial Black, sans-serif" font-size="126">WAS HERE</text>
+  <text x="98" y="1082" fill="#050606" font-family="Impact, Arial Black, sans-serif" font-size="126">BEFORE</text>
+  <text x="98" y="1210" fill="#9D4732" font-family="Impact, Arial Black, sans-serif" font-size="126">THE SEAL</text>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920" role="img" aria-labelledby="title desc">
+  <title id="title">Build The Body Story</title>
+  <desc id="desc">A vertical story frame reading Build The Body with civic stack words.</desc>
+  <rect width="1080" height="1920" fill="#F4B037"/>
+  <rect x="58" y="58" width="964" height="1804" fill="#E8DDC7"/>
+  <text x="86" y="242" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="42" letter-spacing="5">FULL CITY COLUMBUS / DROP 001</text>
+  <text x="84" y="540" fill="#050606" font-family="Impact, Arial Black, sans-serif" font-size="174">BUILD</text>
+  <text x="84" y="714" fill="#9D4732" font-family="Impact, Arial Black, sans-serif" font-size="174">THE</text>
+  <text x="84" y="888" fill="#050606" font-family="Impact, Arial Black, sans-serif" font-size="174">BODY</text>
+  <g font-family="Impact, Arial Black, sans-serif" font-size="92">
+    <text x="86" y="1120" fill="#061620">HOMES</text>
+    <text x="86" y="1230" fill="#061620">TRANSIT</text>
+    <text x="86" y="1340" fill="#061620">WATER</text>
+    <text x="86" y="1450" fill="#061620">POWER</text>
+    <text x="86" y="1560" fill="#061620">DATA</text>
+    <text x="86" y="1670" fill="#061620">PUBLIC BEAUTY</text>
+  </g>
+  <path d="M760 1080h184M852 988v184" stroke="#F4B037" stroke-width="20"/>
+  <circle cx="852" cy="1080" r="90" fill="#061620"/>
+  <circle cx="852" cy="1080" r="56" fill="#E8DDC7"/>
+  <circle cx="852" cy="1080" r="24" fill="#F4B037"/>
+</svg>
