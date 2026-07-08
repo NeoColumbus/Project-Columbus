@@ -167,6 +167,12 @@ Open [brand/MANUAL.md](brand/MANUAL.md).
 Want the moderation rules?
 Open [MODERATION.md](MODERATION.md).
 
+Want setup help?
+Open [SETUP.md](SETUP.md).
+
+Want to submit field proof?
+Open [SUBMISSIONS.md](SUBMISSIONS.md).
+
 Hosting notes live in [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ## Open Source Invitation

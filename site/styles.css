@@ -2060,6 +2060,29 @@ h1 {
   font-size: 13px;
 }
 
+.proof-card p {
+  margin: 14px 0 0;
+  color: var(--bone);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.proof-card a {
+  color: var(--amber);
+}
+
+.proof-card-open {
+  border-color: rgba(5, 6, 6, 0.72);
+}
+
+.proof-card-entry {
+  border-color: var(--amber);
+}
+
 .proof-ledger {
   padding: clamp(76px, 10vw, 140px) clamp(18px, 5vw, 72px);
   background: var(--black);

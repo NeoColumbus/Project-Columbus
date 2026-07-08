@@ -9,6 +9,9 @@ Full City Columbus is open source because one person can start the signal, but a
 Public site:
 https://neocolumbus.github.io/Project-Columbus/
 
+No-login scan path:
+https://neocolumbus.github.io/Project-Columbus/signal/
+
 You do not need to know every tool.
 You do not need to have perfect taste.
 You do not need permission from a committee.
@@ -109,6 +112,10 @@ git push origin your-name/one-good-change
 ```
 
 Then open a pull request on GitHub.
+
+Local setup, asset export, and site preview live in [SETUP.md](SETUP.md).
+
+Field-card and proof-wall submission rules live in [SUBMISSIONS.md](SUBMISSIONS.md).
 
 ## First Issue Ideas
 

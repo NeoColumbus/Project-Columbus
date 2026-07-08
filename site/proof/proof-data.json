@@ -1,0 +1,34 @@
+{
+  "updated": "2026-07-08",
+  "entries": [],
+  "openSlots": [
+    {
+      "slot": "Slot 001",
+      "type": "Dead wall",
+      "place": "Bring one back",
+      "line": "Blank frontage. Dead street. Density deserves beauty.",
+      "status": "open"
+    },
+    {
+      "slot": "Slot 002",
+      "type": "Bus stop",
+      "place": "Bring one back",
+      "line": "Shelter, shade, crossing, light, route information, dignity.",
+      "status": "open"
+    },
+    {
+      "slot": "Slot 003",
+      "type": "Fragment",
+      "place": "Bring one back",
+      "line": "A neighborhood treated like leftover space.",
+      "status": "open"
+    },
+    {
+      "slot": "Slot 004",
+      "type": "Machine",
+      "place": "Bring one back",
+      "line": "Water, power, land, tax, compute, data. Make it pay tribute.",
+      "status": "open"
+    }
+  ]
+}

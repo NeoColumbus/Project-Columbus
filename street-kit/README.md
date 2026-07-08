@@ -44,3 +44,33 @@ One place for people to go next.
 When the object is meant to travel, give it a scan path.
 
 Never make the poster explain the whole project.
+
+## Field Protocol
+
+Do:
+
+- test the QR before anything leaves your hand
+- photograph the object after it lands
+- note the exact place
+- keep faces, license plates, and private homes out of proof unless there is consent
+- use tape, wheatpaste, stickers, or handouts only where you are allowed to use them
+- ask permission on private property
+- leave the place cleaner than you found it
+- remove or replace failed prints
+
+Do not:
+
+- cover traffic signs, transit notices, safety warnings, memorials, public art, or small-business signs
+- damage glass, stone, brick, paint, transit shelters, or civic infrastructure
+- pretend the project is official city communication
+- tag sacred, ceremonial, cemetery, school, hospital, or emergency-service space
+- use someone else's photo, art, or logo without rights
+- fake a crowd, fake proof, or fake local support
+
+Proof standard:
+
+- real place
+- real missing piece
+- one line
+- proof link or photo context
+- status: submitted, checked, published, cut

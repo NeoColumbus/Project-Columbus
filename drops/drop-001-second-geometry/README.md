@@ -21,6 +21,8 @@ The script writes PNG and PDF files to:
 
 The export script uses the repo dev dependencies in [package.json](../../package.json).
 
+Maintainers can also run the `Export Drop Assets` GitHub Action and download the generated artifact.
+
 ## Public Package
 
 Drop 001 should leave the repo with:

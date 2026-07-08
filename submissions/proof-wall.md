@@ -4,6 +4,8 @@
 
 The proof wall is the return path for Drop 001.
 
+The public page renders from [../site/proof/proof-data.json](../site/proof/proof-data.json).
+
 Every entry needs:
 
 - place

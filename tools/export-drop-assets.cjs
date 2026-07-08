@@ -4,31 +4,27 @@ const sharp = require("sharp");
 const { PDFDocument } = require("pdf-lib");
 
 const root = path.resolve(__dirname, "..");
-const outDir = path.join(root, "dist", "drop-001-second-geometry");
+const manifestPath = path.join(root, "drops", "drop-001-second-geometry", "manifest.json");
+const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+const outDir = path.join(root, "dist", manifest.drop || "drop-001-second-geometry");
 
-const assets = [
-  ["brand-signal-mark", "brand/signal-mark.svg"],
-  ["brand-signal-mark-mono", "brand/signal-mark-mono.svg"],
-  ["brand-project-qr", "brand/project-qr.svg"],
-  ["flag-second-geometry", "site/assets/second-geometry-flag.svg"],
-  ["poster-001-earthworks-were-first", "street-kit/posters/001-earthworks-were-first.svg"],
-  ["poster-002-signal-seen-confluence", "street-kit/posters/002-signal-seen-confluence.svg"],
-  ["poster-003-center-before-seal", "street-kit/posters/003-center-before-seal.svg"],
-  ["poster-004-pile-of-projects", "street-kit/posters/004-pile-of-projects.svg"],
-  ["poster-005-machine-pays-tribute", "street-kit/posters/005-machine-pays-tribute.svg"],
-  ["poster-006-report-dead-wall", "street-kit/posters/006-report-dead-wall.svg"],
-  ["poster-006-report-dead-wall-qr", "street-kit/posters/006-report-dead-wall-qr.svg"],
-  ["sticker-sheet", "street-kit/sticker-sheet.svg"],
-  ["sticker-sheet-qr", "street-kit/sticker-sheet-qr.svg"],
-  ["qr-sticker", "street-kit/qr-sticker.svg"],
-  ["handbill-post-the-signal", "street-kit/handbill-post-the-signal.svg"],
-  ["social-square-001-earthworks-were-first", "social-kit/squares/001-earthworks-were-first.svg"],
-  ["social-square-002-post-the-signal", "social-kit/squares/002-post-the-signal.svg"],
-  ["social-square-003-old-ground-new-machine", "social-kit/squares/003-old-ground-new-machine.svg"],
-  ["social-square-004-machine-pays-tribute", "social-kit/squares/004-machine-pays-tribute.svg"],
-  ["social-story-001-second-geometry-arrives", "social-kit/stories/001-second-geometry-arrives.svg"],
-  ["social-story-002-build-the-body", "social-kit/stories/002-build-the-body.svg"]
-];
+function fileNameFromSource(source) {
+  return source
+    .replace(/\.svg$/i, "")
+    .replace(/^site\/assets\//, "")
+    .replace(/^street-kit\/posters\//, "poster-")
+    .replace(/^social-kit\/squares\//, "social-square-")
+    .replace(/^social-kit\/stories\//, "social-story-")
+    .replace(/^brand\//, "brand-")
+    .replace(/^street-kit\//, "")
+    .replace(/[\/_]+/g, "-")
+    .toLowerCase();
+}
+
+const assets = (manifest.exportAssets || manifest.sourceAssets.map((source) => ({
+  name: fileNameFromSource(source),
+  source
+}))).map((asset) => [asset.name, asset.source]);
 
 function readViewBox(file) {
   const text = fs.readFileSync(file, "utf8");
@@ -79,10 +75,11 @@ async function main() {
   fs.writeFileSync(
     path.join(outDir, "README.txt"),
     [
-      "Drop 001: Second Geometry export bundle",
+      `${manifest.title || "Drop 001"} export bundle`,
       "",
       "Generated from source SVG files.",
-      "QR target: https://neocolumbus.github.io/Project-Columbus/signal/",
+      `QR target: ${manifest.scanPath}`,
+      `Proof wall: ${manifest.proofPath}`,
       "",
       "Before public release: scan every QR, check every collision, and cut weak assets."
     ].join("\n")

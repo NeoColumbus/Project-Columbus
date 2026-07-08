@@ -9,6 +9,7 @@
     />
     <title>Proof Wall / Full City Columbus</title>
     <link rel="stylesheet" href="../styles.css" />
+    <script src="proof.js" defer></script>
   </head>
   <body>
     <header class="site-header" aria-label="Primary">
@@ -35,15 +36,15 @@
           </p>
           <div class="hero-actions">
             <a class="button primary" href="../signal/#field-card">Make a field card</a>
-            <a class="button ghost" href="https://github.com/NeoColumbus/Project-Columbus/issues/new?template=field-report.md&title=%5BField%5D%20">Send proof upstream</a>
+            <a class="button ghost" href="../signal/#field-card">Send proof upstream</a>
           </div>
         </div>
       </section>
 
       <section class="proof-wall-section" id="slots" aria-labelledby="slots-title">
-        <p class="kicker">Open slots</p>
+        <p class="kicker" data-proof-status>Open slots</p>
         <h2 id="slots-title">Bring back the city.</h2>
-        <div class="proof-grid">
+        <div class="proof-grid" data-proof-grid>
           <article class="proof-card">
             <span>Slot 001</span>
             <strong>Dead wall.</strong>

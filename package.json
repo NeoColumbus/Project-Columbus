@@ -1,6 +1,7 @@
 {
   "name": "full-city-columbus",
   "private": true,
+  "packageManager": "pnpm@11.7.0",
   "scripts": {
     "export:drop001": "node tools/export-drop-assets.cjs"
   },

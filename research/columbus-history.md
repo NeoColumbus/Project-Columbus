@@ -15,6 +15,9 @@ The deeper story includes the rivers, routes, Indigenous histories, Franklinton,
 ## Research Needs
 
 - A clean founding timeline.
+- A clean annexation timeline.
+- Municipal boundary maps by decade.
+- Population and job geography.
 - Maps of the Scioto and Olentangy before major modern intervention.
 - Franklinton history.
 - Highway cuts and neighborhood severance.
@@ -28,3 +31,7 @@ The deeper story includes the rivers, routes, Indigenous histories, Franklinton,
 
 - [City of Columbus wastewater history timeline](https://www.columbus.gov/Services/Columbus-Water-Power/About-Columbus-Water-Power/Our-History/Water-Treatment-History/Historical-Milestones-for-Wastewater-Treatment-in-Columbus)
 - [City of Columbus 2026 Community Profile PDF](https://www.columbus.gov/files/sharedassets/city/v/1/finance/budget/2026/008-2026.pdf)
+
+## Sprint Output
+
+Use [SOURCE_SPRINTS.md](SOURCE_SPRINTS.md#sprint-001-growth-annexation-and-fragments) to turn this from frame into timeline, maps, and source-backed public language.

@@ -154,6 +154,21 @@ Track what proves motion:
 Numbers are not the soul.
 They tell us where the soul reached pavement.
 
+## Source Parameters
+
+Use source parameters when an asset needs attribution:
+
+`/signal/?drop=001&asset=poster-006-report-dead-wall-qr`
+
+Accepted fields:
+
+- `drop`
+- `asset`
+- `source`
+
+The signal page carries these fields into the generated field card.
+This gives the project manual attribution without adding surveillance by default.
+
 ## Law
 
 Signal first.

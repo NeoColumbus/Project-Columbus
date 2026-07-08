@@ -12,6 +12,8 @@ The workflow at [.github/workflows/deploy-pages.yml](.github/workflows/deploy-pa
 
 It uploads the `site/` folder as the Pages artifact and deploys it to GitHub Pages.
 
+The workflow at [.github/workflows/export-drop-assets.yml](.github/workflows/export-drop-assets.yml) builds the Drop 001 PNG/PDF artifact when source assets change or when a maintainer runs it manually.
+
 ## First-Time Setup
 
 If GitHub Pages is not enabled yet:
@@ -22,3 +24,12 @@ If GitHub Pages is not enabled yet:
 4. Re-run the Deploy GitHub Pages workflow or push a new commit.
 
 After that, every push to `main` should update the public site automatically.
+
+## Static Site Limit
+
+GitHub Pages serves files.
+It does not store form submissions.
+
+The current no-login field path creates portable field cards: copy, share, download, or card link.
+
+To accept private submissions without GitHub login, add a public inbox or form backend and document it in [SUBMISSIONS.md](SUBMISSIONS.md).

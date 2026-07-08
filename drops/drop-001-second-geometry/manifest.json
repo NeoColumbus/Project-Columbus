@@ -3,28 +3,99 @@
   "title": "Drop 001: Second Geometry",
   "scanPath": "https://neocolumbus.github.io/Project-Columbus/signal/",
   "proofPath": "https://neocolumbus.github.io/Project-Columbus/proof/",
-  "sourceAssets": [
-    "brand/signal-mark.svg",
-    "brand/signal-mark-mono.svg",
-    "brand/project-qr.svg",
-    "site/assets/second-geometry-flag.svg",
-    "street-kit/posters/001-earthworks-were-first.svg",
-    "street-kit/posters/002-signal-seen-confluence.svg",
-    "street-kit/posters/003-center-before-seal.svg",
-    "street-kit/posters/004-pile-of-projects.svg",
-    "street-kit/posters/005-machine-pays-tribute.svg",
-    "street-kit/posters/006-report-dead-wall.svg",
-    "street-kit/posters/006-report-dead-wall-qr.svg",
-    "street-kit/sticker-sheet.svg",
-    "street-kit/sticker-sheet-qr.svg",
-    "street-kit/qr-sticker.svg",
-    "street-kit/handbill-post-the-signal.svg",
-    "social-kit/squares/001-earthworks-were-first.svg",
-    "social-kit/squares/002-post-the-signal.svg",
-    "social-kit/squares/003-old-ground-new-machine.svg",
-    "social-kit/squares/004-machine-pays-tribute.svg",
-    "social-kit/stories/001-second-geometry-arrives.svg",
-    "social-kit/stories/002-build-the-body.svg"
+  "tracking": {
+    "pattern": "https://neocolumbus.github.io/Project-Columbus/signal/?drop=001&asset={asset}",
+    "capturedFields": [
+      "drop",
+      "asset",
+      "source"
+    ]
+  },
+  "exportAssets": [
+    {
+      "name": "brand-signal-mark",
+      "source": "brand/signal-mark.svg"
+    },
+    {
+      "name": "brand-signal-mark-mono",
+      "source": "brand/signal-mark-mono.svg"
+    },
+    {
+      "name": "brand-project-qr",
+      "source": "brand/project-qr.svg"
+    },
+    {
+      "name": "flag-second-geometry",
+      "source": "site/assets/second-geometry-flag.svg"
+    },
+    {
+      "name": "poster-001-earthworks-were-first",
+      "source": "street-kit/posters/001-earthworks-were-first.svg"
+    },
+    {
+      "name": "poster-002-signal-seen-confluence",
+      "source": "street-kit/posters/002-signal-seen-confluence.svg"
+    },
+    {
+      "name": "poster-003-center-before-seal",
+      "source": "street-kit/posters/003-center-before-seal.svg"
+    },
+    {
+      "name": "poster-004-pile-of-projects",
+      "source": "street-kit/posters/004-pile-of-projects.svg"
+    },
+    {
+      "name": "poster-005-machine-pays-tribute",
+      "source": "street-kit/posters/005-machine-pays-tribute.svg"
+    },
+    {
+      "name": "poster-006-report-dead-wall",
+      "source": "street-kit/posters/006-report-dead-wall.svg"
+    },
+    {
+      "name": "poster-006-report-dead-wall-qr",
+      "source": "street-kit/posters/006-report-dead-wall-qr.svg"
+    },
+    {
+      "name": "sticker-sheet",
+      "source": "street-kit/sticker-sheet.svg"
+    },
+    {
+      "name": "sticker-sheet-qr",
+      "source": "street-kit/sticker-sheet-qr.svg"
+    },
+    {
+      "name": "qr-sticker",
+      "source": "street-kit/qr-sticker.svg"
+    },
+    {
+      "name": "handbill-post-the-signal",
+      "source": "street-kit/handbill-post-the-signal.svg"
+    },
+    {
+      "name": "social-square-001-earthworks-were-first",
+      "source": "social-kit/squares/001-earthworks-were-first.svg"
+    },
+    {
+      "name": "social-square-002-post-the-signal",
+      "source": "social-kit/squares/002-post-the-signal.svg"
+    },
+    {
+      "name": "social-square-003-old-ground-new-machine",
+      "source": "social-kit/squares/003-old-ground-new-machine.svg"
+    },
+    {
+      "name": "social-square-004-machine-pays-tribute",
+      "source": "social-kit/squares/004-machine-pays-tribute.svg"
+    },
+    {
+      "name": "social-story-001-second-geometry-arrives",
+      "source": "social-kit/stories/001-second-geometry-arrives.svg"
+    },
+    {
+      "name": "social-story-002-build-the-body",
+      "source": "social-kit/stories/002-build-the-body.svg"
+    }
   ],
   "releaseOutputs": [
     "png",

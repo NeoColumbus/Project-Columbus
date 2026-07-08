@@ -4,6 +4,8 @@
 
 Use this queue when a claim moves from campaign language into public argument.
 
+Run the work through [SOURCE_SPRINTS.md](SOURCE_SPRINTS.md).
+
 ## P0: Must Source Before Public Testimony
 
 ### Columbus Growth And Annexation

@@ -23,6 +23,8 @@ Columbus has been updating its zoning code through Zone In. The official Zone In
 - Which neighborhoods remain frozen?
 - What design rules prevent dead frontage?
 - Where are transit and housing finally speaking to each other?
+- Which code sections actually prevent dead frontage?
+- Which corridors can carry visible city life now?
 
 ## Initial Sources
 
@@ -30,3 +32,6 @@ Columbus has been updating its zoning code through Zone In. The official Zone In
 - [Zone In: Adopted Code and Map](https://zone-in-columbus.hub.arcgis.com/pages/code-and-map)
 - [Zone In: Current Proposal](https://zone-in-columbus.hub.arcgis.com/pages/current-proposal)
 
+## Sprint Output
+
+Use [SOURCE_SPRINTS.md](SOURCE_SPRINTS.md#sprint-002-zoning-and-the-shape-of-daily-life) to turn this into code citations, corridor examples, and public lines that can survive a planning meeting.
