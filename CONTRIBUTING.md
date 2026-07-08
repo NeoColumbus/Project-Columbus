@@ -8,6 +8,13 @@ Bring slogans, flyers, neighborhood modules, policy notes, flag concepts, transi
 
 Do not bring beige.
 
+Raw first drafts are allowed.
+Spam, stolen assets, leaked secrets, fake grassroots, bot movement, and hard-blocklist garbage are not.
+
+The moderation tripwire labels risky content for human review. It does not decide taste.
+
+Read [MODERATION.md](MODERATION.md).
+
 This is an open-source project meant to inspire. You do not need credentials to help. You need a real contribution, a source when you make a factual claim, and enough respect for the city to avoid fake authority.
 
 ## New Here?

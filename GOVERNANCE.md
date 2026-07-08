@@ -23,6 +23,15 @@ Taste matters.
 Sources matter.
 Street usefulness matters.
 
+## Edge And Main
+
+The edge can be rough.
+`main` cannot be asleep.
+
+Issues, field reports, sketches, and first drafts can arrive messy. The merge button is where the project protects taste, sources, rights, safety, and usefulness.
+
+Read [MODERATION.md](MODERATION.md) for the tripwire and branch-protection setup.
+
 ## Maintainer Roles
 
 Maintainer roles can be split as the project grows:
@@ -58,6 +67,7 @@ open an issue first, show the artifact or argument, and let maintainers decide a
 - unsourced historical claims
 - stolen images or assets
 - bot movement
+- leaked secrets or credentials
 - generic civic-brand filler
 - policy with no material demand
 - design that cannot survive street distance

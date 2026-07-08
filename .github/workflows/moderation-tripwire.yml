@@ -1,0 +1,201 @@
+name: Moderation Tripwire
+
+on:
+  issues:
+    types: [opened, edited, reopened]
+  issue_comment:
+    types: [created, edited]
+  pull_request_target:
+    types: [opened, edited, reopened, synchronize]
+  pull_request_review_comment:
+    types: [created, edited]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: read
+
+jobs:
+  scan:
+    name: Label risky public contributions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tripwire scan
+        uses: actions/github-script@v7
+        env:
+          MODERATION_TRIPWIRE_REGEX: ${{ vars.MODERATION_TRIPWIRE_REGEX }}
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const payload = context.payload;
+            const eventName = context.eventName;
+
+            const issueNumber =
+              payload.issue?.number ||
+              payload.pull_request?.number ||
+              payload.comment?.issue_url?.match(/\/issues\/(\d+)$/)?.[1] ||
+              payload.pull_request_review_comment?.pull_request_url?.match(/\/pulls\/(\d+)$/)?.[1];
+
+            if (!issueNumber) {
+              core.info('No issue or pull request number found; skipping.');
+              return;
+            }
+
+            const parts = [];
+
+            if (payload.issue) {
+              parts.push(payload.issue.title || '');
+              parts.push(payload.issue.body || '');
+            }
+
+            if (payload.pull_request) {
+              parts.push(payload.pull_request.title || '');
+              parts.push(payload.pull_request.body || '');
+            }
+
+            if (payload.comment) {
+              parts.push(payload.comment.body || '');
+            }
+
+            const reasons = new Map();
+            const addHit = (label, reason) => {
+              if (!reasons.has(label)) reasons.set(label, new Set());
+              reasons.get(label).add(reason);
+            };
+
+            const checks = [
+              {
+                label: 'spam-risk',
+                reason: 'spam or promo pattern',
+                re: /\b(casino|crypto|airdrop|forex|telegram|whatsapp|seo backlinks?|guest post|loan offer|work from home)\b/i
+              },
+              {
+                label: 'credential-risk',
+                reason: 'possible secret, token, key, or password',
+                re: /(BEGIN (RSA|OPENSSH|EC|DSA)? ?PRIVATE KEY|api[_-]?key\s*[:=]|secret\s*[:=]|password\s*[:=]|token\s*[:=]\s*[A-Za-z0-9_\-.]{20,})/i
+              },
+              {
+                label: 'bot-dump-risk',
+                reason: 'possible low-effort AI or placeholder dump',
+                re: /(as an ai language model|i cannot browse the internet|lorem ipsum)/i
+              }
+            ];
+
+            let prFiles = [];
+
+            if (payload.pull_request) {
+              prFiles = await github.paginate(github.rest.pulls.listFiles, {
+                owner,
+                repo,
+                pull_number: payload.pull_request.number,
+                per_page: 100
+              });
+
+              const fileText = prFiles
+                .map(file => `${file.filename}\n${file.patch || ''}`)
+                .join('\n\n')
+                .slice(0, 220000);
+
+              parts.push(fileText);
+
+              const assetFiles = prFiles.filter(file =>
+                file.status !== 'removed' &&
+                /\.(png|jpe?g|webp|gif|mp4|mov|pdf|ai|psd|fig)$/i.test(file.filename)
+              );
+
+              if (assetFiles.length > 0) {
+                addHit('asset-rights-risk', 'new or changed media/design asset needs rights review');
+              }
+
+              const sourceReviewFiles = prFiles.filter(file =>
+                /^(research|policy|canon|campaigns|landing)\//.test(file.filename) &&
+                /\.md$/i.test(file.filename)
+              );
+
+              if (sourceReviewFiles.length > 0) {
+                addHit('source-review', 'research, policy, canon, campaign, or landing copy needs human source/taste review');
+              }
+            }
+
+            const text = parts.join('\n\n').slice(0, 300000);
+
+            for (const check of checks) {
+              if (check.re.test(text)) addHit(check.label, check.reason);
+            }
+
+            if (eventName !== 'pull_request_target' && text.length > 25000) {
+              addHit('bot-dump-risk', 'very large issue/comment body needs human review');
+            }
+
+            const customRegex = (process.env.MODERATION_TRIPWIRE_REGEX || '').trim();
+            if (customRegex) {
+              try {
+                const custom = new RegExp(customRegex, 'i');
+                if (custom.test(text)) addHit('needs-review', 'private moderation regex matched');
+              } catch (error) {
+                addHit('needs-review', 'MODERATION_TRIPWIRE_REGEX is invalid and needs maintainer repair');
+                core.warning(`Invalid MODERATION_TRIPWIRE_REGEX: ${error.message}`);
+              }
+            }
+
+            if (reasons.size === 0) {
+              core.info('No moderation tripwire hits.');
+              return;
+            }
+
+            addHit('needs-review', 'human review required');
+            addHit('moderation-tripwire', 'automated tripwire label');
+
+            const labelMeta = {
+              'needs-review': ['F4B037', 'Needs a human maintainer before merge or publication.'],
+              'moderation-tripwire': ['0E2A32', 'Flagged by the moderation tripwire.'],
+              'spam-risk': ['9D4732', 'Possible spam, promo, or bot content.'],
+              'credential-risk': ['B77836', 'Possible leaked credential or secret.'],
+              'bot-dump-risk': ['4F8A74', 'Possible low-effort AI, placeholder, or bulk dump.'],
+              'asset-rights-risk': ['17352F', 'Media/design asset needs rights or license review.'],
+              'source-review': ['E8DDC7', 'Historical, policy, canon, or campaign claim needs review.']
+            };
+
+            for (const label of reasons.keys()) {
+              const [color, description] = labelMeta[label] || ['E8DDC7', 'Tripwire label.'];
+              try {
+                await github.rest.issues.getLabel({ owner, repo, name: label });
+              } catch (error) {
+                if (error.status === 404) {
+                  await github.rest.issues.createLabel({ owner, repo, name: label, color, description });
+                } else {
+                  throw error;
+                }
+              }
+            }
+
+            await github.rest.issues.addLabels({
+              owner,
+              repo,
+              issue_number: Number(issueNumber),
+              labels: Array.from(reasons.keys())
+            });
+
+            const marker = '<!-- full-city-moderation-tripwire -->';
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner,
+              repo,
+              issue_number: Number(issueNumber),
+              per_page: 100
+            });
+
+            const alreadyCommented = comments.some(comment => comment.body?.includes(marker));
+
+            if (!alreadyCommented) {
+              const reasonLines = Array.from(reasons.entries())
+                .filter(([label]) => !['needs-review', 'moderation-tripwire'].includes(label))
+                .map(([label, items]) => `- \`${label}\`: ${Array.from(items).join('; ')}`);
+
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: Number(issueNumber),
+                body: `${marker}\nTripwire flagged this for human review.\n\nRaw language is allowed. Spam, leaked secrets, stolen assets, fake grassroots, hard-blocklist hits, and giant low-effort dumps are not.\n\n${reasonLines.join('\n') || '- `needs-review`: human review required'}\n\nNothing was deleted or rejected. A maintainer should decide.`
+              });
+            }

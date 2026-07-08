@@ -4,6 +4,10 @@ All notable project changes should be tracked here.
 
 ## Unreleased
 
+- Added moderation tripwire workflow, moderation rules, and CODEOWNERS starter.
+
+## v0.3 - 2026-07-08
+
 - Added the campaign operating system for drops, roles, rituals, scan paths, proof, and metrics.
 - Added governance, maintainer, and conduct files for open-source growth.
 - Added a brand manual and release checklist for design and publishing discipline.

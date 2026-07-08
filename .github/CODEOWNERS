@@ -1,0 +1,14 @@
+# CODEOWNERS starter for Full City Columbus.
+#
+# This file is intentionally inactive until the project has real GitHub users
+# or teams with write access. Uncomment and replace the examples below when
+# branch protection is ready to require CODEOWNERS review.
+#
+# * @your-github-username
+# /site/ @NeoColumbus/site-maintainers
+# /brand/ @NeoColumbus/design-maintainers
+# /street-kit/ @NeoColumbus/design-maintainers
+# /social-kit/ @NeoColumbus/design-maintainers
+# /research/ @NeoColumbus/research-maintainers
+# /policy/ @NeoColumbus/policy-maintainers
+# /canon/ @NeoColumbus/myth-maintainers

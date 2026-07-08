@@ -157,6 +157,9 @@ Open [CAMPAIGN_OS.md](CAMPAIGN_OS.md).
 Want the visual rules?
 Open [brand/MANUAL.md](brand/MANUAL.md).
 
+Want the moderation rules?
+Open [MODERATION.md](MODERATION.md).
+
 Hosting notes live in [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ## Open Source Invitation
