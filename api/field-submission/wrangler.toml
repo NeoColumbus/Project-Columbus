@@ -6,8 +6,3 @@ compatibility_date = "2026-07-08"
 GITHUB_REPO = "NeoColumbus/Project-Columbus"
 GITHUB_LABELS = "field-report,public-submission,needs-review"
 ALLOWED_ORIGINS = "https://neocolumbus.github.io,http://127.0.0.1:8131,http://127.0.0.1:8132,http://localhost:8131,http://localhost:8132"
-
-# Set secrets with:
-# wrangler secret put GITHUB_TOKEN
-# Optional when site/config.js has a turnstileSiteKey:
-# wrangler secret put TURNSTILE_SECRET

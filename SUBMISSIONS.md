@@ -53,6 +53,13 @@ Every proof entry needs:
 - one public line
 - status
 
+Maintainer publishing path:
+
+1. Check the field report.
+2. Confirm the place, proof, missing piece, and public line are real enough to publish.
+3. Add the `publish-proof` label to the issue.
+4. The `Publish Proof Wall Entry` workflow updates the proof wall files.
+
 ## Public Inbox API
 
 GitHub Pages is static.
@@ -65,3 +72,5 @@ This repo includes a small worker API:
 When deployed, it receives no-login field cards and opens GitHub issues for maintainer review.
 
 Until the endpoint is configured in [site/config.js](site/config.js), the public button falls back to copying the field card.
+
+If `turnstileSiteKey` is configured in [site/config.js](site/config.js), the field card form asks for Cloudflare Turnstile verification before sending to the worker.

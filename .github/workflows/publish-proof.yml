@@ -1,0 +1,108 @@
+name: Publish Proof Wall Entry
+
+on:
+  issues:
+    types: [labeled]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: Issue number to publish after review
+        required: true
+        type: number
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  publish:
+    name: Publish reviewed field report
+    if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'publish-proof'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Load issue
+        uses: actions/github-script@v7
+        env:
+          EVENT_ISSUE_NUMBER: ${{ github.event.issue.number }}
+          INPUT_ISSUE_NUMBER: ${{ inputs.issue_number }}
+        with:
+          script: |
+            const fs = require('fs');
+            const issueNumber = Number(process.env.EVENT_ISSUE_NUMBER || process.env.INPUT_ISSUE_NUMBER);
+
+            if (!issueNumber) {
+              core.setFailed('No issue number provided.');
+              return;
+            }
+
+            const { owner, repo } = context.repo;
+            const { data: issue } = await github.rest.issues.get({
+              owner,
+              repo,
+              issue_number: issueNumber
+            });
+
+            fs.writeFileSync('issue.json', JSON.stringify(issue, null, 2));
+
+      - name: Publish proof data
+        run: node tools/publish-proof-from-issue.cjs issue.json
+
+      - name: Commit proof wall update
+        id: commit
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/proof/proof-data.json submissions/proof-wall.md
+
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          ISSUE_NUMBER="$(node -p "require('./.proof-publish-result.json').issueNumber")"
+          git commit -m "Publish proof from issue #${ISSUE_NUMBER}"
+          git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Mark issue published
+        if: steps.commit.outputs.changed == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const result = JSON.parse(fs.readFileSync('.proof-publish-result.json', 'utf8'));
+            const { owner, repo } = context.repo;
+
+            try {
+              await github.rest.issues.getLabel({ owner, repo, name: 'proof-published' });
+            } catch (error) {
+              if (error.status === 404) {
+                await github.rest.issues.createLabel({
+                  owner,
+                  repo,
+                  name: 'proof-published',
+                  color: '4F8A74',
+                  description: 'Reviewed field report published to the proof wall.'
+                });
+              } else {
+                throw error;
+              }
+            }
+
+            await github.rest.issues.addLabels({
+              owner,
+              repo,
+              issue_number: result.issueNumber,
+              labels: ['proof-published']
+            });
+
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number: result.issueNumber,
+              body: `Published to the proof wall as \`${result.entryId}\`.\n\n${result.place} / ${result.type}`
+            });

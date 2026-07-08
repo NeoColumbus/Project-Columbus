@@ -3,6 +3,8 @@
   const issueBase = "https://github.com/NeoColumbus/Project-Columbus/issues/new";
   const query = new URLSearchParams(window.location.search);
   const config = window.FULL_CITY_CONFIG || {};
+  let turnstileToken = "";
+  let turnstileWidgetId = null;
 
   const fields = {
     kind: document.querySelector("#field-kind"),
@@ -13,7 +15,9 @@
     website: document.querySelector("#field-website"),
     output: document.querySelector("#field-card-output"),
     github: document.querySelector("#github-field-report"),
-    status: document.querySelector("#field-card-status")
+    status: document.querySelector("#field-card-status"),
+    turnstileWrap: document.querySelector("#turnstile-wrap"),
+    turnstile: document.querySelector("#field-turnstile")
   };
 
   if (!fields.output) return;
@@ -135,7 +139,8 @@
       proof: clean(fields.proof.value, ""),
       card: buildCard(),
       source: sourceData(),
-      website: clean(fields.website?.value, "")
+      website: clean(fields.website?.value, ""),
+      turnstileToken
     };
   }
 
@@ -197,6 +202,11 @@
       return;
     }
 
+    if (config.turnstileSiteKey && !turnstileToken) {
+      fields.status.textContent = "Complete verification first.";
+      return;
+    }
+
     button.disabled = true;
     fields.status.textContent = "Sending.";
 
@@ -219,12 +229,59 @@
         : "Submitted for review.";
 
       if (data.issueUrl) fields.github.href = data.issueUrl;
+      resetTurnstile();
     } catch (error) {
       await copyCard();
       fields.status.textContent = "Submission failed. Card copied.";
     } finally {
       button.disabled = false;
     }
+  }
+
+  function resetTurnstile() {
+    turnstileToken = "";
+
+    if (turnstileWidgetId !== null && window.turnstile?.reset) {
+      window.turnstile.reset(turnstileWidgetId);
+    }
+  }
+
+  function setupTurnstile() {
+    const siteKey = String(config.turnstileSiteKey || "").trim();
+
+    if (!siteKey || !fields.turnstileWrap || !fields.turnstile) return;
+
+    fields.turnstileWrap.hidden = false;
+    window.onFullCityTurnstileLoad = () => {
+      if (!window.turnstile || turnstileWidgetId !== null) return;
+
+      turnstileWidgetId = window.turnstile.render(fields.turnstile, {
+        sitekey: siteKey,
+        callback(token) {
+          turnstileToken = token;
+          fields.status.textContent = "Verification ready.";
+        },
+        "expired-callback"() {
+          turnstileToken = "";
+          fields.status.textContent = "Verification expired.";
+        },
+        "error-callback"() {
+          turnstileToken = "";
+          fields.status.textContent = "Verification unavailable.";
+        }
+      });
+    };
+
+    if (window.turnstile) {
+      window.onFullCityTurnstileLoad();
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onFullCityTurnstileLoad&render=explicit";
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
   }
 
   async function copyCardLink() {
@@ -295,5 +352,6 @@
   document.querySelector("#download-field-card")?.addEventListener("click", downloadCard);
 
   hydrateFromUrl();
+  setupTurnstile();
   updateCard();
 })();

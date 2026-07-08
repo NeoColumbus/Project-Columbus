@@ -64,7 +64,19 @@ Do not commit the token.
 
 ## Deploy
 
-Copy `wrangler.toml.example` to `wrangler.toml`, fill in the worker name, and deploy with Wrangler.
+This folder includes a deployable `wrangler.toml`.
+
+Manual deploy:
+
+```sh
+wrangler deploy
+```
+
+GitHub Actions deploy:
+
+- add `CLOUDFLARE_API_TOKEN` as a repository secret
+- add `CLOUDFLARE_ACCOUNT_ID` as a repository secret
+- run the `Deploy Field Submission API` workflow
 
 After deploy, set the endpoint in:
 
@@ -74,12 +86,29 @@ Example:
 
 ```js
 window.FULL_CITY_CONFIG = {
-  fieldSubmissionEndpoint: "https://YOUR-WORKER.YOUR-SUBDOMAIN.workers.dev/field-report"
+  fieldSubmissionEndpoint: "https://YOUR-WORKER.YOUR-SUBDOMAIN.workers.dev/field-report",
+  turnstileSiteKey: ""
 };
+```
+
+Set the worker secret before accepting submissions:
+
+```sh
+wrangler secret put GITHUB_TOKEN
 ```
 
 ## Turnstile
 
 If `TURNSTILE_SECRET` is set, submissions must include a valid `turnstileToken`.
 
-Leave it unset until the frontend is wired with a Turnstile widget.
+The signal page renders a Turnstile widget only when `turnstileSiteKey` is set in [../../site/config.js](../../site/config.js).
+
+To turn it on:
+
+1. Create a Cloudflare Turnstile widget for the public site domain.
+2. Set `turnstileSiteKey` in [../../site/config.js](../../site/config.js).
+3. Set the matching worker secret:
+
+```sh
+wrangler secret put TURNSTILE_SECRET
+```

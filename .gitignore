@@ -15,6 +15,7 @@ __pycache__/
 
 # Logs and generated artifacts
 *.log
+.proof-publish-result.json
 dist/
 build/
 .cache/

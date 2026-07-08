@@ -14,6 +14,10 @@ It uploads the `site/` folder as the Pages artifact and deploys it to GitHub Pag
 
 The workflow at [.github/workflows/export-drop-assets.yml](.github/workflows/export-drop-assets.yml) builds the Drop 001 PNG/PDF artifact when source assets change or when a maintainer runs it manually.
 
+The workflow at [.github/workflows/deploy-field-api.yml](.github/workflows/deploy-field-api.yml) deploys the no-login field submission worker when a maintainer runs it manually.
+
+The workflow at [.github/workflows/publish-proof.yml](.github/workflows/publish-proof.yml) publishes reviewed field report issues to the proof wall when a maintainer labels an issue `publish-proof` or runs the workflow with an issue number.
+
 ## First-Time Setup
 
 If GitHub Pages is not enabled yet:
@@ -38,4 +42,24 @@ To accept private submissions without GitHub login, add a public inbox or form b
 
 The worker in [api/field-submission](api/field-submission) can receive field cards from the static site and create GitHub issues.
 
-Deploy it separately, store `GITHUB_TOKEN` as a worker secret, then set the deployed URL in [site/config.js](site/config.js).
+To activate it:
+
+1. Add repository secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
+2. Run the `Deploy Field Submission API` workflow.
+3. Store `GITHUB_TOKEN` as a Cloudflare Worker secret.
+4. Optional: create a Cloudflare Turnstile widget, store `TURNSTILE_SECRET` as a worker secret, and set `turnstileSiteKey` in [site/config.js](site/config.js).
+5. Set the deployed worker URL in [site/config.js](site/config.js).
+
+Until [site/config.js](site/config.js) has a live `fieldSubmissionEndpoint`, the signal page falls back to copy/share/download.
+
+## Proof Wall Publishing
+
+The proof wall starts clean.
+Do not add entries without a checkable field report.
+
+Publishing path:
+
+1. A field card becomes a GitHub issue.
+2. A maintainer checks that the place, proof, missing piece, and line are usable.
+3. The maintainer adds the `publish-proof` label.
+4. GitHub Actions updates [site/proof/proof-data.json](site/proof/proof-data.json) and [submissions/proof-wall.md](submissions/proof-wall.md).

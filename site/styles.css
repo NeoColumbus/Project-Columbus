@@ -1884,10 +1884,15 @@ h1 {
 
 .field-proof-input,
 .hp-field,
+.turnstile-wrap,
 .field-output,
 .field-card-form .final-actions,
 .field-card-status {
   grid-column: 1 / -1;
+}
+
+.turnstile-wrap {
+  min-height: 68px;
 }
 
 .hp-field {

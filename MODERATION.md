@@ -44,6 +44,14 @@ It only adds labels such as:
 
 A maintainer still decides.
 
+## Proof Publishing
+
+`publish-proof` is a human approval label.
+
+Only add it after the field report has a checkable place, proof, missing piece, and public line.
+
+When that label lands, the `Publish Proof Wall Entry` workflow publishes the issue to the proof wall and adds `proof-published`.
+
 ## What Gets Flagged
 
 Default tripwires watch for:
