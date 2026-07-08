@@ -4,6 +4,7 @@ All notable project changes should be tracked here.
 
 ## Unreleased
 
+- Added the no-login field submission worker API and wired the signal page to use it when configured.
 - Added data-driven proof wall rendering, portable field-card links/downloads, release artifact workflow, setup docs, submission docs, street protocol, and source sprint queue.
 - Fixed Drop 001 QR targets and inlined QR paths into street assets for reliable export.
 - Added a no-login field-card path, public proof wall, and proof ledger.

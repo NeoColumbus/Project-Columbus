@@ -148,12 +148,17 @@
             Proof
             <input id="field-proof" name="proof" type="text" placeholder="Photo link, post link, or note" />
           </label>
+          <label class="hp-field" aria-hidden="true">
+            Website
+            <input id="field-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </label>
           <label class="field-output">
             Card
             <textarea id="field-card-output" readonly rows="10"></textarea>
           </label>
           <div class="final-actions">
-            <button class="button primary" id="copy-field-card" type="button">Copy field card</button>
+            <button class="button primary" id="submit-field-card" type="button">Send to project</button>
+            <button class="button ghost light" id="copy-field-card" type="button">Copy field card</button>
             <button class="button ghost light" id="share-field-card" type="button">Share field card</button>
             <button class="button ghost light" id="copy-card-link" type="button">Copy card link</button>
             <button class="button ghost light" id="download-field-card" type="button">Download card</button>
@@ -194,6 +199,7 @@
         <a href="https://github.com/NeoColumbus/Project-Columbus">GitHub</a>.
       </p>
     </footer>
+    <script src="../config.js"></script>
     <script src="signal.js"></script>
   </body>
 </html>

@@ -173,6 +173,9 @@ Open [SETUP.md](SETUP.md).
 Want to submit field proof?
 Open [SUBMISSIONS.md](SUBMISSIONS.md).
 
+Want the no-login submission API?
+Open [api/field-submission](api/field-submission).
+
 Hosting notes live in [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ## Open Source Invitation

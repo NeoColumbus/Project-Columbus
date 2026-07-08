@@ -33,3 +33,9 @@ It does not store form submissions.
 The current no-login field path creates portable field cards: copy, share, download, or card link.
 
 To accept private submissions without GitHub login, add a public inbox or form backend and document it in [SUBMISSIONS.md](SUBMISSIONS.md).
+
+## Field Submission API
+
+The worker in [api/field-submission](api/field-submission) can receive field cards from the static site and create GitHub issues.
+
+Deploy it separately, store `GITHUB_TOKEN` as a worker secret, then set the deployed URL in [site/config.js](site/config.js).

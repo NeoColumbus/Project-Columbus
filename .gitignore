@@ -18,7 +18,11 @@ __pycache__/
 dist/
 build/
 .cache/
+.wrangler/
+api/**/.wrangler/
 
 # Local environment files
 .env
 .env.*
+.dev.vars
+api/**/.dev.vars

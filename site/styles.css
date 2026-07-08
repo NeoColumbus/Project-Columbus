@@ -1883,10 +1883,24 @@ h1 {
 }
 
 .field-proof-input,
+.hp-field,
 .field-output,
 .field-card-form .final-actions,
 .field-card-status {
   grid-column: 1 / -1;
+}
+
+.hp-field {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.button:disabled {
+  cursor: wait;
+  opacity: 0.62;
 }
 
 .field-card-status {

@@ -2,6 +2,7 @@
   const scanPath = "https://neocolumbus.github.io/Project-Columbus/signal/";
   const issueBase = "https://github.com/NeoColumbus/Project-Columbus/issues/new";
   const query = new URLSearchParams(window.location.search);
+  const config = window.FULL_CITY_CONFIG || {};
 
   const fields = {
     kind: document.querySelector("#field-kind"),
@@ -9,6 +10,7 @@
     break: document.querySelector("#field-break"),
     line: document.querySelector("#field-line"),
     proof: document.querySelector("#field-proof"),
+    website: document.querySelector("#field-website"),
     output: document.querySelector("#field-card-output"),
     github: document.querySelector("#github-field-report"),
     status: document.querySelector("#field-card-status")
@@ -41,16 +43,27 @@
   }
 
   function sourceText() {
+    const source = sourceData();
+    const parts = [];
+
+    if (source.drop) parts.push(`drop=${source.drop}`);
+    if (source.asset) parts.push(`asset=${source.asset}`);
+    if (source.source) parts.push(`source=${source.source}`);
+
+    return parts.join(" / ");
+  }
+
+  function sourceData() {
     const drop = query.get("drop");
     const asset = query.get("asset");
     const source = query.get("source");
-    const parts = [];
 
-    if (drop) parts.push(`drop=${drop}`);
-    if (asset) parts.push(`asset=${asset}`);
-    if (source) parts.push(`source=${source}`);
-
-    return parts.join(" / ");
+    return {
+      drop: drop || "",
+      asset: asset || "",
+      source: source || "",
+      url: window.location.href
+    };
   }
 
   function buildCard() {
@@ -84,7 +97,10 @@
       place: clean(fields.place.value, ""),
       break: clean(fields.break.value, ""),
       line: clean(fields.line.value, ""),
-      proof: clean(fields.proof.value, "")
+      proof: clean(fields.proof.value, ""),
+      drop: query.get("drop") || "",
+      asset: query.get("asset") || "",
+      source: query.get("source") || ""
     });
 
     for (const key of Array.from(params.keys())) {
@@ -108,6 +124,26 @@
 
     fields.output.value = card;
     fields.github.href = `${issueBase}?${params.toString()}`;
+  }
+
+  function buildPayload() {
+    return {
+      kind: clean(fields.kind.value, "Signal"),
+      place: clean(fields.place.value, ""),
+      break: clean(fields.break.value, fallback[fields.kind.value]?.break || ""),
+      line: clean(fields.line.value, fallback[fields.kind.value]?.line || ""),
+      proof: clean(fields.proof.value, ""),
+      card: buildCard(),
+      source: sourceData(),
+      website: clean(fields.website?.value, "")
+    };
+  }
+
+  function canSubmitPayload(payload) {
+    if (!payload.place) return "Add a place first.";
+    if (!payload.break) return "Name what is missing.";
+    if (!payload.line) return "Add one public line.";
+    return "";
   }
 
   async function copyCard() {
@@ -141,6 +177,54 @@
 
     await copyCard();
     fields.status.textContent = "Share unavailable. Card copied.";
+  }
+
+  async function submitFieldCard() {
+    const endpoint = String(config.fieldSubmissionEndpoint || "").trim();
+    const payload = buildPayload();
+    const validation = canSubmitPayload(payload);
+    const button = document.querySelector("#submit-field-card");
+
+    if (validation) {
+      fields.status.textContent = validation;
+      if (!payload.place) fields.place.focus();
+      return;
+    }
+
+    if (!endpoint) {
+      await copyCard();
+      fields.status.textContent = "Public inbox not configured yet. Card copied.";
+      return;
+    }
+
+    button.disabled = true;
+    fields.status.textContent = "Sending.";
+
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok || !data.ok) {
+        throw new Error(data.error || "Submission failed.");
+      }
+
+      fields.status.textContent = data.issueNumber
+        ? `Submitted for review. Issue ${data.issueNumber}.`
+        : "Submitted for review.";
+
+      if (data.issueUrl) fields.github.href = data.issueUrl;
+    } catch (error) {
+      await copyCard();
+      fields.status.textContent = "Submission failed. Card copied.";
+    } finally {
+      button.disabled = false;
+    }
   }
 
   async function copyCardLink() {
@@ -205,6 +289,7 @@
   });
 
   document.querySelector("#copy-field-card")?.addEventListener("click", copyCard);
+  document.querySelector("#submit-field-card")?.addEventListener("click", submitFieldCard);
   document.querySelector("#share-field-card")?.addEventListener("click", shareCard);
   document.querySelector("#copy-card-link")?.addEventListener("click", copyCardLink);
   document.querySelector("#download-field-card")?.addEventListener("click", downloadCard);

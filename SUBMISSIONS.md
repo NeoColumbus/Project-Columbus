@@ -5,6 +5,7 @@
 Full City Columbus has two front doors:
 
 - public field cards for people who do not know Git
+- the field submission API when the public inbox is configured
 - GitHub issues and pull requests for people ready to send material upstream
 
 ## No-Login Field Path
@@ -17,6 +18,7 @@ Make a field card.
 
 Then:
 
+- send it to the project if the public inbox is configured
 - copy it
 - share it
 - download it
@@ -51,17 +53,15 @@ Every proof entry needs:
 - one public line
 - status
 
-## If You Want A Real Inbox Later
+## Public Inbox API
 
 GitHub Pages is static.
 It cannot store form submissions without an outside service.
 
-Good future options:
+This repo includes a small worker API:
 
-- public project email
-- Tally or Google Form
-- Airtable form
-- Netlify Forms if hosting changes
-- a tiny worker/API endpoint
+- [api/field-submission](api/field-submission)
 
-Until that exists, the honest no-login path is portable proof: copy, share, download, post, then a maintainer checks and publishes.
+When deployed, it receives no-login field cards and opens GitHub issues for maintainer review.
+
+Until the endpoint is configured in [site/config.js](site/config.js), the public button falls back to copying the field card.
