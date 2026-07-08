@@ -9,6 +9,36 @@ No fog.
 
 The voice is severe, beautiful, civic, loved, fanatical, sincere, anti-beige, grounded in Columbus, and grand without becoming fake.
 
+## Presence Law
+
+The language should carry pavement.
+
+Use:
+
+- roads
+- routes
+- rivers
+- stops
+- walls
+- bridges
+- porches
+- storefronts
+- public rooms
+
+Say the place before the theory.
+
+Bad:
+
+`This campaign reimagines civic identity.`
+
+Better:
+
+`Morse Road is not a fragment.`
+
+Best:
+
+`Morse Road has groceries, buses, languages, and money moving. It needs shelter, shade, crossings, and beauty. Build the body.`
+
 ## Core Lines
 
 No more half-city.
@@ -43,3 +73,4 @@ If a line can fit on a flyer and survive being shouted under an overpass, keep i
 
 If the language loses the city, cut the language.
 
+If the line has no place, no object, no wound, and no demand, it is probably vapor.

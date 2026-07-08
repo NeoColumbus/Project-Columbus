@@ -70,6 +70,8 @@ Mascot-level affection:
 8. Keep the palette civic, not lifestyle.
 9. Make the artifact feel found, official, and illegal at the same time.
 10. Never make it beige.
+11. Put a real place into the composition.
+12. Let the object feel handled, posted, carried, or reported.
 
 ## Core Motifs
 
@@ -97,6 +99,36 @@ street heat, labor, walls, alleys, neighborhood pressure.
 Copper:
 weathered future, infrastructure, wire, age.
 
+## Inhabited Feel
+
+Earthwork Futurism is not clean-room branding.
+
+It should feel like:
+
+- a sticker on a laptop
+- a flyer taped to a window
+- a bus stop field card
+- a handbill folded in a pocket
+- a public hearing slide with teeth
+- a wall report from a named block
+- a flag seen from a bridge
+
+Use place names as voltage:
+
+- Morse Road
+- Parsons Avenue
+- Broad and High
+- Franklinton
+- Linden
+- The Hilltop
+- Northland
+- South Side
+- Scioto
+- Olentangy
+
+Do not make the city into scenery.
+Make the place the proof.
+
 ## Typography
 
 Use heavy condensed type for public commands.
@@ -114,17 +146,23 @@ chant.
 
 Do not explain first.
 
-Signal first.
+Place first.
+Signal second.
 Then line.
 Then demand.
+Then proof.
 Then source.
 
 Order:
 
-1. the mark
-2. the impossible-to-ignore line
-3. the civic demand
-4. the source trail
+1. the named place
+2. the mark
+3. the impossible-to-ignore line
+4. the civic demand
+5. the proof path
+6. the source trail
+
+If a line could belong to any city, it does not belong here yet.
 
 ## Artifact Types
 

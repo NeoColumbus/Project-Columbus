@@ -60,3 +60,15 @@ Simple enough to steal.
 Strange enough to remember.
 
 Local enough that it could not belong anywhere else.
+
+## Inhabited Test
+
+Before shipping a public artifact, ask:
+
+- Does it name a place?
+- Could someone photograph the condition?
+- Could it become a sticker, flyer, or field card?
+- Does the object make the city feel bigger, not smaller?
+- Would a person from that corridor recognize the room?
+
+If the artifact only says Columbus in the abstract, it needs more pavement.

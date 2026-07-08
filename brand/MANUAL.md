@@ -128,6 +128,52 @@ Avoid:
 - stock civic smiles
 - fake official seals
 
+## Presence Rules
+
+This cannot feel like a generic city package.
+
+Every major artifact should carry at least one of these:
+
+- a road
+- a bus stop
+- a wall
+- a bridge
+- a storefront
+- a neighborhood
+- a corridor
+- a room people actually use
+
+Good place nouns:
+
+- Morse Road
+- Parsons Avenue
+- Broad and High
+- Franklinton
+- Linden
+- The Hilltop
+- Northland
+- South Side
+- Scioto
+- Olentangy
+
+Do not use place names as decoration.
+Use them as doors into action.
+
+## Myth Building
+
+The myth should feel discovered, not explained.
+
+Build it through:
+
+- repeated symbols
+- named places
+- field proof
+- public objects
+- rituals people can copy
+- lines people can finish themselves
+
+The strongest artifact feels like it was already in the city and somebody finally noticed it.
+
 ## QR Rule
 
 Campaign QR target:
@@ -184,6 +230,16 @@ Short beats clever.
 Place beats abstraction.
 Object beats essay.
 Demand beats mood.
+Proof beats vibes.
+
+Order:
+
+1. Place
+2. Signal
+3. Break
+4. Line
+5. Proof
+6. Scan
 
 Good:
 
@@ -192,6 +248,8 @@ Good:
 - The machine pays tribute.
 - Morse Road is not a fragment.
 - Frequency is dignity.
+- Parsons needs rooms, routes, light.
+- Broad and High is a civic room, not a postcard.
 
 Bad:
 
@@ -199,5 +257,7 @@ Bad:
 - inclusive placemaking framework
 - authentic community activation
 - comprehensive engagement ecosystem
+- vibrant urban fabric
+- culturally rich community tapestry
 
 The line should feel like it could be printed huge.
