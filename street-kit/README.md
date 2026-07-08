@@ -25,7 +25,7 @@ Campaign QR target:
 
 https://neocolumbus.github.io/Project-Columbus/signal/
 
-Legacy QR assets may still point to the public homepage. New QR assets should go to the scan path.
+QR-bearing assets should be regenerated from [../brand/project-qr.svg](../brand/project-qr.svg) and inline the QR path before export. Nested SVG images can disappear in some renderers.
 
 ## Print Notes
 

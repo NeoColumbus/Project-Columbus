@@ -80,6 +80,8 @@ Use it for content the project never wants to publish.
 
 This part cannot be fully committed as a file. It has to be turned on in GitHub settings.
 
+Use [.github/BRANCH_PROTECTION.md](.github/BRANCH_PROTECTION.md) as the setup checklist.
+
 Recommended branch rule for `main`:
 
 - require a pull request before merging

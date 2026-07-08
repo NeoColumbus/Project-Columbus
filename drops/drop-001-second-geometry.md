@@ -37,6 +37,8 @@ No one has to understand the whole theory before they can feel the signal.
 - [social squares](../social-kit/squares)
 - [social stories](../social-kit/stories)
 - [public scan path](https://neocolumbus.github.io/Project-Columbus/signal/)
+- [public proof wall](https://neocolumbus.github.io/Project-Columbus/proof/)
+- [release bundle manifest](drop-001-second-geometry/README.md)
 
 ## Evidence Posters
 
@@ -69,6 +71,9 @@ Second Geometry means the city has to take form:
 
 Fast door:
 https://neocolumbus.github.io/Project-Columbus/signal/
+
+Proof wall:
+https://neocolumbus.github.io/Project-Columbus/proof/
 
 ## First Missions
 

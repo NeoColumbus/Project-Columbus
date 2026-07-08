@@ -4,6 +4,11 @@ All notable project changes should be tracked here.
 
 ## Unreleased
 
+- Fixed Drop 001 QR targets and inlined QR paths into street assets for reliable export.
+- Added a no-login field-card path, public proof wall, and proof ledger.
+- Added Drop 001 export tooling, release manifest, and repo dev dependencies for PNG/PDF bundles.
+- Added a credibility queue for source hardening and a branch-protection setup checklist.
+- Self-hosted the Archivo Black display font for steadier public renders.
 - Added moderation tripwire workflow, moderation rules, and CODEOWNERS starter.
 
 ## v0.3 - 2026-07-08

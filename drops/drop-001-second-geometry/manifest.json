@@ -1,0 +1,41 @@
+{
+  "drop": "drop-001-second-geometry",
+  "title": "Drop 001: Second Geometry",
+  "scanPath": "https://neocolumbus.github.io/Project-Columbus/signal/",
+  "proofPath": "https://neocolumbus.github.io/Project-Columbus/proof/",
+  "sourceAssets": [
+    "brand/signal-mark.svg",
+    "brand/signal-mark-mono.svg",
+    "brand/project-qr.svg",
+    "site/assets/second-geometry-flag.svg",
+    "street-kit/posters/001-earthworks-were-first.svg",
+    "street-kit/posters/002-signal-seen-confluence.svg",
+    "street-kit/posters/003-center-before-seal.svg",
+    "street-kit/posters/004-pile-of-projects.svg",
+    "street-kit/posters/005-machine-pays-tribute.svg",
+    "street-kit/posters/006-report-dead-wall.svg",
+    "street-kit/posters/006-report-dead-wall-qr.svg",
+    "street-kit/sticker-sheet.svg",
+    "street-kit/sticker-sheet-qr.svg",
+    "street-kit/qr-sticker.svg",
+    "street-kit/handbill-post-the-signal.svg",
+    "social-kit/squares/001-earthworks-were-first.svg",
+    "social-kit/squares/002-post-the-signal.svg",
+    "social-kit/squares/003-old-ground-new-machine.svg",
+    "social-kit/squares/004-machine-pays-tribute.svg",
+    "social-kit/stories/001-second-geometry-arrives.svg",
+    "social-kit/stories/002-build-the-body.svg"
+  ],
+  "releaseOutputs": [
+    "png",
+    "pdf"
+  ],
+  "qa": [
+    "scan every QR",
+    "check text collisions",
+    "check small text",
+    "check image credits",
+    "check public links",
+    "verify proof path"
+  ]
+}

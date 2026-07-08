@@ -20,6 +20,9 @@ The curb is form.
 Do not write policy notes that could belong anywhere.
 Make them answer Columbus.
 
+Claims that move toward public testimony should be added to
+[../research/CREDIBILITY_QUEUE.md](../research/CREDIBILITY_QUEUE.md).
+
 ## Policy Law
 
 No policy without beauty.

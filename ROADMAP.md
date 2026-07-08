@@ -14,9 +14,9 @@ This is a list of ways to make the signal stronger.
 - Add more Columbus photo sources with clean credits.
 - Test the Second Geometry flag on stickers, banners, phone avatars, and cheap print.
 - Field-test Drop 001 posters, sticker sheet, handbill, and social frames.
-- Field-test the scan path with one dead wall report, one bus stop audit, and one neighborhood line.
+- Field-test the scan path and proof wall with one dead wall report, one bus stop audit, and one neighborhood line.
 - Tighten the myth copy until every line can survive being printed huge.
-- Add better sources to the research files.
+- Work through [research/CREDIBILITY_QUEUE.md](research/CREDIBILITY_QUEUE.md).
 - Cut any phrase that sounds like a committee trying to sound brave.
 
 ## Good First Issues
@@ -33,8 +33,8 @@ This is a list of ways to make the signal stronger.
 ## Bigger Builds
 
 - Create a neighborhood module system.
-- Turn Drop 001 into export-ready PDF and PNG bundles.
-- Build a real submissions gallery.
+- Publish the first generated Drop 001 PNG/PDF bundle from [tools/export-drop-assets.cjs](tools/export-drop-assets.cjs).
+- Fill the first real proof entries in [submissions/proof-wall.md](submissions/proof-wall.md).
 - Add a local photo library with licenses.
 - Build a public issue board after the repo is on GitHub.
 - Add release bundles for flyers, web assets, and research notes.

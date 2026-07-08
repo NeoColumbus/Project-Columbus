@@ -87,6 +87,20 @@ If a drop has no proof wall, it never touched the city.
 
 Every QR should send people to one action fast.
 
+Drop 001 QR target:
+
+https://neocolumbus.github.io/Project-Columbus/signal/
+
+The scan path should let a person act before they understand GitHub.
+
+Order:
+
+1. choose a door
+2. make a field card
+3. copy, share, or post the proof
+4. send the proof upstream when it is ready
+5. publish checked proof on the proof wall
+
 Good scan doors:
 
 - Report a dead wall.
@@ -117,6 +131,10 @@ The project needs visible evidence:
 - remixed posters
 
 Proof is what makes the myth walk.
+
+Public proof wall:
+
+https://neocolumbus.github.io/Project-Columbus/proof/
 
 ## Metrics
 

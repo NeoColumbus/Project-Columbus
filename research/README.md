@@ -18,6 +18,7 @@ Treat them as a queue for better humans.
 
 ## Starting Files
 
+- [CREDIBILITY_QUEUE.md](CREDIBILITY_QUEUE.md)
 - [hopewell.md](hopewell.md)
 - [columbus-history.md](columbus-history.md)
 - [zoning.md](zoning.md)

@@ -18,7 +18,9 @@
       </a>
       <nav class="nav" aria-label="Signal sections">
         <a href="#actions">Act</a>
+        <a href="#field-card">Card</a>
         <a href="#proof">Proof</a>
+        <a href="../proof/">Wall</a>
         <a href="https://github.com/NeoColumbus/Project-Columbus">Repo</a>
       </nav>
     </header>
@@ -66,7 +68,10 @@
         <div class="signal-action-grid">
           <a
             class="signal-action"
-            href="https://github.com/NeoColumbus/Project-Columbus/issues/new?template=field-report.md&title=%5BField%5D%20Dead%20wall%3A%20"
+            href="#field-card"
+            data-kind="Dead Wall"
+            data-break="Blank frontage. Dead street."
+            data-line="Density deserves beauty."
           >
             <span>Dead Wall</span>
             <strong>Report a dead wall.</strong>
@@ -74,7 +79,10 @@
           </a>
           <a
             class="signal-action"
-            href="https://github.com/NeoColumbus/Project-Columbus/issues/new?template=field-report.md&title=%5BField%5D%20Bus%20stop%3A%20"
+            href="#field-card"
+            data-kind="Transit"
+            data-break="Stop lacks shelter, shade, light, crossing, seating, route information, or dignity."
+            data-line="Transit is the nervous system."
           >
             <span>Transit</span>
             <strong>Score a bus stop.</strong>
@@ -82,7 +90,10 @@
           </a>
           <a
             class="signal-action"
-            href="https://github.com/NeoColumbus/Project-Columbus/issues/new?template=field-report.md&title=%5BField%5D%20Fragment%3A%20"
+            href="#field-card"
+            data-kind="Neighborhood"
+            data-break="This place is treated like a fragment."
+            data-line="[Place] is not a fragment."
           >
             <span>Neighborhood</span>
             <strong>Name the fragment.</strong>
@@ -90,7 +101,10 @@
           </a>
           <a
             class="signal-action"
-            href="https://github.com/NeoColumbus/Project-Columbus/blob/main/participation/data-center-public-test-card.md"
+            href="#field-card"
+            data-kind="Machine"
+            data-break="Water, power, land, tax, compute, or data is being treated as extraction."
+            data-line="The machine pays tribute."
           >
             <span>Machine</span>
             <strong>Make it pay tribute.</strong>
@@ -99,8 +113,56 @@
         </div>
       </section>
 
+      <section class="signal-field-card" id="field-card" aria-labelledby="field-card-title">
+        <div class="field-card-copy">
+          <p class="kicker">02 / field card</p>
+          <h2 id="field-card-title">Make the proof portable.</h2>
+          <p>
+            No login at the front door. Make the card, copy it, share it, then
+            send it upstream when the line is sharp enough.
+          </p>
+        </div>
+        <form class="field-card-form" aria-label="Field card generator">
+          <label>
+            Signal
+            <select id="field-kind" name="kind">
+              <option>Dead Wall</option>
+              <option>Transit</option>
+              <option>Neighborhood</option>
+              <option>Machine</option>
+            </select>
+          </label>
+          <label>
+            Place
+            <input id="field-place" name="place" type="text" placeholder="Street, stop, wall, block, building" />
+          </label>
+          <label>
+            Break
+            <input id="field-break" name="break" type="text" placeholder="What is missing or broken?" />
+          </label>
+          <label>
+            Line
+            <input id="field-line" name="line" type="text" placeholder="One sentence that hits." />
+          </label>
+          <label class="field-proof-input">
+            Proof
+            <input id="field-proof" name="proof" type="text" placeholder="Photo link, post link, or note" />
+          </label>
+          <label class="field-output">
+            Card
+            <textarea id="field-card-output" readonly rows="10"></textarea>
+          </label>
+          <div class="final-actions">
+            <button class="button primary" id="copy-field-card" type="button">Copy field card</button>
+            <button class="button ghost light" id="share-field-card" type="button">Share field card</button>
+            <a class="button ghost light" id="github-field-report" href="https://github.com/NeoColumbus/Project-Columbus/issues/new?template=field-report.md&title=%5BField%5D%20">Open GitHub report</a>
+          </div>
+          <p class="field-card-status" id="field-card-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
       <section class="signal-proof-band" id="proof" aria-labelledby="proof-title">
-        <p class="kicker">02 / proof path</p>
+        <p class="kicker">03 / proof path</p>
         <h2 id="proof-title">No proof, no movement.</h2>
         <div class="signal-proof-grid">
           <p>Photo.</p>
@@ -110,7 +172,9 @@
           <p>Send it back.</p>
         </div>
         <div class="final-actions">
-          <a class="button primary" href="https://github.com/NeoColumbus/Project-Columbus/issues/new?template=field-report.md&title=%5BField%5D%20">Open field report</a>
+          <a class="button primary" href="../proof/">Open proof wall</a>
+          <a class="button ghost light" href="#field-card">Make field card</a>
+          <a class="button ghost light" href="https://github.com/NeoColumbus/Project-Columbus/issues/new?template=field-report.md&title=%5BField%5D%20">GitHub field report</a>
           <a class="button ghost light" href="../#drop">Open Drop 001</a>
         </div>
       </section>
@@ -128,5 +192,6 @@
         <a href="https://github.com/NeoColumbus/Project-Columbus">GitHub</a>.
       </p>
     </footer>
+    <script src="signal.js"></script>
   </body>
 </html>

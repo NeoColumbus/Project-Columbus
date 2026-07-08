@@ -1,3 +1,9 @@
+@font-face {
+  font-family: "Archivo Black";
+  src: url("assets/fonts/archivo-black-latin.woff2") format("woff2");
+  font-display: swap;
+}
+
 :root {
   --river-navy: #061620;
   --deep-current: #0e2a32;
@@ -9,6 +15,7 @@
   --amber: #f4b037;
   --black: #050606;
   --green: #17352f;
+  --display-font: "Archivo Black", Impact, Haettenschweiler, "Arial Narrow Bold", "Arial Black", sans-serif;
   color-scheme: dark;
 }
 
@@ -25,7 +32,7 @@ body {
   overflow-x: hidden;
   background: var(--black);
   color: var(--bone);
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", "Arial Black", sans-serif;
+  font-family: var(--display-font);
   line-height: 1;
 }
 
@@ -253,6 +260,7 @@ h1 {
   text-align: center;
   text-transform: uppercase;
   overflow-wrap: anywhere;
+  cursor: pointer;
 }
 
 .button.primary {
@@ -1801,6 +1809,97 @@ h1 {
   box-shadow: 5px 5px 0 var(--brick);
 }
 
+.signal-field-card {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr);
+  gap: clamp(24px, 5vw, 72px);
+  padding: clamp(76px, 10vw, 140px) clamp(18px, 5vw, 72px);
+  background:
+    linear-gradient(135deg, rgba(5, 6, 6, 0.98), rgba(14, 42, 50, 0.94)),
+    var(--black);
+  color: var(--bone);
+}
+
+.signal-field-card h2 {
+  max-width: 9ch;
+  font-size: clamp(58px, 10.8vw, 168px);
+  line-height: 0.88;
+}
+
+.field-card-copy p:not(.kicker) {
+  max-width: 640px;
+  margin: 28px 0 0;
+  color: var(--amber);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(18px, 2.2vw, 32px);
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  line-height: 1.14;
+  text-transform: uppercase;
+}
+
+.field-card-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  align-self: start;
+}
+
+.field-card-form label {
+  display: grid;
+  gap: 8px;
+  color: var(--amber);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.field-card-form input,
+.field-card-form select,
+.field-card-form textarea {
+  width: 100%;
+  min-height: 54px;
+  border: 3px solid var(--amber);
+  border-radius: 0;
+  background: var(--bone);
+  color: var(--black);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  padding: 12px;
+}
+
+.field-card-form textarea {
+  min-height: 280px;
+  resize: vertical;
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  text-transform: none;
+}
+
+.field-proof-input,
+.field-output,
+.field-card-form .final-actions,
+.field-card-status {
+  grid-column: 1 / -1;
+}
+
+.field-card-status {
+  min-height: 1.2em;
+  margin: 0;
+  color: var(--amber);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 .signal-proof-band {
   min-height: 82svh;
   padding: clamp(76px, 10vw, 140px) clamp(18px, 5vw, 72px);
@@ -1854,6 +1953,127 @@ h1 {
   font-size: clamp(28px, 4.4vw, 72px);
   font-weight: 900;
   line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.proof-main {
+  background: var(--black);
+  color: var(--bone);
+}
+
+.proof-hero {
+  min-height: 78svh;
+  display: grid;
+  align-items: end;
+  padding: 112px clamp(18px, 5vw, 72px) 70px;
+  background:
+    linear-gradient(135deg, rgba(5, 6, 6, 0.96), rgba(23, 53, 47, 0.88)),
+    var(--green);
+}
+
+.proof-hero h1 {
+  max-width: 9ch;
+  font-size: clamp(72px, 13vw, 188px);
+}
+
+.proof-deck {
+  max-width: 780px;
+  margin: 24px 0 0;
+  color: var(--amber);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(20px, 2.6vw, 38px);
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  line-height: 1.12;
+  text-transform: uppercase;
+}
+
+.proof-wall-section {
+  padding: clamp(76px, 10vw, 140px) clamp(18px, 5vw, 72px);
+  background:
+    linear-gradient(135deg, rgba(232, 221, 199, 0.98), rgba(244, 176, 55, 0.82)),
+    var(--bone);
+  color: var(--black);
+}
+
+.proof-wall-section .kicker {
+  color: var(--brick);
+}
+
+.proof-wall-section h2 {
+  max-width: 10ch;
+  font-size: clamp(58px, 10.8vw, 168px);
+  line-height: 0.88;
+}
+
+.proof-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: clamp(30px, 5vw, 64px);
+}
+
+.proof-card {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  border: 3px solid var(--black);
+  background: var(--black);
+  color: var(--bone);
+}
+
+.proof-card:nth-child(2n) {
+  background: var(--river-navy);
+}
+
+.proof-card:nth-child(3n) {
+  background: var(--brick);
+}
+
+.proof-card span,
+.proof-card em {
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1.18;
+  text-transform: uppercase;
+}
+
+.proof-card span {
+  color: var(--amber);
+  font-size: 12px;
+}
+
+.proof-card strong {
+  display: block;
+  margin-top: auto;
+  font-size: clamp(34px, 3.8vw, 64px);
+  line-height: 0.88;
+}
+
+.proof-card em {
+  display: block;
+  margin-top: 18px;
+  font-size: 13px;
+}
+
+.proof-ledger {
+  padding: clamp(76px, 10vw, 140px) clamp(18px, 5vw, 72px);
+  background: var(--black);
+}
+
+.proof-ledger p {
+  max-width: 820px;
+  margin: 24px 0 0;
+  color: var(--bone);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(18px, 2vw, 28px);
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  line-height: 1.18;
   text-transform: uppercase;
 }
 
@@ -1934,6 +2154,7 @@ h1 {
   .civic-stack,
   .ai-dividend,
   .transit-blast,
+  .signal-field-card,
   .signal-hero-page {
     grid-template-columns: 1fr;
   }
@@ -1984,7 +2205,9 @@ h1 {
   }
 
   .signal-action-grid,
-  .signal-proof-grid {
+  .signal-proof-grid,
+  .field-card-form,
+  .proof-grid {
     grid-template-columns: 1fr;
   }
 
@@ -2026,11 +2249,21 @@ h1 {
   }
 
   .declaration {
-    font-size: clamp(26px, 10vw, 42px);
+    max-width: 100%;
+    font-size: clamp(24px, 8.4vw, 34px);
+    line-height: 0.96;
   }
 
   .signal {
     font-size: clamp(20px, 7vw, 30px);
+  }
+
+  .proof-deck {
+    width: min(18rem, calc(100vw - 48px));
+    max-width: calc(100vw - 48px);
+    font-size: clamp(16px, 4.6vw, 18px);
+    line-height: 1.18;
+    overflow-wrap: anywhere;
   }
 
   .impact h2,
@@ -2047,8 +2280,11 @@ h1 {
     .campaign-wall h2,
     .final-call h2,
     .signal-action-section h2,
-    .signal-proof-band h2 {
-    font-size: clamp(48px, 16vw, 82px);
+    .signal-field-card h2,
+    .signal-proof-band h2,
+    .proof-hero h1,
+    .proof-wall-section h2 {
+    font-size: clamp(44px, 13vw, 64px);
   }
 }
 

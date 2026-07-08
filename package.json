@@ -1,0 +1,11 @@
+{
+  "name": "full-city-columbus",
+  "private": true,
+  "scripts": {
+    "export:drop001": "node tools/export-drop-assets.cjs"
+  },
+  "devDependencies": {
+    "pdf-lib": "^1.17.1",
+    "sharp": "^0.35.3"
+  }
+}

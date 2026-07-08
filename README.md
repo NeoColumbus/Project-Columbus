@@ -12,6 +12,12 @@ Full City Columbus is the open-source myth, flag system, street kit, and civic c
 Public site:
 https://neocolumbus.github.io/Project-Columbus/
 
+Scan path:
+https://neocolumbus.github.io/Project-Columbus/signal/
+
+Proof wall:
+https://neocolumbus.github.io/Project-Columbus/proof/
+
 It is meant to be felt first.
 Then printed, forked, corrected, remixed, argued with, and made harder by people who give a damn.
 
@@ -79,6 +85,7 @@ Full City Columbus is:
 - a flag and signal system
 - a street campaign kit
 - a campaign operating system for drops, rituals, scan paths, and proof
+- a proof wall for field reports from real Columbus places
 - a civic stack for housing, transit, water, power, data, and public beauty
 - an open-source repo where the myth can be corrected, localized, printed, and rebuilt
 

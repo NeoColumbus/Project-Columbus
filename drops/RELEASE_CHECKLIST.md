@@ -29,6 +29,10 @@ Each release should include:
 - issue link or submission path
 - source notes
 
+For Drop 001, generate the working export bundle with:
+
+`pnpm export:drop001`
+
 ## QA
 
 Before release:
