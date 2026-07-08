@@ -69,7 +69,31 @@ This folder includes a deployable `wrangler.toml`.
 Manual deploy:
 
 ```sh
-wrangler deploy
+pnpm run field-api:deploy
+```
+
+Dry-run the Worker bundle:
+
+```sh
+pnpm run field-api:dry-run
+```
+
+Pressure-test the Worker logic with mocked GitHub and Turnstile:
+
+```sh
+pnpm run test:field-api
+```
+
+To push the concurrency count higher:
+
+```sh
+FIELD_API_PRESSURE_COUNT=5000 pnpm run test:field-api
+```
+
+PowerShell:
+
+```powershell
+$env:FIELD_API_PRESSURE_COUNT = "5000"; pnpm run test:field-api
 ```
 
 GitHub Actions deploy:

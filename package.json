@@ -3,10 +3,14 @@
   "private": true,
   "packageManager": "pnpm@11.7.0",
   "scripts": {
-    "export:drop001": "node tools/export-drop-assets.cjs"
+    "export:drop001": "node tools/export-drop-assets.cjs",
+    "field-api:deploy": "wrangler deploy --config api/field-submission/wrangler.toml",
+    "field-api:dry-run": "wrangler deploy --dry-run --config api/field-submission/wrangler.toml",
+    "test:field-api": "node tools/pressure-test-field-api.cjs"
   },
   "devDependencies": {
     "pdf-lib": "^1.17.1",
-    "sharp": "^0.35.3"
+    "sharp": "^0.35.3",
+    "wrangler": "^4.107.1"
   }
 }

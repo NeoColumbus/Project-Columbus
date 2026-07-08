@@ -20,7 +20,9 @@ dist/
 build/
 .cache/
 .wrangler/
+.wrangler-dry-run/
 api/**/.wrangler/
+api/**/.wrangler-dry-run/
 
 # Local environment files
 .env

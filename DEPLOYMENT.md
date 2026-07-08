@@ -42,6 +42,13 @@ To accept private submissions without GitHub login, add a public inbox or form b
 
 The worker in [api/field-submission](api/field-submission) can receive field cards from the static site and create GitHub issues.
 
+Local checks:
+
+```sh
+pnpm run test:field-api
+pnpm run field-api:dry-run
+```
+
 To activate it:
 
 1. Add repository secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
