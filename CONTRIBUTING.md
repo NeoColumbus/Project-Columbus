@@ -43,6 +43,10 @@ Use the templates in [submissions](submissions).
 
 For the first public drop, start with [drops/drop-001-second-geometry.md](drops/drop-001-second-geometry.md), [street-kit](street-kit), [social-kit](social-kit), or [participation](participation).
 
+For the campaign machinery, read [CAMPAIGN_OS.md](CAMPAIGN_OS.md).
+
+For visual work, read [brand/MANUAL.md](brand/MANUAL.md) and [drops/RELEASE_CHECKLIST.md](drops/RELEASE_CHECKLIST.md).
+
 Keep the work specific. A flyer for a bus stop should feel different from a manifesto paragraph. A neighborhood module should name actual streets, routes, buildings, missing crossings, and local beauty.
 
 If you make a historical claim, cite it.
@@ -73,6 +77,17 @@ Before submitting, read the piece out loud.
 
 If it sounds like a grant packet, rewrite it.
 If it sounds like a real person could chant it, print it, wear it, argue with it, or steal it, keep going.
+
+## Visual Check
+
+Before submitting a poster, sticker, QR asset, or site image:
+
+- Check phone size.
+- Check room distance.
+- Check collisions.
+- Check the QR scan.
+- Check image rights.
+- Check that one action is obvious.
 
 ## Research Corrections
 

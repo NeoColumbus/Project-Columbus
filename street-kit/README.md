@@ -21,9 +21,11 @@ Companion artifacts:
 - [qr-sticker.svg](qr-sticker.svg)
 - [handbill-post-the-signal.svg](handbill-post-the-signal.svg)
 
-QR target:
+Campaign QR target:
 
-https://neocolumbus.github.io/Project-Columbus/
+https://neocolumbus.github.io/Project-Columbus/signal/
+
+Legacy QR assets may still point to the public homepage. New QR assets should go to the scan path.
 
 ## Print Notes
 

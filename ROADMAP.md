@@ -14,6 +14,7 @@ This is a list of ways to make the signal stronger.
 - Add more Columbus photo sources with clean credits.
 - Test the Second Geometry flag on stickers, banners, phone avatars, and cheap print.
 - Field-test Drop 001 posters, sticker sheet, handbill, and social frames.
+- Field-test the scan path with one dead wall report, one bus stop audit, and one neighborhood line.
 - Tighten the myth copy until every line can survive being printed huge.
 - Add better sources to the research files.
 - Cut any phrase that sounds like a committee trying to sound brave.
@@ -27,6 +28,7 @@ This is a list of ways to make the signal stronger.
 - Add one neighborhood truth to a campaign file.
 - Fix one typo, weak line, or vague phrase.
 - Improve [START_HERE.md](START_HERE.md) for people new to Git.
+- Submit one field report through the scan path.
 
 ## Bigger Builds
 
@@ -36,6 +38,8 @@ This is a list of ways to make the signal stronger.
 - Add a local photo library with licenses.
 - Build a public issue board after the repo is on GitHub.
 - Add release bundles for flyers, web assets, and research notes.
+- Add scan metrics by drop, asset, and neighborhood.
+- Add maintainer lanes for myth, research, design, street kit, site, policy, and community.
 
 ## Standard
 

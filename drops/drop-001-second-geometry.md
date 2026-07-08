@@ -36,6 +36,7 @@ No one has to understand the whole theory before they can feel the signal.
 - [post-the-signal handbill](../street-kit/handbill-post-the-signal.svg)
 - [social squares](../social-kit/squares)
 - [social stories](../social-kit/stories)
+- [public scan path](https://neocolumbus.github.io/Project-Columbus/signal/)
 
 ## Evidence Posters
 
@@ -65,6 +66,9 @@ Second Geometry means the city has to take form:
 3. Name what is broken or unfinished.
 4. Point to one buildable demand.
 5. Send it back as a pull request, issue, flyer, photo, caption, or field note.
+
+Fast door:
+https://neocolumbus.github.io/Project-Columbus/signal/
 
 ## First Missions
 

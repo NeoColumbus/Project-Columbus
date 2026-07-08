@@ -11,13 +11,17 @@ public myth you can wear.
 The goal is not to explain the whole project every time.
 
 The goal is to make the signal irresistible enough that people ask what it means.
+Then the scan path gives them one way to act.
 
 ## Files
 
 - [drop-system.md](drop-system.md)
 - [slogan-bank.md](slogan-bank.md)
+- [../CAMPAIGN_OS.md](../CAMPAIGN_OS.md)
 - [../drops/drop-001-second-geometry.md](../drops/drop-001-second-geometry.md)
+- [../drops/RELEASE_CHECKLIST.md](../drops/RELEASE_CHECKLIST.md)
 - [../brand/README.md](../brand/README.md)
+- [../brand/MANUAL.md](../brand/MANUAL.md)
 - [../street-kit/README.md](../street-kit/README.md)
 - [../social-kit/README.md](../social-kit/README.md)
 - [../participation/post-the-signal.md](../participation/post-the-signal.md)
@@ -30,7 +34,8 @@ The goal is to make the signal irresistible enough that people ask what it means
 Signal first.
 Line second.
 Demand third.
-Source trail fourth.
+Scan path fourth.
+Source trail fifth.
 
 If the first move is a paragraph, the poster already lost.
 

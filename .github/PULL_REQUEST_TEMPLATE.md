@@ -22,6 +22,8 @@ What does this make stronger, truer, more useful, or more Columbus?
 - [ ] I credited borrowed images or assets.
 - [ ] I disclosed AI-assisted work if used.
 - [ ] I removed anything that sounds fake, official, or beige.
+- [ ] I checked phone size, room distance, and text collisions for visual work.
+- [ ] I tested the QR scan if this adds or changes a QR asset.
 
 # Notes
 

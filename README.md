@@ -78,6 +78,7 @@ Full City Columbus is:
 - a public myth for Columbus
 - a flag and signal system
 - a street campaign kit
+- a campaign operating system for drops, rituals, scan paths, and proof
 - a civic stack for housing, transit, water, power, data, and public beauty
 - an open-source repo where the myth can be corrected, localized, printed, and rebuilt
 
@@ -150,6 +151,12 @@ Read [ROADMAP.md](ROADMAP.md).
 Want the first public drop?
 Open [Drop 001: Second Geometry](drops/drop-001-second-geometry.md).
 
+Want the operating system?
+Open [CAMPAIGN_OS.md](CAMPAIGN_OS.md).
+
+Want the visual rules?
+Open [brand/MANUAL.md](brand/MANUAL.md).
+
 Hosting notes live in [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ## Open Source Invitation
@@ -185,6 +192,8 @@ Make a neighborhood version.
 Make a bus-stop version.
 Make a flyer that scares the beige out of a meeting room.
 Post the signal and send back what happened.
+Scan path:
+https://neocolumbus.github.io/Project-Columbus/signal/
 
 But do not drain the blood out of the language and call that maturity.
 

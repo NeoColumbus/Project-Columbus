@@ -30,6 +30,7 @@ The next city is us.
 - [signal-mark.svg](signal-mark.svg)
 - [signal-mark-mono.svg](signal-mark-mono.svg)
 - [project-qr.svg](project-qr.svg)
+- [MANUAL.md](MANUAL.md)
 - [../site/assets/second-geometry-flag.svg](../site/assets/second-geometry-flag.svg)
 
 ## Usage Rules
@@ -56,9 +57,9 @@ The mark should feel like people found it before they understood it.
 
 ## QR Rule
 
-QR codes should point to the public site:
+Campaign QR codes should point to the scan path:
 
-https://neocolumbus.github.io/Project-Columbus/
+https://neocolumbus.github.io/Project-Columbus/signal/
 
 Use them where the artifact needs a handoff from street to repo.
 Keep the quiet zone clean.

@@ -17,7 +17,9 @@ Start with one useful change.
 
 Fastest door:
 
-Open [Drop 001: Second Geometry](drops/drop-001-second-geometry.md), post one signal asset, and send back one real place, one missing piece, or one sharper line.
+Open the public scan path, pick one door, and send back one real place, one missing piece, or one sharper line:
+
+https://neocolumbus.github.io/Project-Columbus/signal/
 
 ## Pick One Door
 
@@ -74,10 +76,12 @@ One flyer can be enough:
 Use the public kit:
 
 - [brand signal](brand/signal-mark.svg)
+- [brand manual](brand/MANUAL.md)
 - [street kit](street-kit/README.md)
 - [social kit](social-kit/README.md)
 - [post the signal](participation/post-the-signal.md)
 - [neighborhood generator](participation/neighborhood-generator.md)
+- [campaign OS](CAMPAIGN_OS.md)
 
 ## Git In Plain English
 
@@ -115,6 +119,7 @@ Then open a pull request on GitHub.
 - Add better historical sources.
 - Make a printable flyer.
 - Post one Drop 001 asset and report what it needs next.
+- Submit one field report through the scan path.
 - Cut any line that sounds like a committee wrote it.
 
 ## The Standard
