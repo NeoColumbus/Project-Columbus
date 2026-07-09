@@ -13,9 +13,9 @@
       <circle r="28" fill="none" stroke="#E8DDC7" stroke-width="10"/>
       <circle r="14" fill="#F4B037"/>
     </g>
-    <text x="42" y="322" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="56">THE</text>
-    <text x="42" y="382" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="56">EARTHWORKS</text>
-    <text x="42" y="442" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="56">WERE FIRST</text>
+    <text x="42" y="322" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="48">THE</text>
+    <text x="42" y="378" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="48">EARTHWORKS</text>
+    <text x="42" y="434" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="48">WERE FIRST</text>
   </g>
   <g transform="translate(490 168)">
     <rect width="342" height="520" fill="#F4B037"/>
@@ -40,10 +40,10 @@
       <circle r="48" fill="none" stroke="#E8DDC7" stroke-width="10"/>
       <circle r="22" fill="#F4B037"/>
     </g>
-    <text x="34" y="320" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="62">THE MACHINE</text>
-    <text x="34" y="382" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="62">PAYS</text>
-    <text x="34" y="444" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="62">TRIBUTE</text>
+    <text x="34" y="314" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="50">THE</text>
+    <text x="34" y="370" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="50">MACHINE</text>
+    <text x="34" y="426" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="50">PAYS TRIBUTE</text>
   </g>
-  <text x="80" y="754" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="82">DROP 001: SECOND GEOMETRY</text>
-  <text x="80" y="812" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="32" letter-spacing="5">POST THE SIGNAL / NAME THE BREAK / BUILD THE BODY</text>
+  <text x="80" y="754" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="78">DROP 001: SECOND GEOMETRY</text>
+  <text x="80" y="812" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="25" letter-spacing="3">POST THE SIGNAL / NAME THE BREAK / BUILD THE BODY</text>
 </svg>

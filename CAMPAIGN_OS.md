@@ -22,6 +22,24 @@ That is the campaign.
 Do not make the first touch an essay.
 Make it a flag, a wall, a sticker, a route, a photo, a report, a line.
 
+## Theory Of Change
+
+The campaign is not trying to win attention and stop there.
+
+The work is:
+
+1. build a shared city signal
+2. attach it to real Columbus places
+3. collect proof from the street
+4. turn proof into public pressure
+5. move officials toward better material life
+
+Officials can ignore scattered complaints.
+They have a harder time ignoring a city that has learned to see itself, name its breaks, and repeat the same demands in public.
+
+Myth is the ignition.
+Policy is the work.
+
 ## Roles
 
 Signal Keeper:

@@ -55,6 +55,20 @@ A university is not a city.
 A downtown is not a city.
 A city is when the whole body starts to move.
 
+## The Civic Theory
+
+The branding, myth building, stickers, posters, scans, and field reports are not the end goal.
+
+The goal is to make Columbus conscious of itself as a whole city, then turn that consciousness into public pressure for better material life: housing, transit, public rooms, water, power, data, beauty, safety, and streets that feel worthy of the people using them.
+
+City officials respond to organized pressure.
+Organized pressure needs a shared language.
+Shared language needs symbols people can recognize, repeat, argue with, and carry into public.
+
+Build the signal first.
+Make the city visible to itself.
+Then use that visibility to demand a better city.
+
 ## The Myth
 
 Columbus is not only a city founded in 1812.
