@@ -2,7 +2,7 @@
 
 <!-- HUMAN NOTE: This is the honest participation pipe. Do not fake a backend. Static GitHub Pages cannot collect private form submissions by itself. -->
 
-Full City Columbus has two front doors:
+Full City Columbus has three front doors:
 
 - public field cards for people who do not know Git
 - the field submission API when the public inbox is configured
@@ -18,7 +18,7 @@ Make a field card.
 
 Then:
 
-- send it to the project if the public inbox is configured
+- send it to the project through the public inbox
 - copy it
 - share it
 - download it
@@ -71,6 +71,8 @@ This repo includes a small worker API:
 
 When deployed, it receives no-login field cards and opens GitHub issues for maintainer review.
 
-Until the endpoint is configured in [site/config.js](site/config.js), the public button falls back to copying the field card.
+The live worker endpoint is configured in [site/config.js](site/config.js).
+
+If that endpoint is blank or the worker fails, the public button falls back to copying the field card so the signal is not lost.
 
 If `turnstileSiteKey` is configured in [site/config.js](site/config.js), the field card form asks for Cloudflare Turnstile verification before sending to the worker.

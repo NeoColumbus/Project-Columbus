@@ -2,9 +2,23 @@
 
 Full City Columbus is designed to publish as a static GitHub Pages site from the `site/` folder.
 
+The repo also keeps root-level entry shims for:
+
+- `/`
+- `/signal/`
+- `/proof/`
+
+Those shims make printed QR paths and README links work even if GitHub Pages is temporarily configured to serve the repository root instead of the Actions-built `site/` artifact.
+
 Expected public URL:
 
 https://neocolumbus.github.io/Project-Columbus/
+
+Canonical public action paths:
+
+https://neocolumbus.github.io/Project-Columbus/signal/
+
+https://neocolumbus.github.io/Project-Columbus/proof/
 
 ## How It Works
 
@@ -28,6 +42,14 @@ If GitHub Pages is not enabled yet:
 4. Re-run the Deploy GitHub Pages workflow or push a new commit.
 
 After that, every push to `main` should update the public site automatically.
+
+If Pages is still serving the branch root, the shims will forward visitors into:
+
+- `/site/`
+- `/site/signal/`
+- `/site/proof/`
+
+Do not remove the shims unless Pages is confirmed to serve the `site/` artifact and the printed QR path has been retested.
 
 ## Static Site Limit
 
