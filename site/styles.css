@@ -537,6 +537,14 @@ h1 {
   max-width: 12ch;
 }
 
+.impact h2 {
+  font-size: clamp(54px, 10.2vw, 160px);
+}
+
+.project-primer h2 {
+  font-size: clamp(48px, 8.6vw, 150px);
+}
+
 .impact-line {
   max-width: 900px;
   margin: 28px 0 0;
