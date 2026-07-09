@@ -25,6 +25,15 @@ Campaign QR target:
 
 https://neocolumbus.github.io/Project-Columbus/signal/
 
+Each printed artifact carries a source-tagged QR so field reports show which object pulled them in:
+
+- `qr-sticker.svg` -> `?source=sticker`
+- `sticker-sheet-qr.svg` -> `?source=sticker-sheet`
+- `006-report-dead-wall-qr.svg` -> `?source=poster-006`
+- `handbill-post-the-signal.svg` -> `?source=handbill`
+
+The signal page reads `source` and includes it in the GitHub issue, so the proof queue shows which print run is working.
+
 QR-bearing assets should be regenerated from [../brand/project-qr.svg](../brand/project-qr.svg) and inline the QR path before export. Nested SVG images can disappear in some renderers.
 
 ## Print Notes
