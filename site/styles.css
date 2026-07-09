@@ -1839,6 +1839,90 @@ h1 {
   margin-top: 0.48em;
 }
 
+.signal-log {
+  padding: clamp(64px, 8vw, 110px) clamp(18px, 5vw, 72px);
+  border-top: 2px solid rgba(244, 176, 55, 0.4);
+  background: var(--black);
+  color: var(--bone);
+}
+
+.signal-log h2 {
+  max-width: 18ch;
+  font-size: clamp(32px, 3.4vw, 52px);
+  line-height: 0.94;
+}
+
+.log-note {
+  max-width: 560px;
+  margin: 18px 0 0;
+  color: rgba(246, 240, 228, 0.66);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.log-list {
+  max-width: 860px;
+  margin: 34px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.log-list li {
+  display: grid;
+  grid-template-columns: minmax(110px, 0.2fr) minmax(0, 1fr);
+  gap: 16px;
+  padding: 14px 0;
+  border-top: 1px solid rgba(246, 240, 228, 0.16);
+}
+
+.log-list li:last-child {
+  border-bottom: 1px solid rgba(246, 240, 228, 0.16);
+}
+
+.log-list span {
+  color: var(--amber);
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.log-list p {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.log-next span {
+  color: rgba(246, 240, 228, 0.55);
+}
+
+.log-next p {
+  color: rgba(246, 240, 228, 0.72);
+}
+
+.log-follow {
+  max-width: 860px;
+  margin-top: 34px;
+}
+
+.log-follow > p {
+  margin: 0;
+  color: rgba(246, 240, 228, 0.66);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.log-follow .final-actions {
+  margin-top: 16px;
+}
+
 .site-footer {
   padding: 18px clamp(18px, 5vw, 72px);
   border-top: 1px solid rgba(246, 240, 228, 0.18);
@@ -2023,8 +2107,8 @@ h1 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: clamp(18px, 2.1vw, 30px);
   font-weight: 900;
-  letter-spacing: 0.02em;
-  line-height: 1.14;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
   text-transform: uppercase;
 }
 
