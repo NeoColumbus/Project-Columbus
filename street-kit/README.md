@@ -38,6 +38,8 @@ QR-bearing assets should be regenerated from [../brand/project-qr.svg](../brand/
 
 ## Print Notes
 
+Print the sticker sheet at native size (about 16.7 x 22 inches) so each mini QR lands near 1.2 inches wide. At letter size the QR drops to about 0.6 inches: still scannable up close, but test one scan from a real print before running a batch.
+
 These are SVG source files, sized as digital poster masters. Export to PDF or PNG before sending to print.
 
 Use cheap paper first.
