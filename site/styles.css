@@ -511,19 +511,27 @@ h1 {
 }
 
 .impact-credit {
-  max-width: 760px;
-  font-size: clamp(15px, 1.5vw, 20px);
-  color: rgba(246, 240, 228, 0.78);
+  max-width: 620px;
+  margin-top: 30px;
+  font-weight: 500;
+  font-size: clamp(16px, 1.6vw, 21px);
+  letter-spacing: 0.01em;
+  line-height: 1.6;
+  text-transform: none;
+  color: rgba(246, 240, 228, 0.72);
 }
 
 .impact {
-  min-height: 78svh;
+  min-height: 92svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background:
-    linear-gradient(135deg, rgba(157, 71, 50, 0.86), rgba(5, 6, 6, 0.96)),
-    var(--brick);
+  padding-block: clamp(110px, 15vw, 200px);
+  background: linear-gradient(180deg, #050606, #061620 82%);
+}
+
+.impact .kicker {
+  color: rgba(244, 176, 55, 0.8);
 }
 
 .impact h2,
