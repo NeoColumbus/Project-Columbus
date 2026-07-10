@@ -62,7 +62,7 @@ async function main() {
     const pngPath = path.join(outDir, `${name}.png`);
     const pdfPath = path.join(outDir, `${name}.pdf`);
 
-    const pngBuffer = await sharp(source, { density: 144, unlimited: true })
+    const pngBuffer = await sharp(source, { density: 300, unlimited: true })
       .png({ compressionLevel: 9 })
       .toBuffer();
 
