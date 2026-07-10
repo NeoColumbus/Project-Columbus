@@ -112,9 +112,12 @@ It is not a brand mood.
 
 Neo Columbus is the awakened form of the city already here.
 
+Full City Columbus is the campaign.
+Neo Columbus is what the campaign calls forward.
+
 The future city arrives through the old name and changes what it means.
 
-Neo Columbus arrives from the future to call the hidden city forward.
+Neo Columbus rises from under the old name to call the hidden city forward.
 
 Columbus was always here.
 Now it arrives.

@@ -485,6 +485,37 @@ h1 {
   color: var(--bone);
 }
 
+.hero-links {
+  margin: 20px 0 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hero-links a {
+  color: rgba(246, 240, 228, 0.85);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: rgba(244, 176, 55, 0.7);
+}
+
+.hero-links a + a {
+  margin-left: 22px;
+}
+
+.hero-links a:hover,
+.hero-links a:focus-visible {
+  color: var(--amber);
+}
+
+.impact-credit {
+  max-width: 760px;
+  font-size: clamp(15px, 1.5vw, 20px);
+  color: rgba(246, 240, 228, 0.78);
+}
+
 .impact {
   min-height: 78svh;
   display: flex;
