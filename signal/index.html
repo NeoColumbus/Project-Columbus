@@ -3,9 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Signal Redirect / Full City Columbus</title>
     <meta http-equiv="refresh" content="0; url=../site/signal/" />
-    <link rel="canonical" href="../site/signal/" />
-    <title>Signal Seen / Full City Columbus</title>
     <style>
       :root {
         color-scheme: dark;
@@ -31,26 +30,31 @@
         text-transform: uppercase;
       }
 
-      h1 {
-        max-width: 10ch;
+      p {
+        max-width: 22rem;
         margin: 0;
-        font-size: clamp(56px, 14vw, 160px);
-        line-height: 0.82;
+        font-size: clamp(42px, 10vw, 96px);
+        line-height: 0.86;
       }
 
       a {
         color: var(--amber);
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 14px;
-        font-weight: 900;
-        letter-spacing: 0.12em;
       }
     </style>
+    <script>
+      (function () {
+        var target = new URL("../site/signal/", window.location.href);
+        target.search = window.location.search;
+        target.hash = window.location.hash || "#field-card";
+        window.location.replace(target.href);
+      })();
+    </script>
   </head>
   <body>
-    <main>
-      <h1>Scan the signal.</h1>
-      <p><a href="../site/signal/">Enter the field path</a></p>
-    </main>
+    <p>
+      Signal moving.
+      <br />
+      <a href="../site/signal/">Open signal</a>
+    </p>
   </body>
 </html>

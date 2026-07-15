@@ -29,8 +29,13 @@ Drop 001 should leave the repo with:
 
 - poster PNGs
 - poster PDFs
+- standalone QR poster PNGs
+- standalone QR poster PDFs
 - sticker-sheet PNGs
 - sticker-sheet PDFs
+- letter sticker sheet PNG/PDF
+- signal sticker sheet PNG/PDF
+- QR utility sheet PNG/PDF
 - QR sticker PNG/PDF
 - handbill PNG/PDF
 - flag PNG/PDF
@@ -54,7 +59,7 @@ Drop 001 should leave the repo with:
 
 Scan:
 
-https://neocolumbus.github.io/Project-Columbus/signal/
+https://neocolumbus.github.io/Project-Columbus/site/signal/
 
 Proof:
 

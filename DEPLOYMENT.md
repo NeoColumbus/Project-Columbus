@@ -16,7 +16,7 @@ https://neocolumbus.github.io/Project-Columbus/
 
 Canonical public action paths:
 
-https://neocolumbus.github.io/Project-Columbus/signal/
+https://neocolumbus.github.io/Project-Columbus/site/signal/
 
 https://neocolumbus.github.io/Project-Columbus/proof/
 

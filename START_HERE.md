@@ -10,7 +10,7 @@ Public site:
 https://neocolumbus.github.io/Project-Columbus/
 
 No-login scan path:
-https://neocolumbus.github.io/Project-Columbus/signal/
+https://neocolumbus.github.io/Project-Columbus/site/signal/
 
 You do not need to know every tool.
 You do not need to have perfect taste.
@@ -22,7 +22,7 @@ Fastest door:
 
 Open the public scan path, pick one door, and send back one real place, one missing piece, or one sharper line:
 
-https://neocolumbus.github.io/Project-Columbus/signal/
+https://neocolumbus.github.io/Project-Columbus/site/signal/
 
 ## Pick One Door
 

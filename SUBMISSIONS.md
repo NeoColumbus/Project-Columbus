@@ -12,7 +12,7 @@ Full City Columbus has three front doors:
 
 Use the public scan path:
 
-https://neocolumbus.github.io/Project-Columbus/signal/
+https://neocolumbus.github.io/Project-Columbus/site/signal/
 
 Make a field card.
 

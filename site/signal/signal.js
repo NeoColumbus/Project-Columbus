@@ -1,5 +1,5 @@
 (function () {
-  const scanPath = "https://neocolumbus.github.io/Project-Columbus/signal/";
+  const scanPath = "https://neocolumbus.github.io/Project-Columbus/site/signal/";
   const issueBase = "https://github.com/NeoColumbus/Project-Columbus/issues/new";
   const query = new URLSearchParams(window.location.search);
   const config = window.FULL_CITY_CONFIG || {};

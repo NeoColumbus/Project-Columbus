@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1600" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 2050" role="img" aria-labelledby="title desc">
   <title id="title">Drop 001 Poster Sticker Set</title>
   <desc id="desc">A no-QR sticker sheet made from the cleaned Drop 001 poster set.</desc>
   <defs>
@@ -10,7 +10,7 @@
       <rect x="-14" y="-14" width="348" height="428" rx="22" fill="none" stroke="#050606" stroke-width="6"/>
     </g>
   </defs>
-  <rect width="1200" height="1600" fill="#F6F0E4"/>
+  <rect width="1200" height="2050" fill="#F6F0E4"/>
   <text x="70" y="108" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="42" letter-spacing="3">DROP 001 / POSTER STICKER SET</text>
 
   <g transform="translate(130 160)">
@@ -37,6 +37,14 @@
     <use href="#sticker-frame"/>
     <image href="posters/006-report-dead-wall.svg" width="320" height="400" clip-path="url(#poster-sticker)"/>
   </g>
+  <g transform="translate(130 1510)">
+    <use href="#sticker-frame"/>
+    <image href="posters/007-cota-nervous-system.svg" width="320" height="400" clip-path="url(#poster-sticker)"/>
+  </g>
+  <g transform="translate(750 1510)">
+    <use href="#sticker-frame"/>
+    <image href="posters/008-no-more-half-city.svg" width="320" height="400" clip-path="url(#poster-sticker)"/>
+  </g>
 
-  <text x="70" y="1548" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="24" letter-spacing="4">SAME POSTERS / STICKER SCALE / NO QR</text>
+  <text x="70" y="1998" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="24" letter-spacing="4">POSTER STICKERS / TRANSIT ADDED / NO QR</text>
 </svg>

@@ -79,4 +79,4 @@ If you do not want any of this:
 
 Scan path:
 
-https://neocolumbus.github.io/Project-Columbus/signal/
+https://neocolumbus.github.io/Project-Columbus/site/signal/

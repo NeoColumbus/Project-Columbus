@@ -4,6 +4,9 @@
   "packageManager": "pnpm@11.7.0",
   "scripts": {
     "export:drop001": "node tools/export-drop-assets.cjs",
+    "generate:generic-qr": "node tools/generate-generic-qr-assets.cjs",
+    "generate:qr-assets": "pnpm generate:generic-qr && pnpm generate:qr-posters",
+    "generate:qr-posters": "node tools/generate-standalone-qr-posters.cjs",
     "field-api:deploy": "wrangler deploy --config api/field-submission/wrangler.toml",
     "field-api:dry-run": "wrangler deploy --dry-run --config api/field-submission/wrangler.toml",
     "test:field-api": "node tools/pressure-test-field-api.cjs"

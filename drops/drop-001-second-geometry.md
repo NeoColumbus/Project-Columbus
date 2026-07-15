@@ -32,11 +32,14 @@ No one has to understand the whole theory before they can feel the signal.
 - [Second Geometry flag](../site/assets/second-geometry-flag.svg)
 - [street poster set](../street-kit/posters)
 - [sticker sheet](../street-kit/sticker-sheet.svg)
+- [letter sticker sheet](../street-kit/sticker-sheet-letter.svg)
+- [signal sticker sheet](../street-kit/signal-sticker-sheet.svg)
+- [QR utility sheet](../street-kit/qr-utility-sheet.svg)
 - [QR sticker](../street-kit/qr-sticker.svg)
 - [post-the-signal handbill](../street-kit/handbill-post-the-signal.svg)
 - [social squares](../social-kit/squares)
 - [social stories](../social-kit/stories)
-- [public scan path](https://neocolumbus.github.io/Project-Columbus/signal/)
+- [public scan path](https://neocolumbus.github.io/Project-Columbus/site/signal/)
 - [public proof wall](https://neocolumbus.github.io/Project-Columbus/proof/)
 - [release bundle manifest](drop-001-second-geometry/README.md)
 
@@ -70,7 +73,7 @@ Second Geometry means the city has to take form:
 5. Send it back as a pull request, issue, flyer, photo, caption, or field note.
 
 Fast door:
-https://neocolumbus.github.io/Project-Columbus/signal/
+https://neocolumbus.github.io/Project-Columbus/site/signal/
 
 Proof wall:
 https://neocolumbus.github.io/Project-Columbus/proof/

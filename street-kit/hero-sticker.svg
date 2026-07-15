@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">No More Half City Hero Sticker</title>
+  <desc id="desc">A Full City Columbus hero sticker reading No More Half-City.</desc>
+  <rect width="1200" height="800" rx="42" fill="#050606"/>
+  <rect x="34" y="34" width="1132" height="732" rx="30" fill="#061620" stroke="#F4B037" stroke-width="24"/>
+  <path d="M690 116 H1120 M690 214 H1120 M690 312 H1120 M690 410 H1120 M690 508 H1120 M690 606 H1120" stroke="#4F8A74" stroke-width="7" opacity="0.58"/>
+  <path d="M760 82 V706 M882 82 V706 M1004 82 V706" stroke="#4F8A74" stroke-width="7" opacity="0.58"/>
+  <g transform="translate(936 400)">
+    <path d="M-260 0 H260 M0 -260 V260" stroke="#E8DDC7" stroke-width="20"/>
+    <path d="M-260 0 H260 M0 -260 V260" stroke="#B77836" stroke-width="7"/>
+    <circle r="164" fill="#E8DDC7"/>
+    <circle r="126" fill="#061620"/>
+    <circle r="72" fill="none" stroke="#E8DDC7" stroke-width="22"/>
+    <circle r="38" fill="none" stroke="#B77836" stroke-width="11"/>
+    <circle r="26" fill="#F4B037"/>
+  </g>
+  <text x="78" y="176" fill="#F4B037" font-family="Arial Black, Impact, sans-serif" font-size="36" letter-spacing="6">FULL CITY COLUMBUS</text>
+  <text x="76" y="350" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="154">NO MORE</text>
+  <text x="76" y="512" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="154">HALF-CITY</text>
+  <text x="82" y="642" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="34" letter-spacing="4">BUILD THE WHOLE BODY</text>
+  <text x="82" y="702" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="24" letter-spacing="3">neocolumbus.github.io/Project-Columbus/site/signal</text>
+</svg>

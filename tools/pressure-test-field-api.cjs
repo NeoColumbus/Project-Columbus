@@ -45,7 +45,7 @@ function issuePayload(index = 1) {
       drop: "001",
       asset: "pressure-test",
       source: "automated",
-      url: "https://neocolumbus.github.io/Project-Columbus/signal/?drop=001"
+      url: "https://neocolumbus.github.io/Project-Columbus/site/signal/?drop=001"
     }
   };
 }

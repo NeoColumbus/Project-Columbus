@@ -107,7 +107,7 @@ Every QR should send people to one action fast.
 
 Drop 001 QR target:
 
-https://neocolumbus.github.io/Project-Columbus/signal/
+https://neocolumbus.github.io/Project-Columbus/site/signal/
 
 The scan path should let a person act before they understand GitHub.
 

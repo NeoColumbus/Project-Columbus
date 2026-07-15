@@ -178,7 +178,7 @@ The strongest artifact feels like it was already in the city and somebody finall
 
 Campaign QR target:
 
-https://neocolumbus.github.io/Project-Columbus/signal/
+https://neocolumbus.github.io/Project-Columbus/site/signal/
 
 Use QR when the artifact needs a street-to-repo handoff.
 

@@ -1,10 +1,10 @@
 {
   "drop": "drop-001-second-geometry",
   "title": "Drop 001: Second Geometry",
-  "scanPath": "https://neocolumbus.github.io/Project-Columbus/signal/",
+  "scanPath": "https://neocolumbus.github.io/Project-Columbus/site/signal/",
   "proofPath": "https://neocolumbus.github.io/Project-Columbus/proof/",
   "tracking": {
-    "pattern": "https://neocolumbus.github.io/Project-Columbus/signal/?drop=001&asset={asset}",
+    "pattern": "https://neocolumbus.github.io/Project-Columbus/site/signal/?drop=001&asset={asset}",
     "capturedFields": [
       "drop",
       "asset",
@@ -33,20 +33,40 @@
       "source": "street-kit/posters/001-earthworks-were-first.svg"
     },
     {
+      "name": "poster-001-earthworks-were-first-qr",
+      "source": "street-kit/posters/001-earthworks-were-first-qr.svg"
+    },
+    {
       "name": "poster-002-signal-seen-confluence",
       "source": "street-kit/posters/002-signal-seen-confluence.svg"
+    },
+    {
+      "name": "poster-002-signal-seen-confluence-qr",
+      "source": "street-kit/posters/002-signal-seen-confluence-qr.svg"
     },
     {
       "name": "poster-003-center-before-seal",
       "source": "street-kit/posters/003-center-before-seal.svg"
     },
     {
+      "name": "poster-003-center-before-seal-qr",
+      "source": "street-kit/posters/003-center-before-seal-qr.svg"
+    },
+    {
       "name": "poster-004-pile-of-projects",
       "source": "street-kit/posters/004-pile-of-projects.svg"
     },
     {
+      "name": "poster-004-pile-of-projects-qr",
+      "source": "street-kit/posters/004-pile-of-projects-qr.svg"
+    },
+    {
       "name": "poster-005-machine-pays-tribute",
       "source": "street-kit/posters/005-machine-pays-tribute.svg"
+    },
+    {
+      "name": "poster-005-machine-pays-tribute-qr",
+      "source": "street-kit/posters/005-machine-pays-tribute-qr.svg"
     },
     {
       "name": "poster-006-report-dead-wall",
@@ -57,12 +77,44 @@
       "source": "street-kit/posters/006-report-dead-wall-qr.svg"
     },
     {
+      "name": "poster-007-cota-nervous-system",
+      "source": "street-kit/posters/007-cota-nervous-system.svg"
+    },
+    {
+      "name": "poster-007-cota-nervous-system-qr",
+      "source": "street-kit/posters/007-cota-nervous-system-qr.svg"
+    },
+    {
+      "name": "poster-008-no-more-half-city",
+      "source": "street-kit/posters/008-no-more-half-city.svg"
+    },
+    {
+      "name": "poster-008-no-more-half-city-qr",
+      "source": "street-kit/posters/008-no-more-half-city-qr.svg"
+    },
+    {
       "name": "sticker-sheet",
       "source": "street-kit/sticker-sheet.svg"
     },
     {
       "name": "sticker-sheet-qr",
       "source": "street-kit/sticker-sheet-qr.svg"
+    },
+    {
+      "name": "sticker-sheet-letter",
+      "source": "street-kit/sticker-sheet-letter.svg"
+    },
+    {
+      "name": "signal-sticker-sheet",
+      "source": "street-kit/signal-sticker-sheet.svg"
+    },
+    {
+      "name": "qr-utility-sheet",
+      "source": "street-kit/qr-utility-sheet.svg"
+    },
+    {
+      "name": "hero-sticker",
+      "source": "street-kit/hero-sticker.svg"
     },
     {
       "name": "qr-sticker",

@@ -13,7 +13,7 @@ Public site:
 https://neocolumbus.github.io/Project-Columbus/
 
 Scan path:
-https://neocolumbus.github.io/Project-Columbus/signal/
+https://neocolumbus.github.io/Project-Columbus/site/signal/
 
 Proof wall:
 https://neocolumbus.github.io/Project-Columbus/proof/
@@ -226,7 +226,7 @@ Make a bus-stop version.
 Make a flyer that scares the beige out of a meeting room.
 Post the signal and send back what happened.
 Scan path:
-https://neocolumbus.github.io/Project-Columbus/signal/
+https://neocolumbus.github.io/Project-Columbus/site/signal/
 
 But do not drain the blood out of the language and call that maturity.
 
