@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2550 3300" role="img" aria-labelledby="title desc">
   <title id="title">Drop 001 Letter Sticker Sheet</title>
-  <desc id="desc">A letter-size sticker sheet with four larger poster stickers and corner QR badges.</desc>
+  <desc id="desc">A letter-size sticker sheet with four larger poster stickers and corner QR badges. Poster art is inlined for GitHub-safe rendering.</desc>
   <defs>
     <symbol id="project-qr" viewBox="0 0 49 49">
       <rect width="49" height="49" fill="#F6F0E4"/>
@@ -25,22 +25,122 @@
 
   <g transform="translate(250 360)">
     <use href="#letter-frame"/>
-    <image href="posters/001-earthworks-were-first.svg" width="820" height="1025" clip-path="url(#letter-poster)"/>
+    <g clip-path="url(#letter-poster)">
+      <g transform="matrix(0.759259 0 0 0.759259 0.000000 0.000000)">
+        <rect width="1080" height="1350" fill="#E8DDC7"/>
+          <rect x="58" y="58" width="964" height="1234" fill="#061620"/>
+          <rect x="58" y="58" width="964" height="98" fill="#9D4732"/>
+          <text x="92" y="121" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="34" letter-spacing="5">DROP 001 / SECOND GEOMETRY</text>
+          <g transform="translate(540 356)">
+            <circle r="178" fill="#E8DDC7"/>
+            <circle r="136" fill="#061620"/>
+            <rect x="-258" y="-13" width="516" height="26" fill="#E8DDC7"/>
+            <rect x="-13" y="-178" width="26" height="356" fill="#E8DDC7"/>
+            <rect x="-258" y="-4" width="516" height="8" fill="#B77836"/>
+            <rect x="-4" y="-178" width="8" height="356" fill="#B77836"/>
+            <circle r="72" fill="none" stroke="#E8DDC7" stroke-width="23"/>
+            <circle r="36" fill="#F4B037"/>
+          </g>
+          <text x="92" y="725" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="150">THE</text>
+          <text x="92" y="875" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="144">EARTHWORKS</text>
+          <text x="92" y="1025" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="150">WERE</text>
+          <text x="92" y="1176" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="150">FIRST</text>
+          <rect x="58" y="1216" width="964" height="76" fill="#F4B037"/>
+          <text x="92" y="1266" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="28" letter-spacing="3">THE NEXT CITY IS US / PROJECT-COLUMBUS</text>
+          <text x="540" y="1318" text-anchor="middle" fill="#061620" font-family="Arial Black, Impact, sans-serif" font-size="17" letter-spacing="2">HOPEWELL CEREMONIAL EARTHWORKS / RAISED TWO THOUSAND YEARS BACK</text>
+          <text x="540" y="1340" text-anchor="middle" fill="#061620" font-family="Arial Black, Impact, sans-serif" font-size="17" letter-spacing="2">neocolumbus.github.io/Project-Columbus/site/signal</text>
+      </g>
+    </g>
     <use href="#letter-qr" transform="translate(620 790)"/>
   </g>
   <g transform="translate(1480 360)">
     <use href="#letter-frame"/>
-    <image href="posters/002-signal-seen-confluence.svg" width="820" height="1025" clip-path="url(#letter-poster)"/>
+    <g clip-path="url(#letter-poster)">
+      <g transform="matrix(0.759259 0 0 0.759259 0.000000 0.000000)">
+        <rect width="1080" height="1350" fill="#050606"/>
+          <rect x="54" y="54" width="972" height="1242" fill="#061620"/>
+          <path d="M0 894 C220 786 350 810 540 902 S870 1006 1080 882" fill="none" stroke="#4F8A74" stroke-width="58"/>
+          <path d="M0 972 C220 864 350 888 540 980 S870 1084 1080 960" fill="none" stroke="#E8DDC7" stroke-width="20"/>
+          <path d="M540 54 V1296" stroke="#F4B037" stroke-width="10"/>
+          <path d="M54 656 H1026" stroke="#F4B037" stroke-width="10"/>
+          <g transform="translate(540 656)">
+            <circle r="198" fill="#E8DDC7"/>
+            <circle r="152" fill="#061620"/>
+            <circle r="78" fill="none" stroke="#E8DDC7" stroke-width="26"/>
+            <circle r="40" fill="#F4B037"/>
+          </g>
+          <rect x="54" y="54" width="972" height="116" fill="#F4B037"/>
+          <text x="92" y="126" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="38" letter-spacing="5">FIELD NOTICE / 002</text>
+          <text x="92" y="314" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="132">SIGNAL</text>
+          <text x="92" y="442" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="132">SEEN</text>
+          <text x="92" y="1150" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="118">CONFLUENCE</text>
+          <text x="92" y="1216" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="28" letter-spacing="4">SCIOTO + OLENTANGY</text>
+          <text x="540" y="1332" text-anchor="middle" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="19" letter-spacing="2">neocolumbus.github.io/Project-Columbus/site/signal</text>
+      </g>
+    </g>
     <use href="#letter-qr" transform="translate(620 790)"/>
   </g>
   <g transform="translate(250 1710)">
     <use href="#letter-frame"/>
-    <image href="posters/003-center-before-seal.svg" width="820" height="1025" clip-path="url(#letter-poster)"/>
+    <g clip-path="url(#letter-poster)">
+      <g transform="matrix(0.759259 0 0 0.759259 0.000000 0.000000)">
+        <rect width="1080" height="1350" fill="#9D4732"/>
+          <rect x="66" y="66" width="948" height="1218" fill="#E8DDC7"/>
+          <rect x="66" y="66" width="948" height="168" fill="#061620"/>
+          <text x="100" y="138" fill="#F4B037" font-family="Arial Black, Impact, sans-serif" font-size="32" letter-spacing="5">EVIDENCE 003 / CITY CENTER</text>
+          <text x="100" y="204" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="26" letter-spacing="4">NOT A SEAL. A SIGNAL.</text>
+          <g transform="translate(540 454)">
+            <rect x="-342" y="-15" width="684" height="30" fill="#061620"/>
+            <rect x="-15" y="-282" width="30" height="560" fill="#061620"/>
+            <circle r="190" fill="#E8DDC7" stroke="#061620" stroke-width="26"/>
+            <circle r="132" fill="#061620"/>
+            <circle r="64" fill="none" stroke="#E8DDC7" stroke-width="22"/>
+            <circle r="38" fill="#F4B037"/>
+          </g>
+          <text x="98" y="780" fill="#050606" font-family="Impact, Arial Black, sans-serif" font-size="112">THE CENTER</text>
+          <text x="98" y="902" fill="#050606" font-family="Impact, Arial Black, sans-serif" font-size="112">WAS HERE</text>
+          <text x="98" y="1024" fill="#050606" font-family="Impact, Arial Black, sans-serif" font-size="112">BEFORE</text>
+          <text x="98" y="1146" fill="#9D4732" font-family="Impact, Arial Black, sans-serif" font-size="112">THE SEAL</text>
+          <rect x="66" y="1218" width="948" height="66" fill="#061620"/>
+          <text x="540" y="1332" text-anchor="middle" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="19" letter-spacing="2">neocolumbus.github.io/Project-Columbus/site/signal</text>
+      </g>
+    </g>
     <use href="#letter-qr" transform="translate(620 790)"/>
   </g>
   <g transform="translate(1480 1710)">
     <use href="#letter-frame"/>
-    <image href="posters/007-cota-nervous-system.svg" width="820" height="1025" clip-path="url(#letter-poster)"/>
+    <g clip-path="url(#letter-poster)">
+      <g transform="matrix(0.759259 0 0 0.759259 0.000000 0.000000)">
+        <rect width="1080" height="1350" fill="#061620"/>
+          <rect x="58" y="58" width="964" height="1234" fill="#050606"/>
+          <rect x="58" y="58" width="964" height="104" fill="#F4B037"/>
+          <text x="92" y="124" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="34" letter-spacing="5">TRANSIT 007</text>
+          <g opacity="0.42">
+            <path d="M474 274 H932 M474 402 H932 M474 530 H932 M474 658 H932 M474 786 H932 M474 914 H932" stroke="#4F8A74" stroke-width="8"/>
+            <path d="M560 220 V1040 M690 220 V1040 M820 220 V1040 M950 220 V1040" stroke="#4F8A74" stroke-width="8"/>
+          </g>
+          <path d="M500 1010 C630 850 620 704 726 650 C820 602 820 724 946 472" fill="none" stroke="#F4B037" stroke-width="34" stroke-linecap="square"/>
+          <path d="M488 506 C604 418 706 436 788 548 C878 674 894 730 968 660" fill="none" stroke="#E8DDC7" stroke-width="18" stroke-linecap="square"/>
+          <g fill="#F6F0E4" stroke="#050606" stroke-width="14">
+            <circle cx="548" cy="920" r="46"/>
+            <circle cx="726" cy="650" r="46"/>
+            <circle cx="720" cy="610" r="46"/>
+            <circle cx="900" cy="504" r="46"/>
+          </g>
+          <g transform="translate(622 320)">
+            <circle r="116" fill="#E8DDC7"/>
+            <circle r="84" fill="#061620"/>
+            <circle r="44" fill="none" stroke="#E8DDC7" stroke-width="18"/>
+            <circle r="24" fill="#F4B037"/>
+          </g>
+          <text x="86" y="662" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="116">COTA IS THE</text>
+          <text x="86" y="820" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="138">NERVOUS</text>
+          <text x="86" y="978" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="138">SYSTEM</text>
+          <rect x="58" y="1216" width="964" height="76" fill="#F4B037"/>
+          <text x="90" y="1268" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="30" letter-spacing="4">FREQUENCY IS DIGNITY / DROP 001</text>
+          <text x="540" y="1332" text-anchor="middle" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="19" letter-spacing="2">neocolumbus.github.io/Project-Columbus/site/signal</text>
+      </g>
+    </g>
     <use href="#letter-qr" transform="translate(620 790)"/>
   </g>
 

@@ -47,11 +47,15 @@ Each printed artifact carries a source-tagged QR so field reports show which obj
 
 The signal page reads `source` and includes it in the GitHub issue, so the proof queue shows which print run is working. Standalone QR posters also carry `kind`, `break`, and `line` so the field card opens in the right lane.
 
-QR-bearing assets should be regenerated from [../brand/project-qr.svg](../brand/project-qr.svg) and inline the QR path before export. Nested SVG images can disappear in some renderers.
+QR-bearing assets should be regenerated from [../brand/project-qr.svg](../brand/project-qr.svg) and inline the QR path before export. Sticker sheets also inline poster SVG content directly because GitHub blocks nested SVG resource loads inside rendered SVG files.
 
-Standalone QR poster variants can be regenerated with:
+Regenerate the complete QR and sticker-sheet source set with:
 
-`pnpm generate:qr-posters`
+`pnpm generate:qr-assets`
+
+Regenerate only the poster-inlined sticker sheets with:
+
+`pnpm generate:sticker-sheets`
 
 ## Print Notes
 
