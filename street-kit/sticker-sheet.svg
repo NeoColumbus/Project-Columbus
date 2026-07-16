@@ -79,16 +79,16 @@
           <text x="100" y="204" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="26" letter-spacing="4">NOT A SEAL. A SIGNAL.</text>
           <g transform="translate(540 454)">
             <rect x="-342" y="-15" width="684" height="30" fill="#061620"/>
-            <rect x="-15" y="-204" width="30" height="408" fill="#061620"/>
+            <rect x="-15" y="-282" width="30" height="560" fill="#061620"/>
             <circle r="190" fill="#E8DDC7" stroke="#061620" stroke-width="26"/>
             <circle r="132" fill="#061620"/>
             <circle r="64" fill="none" stroke="#E8DDC7" stroke-width="22"/>
             <circle r="38" fill="#F4B037"/>
           </g>
-          <text x="98" y="780" fill="#050606" font-family="Impact, Arial Black, sans-serif" font-size="112">THE CENTER</text>
-          <text x="98" y="902" fill="#050606" font-family="Impact, Arial Black, sans-serif" font-size="112">WAS HERE</text>
-          <text x="98" y="1024" fill="#050606" font-family="Impact, Arial Black, sans-serif" font-size="112">BEFORE</text>
-          <text x="98" y="1146" fill="#9D4732" font-family="Impact, Arial Black, sans-serif" font-size="112">THE SEAL</text>
+          <text x="98" y="850" fill="#050606" font-family="Impact, Arial Black, sans-serif" font-size="104">THE CENTER</text>
+          <text x="98" y="960" fill="#050606" font-family="Impact, Arial Black, sans-serif" font-size="104">WAS HERE</text>
+          <text x="98" y="1070" fill="#050606" font-family="Impact, Arial Black, sans-serif" font-size="104">BEFORE</text>
+          <text x="98" y="1180" fill="#9D4732" font-family="Impact, Arial Black, sans-serif" font-size="104">THE SEAL</text>
           <rect x="66" y="1218" width="948" height="66" fill="#061620"/>
           <text x="540" y="1332" text-anchor="middle" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="19" letter-spacing="2">neocolumbus.github.io/Project-Columbus/site/signal</text>
       </g>
