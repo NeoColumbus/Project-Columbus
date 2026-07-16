@@ -6,6 +6,10 @@ const { execFileSync } = require("child_process");
 const root = path.resolve(__dirname, "..");
 const pnpm = process.env.PNPM_EXECUTABLE || (process.platform === "win32" ? "pnpm.cmd" : "pnpm");
 const signalUrl = "https://neocolumbus.github.io/Project-Columbus/site/signal/";
+const commandEnv = {
+  ...process.env,
+  PATH: `${path.dirname(process.execPath)}${path.delimiter}${process.env.PATH || ""}`
+};
 
 function quote(value) {
   return `"${String(value).replace(/"/g, '\\"')}"`;
@@ -18,11 +22,13 @@ function qrFor(name, url) {
   if (process.platform === "win32") {
     const command = `${pnpm} dlx qrcode -t svg -q 4 -o ${quote(tmp)} ${quote(url)}`;
     execFileSync("cmd.exe", ["/d", "/c", command], {
-      stdio: ["ignore", "ignore", "inherit"]
+      stdio: ["ignore", "ignore", "inherit"],
+      env: commandEnv
     });
   } else {
     execFileSync(pnpm, args, {
-      stdio: ["ignore", "ignore", "inherit"]
+      stdio: ["ignore", "ignore", "inherit"],
+      env: commandEnv
     });
   }
 

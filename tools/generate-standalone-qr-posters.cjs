@@ -7,6 +7,10 @@ const root = path.resolve(__dirname, "..");
 const postersDir = path.join(root, "street-kit", "posters");
 const pnpm = process.env.PNPM_EXECUTABLE || (process.platform === "win32" ? "pnpm.cmd" : "pnpm");
 const signalUrl = "https://neocolumbus.github.io/Project-Columbus/site/signal/";
+const commandEnv = {
+  ...process.env,
+  PATH: `${path.dirname(process.execPath)}${path.delimiter}${process.env.PATH || ""}`
+};
 
 const posters = [
   {
@@ -85,11 +89,13 @@ function qrFor(poster) {
     const command = `${pnpm} dlx qrcode -t svg -q 4 -o ${quote(tmp)} ${quote(url)}`;
 
     execFileSync("cmd.exe", ["/d", "/c", command], {
-      stdio: ["ignore", "ignore", "inherit"]
+      stdio: ["ignore", "ignore", "inherit"],
+      env: commandEnv
     });
   } else {
     execFileSync(pnpm, args, {
-      stdio: ["ignore", "ignore", "inherit"]
+      stdio: ["ignore", "ignore", "inherit"],
+      env: commandEnv
     });
   }
 
@@ -119,14 +125,54 @@ function escapeXml(value) {
     .replace(/"/g, "&quot;");
 }
 
+function namespaceIds(svg, prefix) {
+  return svg
+    .replace(/\bid=(["'])([^"']+)\1/g, (_match, quote, id) => `id=${quote}${prefix}-${id}${quote}`)
+    .replace(/\b(href|xlink:href)=(["'])#([^"']+)\2/g, (_match, attr, quote, id) => `${attr}=${quote}#${prefix}-${id}${quote}`)
+    .replace(/url\(#([^)]+)\)/g, (_match, id) => `url(#${prefix}-${id})`);
+}
+
+function inlinePoster(poster) {
+  const source = path.join(postersDir, `${poster.id}.svg`);
+  const text = fs.readFileSync(source, "utf8");
+  const svgMatch = text.match(/<svg\b([^>]*)>([\s\S]*?)<\/svg>\s*$/);
+
+  if (!svgMatch) {
+    throw new Error(`Could not parse poster SVG: ${poster.id}`);
+  }
+
+  const viewBoxMatch = svgMatch[1].match(/\bviewBox="([^"]+)"/);
+
+  if (!viewBoxMatch) {
+    throw new Error(`Poster has no viewBox: ${poster.id}`);
+  }
+
+  const [minX, minY, width, height] = viewBoxMatch[1].trim().split(/\s+/).map(Number);
+  const scaleX = 1080 / width;
+  const scaleY = 1350 / height;
+  const translateX = -minX * scaleX;
+  const translateY = -minY * scaleY;
+  const body = namespaceIds(
+    svgMatch[2]
+      .replace(/<title\b[\s\S]*?<\/title>\s*/g, "")
+      .replace(/<desc\b[\s\S]*?<\/desc>\s*/g, "")
+      .trim(),
+    `p${poster.id.slice(0, 3)}`
+  );
+
+  return `<g transform="matrix(${scaleX.toFixed(6)} 0 0 ${scaleY.toFixed(6)} ${translateX.toFixed(6)} ${translateY.toFixed(6)})">
+    ${body.split("\n").join("\n    ")}
+  </g>`;
+}
+
 function renderPoster(poster) {
   const qr = qrFor(poster);
   const scale = 160 / qr.size;
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" role="img" aria-labelledby="title desc">
   <title id="title">${escapeXml(poster.title)} With QR</title>
-  <desc id="desc">A Drop 001 standalone QR poster linking to ${escapeXml(qr.url)}</desc>
-  <image href="${poster.id}.svg" width="1080" height="1350"/>
+  <desc id="desc">A Drop 001 standalone QR poster linking to ${escapeXml(qr.url)}. Poster art is inlined for GitHub-safe rendering.</desc>
+  ${inlinePoster(poster)}
   <g transform="translate(796 1008)">
     <rect width="196" height="196" fill="#F6F0E4" stroke="#050606" stroke-width="8"/>
     <g transform="translate(18 14) scale(${scale.toFixed(6)})">
