@@ -5,6 +5,7 @@
   "scripts": {
     "export:drop001": "node tools/export-drop-assets.cjs",
     "generate:generic-qr": "node tools/generate-generic-qr-assets.cjs",
+    "generate:printer-test-stickers": "node tools/generate-printer-test-stickers.cjs",
     "generate:qr-assets": "pnpm generate:generic-qr && pnpm generate:qr-posters && pnpm generate:sticker-sheets",
     "generate:qr-posters": "node tools/generate-standalone-qr-posters.cjs",
     "generate:sticker-sheets": "node tools/generate-sticker-sheets.cjs",
