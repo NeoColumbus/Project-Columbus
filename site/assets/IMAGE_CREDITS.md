@@ -38,4 +38,12 @@ Author: puroticorico
 
 License: [Creative Commons Attribution 2.0 Generic](https://creativecommons.org/licenses/by/2.0/)
 
-Changes for `neo-columbus-hero.png`: AI-assisted lighting/weather-style edit, CSS cropping, dark over
+Changes for `neo-columbus-hero.png`: AI-assisted lighting/weather-style edit, CSS cropping, dark overlay, and color treatment. The source photograph itself is not presented as an official project endorsement.
+
+## `fonts/archivo-black-latin.woff2`
+
+Archivo Black latin subset from Google Fonts.
+
+License: SIL Open Font License 1.1.
+
+Local license copy: [fonts/OFL-Archivo-Black.txt](fonts/OFL-Archivo-Black.txt)
