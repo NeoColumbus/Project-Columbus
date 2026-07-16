@@ -8,7 +8,7 @@
   <text x="100" y="204" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="26" letter-spacing="4">NOT A SEAL. A SIGNAL.</text>
   <g transform="translate(540 454)">
     <rect x="-342" y="-15" width="684" height="30" fill="#061620"/>
-    <rect x="-15" y="-282" width="30" height="560" fill="#061620"/>
+    <rect x="-15" y="-204" width="30" height="408" fill="#061620"/>
     <circle r="190" fill="#E8DDC7" stroke="#061620" stroke-width="26"/>
     <circle r="132" fill="#061620"/>
     <circle r="64" fill="none" stroke="#E8DDC7" stroke-width="22"/>
