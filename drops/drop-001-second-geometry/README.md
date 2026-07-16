@@ -33,6 +33,8 @@ Drop 001 should leave the repo with:
 - standalone QR poster PDFs
 - sticker-sheet PNGs
 - sticker-sheet PDFs
+- individual sticker page PNGs
+- individual sticker page PDFs
 - letter sticker sheet PNG/PDF
 - signal sticker sheet PNG/PDF
 - QR utility sheet PNG/PDF

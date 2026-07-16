@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2550 3300" role="img" aria-labelledby="title desc">
+  <title id="title">Drop 001 Signal Seen Confluence SINGLE STICKER / QR</title>
+  <desc id="desc">A letter-size printable page with one Drop 001 poster sticker. Poster art is inlined for GitHub-safe rendering.</desc>
+  <defs>
+    <clipPath id="single-poster">
+      <rect width="1640" height="2050" rx="44"/>
+    </clipPath>
+    <g id="single-frame">
+      <rect x="-48" y="-48" width="1736" height="2146" rx="74" fill="#F6F0E4"/>
+      <rect x="-48" y="-48" width="1736" height="2146" rx="74" fill="none" stroke="#050606" stroke-width="18"/>
+    </g>
+    <g id="single-frame-qr">
+      <rect x="-48" y="-48" width="1736" height="2506" rx="74" fill="#F6F0E4"/>
+      <rect x="-48" y="-48" width="1736" height="2506" rx="74" fill="none" stroke="#050606" stroke-width="18"/>
+    </g>
+    <symbol id="project-qr" viewBox="0 0 49 49">
+      <rect width="49" height="49" fill="#F6F0E4"/>
+      <path stroke="#050606" d="M4 4.5h7m3 0h2m4 0h6m1 0h1m1 0h2m3 0h3m1 0h7M4 5.5h1m5 0h1m2 0h1m1 0h4m2 0h1m2 0h2m3 0h6m1 0h1m1 0h1m5 0h1M4 6.5h1m1 0h3m1 0h1m1 0h3m1 0h2m2 0h4m1 0h5m1 0h2m2 0h1m2 0h1m1 0h3m1 0h1M4 7.5h1m1 0h3m1 0h1m1 0h1m1 0h1m3 0h1m5 0h2m4 0h2m1 0h1m4 0h1m1 0h3m1 0h1M4 8.5h1m1 0h3m1 0h1m1 0h2m1 0h1m2 0h2m2 0h6m1 0h1m2 0h5m1 0h1m1 0h3m1 0h1M4 9.5h1m5 0h1m1 0h4m1 0h1m2 0h1m3 0h3m1 0h6m4 0h1m5 0h1M4 10.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M12 11.5h1m3 0h1m2 0h2m1 0h1m2 0h4m1 0h1m4 0h1M4 12.5h1m1 0h5m4 0h1m1 0h1m1 0h3m1 0h2m1 0h1m2 0h3m1 0h1m1 0h1m2 0h5M5 13.5h1m3 0h1m3 0h7m2 0h6m1 0h1m2 0h1m1 0h2m1 0h4m2 0h2M4 14.5h1m2 0h1m2 0h1m1 0h4m8 0h3m1 0h5m3 0h1m2 0h2m1 0h2M4 15.5h6m2 0h2m1 0h4m1 0h1m1 0h1m2 0h4m1 0h1m4 0h2m3 0h2m1 0h1M4 16.5h2m1 0h1m1 0h2m1 0h2m1 0h1m2 0h4m1 0h2m1 0h1m1 0h4m1 0h1m1 0h1m3 0h2m1 0h1M4 17.5h3m1 0h1m4 0h5m1 0h4m3 0h1m2 0h1m1 0h1m1 0h12M4 18.5h2m4 0h1m6 0h1m4 0h1m1 0h1m2 0h2m1 0h2m1 0h1m2 0h2m1 0h1m2 0h1M4 19.5h5m2 0h1m1 0h3m2 0h1m1 0h1m1 0h1m2 0h3m2 0h1m5 0h2m1 0h1m1 0h1m2 0h1M10 20.5h2m2 0h3m2 0h1m1 0h1m2 0h1m1 0h6m1 0h1m1 0h2m2 0h1m2 0h2M4 21.5h2m1 0h2m3 0h1m1 0h6m2 0h3m2 0h1m2 0h1m1 0h1m2 0h2m1 0h3m1 0h3M4 22.5h2m1 0h1m1 0h5m2 0h1m2 0h2m1 0h1m1 0h1m1 0h1m4 0h2m1 0h1m1 0h2m2 0h2m1 0h1M5 23.5h1m1 0h3m2 0h2m1 0h1m2 0h3m3 0h1m3 0h1m1 0h1m4 0h3m1 0h3m1 0h2M5 24.5h4m1 0h1m1 0h2m1 0h3m1 0h2m1 0h2m1 0h4m2 0h1m1 0h1m1 0h1m6 0h2M4 25.5h1m3 0h2m1 0h1m2 0h1m1 0h1m1 0h2m1 0h1m1 0h3m1 0h1m1 0h5m1 0h2m1 0h3m2 0h2M4 26.5h1m4 0h2m1 0h1m1 0h4m2 0h1m1 0h1m1 0h1m5 0h4m2 0h1m1 0h6M7 27.5h3m5 0h2m5 0h2m1 0h2m4 0h2m1 0h4m3 0h1M6 28.5h2m2 0h3m1 0h2m1 0h2m2 0h1m5 0h4m2 0h1m1 0h1m1 0h1m4 0h1m1 0h1M5 29.5h2m1 0h2m3 0h1m2 0h1m1 0h3m2 0h3m1 0h1m1 0h2m1 0h1m1 0h2m1 0h4m1 0h1m1 0h1M10 30.5h1m3 0h1m2 0h3m4 0h1m5 0h5m3 0h1M5 31.5h3m3 0h1m4 0h1m1 0h3m2 0h4m5 0h1m2 0h1m1 0h1m1 0h1m1 0h1M4 32.5h1m1 0h1m1 0h1m1 0h2m1 0h1m5 0h4m4 0h1m1 0h2m2 0h1m1 0h1m5 0h2M4 33.5h1m2 0h3m4 0h1m2 0h1m1 0h2m1 0h1m1 0h2m2 0h1m1 0h1m4 0h1m1 0h2m1 0h1m1 0h1m1 0h1M4 34.5h1m3 0h6m4 0h1m4 0h1m1 0h2m2 0h1m1 0h1m5 0h1m1 0h1m1 0h1M4 35.5h1m2 0h1m4 0h1m4 0h1m1 0h1m3 0h4m1 0h1m1 0h3m3 0h1m1 0h2m1 0h1m2 0h1M4 36.5h1m1 0h1m3 0h2m2 0h1m2 0h5m1 0h1m2 0h1m1 0h4m1 0h1m2 0h5m1 0h1m1 0h1M12 37.5h3m1 0h3m2 0h3m1 0h3m1 0h2m1 0h1m2 0h2m3 0h2m1 0h2M4 38.5h7m2 0h2m1 0h1m2 0h3m3 0h1m2 0h4m1 0h4m1 0h1m1 0h3M4 39.5h1m5 0h1m1 0h2m1 0h1m4 0h4m1 0h2m2 0h1m4 0h1m1 0h1m3 0h2M4 40.5h1m1 0h3m1 0h1m1 0h3m4 0h1m4 0h2m2 0h1m1 0h2m1 0h1m2 0h5m1 0h1M4 41.5h1m1 0h3m1 0h1m1 0h3m3 0h1m1 0h1m1 0h3m1 0h2m6 0h4m1 0h1m1 0h1M4 42.5h1m1 0h3m1 0h1m1 0h1m4 0h2m1 0h2m2 0h1m1 0h1m3 0h2m3 0h2m1 0h3m1 0h1M4 43.5h1m5 0h1m3 0h3m1 0h1m1 0h6m4 0h3m3 0h2m2 0h2m1 0h1M4 44.5h7m1 0h5m6 0h1m2 0h1m1 0h4m1 0h1m1 0h1m1 0h4m1 0h1"/>
+    </symbol>
+    <g id="single-qr">
+      <rect width="300" height="360" fill="#F6F0E4" stroke="#050606" stroke-width="14"/>
+      <use href="#project-qr" x="28" y="24" width="244" height="244"/>
+      <text x="150" y="326" text-anchor="middle" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="48" letter-spacing="7">SCAN</text>
+    </g>
+  </defs>
+  <rect width="2550" height="3300" fill="#F6F0E4"/>
+  <text x="150" y="194" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="74" letter-spacing="5">DROP 001 / SINGLE STICKER / QR</text>
+  <text x="150" y="278" fill="#9D4732" font-family="Arial Black, Impact, sans-serif" font-size="34" letter-spacing="5">SIGNAL SEEN CONFLUENCE</text>
+
+  <g transform="translate(455 450)">
+    <use href="#single-frame-qr"/>
+    <g clip-path="url(#single-poster)">
+      <g transform="matrix(1.518519 0 0 1.518519 0.000000 0.000000)">
+        <rect width="1080" height="1350" fill="#050606"/>
+          <rect x="54" y="54" width="972" height="1242" fill="#061620"/>
+          <path d="M0 894 C220 786 350 810 540 902 S870 1006 1080 882" fill="none" stroke="#4F8A74" stroke-width="58"/>
+          <path d="M0 972 C220 864 350 888 540 980 S870 1084 1080 960" fill="none" stroke="#E8DDC7" stroke-width="20"/>
+          <path d="M540 54 V1296" stroke="#F4B037" stroke-width="10"/>
+          <path d="M54 656 H1026" stroke="#F4B037" stroke-width="10"/>
+          <g transform="translate(540 656)">
+            <circle r="198" fill="#E8DDC7"/>
+            <circle r="152" fill="#061620"/>
+            <circle r="78" fill="none" stroke="#E8DDC7" stroke-width="26"/>
+            <circle r="40" fill="#F4B037"/>
+          </g>
+          <rect x="54" y="54" width="972" height="116" fill="#F4B037"/>
+          <text x="92" y="126" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="38" letter-spacing="5">FIELD NOTICE / 002</text>
+          <text x="92" y="314" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="132">SIGNAL</text>
+          <text x="92" y="442" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="132">SEEN</text>
+          <text x="92" y="1150" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="118">CONFLUENCE</text>
+          <text x="92" y="1216" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="28" letter-spacing="4">SCIOTO + OLENTANGY</text>
+          <text x="540" y="1332" text-anchor="middle" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="19" letter-spacing="2">neocolumbus.github.io/Project-Columbus/site/signal</text>
+      </g>
+    </g>
+    <rect y="2050" width="1640" height="360" fill="#F6F0E4"/>
+    <text x="72" y="2200" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="44" letter-spacing="5">SCAN THE SIGNAL</text>
+    <text x="72" y="2278" fill="#9D4732" font-family="Arial Black, Impact, sans-serif" font-size="26" letter-spacing="4">ONE BIG STICKER / ONE DIRECT ENTRY</text>
+    <use href="#single-qr" transform="translate(1296 2074)"/>
+  </g>
+
+  <text x="150" y="3148" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="40" letter-spacing="5">PRINT ONE PAGE / CUT ONE BIG STICKER / TEST EVERY SCAN</text>
+</svg>

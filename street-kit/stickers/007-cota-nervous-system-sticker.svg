@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2550 3300" role="img" aria-labelledby="title desc">
+  <title id="title">Drop 001 COTA Nervous System SINGLE STICKER / NO QR</title>
+  <desc id="desc">A letter-size printable page with one Drop 001 poster sticker. Poster art is inlined for GitHub-safe rendering.</desc>
+  <defs>
+    <clipPath id="single-poster">
+      <rect width="1640" height="2050" rx="44"/>
+    </clipPath>
+    <g id="single-frame">
+      <rect x="-48" y="-48" width="1736" height="2146" rx="74" fill="#F6F0E4"/>
+      <rect x="-48" y="-48" width="1736" height="2146" rx="74" fill="none" stroke="#050606" stroke-width="18"/>
+    </g>
+    <g id="single-frame-qr">
+      <rect x="-48" y="-48" width="1736" height="2506" rx="74" fill="#F6F0E4"/>
+      <rect x="-48" y="-48" width="1736" height="2506" rx="74" fill="none" stroke="#050606" stroke-width="18"/>
+    </g>
+  </defs>
+  <rect width="2550" height="3300" fill="#F6F0E4"/>
+  <text x="150" y="194" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="74" letter-spacing="5">DROP 001 / SINGLE STICKER / NO QR</text>
+  <text x="150" y="278" fill="#9D4732" font-family="Arial Black, Impact, sans-serif" font-size="34" letter-spacing="5">COTA NERVOUS SYSTEM</text>
+
+  <g transform="translate(455 570)">
+    <use href="#single-frame"/>
+    <g clip-path="url(#single-poster)">
+      <g transform="matrix(1.518519 0 0 1.518519 0.000000 0.000000)">
+        <rect width="1080" height="1350" fill="#061620"/>
+          <rect x="58" y="58" width="964" height="1234" fill="#050606"/>
+          <rect x="58" y="58" width="964" height="104" fill="#F4B037"/>
+          <text x="92" y="124" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="34" letter-spacing="5">TRANSIT 007</text>
+          <g opacity="0.42">
+            <path d="M474 274 H932 M474 402 H932 M474 530 H932 M474 658 H932 M474 786 H932 M474 914 H932" stroke="#4F8A74" stroke-width="8"/>
+            <path d="M560 220 V1040 M690 220 V1040 M820 220 V1040 M950 220 V1040" stroke="#4F8A74" stroke-width="8"/>
+          </g>
+          <path d="M500 1010 C630 850 620 704 726 650 C820 602 820 724 946 472" fill="none" stroke="#F4B037" stroke-width="34" stroke-linecap="square"/>
+          <path d="M488 506 C604 418 706 436 788 548 C878 674 894 730 968 660" fill="none" stroke="#E8DDC7" stroke-width="18" stroke-linecap="square"/>
+          <g fill="#F6F0E4" stroke="#050606" stroke-width="14">
+            <circle cx="548" cy="920" r="46"/>
+            <circle cx="726" cy="650" r="46"/>
+            <circle cx="720" cy="610" r="46"/>
+            <circle cx="900" cy="504" r="46"/>
+          </g>
+          <g transform="translate(622 320)">
+            <circle r="116" fill="#E8DDC7"/>
+            <circle r="84" fill="#061620"/>
+            <circle r="44" fill="none" stroke="#E8DDC7" stroke-width="18"/>
+            <circle r="24" fill="#F4B037"/>
+          </g>
+          <text x="86" y="662" fill="#F4B037" font-family="Impact, Arial Black, sans-serif" font-size="116">COTA IS THE</text>
+          <text x="86" y="820" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="138">NERVOUS</text>
+          <text x="86" y="978" fill="#E8DDC7" font-family="Impact, Arial Black, sans-serif" font-size="138">SYSTEM</text>
+          <rect x="58" y="1216" width="964" height="76" fill="#F4B037"/>
+          <text x="90" y="1268" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="30" letter-spacing="4">FREQUENCY IS DIGNITY / DROP 001</text>
+          <text x="540" y="1332" text-anchor="middle" fill="#E8DDC7" font-family="Arial Black, Impact, sans-serif" font-size="19" letter-spacing="2">neocolumbus.github.io/Project-Columbus/site/signal</text>
+      </g>
+    </g>
+  </g>
+
+  <text x="150" y="3148" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="40" letter-spacing="5">PRINT ONE PAGE / CUT ONE BIG STICKER / TEST EVERY SCAN</text>
+</svg>

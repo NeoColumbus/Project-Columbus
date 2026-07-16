@@ -21,11 +21,23 @@ const letterPosters = [
   "007-cota-nervous-system"
 ];
 
+const stickerTitles = {
+  "001-earthworks-were-first": "Earthworks Were First",
+  "002-signal-seen-confluence": "Signal Seen Confluence",
+  "003-center-before-seal": "Center Was Here Before",
+  "004-pile-of-projects": "Pile Of Projects",
+  "005-machine-pays-tribute": "Machine Pays Tribute",
+  "006-report-dead-wall": "Report A Dead Wall",
+  "007-cota-nervous-system": "COTA Nervous System",
+  "008-no-more-half-city": "No More Half-City"
+};
+
 function read(relativePath) {
   return fs.readFileSync(path.join(root, relativePath), "utf8");
 }
 
 function write(relativePath, text) {
+  fs.mkdirSync(path.dirname(path.join(root, relativePath)), { recursive: true });
   fs.writeFileSync(path.join(root, relativePath), text);
   console.log(`wrote ${relativePath}`);
 }
@@ -206,6 +218,69 @@ function renderLetterSheet() {
 `;
 }
 
+function singleStickerSlot(id, withQr) {
+  const transform = withQr ? "translate(455 450)" : "translate(455 570)";
+  const frame = withQr ? "single-frame-qr" : "single-frame";
+  const qr = withQr
+    ? `
+    <rect y="2050" width="1640" height="360" fill="#F6F0E4"/>
+    <text x="72" y="2200" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="44" letter-spacing="5">SCAN THE SIGNAL</text>
+    <text x="72" y="2278" fill="#9D4732" font-family="Arial Black, Impact, sans-serif" font-size="26" letter-spacing="4">ONE BIG STICKER / ONE DIRECT ENTRY</text>
+    <use href="#single-qr" transform="translate(1296 2074)"/>`
+    : "";
+
+  return `<g transform="${transform}">
+    <use href="#${frame}"/>
+    ${inlinePoster(id, 1640, 2050, "single-poster")}${qr}
+  </g>`;
+}
+
+function renderSingleStickerPage(id, { withQr }) {
+  const sourceLetterSheet = read("street-kit/sticker-sheet-letter.svg");
+  const projectQr = withQr ? `\n    ${extractDef(sourceLetterSheet, "project-qr")}` : "";
+  const title = stickerTitles[id] || id;
+  const label = withQr ? "SINGLE STICKER / QR" : "SINGLE STICKER / NO QR";
+  const qrDef = withQr
+    ? `
+    <g id="single-qr">
+      <rect width="300" height="360" fill="#F6F0E4" stroke="#050606" stroke-width="14"/>
+      <use href="#project-qr" x="28" y="24" width="244" height="244"/>
+      <text x="150" y="326" text-anchor="middle" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="48" letter-spacing="7">SCAN</text>
+    </g>`
+    : "";
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2550 3300" role="img" aria-labelledby="title desc">
+  <title id="title">Drop 001 ${title} ${label}</title>
+  <desc id="desc">A letter-size printable page with one Drop 001 poster sticker. Poster art is inlined for GitHub-safe rendering.</desc>
+  <defs>
+    <clipPath id="single-poster">
+      <rect width="1640" height="2050" rx="44"/>
+    </clipPath>
+    <g id="single-frame">
+      <rect x="-48" y="-48" width="1736" height="2146" rx="74" fill="#F6F0E4"/>
+      <rect x="-48" y="-48" width="1736" height="2146" rx="74" fill="none" stroke="#050606" stroke-width="18"/>
+    </g>
+    <g id="single-frame-qr">
+      <rect x="-48" y="-48" width="1736" height="2506" rx="74" fill="#F6F0E4"/>
+      <rect x="-48" y="-48" width="1736" height="2506" rx="74" fill="none" stroke="#050606" stroke-width="18"/>
+    </g>${projectQr}${qrDef}
+  </defs>
+  <rect width="2550" height="3300" fill="#F6F0E4"/>
+  <text x="150" y="194" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="74" letter-spacing="5">DROP 001 / ${label}</text>
+  <text x="150" y="278" fill="#9D4732" font-family="Arial Black, Impact, sans-serif" font-size="34" letter-spacing="5">${title.toUpperCase()}</text>
+
+  ${singleStickerSlot(id, withQr)}
+
+  <text x="150" y="3148" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="40" letter-spacing="5">PRINT ONE PAGE / CUT ONE BIG STICKER / TEST EVERY SCAN</text>
+</svg>
+`;
+}
+
 write("street-kit/sticker-sheet.svg", renderStickerSheet({ withQr: false }));
 write("street-kit/sticker-sheet-qr.svg", renderStickerSheet({ withQr: true }));
 write("street-kit/sticker-sheet-letter.svg", renderLetterSheet());
+
+for (const id of posters) {
+  write(`street-kit/stickers/${id}-sticker.svg`, renderSingleStickerPage(id, { withQr: false }));
+  write(`street-kit/stickers/${id}-sticker-qr.svg`, renderSingleStickerPage(id, { withQr: true }));
+}

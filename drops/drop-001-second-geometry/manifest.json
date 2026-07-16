@@ -105,6 +105,70 @@
       "source": "street-kit/sticker-sheet-letter.svg"
     },
     {
+      "name": "sticker-001-earthworks-were-first",
+      "source": "street-kit/stickers/001-earthworks-were-first-sticker.svg"
+    },
+    {
+      "name": "sticker-001-earthworks-were-first-qr",
+      "source": "street-kit/stickers/001-earthworks-were-first-sticker-qr.svg"
+    },
+    {
+      "name": "sticker-002-signal-seen-confluence",
+      "source": "street-kit/stickers/002-signal-seen-confluence-sticker.svg"
+    },
+    {
+      "name": "sticker-002-signal-seen-confluence-qr",
+      "source": "street-kit/stickers/002-signal-seen-confluence-sticker-qr.svg"
+    },
+    {
+      "name": "sticker-003-center-before-seal",
+      "source": "street-kit/stickers/003-center-before-seal-sticker.svg"
+    },
+    {
+      "name": "sticker-003-center-before-seal-qr",
+      "source": "street-kit/stickers/003-center-before-seal-sticker-qr.svg"
+    },
+    {
+      "name": "sticker-004-pile-of-projects",
+      "source": "street-kit/stickers/004-pile-of-projects-sticker.svg"
+    },
+    {
+      "name": "sticker-004-pile-of-projects-qr",
+      "source": "street-kit/stickers/004-pile-of-projects-sticker-qr.svg"
+    },
+    {
+      "name": "sticker-005-machine-pays-tribute",
+      "source": "street-kit/stickers/005-machine-pays-tribute-sticker.svg"
+    },
+    {
+      "name": "sticker-005-machine-pays-tribute-qr",
+      "source": "street-kit/stickers/005-machine-pays-tribute-sticker-qr.svg"
+    },
+    {
+      "name": "sticker-006-report-dead-wall",
+      "source": "street-kit/stickers/006-report-dead-wall-sticker.svg"
+    },
+    {
+      "name": "sticker-006-report-dead-wall-qr",
+      "source": "street-kit/stickers/006-report-dead-wall-sticker-qr.svg"
+    },
+    {
+      "name": "sticker-007-cota-nervous-system",
+      "source": "street-kit/stickers/007-cota-nervous-system-sticker.svg"
+    },
+    {
+      "name": "sticker-007-cota-nervous-system-qr",
+      "source": "street-kit/stickers/007-cota-nervous-system-sticker-qr.svg"
+    },
+    {
+      "name": "sticker-008-no-more-half-city",
+      "source": "street-kit/stickers/008-no-more-half-city-sticker.svg"
+    },
+    {
+      "name": "sticker-008-no-more-half-city-qr",
+      "source": "street-kit/stickers/008-no-more-half-city-sticker-qr.svg"
+    },
+    {
       "name": "signal-sticker-sheet",
       "source": "street-kit/signal-sticker-sheet.svg"
     },

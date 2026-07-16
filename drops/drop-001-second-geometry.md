@@ -33,6 +33,7 @@ No one has to understand the whole theory before they can feel the signal.
 - [street poster set](../street-kit/posters)
 - [sticker sheet](../street-kit/sticker-sheet.svg)
 - [letter sticker sheet](../street-kit/sticker-sheet-letter.svg)
+- [individual sticker pages](../street-kit/stickers)
 - [signal sticker sheet](../street-kit/signal-sticker-sheet.svg)
 - [QR utility sheet](../street-kit/qr-utility-sheet.svg)
 - [QR sticker](../street-kit/qr-sticker.svg)

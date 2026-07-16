@@ -34,6 +34,19 @@ Companion artifacts:
 - [qr-sticker.svg](qr-sticker.svg)
 - [handbill-post-the-signal.svg](handbill-post-the-signal.svg)
 
+## Individual Sticker Pages
+
+Use these when you want one large sticker per printable page instead of a sheet:
+
+- Earthworks Were First: [no QR](stickers/001-earthworks-were-first-sticker.svg) / [QR](stickers/001-earthworks-were-first-sticker-qr.svg)
+- Signal Seen Confluence: [no QR](stickers/002-signal-seen-confluence-sticker.svg) / [QR](stickers/002-signal-seen-confluence-sticker-qr.svg)
+- Center Was Here Before: [no QR](stickers/003-center-before-seal-sticker.svg) / [QR](stickers/003-center-before-seal-sticker-qr.svg)
+- Pile Of Projects: [no QR](stickers/004-pile-of-projects-sticker.svg) / [QR](stickers/004-pile-of-projects-sticker-qr.svg)
+- Machine Pays Tribute: [no QR](stickers/005-machine-pays-tribute-sticker.svg) / [QR](stickers/005-machine-pays-tribute-sticker-qr.svg)
+- Report A Dead Wall: [no QR](stickers/006-report-dead-wall-sticker.svg) / [QR](stickers/006-report-dead-wall-sticker-qr.svg)
+- COTA Nervous System: [no QR](stickers/007-cota-nervous-system-sticker.svg) / [QR](stickers/007-cota-nervous-system-sticker-qr.svg)
+- No More Half-City: [no QR](stickers/008-no-more-half-city-sticker.svg) / [QR](stickers/008-no-more-half-city-sticker-qr.svg)
+
 Campaign QR target:
 
 https://neocolumbus.github.io/Project-Columbus/site/signal/
@@ -53,7 +66,7 @@ Regenerate the complete QR and sticker-sheet source set with:
 
 `pnpm generate:qr-assets`
 
-Regenerate only the poster-inlined sticker sheets with:
+Regenerate only the poster-inlined sticker sheets and individual sticker pages with:
 
 `pnpm generate:sticker-sheets`
 
