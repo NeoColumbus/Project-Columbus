@@ -196,48 +196,34 @@ function inlinePoster(id, width, height, clipId) {
 }
 
 function renderSticker(poster, qr) {
-  const scale = (244 / qr.size).toFixed(6);
+  const qrScale = (160 / qr.size).toFixed(6);
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2550 3300" role="img" aria-labelledby="title desc">
   <title id="title">Drop 001 ${escapeXml(poster.title)} Printer Ready Sticker</title>
-  <desc id="desc">A letter-size printer-ready sticker with a distinct QR code linking to ${escapeXml(qr.url)}.</desc>
+  <desc id="desc">An 8 by 10 inch sticker centered on a letter-size page with a distinct QR code linking to ${escapeXml(qr.url)}.</desc>
   <defs>
     <clipPath id="single-poster">
-      <rect width="1640" height="2050" rx="44"/>
+      <rect width="1080" height="1350"/>
     </clipPath>
-    <g id="single-frame">
-      <rect x="-48" y="-48" width="1736" height="2506" rx="74" fill="#F6F0E4"/>
-      <rect x="-48" y="-48" width="1736" height="2506" rx="74" fill="none" stroke="#050606" stroke-width="18"/>
-    </g>
-    <g id="single-qr">
-      <rect width="300" height="360" fill="#F6F0E4" stroke="#050606" stroke-width="14"/>
-      <g transform="translate(28 24) scale(${scale})" shape-rendering="crispEdges">
+  </defs>
+  <rect width="2550" height="3300" fill="#FFFFFF"/>
+  <g transform="translate(75 150) scale(2.222222)">
+    ${inlinePoster(poster.id, 1080, 1350, "single-poster")}
+    <g transform="translate(796 1008)">
+      <rect width="196" height="196" fill="#F6F0E4" stroke="#050606" stroke-width="8"/>
+      <g transform="translate(18 14) scale(${qrScale})" shape-rendering="crispEdges">
         <rect width="${qr.size}" height="${qr.size}" fill="#F6F0E4"/>
         <path stroke="#050606" d="${qr.path}"/>
       </g>
-      <text x="150" y="326" text-anchor="middle" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="48" letter-spacing="7">SCAN</text>
+      <text x="98" y="186" text-anchor="middle" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="26" letter-spacing="3">SCAN</text>
     </g>
-  </defs>
-  <rect width="2550" height="3300" fill="#F6F0E4"/>
-  <text x="150" y="194" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="74" letter-spacing="5">DROP 001 / STICKER / QR</text>
-  <text x="150" y="278" fill="#9D4732" font-family="Arial Black, Impact, sans-serif" font-size="34" letter-spacing="5">${escapeXml(poster.title.toUpperCase())}</text>
-
-  <g transform="translate(455 450)">
-    <use href="#single-frame"/>
-    ${inlinePoster(poster.id, 1640, 2050, "single-poster")}
-    <rect y="2050" width="1640" height="360" fill="#F6F0E4"/>
-    <text x="72" y="2200" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="44" letter-spacing="5">SCAN THE SIGNAL</text>
-    <text x="72" y="2278" fill="#9D4732" font-family="Arial Black, Impact, sans-serif" font-size="26" letter-spacing="4">SOURCE ${escapeXml(qr.source.toUpperCase())} / PRINTER READY</text>
-    <use href="#single-qr" transform="translate(1296 2074)"/>
   </g>
-
-  <text x="150" y="3148" fill="#050606" font-family="Arial Black, Impact, sans-serif" font-size="40" letter-spacing="5">LETTER PDF / CUT ONE BIG STICKER / TEST EVERY SCAN</text>
 </svg>
 `;
 }
 
-async function pngBufferFromSvg(svgText) {
-  return sharp(Buffer.from(svgText), { density: 300, unlimited: true })
+async function pngBufferFromSvg(svgText, density) {
+  return sharp(Buffer.from(svgText), { density, unlimited: true })
     .png({ compressionLevel: 9 })
     .toBuffer();
 }
@@ -292,7 +278,8 @@ async function main() {
     const stickerPdfPath = path.join(stickerPdfDir, `${stickerStem}.pdf`);
 
     fs.writeFileSync(stickerSvgPath, stickerSvg);
-    const stickerPng = await pngBufferFromSvg(stickerSvg);
+    // 2550x3300 pixels on an 8.5x11 page is exactly 300 DPI.
+    const stickerPng = await pngBufferFromSvg(stickerSvg, 72);
     await writeOnePagePdf(stickerPng, stickerPdfPath, 612, 792);
     await addPdfPageFromPng(stickerBook, stickerPng, 612, 792);
     rows.push(["sticker", `stickers-letter-pdfs/${stickerStem}.pdf`, stickerQr.source, stickerQr.asset, stickerQr.url]);
@@ -303,7 +290,8 @@ async function main() {
     const posterSvgPath = path.join(posterSvgDir, `${posterStem}.svg`);
     const posterPdfPath = path.join(posterPdfDir, `${posterStem}.pdf`);
     const posterSvg = copyPosterSource(poster.id, posterSvgPath);
-    const posterPng = await pngBufferFromSvg(posterSvg);
+    // A 1080x1350 SVG rasterized at 160 density becomes 2400x3000: 300 DPI at 8x10.
+    const posterPng = await pngBufferFromSvg(posterSvg, 160);
     const posterUrl = cardUrl(poster, posterSource, "");
 
     await writeOnePagePdf(posterPng, posterPdfPath, 576, 720);
@@ -326,12 +314,15 @@ async function main() {
       "",
       "- `stickers-letter-pdfs/` has one letter-size PDF per sticker.",
       "- `full-city-stickers-qr-letter-all.pdf` has all 8 sticker pages in one PDF.",
+      "- Each page contains only an 8x10 sticker centered on the sheet, with its QR built into the artwork.",
+      "- Trim at the artwork edge. The surrounding page area is intentionally blank.",
       "",
       "## Posters",
       "",
       "- `posters-8x10-pdfs/` has one 8x10 PDF per poster.",
       "- `full-city-posters-qr-8x10-all.pdf` has all 8 poster pages in one PDF.",
-      "- The posters are 4:5 masters. They can scale cleanly to 16x20 without cropping.",
+      "- The PDFs are rendered at 300 DPI for 8x10 printing.",
+      "- Use the vector masters in `source-svg/posters/` for larger 4:5 output such as 16x20.",
       "",
       "## QR Paths",
       "",

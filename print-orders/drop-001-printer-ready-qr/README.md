@@ -6,12 +6,15 @@ This is the upload folder for the real QR run.
 
 - `stickers-letter-pdfs/` has one letter-size PDF per sticker.
 - `full-city-stickers-qr-letter-all.pdf` has all 8 sticker pages in one PDF.
+- Each page contains only an 8x10 sticker centered on the sheet, with its QR built into the artwork.
+- Trim at the artwork edge. The surrounding page area is intentionally blank.
 
 ## Posters
 
 - `posters-8x10-pdfs/` has one 8x10 PDF per poster.
 - `full-city-posters-qr-8x10-all.pdf` has all 8 poster pages in one PDF.
-- The posters are 4:5 masters. They can scale cleanly to 16x20 without cropping.
+- The PDFs are rendered at 300 DPI for 8x10 printing.
+- Use the vector masters in `source-svg/posters/` for larger 4:5 output such as 16x20.
 
 ## QR Paths
 
