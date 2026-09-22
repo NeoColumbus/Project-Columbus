@@ -9,6 +9,7 @@ All notable project changes should be tracked here.
 - Separated field leads from checked proof, with founding document research distinct from community participation.
 - Added accessible, in-flow mobile navigation and institutional public wording without hiding AI disclosure.
 - Hardened intake body limits, error handling, optional Turnstile verification, and edge rate limiting; restricted proof publication to maintainers with checkable evidence.
+- Fixed the moderation workflow's PR labeling permission; it continues to run trusted base-branch code without checking out contributions.
 
 - Added the no-login field submission worker API and wired the signal page to use it when configured.
 - Added data-driven proof wall rendering, portable field-card links/downloads, release artifact workflow, setup docs, submission docs, street protocol, and source sprint queue.

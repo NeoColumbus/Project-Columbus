@@ -13,7 +13,8 @@ on:
 permissions:
   contents: read
   issues: write
-  pull-requests: read
+  # PR labels/comments require write permission; this job never executes head code.
+  pull-requests: write
 
 jobs:
   scan:
