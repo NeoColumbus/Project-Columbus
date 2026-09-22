@@ -1,5 +1,13 @@
 # Start Here
 
+## Start With The Receipts
+
+SIGNAL -> RECEIPTS -> FIELD -> PROOF -> RETURN.
+
+Open the [work register](site/work/index.html), then pick a question, add a source, or bring a real place into view. Useful leads need a place, missing piece, and public line; a hosted photo is not required to start. Evidence and maintainer verification are required before publication as proof.
+
+New work must separate FACT / ANALYSIS / PROPOSAL and state its maturity: DRAFT, SOURCED, REVIEWED, or FIELD TESTED. Record review/test scope rather than implying credentials. Include limitations and the date and scope of the last verification. [Publishing protocol](submissions/PUBLISHING.md).
+
 <!-- HUMAN NOTE: This is the novice door. Keep it clear, direct, and unembarrassed. -->
 
 You can help even if you are new.

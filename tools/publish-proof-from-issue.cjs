@@ -61,7 +61,10 @@ function cardFields() {
 
 function firstUrl(value) {
   const match = String(value || "").match(/https?:\/\/[^\s)]+/i);
-  return match?.[0] || "";
+  try {
+    const url = new URL(match?.[0]);
+    return ["http:", "https:"].includes(url.protocol) && !url.username && !url.password ? url.href : "";
+  } catch { return ""; }
 }
 
 function slug(value) {
@@ -161,7 +164,8 @@ if (!issueNumber) missing.push("issue number");
 if (isPlaceholder(place, [/^\[?place\]?$/i, /^name the street/i])) missing.push("place");
 if (isPlaceholder(missingPiece, [/^\[?break\]?$/i, /^what should the city do here/i])) missing.push("missing piece");
 if (isPlaceholder(line, [/^\[?line\]?$/i, /^write the public line/i, /example:\s*\[place\]/i])) missing.push("public line");
-if (isPlaceholder(proof, [/^\[?photo \/ post \/ note\]?$/i, /^add a photo/i, /^no proof link supplied/i]) && !proofUrl) missing.push("proof");
+if (!proofUrl) missing.push("checkable public evidence URL");
+if (!process.env.PROOF_REVIEWER) missing.push("maintainer review identity (PROOF_REVIEWER)");
 
 if (missing.length > 0) {
   console.error(`Cannot publish proof entry. Missing: ${missing.join(", ")}.`);
@@ -180,6 +184,8 @@ const entry = {
   proof,
   proofUrl,
   sourceIssue: issueUrl,
+  checkedBy: process.env.PROOF_REVIEWER,
+  checkedAt: new Date().toISOString().slice(0, 10),
   status: "published"
 };
 

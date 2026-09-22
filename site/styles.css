@@ -2807,3 +2807,83 @@ h1 {
     animation: none;
   }
 }
+
+/* Receipts use the same civic palette with reading-sized evidence text. */
+.receipts-section, .receipts-intro, .receipts-return, .founding-observations {
+  padding: 64px max(24px, calc((100% - 1200px) / 2));
+  background: var(--limestone);
+  color: var(--black);
+}
+.receipts-section h2, .receipts-intro h1, .founding-observations h2 {
+  color: var(--black);
+  text-shadow: none;
+  max-width: 20ch;
+  margin: 16px 0 24px;
+  font-size: 48px;
+  line-height: 1.06;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+.receipts-section > p, .receipts-intro > p, .work-body p,
+.work-body li, .claim-key p, .maturity-key p, .founding-observations > p,
+.receipts-return p, .scan-context p, .lead-note {
+  max-width: 70ch;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.55;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.receipts-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 32px 0; }
+.receipt-card { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; padding: 24px; background: var(--river-navy); color: var(--bone); text-decoration: none; border-bottom: 5px solid var(--amber); }
+.receipt-card:nth-child(2n) { border-color: var(--brick); }
+.receipt-card h3 { font-size: 26px; line-height: 1.15; margin: 0; text-transform: uppercase; }
+.receipt-card p { font: 18px/1.5 Arial, sans-serif; margin: 0; }
+.receipt-card strong { margin-top: auto; color: var(--amber); font-size: 14px; text-transform: uppercase; }
+.receipt-card:hover strong { text-decoration: underline; }
+.maturity, .claim-label { display: inline-block; font: bold 12px/1.4 Arial, sans-serif; text-transform: uppercase; letter-spacing: 0; padding: 5px 8px; border: 1px solid currentColor; }
+.claim-label { margin: 0 6px 5px 0; color: var(--bone); background: var(--river-navy); }
+.claim-key { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 36px 0; border-top: 3px solid var(--black); padding-top: 24px; }
+.maturity-key { padding: 20px 0; border-block: 1px solid var(--brick); }
+.maturity-key summary { cursor: pointer; line-height: 1.5; }
+.work-main { padding-top: 100px; }
+.work-item { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 48px; padding: 64px max(24px, calc((100% - 1200px) / 2)); background: var(--bone); color: var(--black); border-top: 4px solid var(--brick); }
+.work-heading h2 { font-size: 32px; line-height: 1.1; text-transform: uppercase; overflow-wrap: normal; word-break: normal; }
+.work-heading > p { color: var(--brick); font-size: 18px; line-height: 1.5; }
+.work-body h3 { margin-top: 28px; font-size: 16px; text-transform: uppercase; }
+.work-body h3:first-child { margin-top: 0; }
+.work-body li { margin-bottom: 12px; }
+.work-body a:not(.button) { text-underline-offset: 3px; }
+.work-body .verification { border-top: 1px solid var(--bronze); padding-top: 16px; font-size: 14px; }
+.publication-pending { border-bottom: 2px dashed var(--brick); font-weight: bold; }
+.epistemic-note { font: 14px/1.5 Arial, sans-serif; grid-column: 1 / -1; position: relative; z-index: 2; }
+.scan-context { margin: 24px 0; padding-left: 16px; border-left: 4px solid var(--amber); }
+.scan-context p { font-size: 17px; }
+.scan-context a { color: var(--amber); }
+.receipts-intro .kicker, .receipts-section .kicker, .founding-observations .kicker { color: var(--brick); }
+.receipts-return .button.ghost { color: var(--black); border-color: var(--black); background: transparent; }
+.field-card-copy .lead-note { font: 18px/1.55 Arial, sans-serif; letter-spacing: 0; text-transform: none; color: var(--bone); }
+.nav-toggle { display: none; }
+:focus-visible { outline: 3px solid var(--amber); outline-offset: 4px; }
+.work-main :focus-visible, .receipts-section :focus-visible, .founding-observations :focus-visible { outline-color: var(--brick); }
+@media (max-width: 1280px) {
+  .site-header { position: relative; flex-wrap: wrap; gap: 16px; background: var(--black); pointer-events: auto; }
+  .site-header .nav { display: flex; flex-wrap: wrap; flex-basis: 100%; gap: 8px 20px; }
+  .site-header .nav a { display: inline-flex; align-items: center; min-height: 44px; }
+  .site-header.nav-ready .nav { display: none; }
+  .site-header.nav-open .nav { display: flex; }
+  .nav-toggle { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 12px; background: transparent; color: var(--bone); border: 1px solid var(--amber); font: bold 14px Arial, sans-serif; text-transform: uppercase; cursor: pointer; }
+  .mark { font-size: 12px; letter-spacing: 0; }
+  .work-main { padding-top: 0; }
+}
+@media (max-width: 640px) {
+  .receipts-section h2, .receipts-intro h1, .founding-observations h2 { font-size: 32px; }
+  .receipts-grid, .claim-key, .work-item { grid-template-columns: minmax(0, 1fr); }
+  .work-item { gap: 16px; }
+  .work-heading h2 { font-size: 28px; }
+  .receipt-card h3 { font-size: 24px; }
+  .site-header { padding: 12px 18px; }
+  .mark-symbol { width: 26px; height: 26px; flex-shrink: 0; }
+}

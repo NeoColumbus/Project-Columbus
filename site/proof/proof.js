@@ -19,11 +19,12 @@
 
     return `
       <article class="proof-card proof-card-entry">
-        <span>${escapeHtml(entry.date || `Entry ${String(index + 1).padStart(3, "0")}`)} / ${escapeHtml(entry.type || "Signal")} / ${escapeHtml(entry.status || "checked")}</span>
+        <span>${escapeHtml(entry.date || `Entry ${String(index + 1).padStart(3, "0")}`)} / ${escapeHtml(entry.type || "Signal")} / checked field proof</span>
         <strong>${escapeHtml(entry.place || "Real place")}</strong>
         <em>${escapeHtml(entry.line || "No fake proof.")}</em>
         <p>${escapeHtml(entry.missingPiece || entry.break || "Missing piece under review.")}</p>
         <p>${proof}</p>
+        <p>Submission via public issue / checked ${escapeHtml(entry.checkedAt)}</p>
       </article>
     `;
   }
@@ -44,7 +45,14 @@
       return response.json();
     })
     .then((data) => {
-      const entries = Array.isArray(data.entries) ? data.entries : [];
+      const entries = (Array.isArray(data.entries) ? data.entries : []).filter((entry) => {
+        try {
+          const url = new URL(entry.proofUrl);
+          return entry.status === "published" && entry.checkedAt && entry.checkedBy &&
+            entry.place && entry.missingPiece && entry.line &&
+            ["http:", "https:"].includes(url.protocol) && !url.username && !url.password;
+        } catch { return false; }
+      });
       const openSlots = Array.isArray(data.openSlots) ? data.openSlots : [];
 
       if (entries.length > 0) {

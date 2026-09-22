@@ -4,6 +4,16 @@ This is the tiny no-login intake API for the public scan path.
 
 It receives a field card from the static site and opens a GitHub issue for maintainer review.
 
+Every accepted report is a LEAD, including reports with evidence links. No proof link is required at intake. Publication as PROOF requires a maintainer check and a public evidence URL; see [publishing](../../submissions/PUBLISHING.md).
+
+## Abuse Protection
+
+The configured `SUBMISSION_RATE_LIMITER` permits five attempts per client IP per 60 seconds at an edge location. It is approximate, not a global quota; shared networks share the allowance. It does not persist an IP in an issue or build a visitor profile. Missing bindings leave legacy/local deployments operational; a configured limiter failure returns a retryable 503 with the GitHub fallback still available. CORS is not authentication or an abuse barrier.
+
+Bodies are capped at 12,000 bytes while streaming, even without Content-Length. Malformed/non-object JSON is rejected. Honeypot and content tripwires remain. Upstream timeouts return bounded public errors without secrets or GitHub response details. No live deployment is implied by a code change.
+
+Rate-limit API reference: https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/
+
 ## Shape
 
 Runtime target:
@@ -126,6 +136,8 @@ wrangler secret put GITHUB_TOKEN
 If `TURNSTILE_SECRET` is set, submissions must include a valid `turnstileToken`.
 
 The signal page renders a Turnstile widget only when `turnstileSiteKey` is set in [../../site/config.js](../../site/config.js).
+
+With no secret and no site key, submissions continue normally. Configure both as a coordinated deployment; setting only the secret would block the public form. Optionally set `TURNSTILE_HOSTNAME=neocolumbus.github.io` to bind successful verification to the public host. Verification outages fail closed with a GitHub fallback, not an unhandled exception. Never commit the secret. Turnstile is abuse protection, not analytics.
 
 To turn it on:
 

@@ -28,10 +28,13 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
+      - name: Build permanent and legacy public routes
+        run: node tools/build-pages.cjs
+
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: dist/pages
 
       - name: Deploy
         id: deployment

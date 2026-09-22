@@ -12,7 +12,11 @@ Name the street, stop, wall, route, block, corridor, building, or neighborhood.
 
 ## Proof
 
-Add a photo, short description, link, or field note.
+Optional for a LEAD. Add a public photo, document, or post URL when available. A maintainer may add checkable evidence later. No evidence means pending verification, not rejection. Only checked evidence can reach the proof wall.
+
+## State
+
+LEAD / pending verification. Do not include private information; this issue is public.
 
 ## What Is Missing
 

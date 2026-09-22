@@ -1,5 +1,17 @@
 # Roadmap
 
+## Public-Launch Follow-Through
+
+- Harden the COTA note with dated service baselines and rider review.
+- Publish the COTA optimization experiment only with reproducible inputs, constraints, baseline, limitations, and code. No final result claims before publication.
+- Add zoning code citations and parcel/corridor examples.
+- Verify current AI infrastructure instruments and deal-level public costs; separate law from proposals.
+- Seek qualified historical review without presenting mythic language as evidence of continuity.
+- Turn field leads into checked proof with public evidence and a recorded maintainer check.
+- Configure Turnstile as a matched frontend/backend pair if needed; verify rate limits after Worker deployment.
+
+The loop is SIGNAL -> RECEIPTS -> FIELD -> PROOF -> RETURN. Myth is the ignition. Policy is the work. Every public work item needs a source trail and visible maturity state.
+
 <!-- HUMAN NOTE: This is the ball-rolling board. Keep it practical enough for novices and sharp enough for serious contributors. -->
 
 This is not a corporate roadmap.
