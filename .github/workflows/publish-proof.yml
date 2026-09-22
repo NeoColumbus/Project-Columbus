@@ -39,15 +39,28 @@ jobs:
             }
 
             const { owner, repo } = context.repo;
-            const { data: issue } = await github.rest.issues.get({
+            const { data: access } = await github.rest.repos.getCollaboratorPermissionLevel({
+              owner, repo, username: context.actor
+            });
+            if (!['admin', 'maintain', 'write'].includes(access.permission)) {
+              core.setFailed('Publishing proof requires a maintainer with repository write access.');
+              return;
+            }
+            const { data: currentIssue } = await github.rest.issues.get({
               owner,
               repo,
               issue_number: issueNumber
             });
 
+            // Publish the revision present when the maintainer applied the label,
+            // not a submitter edit made while the workflow was queued.
+            const issue = context.eventName === 'issues' ? context.payload.issue : currentIssue;
+
             fs.writeFileSync('issue.json', JSON.stringify(issue, null, 2));
 
       - name: Publish proof data
+        env:
+          PROOF_REVIEWER: ${{ github.actor }}
         run: node tools/publish-proof-from-issue.cjs issue.json
 
       - name: Commit proof wall update

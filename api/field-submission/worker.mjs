@@ -42,6 +42,17 @@ export default {
       return json({ ok: false, error: "Submission API is not configured." }, 503, cors);
     }
 
+    // Edge-local abuse control, never a visitor profile or analytics identifier.
+    if (env.SUBMISSION_RATE_LIMITER) {
+      try {
+        const key = request.headers.get("cf-connecting-ip") || "unknown-client";
+        const { success } = await env.SUBMISSION_RATE_LIMITER.limit({ key });
+        if (!success) return json({ ok: false, error: "Too many reports. Try again in a minute." }, 429, { ...cors, "retry-after": "60" });
+      } catch {
+        return json({ ok: false, error: "Inbox temporarily unavailable. Use the GitHub report fallback." }, 503, cors);
+      }
+    }
+
     let payload;
     try {
       payload = await readPayload(request);
@@ -53,7 +64,12 @@ export default {
       return json({ ok: true, queued: true }, 202, cors);
     }
 
-    const turnstileOk = await verifyTurnstile(payload.turnstileToken, request, env);
+    let turnstileOk;
+    try {
+      turnstileOk = await verifyTurnstile(payload.turnstileToken, request, env);
+    } catch {
+      return json({ ok: false, error: "Verification temporarily unavailable. Use the GitHub report fallback." }, 503, cors);
+    }
     if (!turnstileOk) {
       return json({ ok: false, error: "Verification failed." }, 403, cors);
     }
@@ -73,11 +89,12 @@ export default {
       const issue = await createGitHubIssue(report, env);
       return json({
         ok: true,
+        state: "LEAD",
         issueNumber: issue.number,
         issueUrl: issue.html_url
       }, 201, cors);
     } catch (error) {
-      return json({ ok: false, error: error.message }, 502, cors);
+      return json({ ok: false, error: "Public inbox unavailable. Use the GitHub report fallback." }, 502, cors);
     }
   }
 };
@@ -110,7 +127,9 @@ function json(body, status, headers) {
     status,
     headers: {
       ...headers,
-      "content-type": "application/json; charset=utf-8"
+      "content-type": "application/json; charset=utf-8",
+      "cache-control": "no-store",
+      "x-content-type-options": "nosniff"
     }
   });
 }
@@ -119,11 +138,30 @@ async function readPayload(request) {
   const length = Number(request.headers.get("content-length") || 0);
   if (length > 12000) throw new Error("Submission is too large.");
 
-  const text = await request.text();
-  if (text.length > 12000) throw new Error("Submission is too large.");
+  const reader = request.body?.getReader();
+  const decoder = new TextDecoder();
+  let text = "";
+  let bytes = 0;
+  if (reader) {
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        bytes += value.byteLength;
+        if (bytes > 12000) {
+          await reader.cancel();
+          throw new Error("Submission is too large.");
+        }
+        text += decoder.decode(value, { stream: true });
+      }
+      text += decoder.decode();
+    } finally { reader.releaseLock(); }
+  }
 
   try {
-    return JSON.parse(text || "{}");
+    const payload = JSON.parse(text || "{}");
+    if (!payload || typeof payload !== "object" || Array.isArray(payload)) throw new Error();
+    return payload;
   } catch {
     throw new Error("Submission must be JSON.");
   }
@@ -203,12 +241,13 @@ async function verifyTurnstile(token, request, env) {
 
   const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
     method: "POST",
-    body: form
+    body: form,
+    signal: AbortSignal.timeout(8000)
   });
 
   if (!response.ok) return false;
   const data = await response.json();
-  return data.success === true;
+  return data.success === true && (!env.TURNSTILE_HOSTNAME || data.hostname === env.TURNSTILE_HOSTNAME);
 }
 
 async function createGitHubIssue(report, env) {
@@ -261,7 +300,8 @@ async function githubFetch(repo, path, env, options = {}) {
       "user-agent": "full-city-columbus-field-api",
       "x-github-api-version": "2022-11-28"
     },
-    body: options.body
+    body: options.body,
+    signal: AbortSignal.timeout(10000)
   });
 
   const data = await response.json().catch(() => ({}));
@@ -288,6 +328,9 @@ function issueBody(report) {
 
   return [
     "Submitted through the public field API.",
+    "",
+    "## State",
+    "LEAD / pending verification. Evidence links do not imply review. Not publishable until a maintainer checks the claim and evidence.",
     "",
     "## Place",
     report.place,

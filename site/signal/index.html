@@ -34,6 +34,7 @@
         <span>Full City Columbus</span>
       </a>
       <nav class="nav" aria-label="Signal sections">
+        <a href="../work/">Work</a>
         <a href="#actions">Act</a>
         <a href="#field-card">Card</a>
         <a href="#proof">Proof</a>
@@ -54,16 +55,16 @@
           <p class="kicker">Drop 001 / Scan the signal</p>
           <h1 id="signal-title">Signal seen.</h1>
           <p class="project-deck">
-            Columbus is not spare parts.<br />
-            Pick one real place.<br />
-            Name what is missing.<br />
-            Bring back proof.
+            Full City Columbus is an independent, open-source civic project.
+            You found its signal: a demand for a city that feels whole.
+            The research stays public. Name one place that needs work.
           </p>
           <p class="declaration">Post the signal. Name the break. Build the body.</p>
           <div class="hero-actions" aria-label="Signal actions">
-            <a class="button primary" href="#actions">Choose a door</a>
-            <a class="button ghost" href="https://github.com/NeoColumbus/Project-Columbus">Enter the repo</a>
+            <a class="button primary" id="scan-action" href="#field-card">Name a place</a>
+            <a class="button ghost" href="../work/">See the work</a>
           </div>
+          <div class="scan-context" id="scan-context" hidden><p class="kicker" id="scan-context-title"></p><p id="scan-context-copy"></p><a id="scan-context-link" href="../work/">Open the work</a></div>
         </div>
         <div class="signal-core" aria-hidden="true">
           <span></span>
@@ -133,11 +134,13 @@
       <section class="signal-field-card" id="field-card" aria-labelledby="field-card-title">
         <div class="field-card-copy">
           <p class="kicker">02 / field card</p>
-          <h2 id="field-card-title">Make the proof portable.</h2>
+          <h2 id="field-card-title">Put a place on record.</h2>
           <p>
             No login at the front door. Make the card, copy it, share it, then
             send it upstream when the line is sharp enough.
           </p>
+          <p class="lead-note"><strong>LEAD</strong>: place, missing piece, one line. No photo link required. <strong>PROOF</strong>: the same claim with checkable evidence, checked by a maintainer before publication. Sending a card does not put it on the proof wall.</p>
+          <p class="lead-note">Reports become public GitHub issues. Keep private addresses, personal details, and secrets out. Printed source codes stay attached; no visitor profile is created.</p>
         </div>
         <form class="field-card-form" aria-label="Field card generator">
           <label>
@@ -162,8 +165,8 @@
             <input id="field-line" name="line" type="text" placeholder="One sentence that hits." />
           </label>
           <label class="field-proof-input">
-            Proof
-            <input id="field-proof" name="proof" type="text" placeholder="Photo link, post link, or note" />
+            Evidence (optional for a lead)
+            <input id="field-proof" name="proof" type="text" placeholder="Public photo, document, or post URL" />
           </label>
           <label class="hp-field" aria-hidden="true">
             Website
@@ -190,7 +193,8 @@
 
       <section class="signal-proof-band" id="proof" aria-labelledby="proof-title">
         <p class="kicker">03 / proof path</p>
-        <h2 id="proof-title">No proof, no movement.</h2>
+        <h2 id="proof-title">A lead starts it. Proof holds it.</h2>
+        <p class="lead-note">Leads wait for verification. Only checked claims with public evidence reach the wall.</p>
         <div class="signal-proof-grid">
           <p>Photo.</p>
           <p>Place.</p>
@@ -215,11 +219,15 @@
 
     <footer class="site-footer">
       <p>
-        Full City Columbus is open source civic myth, street kit, and public pressure.
+        Built in public. Sources, corrections, and AI use are disclosed.
+        <a href="https://github.com/NeoColumbus/Project-Columbus/blob/main/AI_DISCLOSURE.md">AI disclosure</a>.
+        <a href="../assets/IMAGE_CREDITS.md">Image credits</a>.
+        <a href="https://github.com/NeoColumbus/Project-Columbus/blob/main/CONTRIBUTING.md">Corrections / contribute</a>.
         <a href="https://github.com/NeoColumbus/Project-Columbus">GitHub</a>.
       </p>
     </footer>
     <script src="../config.js"></script>
+    <script src="../navigation.js" defer></script>
     <script src="signal.js"></script>
   </body>
 </html>

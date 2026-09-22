@@ -75,13 +75,14 @@
     const place = clean(fields.place.value, "[place]");
     const breakText = clean(fields.break.value, fallback[kind]?.break || "[break]");
     const line = clean(fields.line.value, fallback[kind]?.line || "[line]");
-    const proof = clean(fields.proof.value, "[photo / post / note]");
+    const proof = clean(fields.proof.value, "No evidence supplied; lead pending verification.");
     const source = sourceText();
 
     const lines = [
       "SIGNAL SEEN / FULL CITY COLUMBUS",
       "",
       `TYPE: ${kind}`,
+      "STATE: LEAD / pending verification",
       `PLACE: ${place}`,
       `BREAK: ${breakText}`,
       `LINE: ${line}`,
@@ -225,8 +226,8 @@
       }
 
       fields.status.textContent = data.issueNumber
-        ? `Submitted for review. Issue ${data.issueNumber}.`
-        : "Submitted for review.";
+        ? `Lead received, pending verification. Issue ${data.issueNumber}.`
+        : "Lead received, pending verification.";
 
       if (data.issueUrl) fields.github.href = data.issueUrl;
       resetTurnstile();
@@ -324,8 +325,44 @@
 
     for (const [field, key] of Object.entries(map)) {
       const value = query.get(key);
-      if (value && fields[field]) fields[field].value = value;
+      if (value && fields[field]) {
+        if (field === "kind" && !Array.from(fields.kind.options).some((option) => option.value === value)) {
+          const option = document.createElement("option");
+          option.value = value;
+          option.textContent = value;
+          fields.kind.appendChild(option);
+        }
+        fields[field].value = value;
+      }
     }
+  }
+
+  function setScanContext() {
+    const hints = [query.get("kind"), query.get("asset"), query.get("source")].filter(Boolean).map(value => value.toLowerCase());
+    const contexts = [
+      [/transit|cota|bus|stop-is-a-room/, "Transit", "Transit signal", "The stop is a room. Put a real stop beside the service research.", "../work/#transit", "Open transit work", "Audit a stop"],
+      [/machine|data.center|tribute/, "Machine", "Infrastructure signal", "Water, power, land. Follow the sources behind the civic dividend.", "../work/#ai", "Open infrastructure work", "Name a site"],
+      [/dead.wall/, "Dead Wall", "Dead wall signal", "Name the frontage and what it takes from the street. A lead is enough to start.", "#field-card", "Make a field lead", "Report a dead wall"],
+      [/neighborhood|fragment/, "Neighborhood", "Neighborhood signal", "Put a place and its missing piece on record.", "#field-card", "Name the fragment", "Name your place"]
+    ];
+    const numberedKinds = { '001': 'neighborhood', '002': 'neighborhood', '003': 'neighborhood', '004': 'neighborhood', '005': 'machine', '006': 'dead wall', '007': 'transit', '008': 'neighborhood' };
+    const context = hints.map(hint => {
+      const numbered = hint.match(/^(?:poster|sticker)-(00[1-8])$/);
+      const known = numbered && (!query.get('drop') || query.get('drop') === '001') ? numberedKinds[numbered[1]] : hint;
+      return contexts.find(([pattern]) => pattern.test(known));
+    }).find(Boolean);
+    if (!context) return;
+    const [, kind, title, copy, href, label, action] = context;
+    if (!query.get("kind")) fields.kind.value = kind;
+    const box = document.querySelector("#scan-context");
+    if (!box) return;
+    box.hidden = false;
+    document.querySelector("#scan-context-title").textContent = title;
+    document.querySelector("#scan-context-copy").textContent = copy;
+    const link = document.querySelector("#scan-context-link");
+    link.href = href;
+    link.textContent = label;
+    document.querySelector("#scan-action").textContent = action;
   }
 
   document.querySelectorAll("[data-kind]").forEach((card) => {
@@ -352,6 +389,7 @@
   document.querySelector("#download-field-card")?.addEventListener("click", downloadCard);
 
   hydrateFromUrl();
+  setScanContext();
   setupTurnstile();
   updateCard();
 })();

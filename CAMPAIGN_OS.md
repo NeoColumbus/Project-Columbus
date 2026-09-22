@@ -2,7 +2,15 @@
 
 <!-- HUMAN NOTE: This is the backstage machinery. Public artifacts should hit first and explain later. Keep the system sharp enough that strangers can act without reading the whole repo. -->
 
-Full City Columbus moves through signal, place, proof, and return.
+Full City Columbus moves through SIGNAL -> RECEIPTS -> FIELD -> PROOF -> RETURN.
+
+Myth is the ignition. Policy is the work.
+
+Receipts make the claim inspectable: question, maturity, evidence, finding, limitations, source trail, code/data where relevant, and last verification date/scope. FACT, ANALYSIS, and PROPOSAL are different kinds of statements. Historical evidence, interpretation, and mythic language must not impersonate one another.
+
+Field leads are welcome without hosted evidence. A maintainer must check public evidence before a lead becomes published proof. Founding document research is not community participation. The [publishing protocol](submissions/PUBLISHING.md) is the gate.
+
+Keep the printed `/Project-Columbus/site/signal/` route and all eight existing query parameters permanent. Source codes describe objects, not people. No visitor profiles, demographic inference, or third-party analytics are needed for this loop.
 
 The public sees the mark.
 The street gets the object.

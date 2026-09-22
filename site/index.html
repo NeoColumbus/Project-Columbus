@@ -26,6 +26,7 @@
     <meta name="twitter:description" content="Open-source civic myth, flag system, and campaign kit for Columbus." />
     <meta name="twitter:image" content="https://neocolumbus.github.io/Project-Columbus/site/assets/og-card.jpg" />
     <link rel="stylesheet" href="styles.css" />
+    <script src="navigation.js" defer></script>
   </head>
   <body>
     <!-- HUMAN NOTE: Public page v0.2 is meant to perform first and explain second. Keep sourcing and cautions in the repo, not in the opening blast. -->
@@ -37,6 +38,7 @@
       <nav class="nav" aria-label="Page sections">
         <a href="#why">Why</a>
         <a href="#project">Project</a>
+        <a href="work/">Work</a>
         <a href="#origin">Origin</a>
         <a href="#body">Body</a>
         <a href="#places">Places</a>
@@ -145,9 +147,8 @@
         </div>
         <div class="why-origin">
           <p>
-            This started as a passion project from someone who grew up in the
-            shadow of Columbus and got tired of watching the city undersell
-            itself.
+            Started independently. Built in public. Open to correction.
+            Columbus has more to offer than the story it keeps settling for.
           </p>
           <p>
             The first move is not a perfect plan. It is a repo, a mark, a stack
@@ -188,7 +189,21 @@
         </div>
       </section>
 
+      <section class="receipts-section" id="receipts" aria-labelledby="receipts-title">
+        <p class="kicker">02 / receipts</p>
+        <h2 id="receipts-title">The signal has to survive contact with evidence.</h2>
+        <p>Full City Columbus is not asking anyone to take the posters on faith. Research, models, field reports, corrections, sources, and unfinished work stay public.</p>
+        <div class="receipts-grid">
+          <a class="receipt-card" href="work/#transit"><span class="maturity">Draft / hardening</span><h3>Transit / COTA</h3><p>Service, stops, and the work between them.</p><strong>Open the work</strong></a>
+          <a class="receipt-card" href="work/#zoning"><span class="maturity">Draft</span><h3>Zoning / growth</h3><p>Put the code next to the street it produces.</p><strong>Open the work</strong></a>
+          <a class="receipt-card" href="work/#ai"><span class="maturity">Draft proposal</span><h3>AI infrastructure</h3><p>Public inputs deserve a checkable public return.</p><strong>Open the work</strong></a>
+          <a class="receipt-card" href="work/#history"><span class="maturity">Sourced notes</span><h3>History / Second Geometry</h3><p>Regional history, project interpretation, and myth named separately.</p><strong>Open the work</strong></a>
+        </div>
+        <a class="button primary" href="work/">Open the receipts</a>
+      </section>
+
       <section class="impact arrival-signal" id="origin" aria-labelledby="arrival-title">
+        <p class="epistemic-note"><a href="work/#history">Mythic language / documented history and source trail</a></p>
         <p class="kicker">02 / old place</p>
         <h2 id="arrival-title">
           Columbus was monumental before Columbus was modern.
@@ -278,6 +293,7 @@
       </section>
 
       <section class="geometry-section" aria-labelledby="geometry-title">
+        <p class="epistemic-note"><a href="work/#history">Full City interpretation / history sources</a></p>
         <div class="ring-field" aria-hidden="true">
           <span></span>
           <span></span>
@@ -619,7 +635,7 @@
         </h2>
         <p class="founder-note">
           <span>No money. No machine pretending to be a movement.</span>
-          <span>One novice from the city's shadow got the ball rolling because Columbus deserves more soul than annexed fragments and beige inevitability.</span>
+          <span>Started independently. Built in public. Open to correction. Columbus deserves more than annexed fragments and beige inevitability.</span>
           <span>Fork it. Make it useful. Make it beautiful. Send it back.</span>
         </p>
         <div class="final-actions">
@@ -666,9 +682,11 @@
 
     <footer class="site-footer">
       <p>
-        AI-assisted scaffold. Human-corrected or it does not count.
+        Built in public. Sources, corrections, and AI use are disclosed.
         <a href="https://github.com/NeoColumbus/Project-Columbus/blob/main/AI_DISCLOSURE.md">Disclosure</a>.
         <a href="assets/IMAGE_CREDITS.md">Image credits</a>.
+        <a href="https://github.com/NeoColumbus/Project-Columbus">Repo</a>.
+        <a href="https://github.com/NeoColumbus/Project-Columbus/blob/main/CONTRIBUTING.md">Corrections / contribute</a>.
       </p>
     </footer>
   </body>

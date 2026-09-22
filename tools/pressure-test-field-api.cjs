@@ -267,6 +267,55 @@ async function main() {
     });
   });
 
+  await test("accepts evidence-free leads without claiming proof", async () => {
+    const mockFetch = createMockFetch();
+    await withMockFetch(mockFetch, async () => {
+      const response = await post({ ...issuePayload(), proof: "" });
+      assert.equal(response.status, 201);
+      assert.equal((await json(response)).state, "LEAD");
+      assert.match(JSON.parse(callsTo(mockFetch, "POST", "/issues")[0].body).body, /LEAD \/ pending verification/);
+    });
+  });
+
+  await test("rejects malformed and non-object JSON and multibyte oversize", async () => {
+    for (const body of ["null", "[]", "42", '"text"', "{", JSON.stringify({ place: "\u754c".repeat(4100) })]) {
+      assert.equal((await post(body)).status, 400);
+    }
+  });
+
+  await test("limiter blocks excess traffic before upstream calls", async () => {
+    let attempts = 0;
+    const env = { ...baseEnv, SUBMISSION_RATE_LIMITER: { limit: async ({ key }) => {
+      assert.equal(key, "192.0.2.1");
+      return { success: ++attempts <= 5 };
+    } } };
+    const mockFetch = createMockFetch();
+    await withMockFetch(mockFetch, async () => {
+      for (let i = 0; i < 6; i++) {
+        const response = await post(issuePayload(), env, { headers: { "cf-connecting-ip": "192.0.2.1" } });
+        assert.equal(response.status, i < 5 ? 201 : 429);
+        if (i === 5) assert.equal(response.headers.get("retry-after"), "60");
+      }
+      assert.equal(callsTo(mockFetch, "POST", "/issues").length, 5);
+    });
+  });
+
+  await test("upstream and limiter outages return bounded failures", async () => {
+    await withMockFetch(async () => { throw new Error("private upstream details"); }, async () => {
+      const github = await post(issuePayload());
+      assert.equal(github.status, 502);
+      assert.doesNotMatch(await github.text(), /private upstream/);
+      assert.equal((await post({ ...issuePayload(), turnstileToken: "token" }, { ...baseEnv, TURNSTILE_SECRET: "secret" })).status, 503);
+    });
+    assert.equal((await post(issuePayload(), { ...baseEnv, SUBMISSION_RATE_LIMITER: { limit: async () => { throw new Error(); } } })).status, 503);
+  });
+
+  await test("Turnstile hostname mismatch is rejected", async () => {
+    await withMockFetch(createMockFetch(), async () => {
+      assert.equal((await post({ ...issuePayload(), turnstileToken: "turnstile-pass" }, { ...baseEnv, TURNSTILE_SECRET: "secret", TURNSTILE_HOSTNAME: "neocolumbus.github.io" })).status, 403);
+    });
+  });
+
   console.log("field API pressure suite passed");
 }
 
