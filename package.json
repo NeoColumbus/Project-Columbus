@@ -15,7 +15,8 @@
     "field-api:dry-run": "wrangler deploy --dry-run --config api/field-submission/wrangler.toml",
     "test:field-api": "node tools/pressure-test-field-api.cjs",
     "test:proof": "node tools/test-proof-publication.cjs",
-    "test:launch": "node tools/test-public-launch.cjs"
+    "test:launch": "node tools/test-public-launch.cjs",
+    "test:qr": "node tools/test-qr-contract.cjs"
   },
   "devDependencies": {
     "pdf-lib": "^1.17.1",
