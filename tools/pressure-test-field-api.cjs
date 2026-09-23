@@ -1,325 +1,104 @@
-#!/usr/bin/env node
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const { DatabaseSync } = require('node:sqlite');
 
-const assert = require("node:assert/strict");
-const path = require("node:path");
-const { performance } = require("node:perf_hooks");
-const { pathToFileURL } = require("node:url");
-
-const origin = "https://neocolumbus.github.io";
-const workerUrl = "https://field-api.example.test/field-report";
-const pressureCount = Number(process.env.FIELD_API_PRESSURE_COUNT || 300);
-const workerPath = path.join(__dirname, "..", "api", "field-submission", "worker.mjs");
-let worker;
-
-const baseEnv = {
-  GITHUB_TOKEN: "test-token",
-  GITHUB_REPO: "NeoColumbus/Project-Columbus",
-  GITHUB_LABELS: "field-report,public-submission,needs-review",
-  ALLOWED_ORIGINS: origin
-};
-
-function okJson(body, status = 200) {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers: { "content-type": "application/json; charset=utf-8" }
-  });
-}
-
-function issuePayload(index = 1) {
-  return {
-    kind: "Dead Wall",
-    place: `Test Block ${index}, Columbus`,
-    break: "Blank frontage. Dead street.",
-    line: "Density deserves beauty.",
-    proof: `Photo on file: https://example.com/proof-${index}.jpg`,
-    card: [
-      "SIGNAL SEEN / FULL CITY COLUMBUS",
-      "",
-      "TYPE: Dead Wall",
-      `PLACE: Test Block ${index}, Columbus`,
-      "BREAK: Blank frontage. Dead street.",
-      "LINE: Density deserves beauty.",
-      `PROOF: Photo on file: https://example.com/proof-${index}.jpg`
-    ].join("\n"),
-    source: {
-      drop: "001",
-      asset: "pressure-test",
-      source: "automated",
-      url: "https://neocolumbus.github.io/Project-Columbus/site/signal/?drop=001"
+(async () => {
+  const { default: worker } = await import('../api/field-submission/worker.mjs');
+  const { screen, classify, evidenceUrl } = await import('../api/field-submission/screening.mjs');
+  const sqlite = new DatabaseSync(':memory:');
+  sqlite.exec(fs.readFileSync(path.join(__dirname, '../api/field-submission/migrations/0001_private_intake.sql'), 'utf8'));
+  // Actual SQLite executes the production SQL; this adapter mirrors D1's result shape.
+  const DB = { prepare(sql) { const stmt = sqlite.prepare(sql); let args = []; const wrapper = {
+    bind(...values) { args = values; return wrapper; },
+    async run() { const result = stmt.run(...args); return { meta: { changes: Number(result.changes) } }; },
+    async first() { return stmt.get(...args) || null; },
+    async all() { return { results: stmt.all(...args) }; }
+  }; return wrapper; }, async batch(statements) { return Promise.all(statements.map(s => s.run())); } };
+  const env = { DB, TURNSTILE_SECRET: 'fixture-secret', TURNSTILE_HOSTNAME: 'neocolumbus.github.io', REVIEW_TOKEN: 'fixture-review-token-32-characters-long', GITHUB_TOKEN: 'fixture-github-secret', SUBMISSION_RATE_LIMITER: { limit: async () => ({ success: true }) } };
+  const valid = { kind: 'Transit', place: 'Bus stop outside Kroger', break: 'Bus stop has no shelter.', line: 'The stop is a room.', proof: '', source: { drop: '001', asset: '007-transit', source: 'sticker-007' }, turnstileToken: 'fixture' };
+  let calls = [], verification = { success: true, hostname: env.TURNSTILE_HOSTNAME, action: 'field-report' }, failGitHub = false;
+  const originalFetch = global.fetch;
+  global.fetch = async (url, options) => {
+    calls.push(String(url));
+    if (String(url).includes('siteverify')) return Response.json(verification);
+    if (String(url).startsWith('https://api.github.com/')) {
+      if (failGitHub) throw new Error('SECRET provider error');
+      const issue = JSON.parse(options.body); assert.ok(issue.body.includes('LEAD')); assert.ok(!issue.body.includes('fixture-secret'));
+      return Response.json({ number: 321 }, { status: 201 });
     }
+    throw new Error('Unexpected outbound request');
   };
-}
-
-function createMockFetch(options = {}) {
-  let issueNumber = 8000;
-  let failedIssueOnce = false;
-  const calls = [];
-
-  const mockFetch = async (url, init = {}) => {
-    const href = String(url);
-    const method = init.method || "GET";
-    calls.push({ url: href, method, body: init.body || "" });
-
-    if (href === "https://challenges.cloudflare.com/turnstile/v0/siteverify") {
-      const params = new URLSearchParams(String(init.body || ""));
-      return okJson({ success: params.get("response") === "turnstile-pass" });
-    }
-
-    if (!href.startsWith("https://api.github.com/")) {
-      return okJson({ message: "Unhandled mock URL" }, 500);
-    }
-
-    const pathname = new URL(href).pathname;
-
-    if (method === "GET" && pathname.includes("/labels/")) {
-      return okJson({ message: "Not Found" }, 404);
-    }
-
-    if (method === "POST" && pathname.endsWith("/labels")) {
-      return okJson({ name: "created" }, 201);
-    }
-
-    if (method === "POST" && pathname.endsWith("/issues")) {
-      const requestBody = JSON.parse(String(init.body || "{}"));
-
-      if (options.failFirstIssueWithLabels && requestBody.labels && !failedIssueOnce) {
-        failedIssueOnce = true;
-        return okJson({ message: "Validation Failed" }, 422);
-      }
-
-      issueNumber += 1;
-      return okJson({
-        number: issueNumber,
-        html_url: `https://github.com/NeoColumbus/Project-Columbus/issues/${issueNumber}`
-      }, 201);
-    }
-
-    return okJson({ message: `Unhandled mock GitHub path: ${method} ${pathname}` }, 500);
-  };
-
-  mockFetch.calls = calls;
-  return mockFetch;
-}
-
-async function withMockFetch(mockFetch, callback) {
-  const realFetch = globalThis.fetch;
-  globalThis.fetch = mockFetch;
+  const post = (body = valid, overrides = {}) => worker.fetch(new Request('https://worker.example/field-report', { method: 'POST', headers: { 'content-type': 'application/json', origin: 'https://neocolumbus.github.io', 'cf-connecting-ip': '192.0.2.1' }, body: typeof body === 'string' ? body : JSON.stringify(body) }), { ...env, ...overrides });
+  const admin = (body, token = env.REVIEW_TOKEN, state = '') => worker.fetch(new Request('https://worker.example/admin/review' + state, { method: body ? 'POST' : 'GET', headers: { authorization: 'Bearer ' + token, 'content-type': 'application/json' }, body: body ? JSON.stringify(body) : undefined }), env);
   try {
-    return await callback();
-  } finally {
-    globalThis.fetch = realFetch;
-  }
-}
-
-function requestFor(payload, options = {}) {
-  const headers = new Headers(options.headers || {});
-  if (options.origin !== null) headers.set("origin", options.origin || origin);
-
-  if (options.json !== false) {
-    headers.set("content-type", "application/json");
-  }
-
-  const init = {
-    method: options.method || "POST",
-    headers
-  };
-
-  if (!["GET", "HEAD", "OPTIONS"].includes(init.method)) {
-    init.body = typeof payload === "string" ? payload : JSON.stringify(payload || {});
-  }
-
-  return new Request(options.url || workerUrl, init);
-}
-
-async function post(payload, env = baseEnv, options = {}) {
-  return worker.fetch(requestFor(payload, options), env);
-}
-
-async function json(response) {
-  return response.json();
-}
-
-function callsTo(mockFetch, method, suffix) {
-  return mockFetch.calls.filter((call) => {
-    const pathname = new URL(call.url).pathname;
-    return call.method === method && pathname.endsWith(suffix);
-  });
-}
-
-async function test(name, callback) {
-  const start = performance.now();
-  await callback();
-  const ms = performance.now() - start;
-  console.log(`ok - ${name} (${ms.toFixed(0)}ms)`);
-}
-
-async function main() {
-  const workerModule = await import(pathToFileURL(workerPath).href);
-  worker = workerModule.default;
-
-  await test("allows configured CORS preflight", async () => {
-    const response = await worker.fetch(requestFor(null, { method: "OPTIONS" }), baseEnv);
-    assert.equal(response.status, 204);
-    assert.equal(response.headers.get("access-control-allow-origin"), origin);
-  });
-
-  await test("rejects disallowed origins", async () => {
-    const response = await post(issuePayload(), baseEnv, { origin: "https://bad.example" });
-    assert.equal(response.status, 403);
-    assert.equal((await json(response)).error, "Origin not allowed.");
-  });
-
-  await test("fails closed when GitHub token is missing", async () => {
-    const response = await post(issuePayload(), { ...baseEnv, GITHUB_TOKEN: "" });
-    assert.equal(response.status, 503);
-    assert.equal((await json(response)).error, "Submission API is not configured.");
-  });
-
-  await test("short-circuits honeypot submissions", async () => {
-    const mockFetch = createMockFetch();
-    await withMockFetch(mockFetch, async () => {
-      const response = await post({ ...issuePayload(), website: "https://spam.example" });
-      assert.equal(response.status, 202);
-      assert.deepEqual(await json(response), { ok: true, queued: true });
-      assert.equal(mockFetch.calls.length, 0);
-    });
-  });
-
-  await test("requires and verifies Turnstile when configured", async () => {
-    const mockFetch = createMockFetch();
-    const env = { ...baseEnv, TURNSTILE_SECRET: "secret" };
-
-    await withMockFetch(mockFetch, async () => {
-      const missing = await post(issuePayload(), env);
-      assert.equal(missing.status, 403);
-      assert.equal((await json(missing)).error, "Verification failed.");
-
-      const passed = await post({ ...issuePayload(), turnstileToken: "turnstile-pass" }, env);
-      assert.equal(passed.status, 201);
-      assert.equal(callsTo(mockFetch, "POST", "/issues").length, 1);
-    });
-  });
-
-  await test("creates a GitHub issue with review labels and source body", async () => {
-    const mockFetch = createMockFetch();
-    await withMockFetch(mockFetch, async () => {
-      const response = await post(issuePayload(7));
-      const body = await json(response);
-      assert.equal(response.status, 201);
-      assert.equal(body.ok, true);
-      assert.equal(body.issueNumber, 8001);
-
-      const issueCalls = callsTo(mockFetch, "POST", "/issues");
-      assert.equal(issueCalls.length, 1);
-
-      const issueBody = JSON.parse(String(issueCalls[0].body));
-      assert.equal(issueBody.title, "[Field] Dead Wall: Test Block 7, Columbus");
-      assert.deepEqual(issueBody.labels, ["field-report", "public-submission", "needs-review"]);
-      assert.match(issueBody.body, /## Place\nTest Block 7, Columbus/);
-      assert.match(issueBody.body, /## Field Card/);
-    });
-  });
-
-  await test("falls back when GitHub rejects issue labels", async () => {
-    const mockFetch = createMockFetch({ failFirstIssueWithLabels: true });
-    await withMockFetch(mockFetch, async () => {
-      const response = await post(issuePayload(9));
-      assert.equal(response.status, 201);
-      assert.equal((await json(response)).ok, true);
-      assert.equal(callsTo(mockFetch, "POST", "/issues").length, 2);
-    });
-  });
-
-  await test("rejects spam and placeholder patterns before GitHub", async () => {
-    const mockFetch = createMockFetch();
-    await withMockFetch(mockFetch, async () => {
-      const response = await post({ ...issuePayload(), proof: "casino crypto airdrop" });
-      assert.equal(response.status, 422);
-      assert.equal((await json(response)).error, "Spam pattern detected.");
-      assert.equal(mockFetch.calls.length, 0);
-    });
-  });
-
-  await test("rejects oversized payloads before GitHub", async () => {
-    const mockFetch = createMockFetch();
-    await withMockFetch(mockFetch, async () => {
-      const response = await post(`{"place":"${"x".repeat(12100)}"}`);
-      assert.equal(response.status, 400);
-      assert.equal((await json(response)).error, "Submission is too large.");
-      assert.equal(mockFetch.calls.length, 0);
-    });
-  });
-
-  await test(`${pressureCount} concurrent accepted submissions`, async () => {
-    const mockFetch = createMockFetch();
-
-    await withMockFetch(mockFetch, async () => {
-      const start = performance.now();
-      const responses = await Promise.all(
-        Array.from({ length: pressureCount }, (_, index) => post(issuePayload(index + 1)))
-      );
-      const elapsed = performance.now() - start;
-      const statuses = responses.map((response) => response.status);
-
-      assert.equal(statuses.every((status) => status === 201), true);
-      assert.equal(callsTo(mockFetch, "POST", "/issues").length, pressureCount);
-      console.log(`     ${pressureCount} accepted in ${elapsed.toFixed(0)}ms; mock network calls=${mockFetch.calls.length}`);
-    });
-  });
-
-  await test("accepts evidence-free leads without claiming proof", async () => {
-    const mockFetch = createMockFetch();
-    await withMockFetch(mockFetch, async () => {
-      const response = await post({ ...issuePayload(), proof: "" });
-      assert.equal(response.status, 201);
-      assert.equal((await json(response)).state, "LEAD");
-      assert.match(JSON.parse(callsTo(mockFetch, "POST", "/issues")[0].body).body, /LEAD \/ pending verification/);
-    });
-  });
-
-  await test("rejects malformed and non-object JSON and multibyte oversize", async () => {
-    for (const body of ["null", "[]", "42", '"text"', "{", JSON.stringify({ place: "\u754c".repeat(4100) })]) {
-      assert.equal((await post(body)).status, 400);
-    }
-  });
-
-  await test("limiter blocks excess traffic before upstream calls", async () => {
+    assert.equal((await post()).status, 202);
+    assert.equal(calls.filter(url => url.includes('github')).length, 0, 'intake must never publish');
+    assert.equal((await admin(null, 'wrong')).status, 401);
+    const first = (await (await admin()).json()).items[0];
+    assert.equal(first.status, 'candidate');
+    assert.equal(first.report.proof, '', 'leads need no hosted evidence');
+    assert.ok(!JSON.stringify(first).includes('192.0.2.1'));
+    assert.ok(!JSON.stringify(first).includes('turnstileToken'));
+    const burst = await Promise.all(Array.from({ length: 100 }, () => post()));
+    assert.ok(burst.every(r => r.status === 202));
+    assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM submissions').get().n, 1);
+    assert.equal(sqlite.prepare('SELECT duplicate_count FROM submissions').get().duplicate_count, 100);
     let attempts = 0;
-    const env = { ...baseEnv, SUBMISSION_RATE_LIMITER: { limit: async ({ key }) => {
-      assert.equal(key, "192.0.2.1");
-      return { success: ++attempts <= 5 };
-    } } };
-    const mockFetch = createMockFetch();
-    await withMockFetch(mockFetch, async () => {
-      for (let i = 0; i < 6; i++) {
-        const response = await post(issuePayload(), env, { headers: { "cf-connecting-ip": "192.0.2.1" } });
-        assert.equal(response.status, i < 5 ? 201 : 429);
-        if (i === 5) assert.equal(response.headers.get("retry-after"), "60");
-      }
-      assert.equal(callsTo(mockFetch, "POST", "/issues").length, 5);
-    });
-  });
-
-  await test("upstream and limiter outages return bounded failures", async () => {
-    await withMockFetch(async () => { throw new Error("private upstream details"); }, async () => {
-      const github = await post(issuePayload());
-      assert.equal(github.status, 502);
-      assert.doesNotMatch(await github.text(), /private upstream/);
-      assert.equal((await post({ ...issuePayload(), turnstileToken: "token" }, { ...baseEnv, TURNSTILE_SECRET: "secret" })).status, 503);
-    });
-    assert.equal((await post(issuePayload(), { ...baseEnv, SUBMISSION_RATE_LIMITER: { limit: async () => { throw new Error(); } } })).status, 503);
-  });
-
-  await test("Turnstile hostname mismatch is rejected", async () => {
-    await withMockFetch(createMockFetch(), async () => {
-      assert.equal((await post({ ...issuePayload(), turnstileToken: "turnstile-pass" }, { ...baseEnv, TURNSTILE_SECRET: "secret", TURNSTILE_HOSTNAME: "neocolumbus.github.io" })).status, 403);
-    });
-  });
-
-  console.log("field API pressure suite passed");
-}
-
-main().catch((error) => {
-  console.error(error);
-  process.exit(1);
-});
+    const limited = { limit: async () => ({ success: ++attempts <= 5 }) };
+    const rates = [];
+    for (let i = 0; i < 8; i++) rates.push((await post(valid, { SUBMISSION_RATE_LIMITER: limited })).status);
+    assert.deepEqual(rates, [202,202,202,202,202,429,429,429]);
+    for (const name of ['DB','TURNSTILE_SECRET','TURNSTILE_HOSTNAME','SUBMISSION_RATE_LIMITER']) assert.equal((await post(valid, { [name]: undefined })).status, 503);
+    assert.equal((await post('{bad')).status, 400);
+    assert.equal((await post('x'.repeat(13000))).status, 400);
+    assert.equal((await post([])).status, 400);
+    const before = calls.length;
+    assert.equal((await post({ website: 'spam' })).status, 202);
+    assert.equal(calls.length, before);
+    for (const bad of [{ success:false }, { ...verification, hostname:'evil.example' }, { ...verification, action:'login' }]) {
+      const saved = verification; verification = bad; assert.equal((await post()).status, 403); verification = saved;
+    }
+    for (const text of ['Call 614-555-1234', 'Contact user@example.com', 'github_pat_fakefixturevalue', 'password=example', 'I will kill you', 'Buy now promo code', 'javascript:alert(1)']) {
+      const res = await post({ ...valid, line: text });
+      assert.equal(res.status, 422, text);
+      assert.equal((await res.json()).error, 'This submission could not be accepted.');
+    }
+    for (const url of ['file:///etc/passwd','http://127.0.0.1/x','http://2130706433/x','https://192.168.1.1','https://[::1]','https://user:pass@example.com','https://x.internal/']) assert.throws(() => evidenceUrl(url));
+    assert.equal(evidenceUrl('https://example.com/photo?utm_source=test&item=2'), 'https://example.com/photo?item=2');
+    assert.equal(screen({ ...valid, break: 'Kroger deliberately endangers disabled riders.' }).status, 'quarantine');
+    assert.equal(screen({ ...valid, break: 'My neighbor lives at 12 Sample Street.' }).status, 'quarantine');
+    assert.equal(screen({ ...valid, break: 'John Smith is at the bus stop every night.' }).status, 'quarantine');
+    assert.equal((await post({ ...valid, break: 'Kroger deliberately endangers disabled riders.' })).status, 202);
+    assert.equal((await (await admin()).json()).items.length, 1, 'quarantine excluded by default');
+    const quarantined = (await (await admin(null, env.REVIEW_TOKEN, '?state=quarantine')).json()).items[0];
+    assert.equal((await (await admin({ action:'approve', ids:[quarantined.id] })).json()).results[0].ok, false);
+    const candidate = screen(valid);
+    const low = await classify(candidate, { CLASSIFIER_ENABLED:'true', CLASSIFIER: { fetch: async () => Response.json({ status:'candidate', confidence:0.4 }) } });
+    assert.equal(low.status, 'quarantine');
+    const elevated = await classify(candidate, { CLASSIFIER_ENABLED:'true', CLASSIFIER: { fetch: async () => Response.json({ status:'reject', confidence:0.99 }) } });
+    assert.equal(elevated.status, 'rejected');
+    const quarantine = screen({ ...valid, break:'Fraud at this bus stop.' });
+    assert.equal((await classify(quarantine, { CLASSIFIER_ENABLED:'true', CLASSIFIER: { fetch: () => { throw new Error('must not run'); } } })).status, 'quarantine');
+    assert.equal((await (await admin({ action:'publish', ids:[first.id] })).json()).results[0].ok, false);
+    assert.equal((await (await admin({ action:'approve', ids:[first.id] })).json()).results[0].ok, true);
+    assert.equal(calls.filter(url => url.includes('github')).length, 0, 'approval alone is private');
+    const publications = await Promise.all([admin({ action:'publish', ids:[first.id] }), admin({ action:'publish', ids:[first.id] })]);
+    assert.equal(calls.filter(url => url.includes('github')).length, 1, 'concurrent publication is once only');
+    assert.equal(sqlite.prepare('SELECT status FROM submissions WHERE id=?').get(first.id).status, 'published');
+    await post({ ...valid, place:'Broad and High bus stop' });
+    const second = (await (await admin()).json()).items[0];
+    await admin({ action:'approve', ids:[second.id] });
+    failGitHub = true;
+    const failed = await (await admin({ action:'publish', ids:[second.id] })).json();
+    assert.ok(!JSON.stringify(failed).includes('SECRET'));
+    assert.equal(sqlite.prepare('SELECT publication_state FROM submissions WHERE id=?').get(second.id).publication_state, 'uncertain');
+    const previous = calls.length; await admin({ action:'publish', ids:[second.id] }); assert.equal(calls.length, previous);
+    const unavailable = await post(valid, { DB: { prepare() { throw new Error('fixture-secret'); } } });
+    assert.equal(unavailable.status, 503); assert.ok(!(await unavailable.text()).includes('fixture-secret'));
+    sqlite.exec("UPDATE submissions SET created_at='2020-01-01T00:00:00Z'");
+    await worker.scheduled({}, env);
+    assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM submissions').get().n, 0);
+    console.log('Private intake pressure checks passed: SQL, 100 concurrent duplicates, rate limit, verification, screening, private review, once-only LEAD publication, retention. External services mocked; not production verification.');
+  } finally { global.fetch = originalFetch; sqlite.close(); }
+})().catch(error => { console.error(error); process.exitCode = 1; });

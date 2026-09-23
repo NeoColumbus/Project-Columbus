@@ -1,78 +1,33 @@
-# Submissions
+# Field Submissions
 
-<!-- HUMAN NOTE: This is the honest participation pipe. Do not fake a backend. Static GitHub Pages cannot collect private form submissions by itself. -->
+## Private First
 
-Full City Columbus has three front doors:
+The permanent [signal page](https://neocolumbus.github.io/Project-Columbus/site/signal/) still makes, copies, downloads, and shares field cards. All existing printed source parameters remain supported.
 
-- public field cards for people who do not know Git
-- the field submission API when the public inbox is configured
-- GitHub issues and pull requests for people ready to send material upstream
+Private inbox activation is pending Cloudflare configuration. Until then, save a card. The website does not send it to the legacy public-issue endpoint. Do not post private material to GitHub as a workaround.
 
-## No-Login Field Path
+When enabled, reports enter private D1 screening. Nothing becomes a public issue at intake. A report needs a place, missing piece, and one line. An evidence URL is optional: a useful lead need not have a hosted photograph.
 
-Use the public scan path:
+## What To Send
 
-https://neocolumbus.github.io/Project-Columbus/site/signal/
+Name physical conditions: a shelter, crossing, frontage, bench, connection, or public room. A business may identify a location. Do not include personal contact details, private residential information, secrets, threats, or allegations about people. Reports with risk or uncertainty are rejected or quarantined, not published automatically.
 
-Make a field card.
+Evidence URLs must be public HTTP(S). They are not fetched by intake and do not establish truth. Keep faces, license plates, private details, and unrelated people out of evidence.
 
-Then:
+## What Happens
 
-- send it to the project through the public inbox
-- copy it
-- share it
-- download it
-- copy the card link
-- post it publicly with `#FullCityColumbus` and `#SignalSeen`
+1. Turnstile and edge rate limits guard intake.
+2. Deterministic screening rejects unsafe material or assigns quarantine/candidate.
+3. Optional classification can escalate risk, never establish truth.
+4. A maintainer reviews candidates in batches. Approval is still private.
+5. An explicit publish action creates a public LEAD. A separate human evidence check is required for PROOF.
 
-This is the street path.
+Copies of identical content increment a duplicate counter, not a count of supporters or people. Reports retain only civic fields, source codes, screening state, and review/publication metadata. No visitor IP, token, full scan URL, or raw field-card dump is stored. Private records expire after 30 days via a scheduled cleanup; provider backups may have their own retention.
 
-## Upstream Path
+Sharing a card yourself is a separate public action. Anyone with a shared URL can read its query parameters. Do not put secrets into the card.
 
-When the field card is sharp enough, send it upstream through GitHub:
+## Review And Corrections
 
-- [field report issue](https://github.com/NeoColumbus/Project-Columbus/issues/new?template=field-report.md&title=%5BField%5D%20)
-- pull request against [site/proof/proof-data.json](site/proof/proof-data.json)
-- pull request against [submissions/proof-wall.md](submissions/proof-wall.md)
+[Moderation](MODERATION.md) describes screening limits. [Publishing](submissions/PUBLISHING.md) describes the human proof gate. [Deployment](api/field-submission/README.md) lists the activation prerequisites.
 
-## Proof Wall Publishing
-
-Do not fake momentum.
-
-Checked proof goes in:
-
-- [site/proof/proof-data.json](site/proof/proof-data.json)
-- [submissions/proof-wall.md](submissions/proof-wall.md)
-
-Every proof entry needs:
-
-- place
-- type
-- proof link or field context
-- missing piece
-- one public line
-- status
-
-Maintainer publishing path:
-
-1. Check the field report.
-2. Confirm the place, proof, missing piece, and public line are real enough to publish.
-3. Add the `publish-proof` label to the issue.
-4. The `Publish Proof Wall Entry` workflow updates the proof wall files.
-
-## Public Inbox API
-
-GitHub Pages is static.
-It cannot store form submissions without an outside service.
-
-This repo includes a small worker API:
-
-- [api/field-submission](api/field-submission)
-
-When deployed, it receives no-login field cards and opens GitHub issues for maintainer review.
-
-The live worker endpoint is configured in [site/config.js](site/config.js).
-
-If that endpoint is blank or the worker fails, the public button falls back to copying the field card so the signal is not lost.
-
-If `turnstileSiteKey` is configured in [site/config.js](site/config.js), the field card form asks for Cloudflare Turnstile verification before sending to the worker.
+GitHub is for public source corrections and already-approved leads, not a private inbox. Public repository issues cannot be made confidential by an automated label.

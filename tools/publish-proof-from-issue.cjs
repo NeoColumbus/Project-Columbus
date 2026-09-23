@@ -151,7 +151,7 @@ function renderProofWall(data) {
 const card = cardFields();
 const issueNumber = Number(issue.number);
 const issueUrl = issue.html_url || "";
-const type = clean(section("Type") || card.type || issue.title?.replace(/^\[Field\]\s*/i, "").split(":")[0] || "Signal");
+const type = clean(section("Type") || card.type || issue.title?.replace(/^\[(?:Field|LEAD)\]\s*/i, "").split(":")[0] || "Signal");
 const place = clean(section("Place") || card.place);
 const missingPiece = clean(section("What Is Missing") || card.break);
 const line = clean(section("Line") || card.line);
@@ -184,6 +184,8 @@ const entry = {
   proof,
   proofUrl,
   sourceIssue: issueUrl,
+  context: clean(section("Context")),
+  placeKey: /^[a-z0-9-]+$/.test(section("Place Key")) ? section("Place Key") : undefined,
   checkedBy: process.env.PROOF_REVIEWER,
   checkedAt: new Date().toISOString().slice(0, 10),
   status: "published"

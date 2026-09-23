@@ -1,150 +1,52 @@
-# Field Submission API
+# Private Field Intake
 
-This is the tiny no-login intake API for the public scan path.
+Deployment status: code prepared, **production activation not verified**. The website's `fieldSubmissionEnabled` is false and its Turnstile key is empty. Card generation and printed URLs remain usable.
 
-It receives a field card from the static site and opens a GitHub issue for maintainer review.
+**Migration warning:** disabling the site button does not disable a previously deployed Worker. The legacy deployment may still create public GitHub issues if called directly. Deploy this fail-closed Worker or disable its route in Cloudflare before public promotion. Do not claim private production intake until the coordinated checks below pass.
 
-Every accepted report is a LEAD, including reports with evidence links. No proof link is required at intake. Publication as PROOF requires a maintainer check and a public evidence URL; see [publishing](../../submissions/PUBLISHING.md).
+## Contract
 
-## Abuse Protection
+POST /field-report (legacy POST / also retained). JSON civic fields: kind, place, break, line, proof, source {drop, asset, source}; website honeypot and turnstileToken. Existing card/source.url fields are screened but not stored. Max body 12,000 bytes, streamed. Evidence optional; public HTTP(S) only, no evidence fetching. Common tracking query parameters removed.
 
-The configured `SUBMISSION_RATE_LIMITER` permits five attempts per client IP per 60 seconds at an edge location. It is approximate, not a global quota; shared networks share the allowance. It does not persist an IP in an issue or build a visitor profile. Missing bindings leave legacy/local deployments operational; a configured limiter failure returns a retryable 503 with the GitHub fallback still available. CORS is not authentication or an abuse barrier.
+202 means privately received LEAD (or harmless honeypot response), not published, true, or proof. 400 invalid body; 403 failed verification; 422 generic rejection; 429 edge limit; 503 unavailable. Errors never include provider responses/secrets. No public read endpoint.
 
-Bodies are capped at 12,000 bytes while streaming, even without Content-Length. Malformed/non-object JSON is rejected. Honeypot and content tripwires remain. Upstream timeouts return bounded public errors without secrets or GitHub response details. No live deployment is implied by a code change.
+Required runtime: D1 DB, TURNSTILE_SECRET, TURNSTILE_HOSTNAME, SUBMISSION_RATE_LIMITER. Five attempts per 60 seconds per client IP per edge location, not a globally exact quota. IP used transiently by rate limiting, never stored. Turnstile must return success plus expected hostname and action field-report.
 
-Rate-limit API reference: https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/
+D1 schema: migrations/0001_private_intake.sql. Rejections retain daily counts only. Candidate/quarantine reports retain normalized content and review metadata for 30 days. Fingerprint duplicates update a count atomically. Daily cron expires data; monitor scheduled execution. D1 backup/Time Travel retention is separately managed by Cloudflare.
 
-## Shape
+## Activation Checklist
 
-Runtime target:
+Use the account that owns full-city-field-submission.neocolumbus.workers.dev. Supply a Cloudflare API token through environment or the dashboard, never this repository or chat. Account permissions must cover Workers scripts, D1, and Turnstile for provisioning. Do not invent a database ID or widget key.
 
-- Cloudflare Workers
+1. Create a managed Turnstile widget for neocolumbus.github.io. Keep production verification bound to that hostname and action field-report.
+2. Run `pnpm exec wrangler d1 create full-city-private-intake --config api/field-submission/wrangler.toml`. Add the returned database_id to the existing DB binding in wrangler.toml.
+3. Run `pnpm exec wrangler d1 migrations apply full-city-private-intake --remote --config api/field-submission/wrangler.toml`.
+4. Set secrets via `pnpm exec wrangler secret put NAME --config api/field-submission/wrangler.toml`: TURNSTILE_SECRET, REVIEW_TOKEN (random 32+ characters), and GITHUB_TOKEN (fine-grained issues write on this repository only). No GitHub credential is needed for private intake itself.
+5. Set REVIEWER_ID to a stable maintainer label. Keep CLASSIFIER_ENABLED=false unless a documented private service binding CLASSIFIER is configured.
+6. Run `pnpm field-api:deploy`. Before enabling the site, test the deployed API as below.
+7. Put only the public widget site key in site/config.js, set fieldSubmissionEnabled=true, and remove the pending status only through that configuration. Deploy Pages.
+8. From the actual neocolumbus.github.io signal page, submit a clearly labeled project test with real evidence only when available. Confirm private review, no public issue, explicit LEAD approval/publication, then human proof review. Never publish synthetic test fixtures as participation.
 
-Route:
+Required repository Actions secrets for workflow deployment: CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID. Worker secrets are separate. If credentials are unavailable, activation remains blocked, not silently bypassed.
 
-- `POST /field-report`
+## Deployed Verification
 
-Required JSON fields:
+Use genuine fresh Turnstile tokens from the configured hostname; never a production test bypass. Verify normal202, invalid token403, sixth rapid attempt429, malformed/oversized400, honeypot202 without a stored row, unauthorized admin401, and generic failure responses. Check D1 privately and confirm zero GitHub issues from intake. Clear synthetic test records; record deployment/version and results without private content. Local SQL/mocks are not these checks.
 
-- `kind`
-- `place`
-- `break`
-- `line`
+## Review
 
-Optional JSON fields:
+`pnpm field:review` reads FIELD_REVIEW_TOKEN from environment and uses HTTPS with redirects forbidden. Default candidate listing, up to100 records; process and repeat. Explicit `--state=quarantine` or `--state=approved`. Actions approve/reject/quarantine/skip; multiple IDs allowed. Publish requires separate confirmation and produces a public LEAD, never PROOF.
 
-- `proof`
-- `card`
-- `source`
-- `website`
-- `turnstileToken`
+Admin API: GET /admin/review?state=candidate; POST same route {action,ids}. Bearer REVIEW_TOKEN required; browser origins rejected; no CORS. The response contains private data: do not paste logs into issues or public CI.
 
-`website` is a bot honeypot. Real users should never fill it.
+Publication uses a compare-and-set lock. If GitHub times out or a Worker terminates, sending/uncertain records are not automatically retried. Inspect GitHub for the private-intake:ID marker. If an issue exists, reconcile issue_url/status in D1. Only reset to pending after confirming no issue was created. Never reset and retry blindly.
 
-## Secrets
+## Checks And References
 
-Set these in the worker environment:
+`pnpm test:qr`, `pnpm test:field-api`, `pnpm test:proof`, `pnpm test:launch`, `pnpm field-api:dry-run`.
 
-- `GITHUB_TOKEN`
+The pressure suite executes production SQL against SQLite with mocked external services. It is not a deployed edge test.
 
-Optional:
-
-- `GITHUB_REPO`
-- `GITHUB_LABELS`
-- `ALLOWED_ORIGINS`
-- `TURNSTILE_SECRET`
-
-Recommended `ALLOWED_ORIGINS`:
-
-```txt
-https://neocolumbus.github.io
-```
-
-For local testing, include localhost origins separated by commas.
-
-## GitHub Token
-
-Use a fine-grained GitHub token with access to `NeoColumbus/Project-Columbus`.
-
-Required permission:
-
-- Issues: read and write
-
-Do not commit the token.
-
-## Deploy
-
-This folder includes a deployable `wrangler.toml`.
-
-Manual deploy:
-
-```sh
-pnpm run field-api:deploy
-```
-
-Dry-run the Worker bundle:
-
-```sh
-pnpm run field-api:dry-run
-```
-
-Pressure-test the Worker logic with mocked GitHub and Turnstile:
-
-```sh
-pnpm run test:field-api
-```
-
-To push the concurrency count higher:
-
-```sh
-FIELD_API_PRESSURE_COUNT=5000 pnpm run test:field-api
-```
-
-PowerShell:
-
-```powershell
-$env:FIELD_API_PRESSURE_COUNT = "5000"; pnpm run test:field-api
-```
-
-GitHub Actions deploy:
-
-- add `CLOUDFLARE_API_TOKEN` as a repository secret
-- add `CLOUDFLARE_ACCOUNT_ID` as a repository secret
-- run the `Deploy Field Submission API` workflow
-
-After deploy, set the endpoint in:
-
-- [../../site/config.js](../../site/config.js)
-
-Example:
-
-```js
-window.FULL_CITY_CONFIG = {
-  fieldSubmissionEndpoint: "https://YOUR-WORKER.YOUR-SUBDOMAIN.workers.dev/field-report",
-  turnstileSiteKey: ""
-};
-```
-
-Set the worker secret before accepting submissions:
-
-```sh
-wrangler secret put GITHUB_TOKEN
-```
-
-## Turnstile
-
-If `TURNSTILE_SECRET` is set, submissions must include a valid `turnstileToken`.
-
-The signal page renders a Turnstile widget only when `turnstileSiteKey` is set in [../../site/config.js](../../site/config.js).
-
-With no secret and no site key, submissions continue normally. Configure both as a coordinated deployment; setting only the secret would block the public form. Optionally set `TURNSTILE_HOSTNAME=neocolumbus.github.io` to bind successful verification to the public host. Verification outages fail closed with a GitHub fallback, not an unhandled exception. Never commit the secret. Turnstile is abuse protection, not analytics.
-
-To turn it on:
-
-1. Create a Cloudflare Turnstile widget for the public site domain.
-2. Set `turnstileSiteKey` in [../../site/config.js](../../site/config.js).
-3. Set the matching worker secret:
-
-```sh
-wrangler secret put TURNSTILE_SECRET
-```
+- [D1 prepared statements](https://developers.cloudflare.com/d1/worker-api/prepared-statements/)
+- [Turnstile server verification](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/)
+- [Publishing protocol](../../submissions/PUBLISHING.md)

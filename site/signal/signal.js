@@ -1,6 +1,5 @@
 (function () {
   const scanPath = "https://neocolumbus.github.io/Project-Columbus/site/signal/";
-  const issueBase = "https://github.com/NeoColumbus/Project-Columbus/issues/new";
   const query = new URLSearchParams(window.location.search);
   const config = window.FULL_CITY_CONFIG || {};
   let turnstileToken = "";
@@ -120,15 +119,8 @@
 
   function updateCard() {
     const card = buildCard();
-    const title = `[Field] ${clean(fields.kind.value, "Signal")}: ${clean(fields.place.value, "")}`;
-    const params = new URLSearchParams({
-      template: "field-report.md",
-      title,
-      body: card
-    });
-
     fields.output.value = card;
-    fields.github.href = `${issueBase}?${params.toString()}`;
+    fields.github.href = "https://github.com/NeoColumbus/Project-Columbus/blob/main/SUBMISSIONS.md";
   }
 
   function buildPayload() {
@@ -197,9 +189,9 @@
       return;
     }
 
-    if (!endpoint) {
+    if (!endpoint || config.fieldSubmissionEnabled !== true || !config.turnstileSiteKey) {
       await copyCard();
-      fields.status.textContent = "Public inbox not configured yet. Card copied.";
+      fields.status.textContent = "Private inbox opening soon. Card copied; keep it for later.";
       return;
     }
 
@@ -225,16 +217,13 @@
         throw new Error(data.error || "Submission failed.");
       }
 
-      fields.status.textContent = data.issueNumber
-        ? `Lead received, pending verification. Issue ${data.issueNumber}.`
-        : "Lead received, pending verification.";
-
-      if (data.issueUrl) fields.github.href = data.issueUrl;
+      fields.status.textContent = "Lead received for private screening. Nothing published yet.";
       resetTurnstile();
     } catch (error) {
       await copyCard();
       fields.status.textContent = "Submission failed. Card copied.";
     } finally {
+      resetTurnstile();
       button.disabled = false;
     }
   }
@@ -258,6 +247,7 @@
 
       turnstileWidgetId = window.turnstile.render(fields.turnstile, {
         sitekey: siteKey,
+        action: "field-report",
         callback(token) {
           turnstileToken = token;
           fields.status.textContent = "Verification ready.";
@@ -389,6 +379,8 @@
   document.querySelector("#download-field-card")?.addEventListener("click", downloadCard);
 
   hydrateFromUrl();
+  const availability = document.querySelector('#inbox-availability');
+  if (availability && config.fieldSubmissionEnabled === true && config.turnstileSiteKey) availability.hidden = true;
   setScanContext();
   setupTurnstile();
   updateCard();

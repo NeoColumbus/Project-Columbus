@@ -1,10 +1,12 @@
 ---
 name: Field Report
-about: Send back a street photo, bus stop audit, dead wall report, neighborhood line, or proof from the city.
+about: Maintainer publication of a screened lead. New field reports should use the private signal intake.
 title: "[Field] "
 labels: field-report
 assignees: ""
 ---
+
+This is a PUBLIC issue, not private intake. New reports belong at https://neocolumbus.github.io/Project-Columbus/site/signal/. If intake is pending, save a card. Do not paste personal information here. Maintainers may use this template for screened leads only.
 
 ## Place
 

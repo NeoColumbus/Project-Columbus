@@ -1,355 +1,83 @@
-const DEFAULT_REPO = "NeoColumbus/Project-Columbus";
-const DEFAULT_ALLOWED_ORIGINS = [
-  "https://neocolumbus.github.io",
-  "http://127.0.0.1:8123",
-  "http://127.0.0.1:8131",
-  "http://127.0.0.1:8132",
-  "http://127.0.0.1:8133",
-  "http://localhost:8123",
-  "http://localhost:8131",
-  "http://localhost:8132",
-  "http://localhost:8133"
-];
+import { screen, classify, fingerprint } from './screening.mjs';
+import { reviewRequest } from './review.mjs';
 
-const LABELS = {
-  "field-report": ["4F8A74", "Field report from the public signal path."],
-  "public-submission": ["F4B037", "Submitted through the public no-login path."],
-  "needs-review": ["B77836", "Needs maintainer review before publication."]
-};
+export function json(body, status = 200, headers = {}) {
+  return new Response(JSON.stringify(body), { status, headers: { ...headers, 'content-type': 'application/json', 'cache-control': 'no-store', 'x-content-type-options': 'nosniff' } });
+}
+
+export async function readPayload(request) {
+  if (!request.headers.get('content-type')?.startsWith('application/json')) throw new Error('Invalid body');
+  if (Number(request.headers.get('content-length')) > 12000) throw new Error('Invalid body');
+  const reader = request.body?.getReader();
+  if (!reader) throw new Error('Invalid body');
+  const chunks = []; let length = 0;
+  try {
+    for (;;) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      length += value.byteLength;
+      if (length > 12000) { await reader.cancel(); throw new Error('Invalid body'); }
+      chunks.push(value);
+    }
+  } finally { reader.releaseLock(); }
+  const bytes = new Uint8Array(length); let offset = 0;
+  for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.length; }
+  const payload = JSON.parse(new TextDecoder().decode(bytes));
+  if (!payload || typeof payload !== 'object' || Array.isArray(payload)) throw new Error('Invalid body');
+  return payload;
+}
+
+async function count(db, outcome) {
+  await db.prepare('INSERT INTO intake_counts(day,outcome,count) VALUES(?,?,1) ON CONFLICT(day,outcome) DO UPDATE SET count=count+1').bind(new Date().toISOString().slice(0,10), outcome).run();
+}
 
 export default {
   async fetch(request, env) {
-    const origin = request.headers.get("origin") || "";
-    const cors = corsHeaders(origin, env);
-
-    if (request.method === "OPTIONS") {
-      return new Response(null, {
-        status: isAllowedOrigin(origin, env) ? 204 : 403,
-        headers: cors
-      });
-    }
-
-    if (!isAllowedOrigin(origin, env)) {
-      return json({ ok: false, error: "Origin not allowed." }, 403, cors);
-    }
-
     const url = new URL(request.url);
-    if (request.method !== "POST" || !["/", "/field-report"].includes(url.pathname)) {
-      return json({ ok: false, error: "Use POST /field-report." }, 404, cors);
+    if (url.pathname.startsWith('/admin/')) {
+      try { return await reviewRequest(request, env); }
+      catch { return json({ ok: false, error: 'Review unavailable.' }, 503); }
     }
-
-    if (!env.GITHUB_TOKEN) {
-      return json({ ok: false, error: "Submission API is not configured." }, 503, cors);
-    }
-
-    // Edge-local abuse control, never a visitor profile or analytics identifier.
-    if (env.SUBMISSION_RATE_LIMITER) {
-      try {
-        const key = request.headers.get("cf-connecting-ip") || "unknown-client";
-        const { success } = await env.SUBMISSION_RATE_LIMITER.limit({ key });
-        if (!success) return json({ ok: false, error: "Too many reports. Try again in a minute." }, 429, { ...cors, "retry-after": "60" });
-      } catch {
-        return json({ ok: false, error: "Inbox temporarily unavailable. Use the GitHub report fallback." }, 503, cors);
+    const origin = request.headers.get('origin') || '';
+    const allowed = (env.ALLOWED_ORIGINS || 'https://neocolumbus.github.io').split(',').map(s => s.trim());
+    const cors = { 'vary': 'Origin', 'access-control-allow-methods': 'POST, OPTIONS', 'access-control-allow-headers': 'content-type' };
+    if (allowed.includes(origin)) cors['access-control-allow-origin'] = origin;
+    if (origin && !allowed.includes(origin)) return json({ ok: false, error: 'Origin not allowed.' }, 403, cors);
+    if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
+    if (request.method !== 'POST' || !['/', '/field-report'].includes(url.pathname)) return json({ ok: false, error: 'Not found.' }, 404, cors);
+    try {
+      if (!env.DB || !env.TURNSTILE_SECRET || !env.TURNSTILE_HOSTNAME || !env.SUBMISSION_RATE_LIMITER) return json({ ok: false, error: 'Private inbox is not available. Save your card and try later.' }, 503, cors);
+      const { success } = await env.SUBMISSION_RATE_LIMITER.limit({ key: request.headers.get('cf-connecting-ip') || 'unknown-client' });
+      if (!success) return json({ ok: false, error: 'Try again in a minute.' }, 429, { ...cors, 'retry-after': '60' });
+      let payload;
+      try { payload = await readPayload(request); } catch { return json({ ok: false, error: 'Invalid submission.' }, 400, cors); }
+      if (payload.website) return json({ ok: true, state: 'LEAD', queued: true }, 202, cors);
+      if (typeof payload.turnstileToken !== 'string' || !payload.turnstileToken || payload.turnstileToken.length > 2048) return json({ ok: false, error: 'Verification failed.' }, 403, cors);
+      const verification = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+        method: 'POST', body: new URLSearchParams({ secret: env.TURNSTILE_SECRET, response: payload.turnstileToken }), signal: AbortSignal.timeout(8000)
+      });
+      if (!verification.ok) throw new Error('Verification unavailable');
+      const verified = await verification.json();
+      if (verified.success !== true || verified.hostname !== env.TURNSTILE_HOSTNAME || verified.action !== 'field-report') return json({ ok: false, error: 'Verification failed.' }, 403, cors);
+      const { turnstileToken, website, ...input } = payload;
+      const result = await classify(screen(input), env);
+      if (result.status === 'rejected') {
+        await count(env.DB, 'rejected');
+        return json({ ok: false, error: 'This submission could not be accepted.' }, 422, cors);
       }
-    }
-
-    let payload;
-    try {
-      payload = await readPayload(request);
-    } catch (error) {
-      return json({ ok: false, error: error.message }, 400, cors);
-    }
-
-    if (payload.website) {
-      return json({ ok: true, queued: true }, 202, cors);
-    }
-
-    let turnstileOk;
-    try {
-      turnstileOk = await verifyTurnstile(payload.turnstileToken, request, env);
-    } catch {
-      return json({ ok: false, error: "Verification temporarily unavailable. Use the GitHub report fallback." }, 503, cors);
-    }
-    if (!turnstileOk) {
-      return json({ ok: false, error: "Verification failed." }, 403, cors);
-    }
-
-    const report = normalizeReport(payload);
-    const validation = validateReport(report);
-    if (validation) {
-      return json({ ok: false, error: validation }, 422, cors);
-    }
-
-    const tripwire = tripwireReason(report);
-    if (tripwire) {
-      return json({ ok: false, error: tripwire }, 422, cors);
-    }
-
-    try {
-      const issue = await createGitHubIssue(report, env);
-      return json({
-        ok: true,
-        state: "LEAD",
-        issueNumber: issue.number,
-        issueUrl: issue.html_url
-      }, 201, cors);
-    } catch (error) {
-      return json({ ok: false, error: "Public inbox unavailable. Use the GitHub report fallback." }, 502, cors);
-    }
+      const fp = await fingerprint(result.report);
+      // A single UPSERT arbitrates simultaneous duplicates. Retain at most 30 days.
+      await env.DB.prepare("INSERT INTO submissions(id,created_at,fingerprint,report,status,flags,screening_version) VALUES(?,?,?,?,?,?,?) ON CONFLICT(fingerprint) DO UPDATE SET duplicate_count=duplicate_count+1, status=CASE WHEN excluded.status='quarantine' AND submissions.status='candidate' THEN 'quarantine' ELSE submissions.status END, flags=CASE WHEN excluded.status='quarantine' AND submissions.status='candidate' THEN excluded.flags ELSE submissions.flags END").bind(crypto.randomUUID(), new Date().toISOString(), fp, JSON.stringify(result.report), result.status, JSON.stringify(result.flags), result.version).run();
+      await count(env.DB, result.status);
+      return json({ ok: true, state: 'LEAD', queued: true }, 202, cors);
+    } catch { return json({ ok: false, error: 'Private inbox temporarily unavailable. Save your card and try later.' }, 503, cors); }
+  },
+  async scheduled(event, env) {
+    if (!env.DB) return;
+    const cutoff = new Date(Date.now() - 30 * 86400000).toISOString();
+    await env.DB.batch([
+      env.DB.prepare('DELETE FROM submissions WHERE created_at < ?').bind(cutoff),
+      env.DB.prepare('DELETE FROM intake_counts WHERE day < ?').bind(cutoff.slice(0,10))
+    ]);
   }
 };
-
-function allowedOrigins(env) {
-  const raw = env.ALLOWED_ORIGINS || DEFAULT_ALLOWED_ORIGINS.join(",");
-  return raw.split(",").map((value) => value.trim()).filter(Boolean);
-}
-
-function isAllowedOrigin(origin, env) {
-  const allowed = allowedOrigins(env);
-  return !origin || allowed.includes("*") || allowed.includes(origin);
-}
-
-function corsHeaders(origin, env) {
-  const allowed = allowedOrigins(env);
-  const allowOrigin = allowed.includes("*") ? "*" : allowed.includes(origin) ? origin : allowed[0];
-
-  return {
-    "access-control-allow-origin": allowOrigin,
-    "access-control-allow-methods": "POST, OPTIONS",
-    "access-control-allow-headers": "content-type",
-    "access-control-max-age": "86400",
-    "vary": "Origin"
-  };
-}
-
-function json(body, status, headers) {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers: {
-      ...headers,
-      "content-type": "application/json; charset=utf-8",
-      "cache-control": "no-store",
-      "x-content-type-options": "nosniff"
-    }
-  });
-}
-
-async function readPayload(request) {
-  const length = Number(request.headers.get("content-length") || 0);
-  if (length > 12000) throw new Error("Submission is too large.");
-
-  const reader = request.body?.getReader();
-  const decoder = new TextDecoder();
-  let text = "";
-  let bytes = 0;
-  if (reader) {
-    try {
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        bytes += value.byteLength;
-        if (bytes > 12000) {
-          await reader.cancel();
-          throw new Error("Submission is too large.");
-        }
-        text += decoder.decode(value, { stream: true });
-      }
-      text += decoder.decode();
-    } finally { reader.releaseLock(); }
-  }
-
-  try {
-    const payload = JSON.parse(text || "{}");
-    if (!payload || typeof payload !== "object" || Array.isArray(payload)) throw new Error();
-    return payload;
-  } catch {
-    throw new Error("Submission must be JSON.");
-  }
-}
-
-function clean(value, max = 500) {
-  return String(value || "")
-    .replace(/\s+/g, " ")
-    .trim()
-    .slice(0, max);
-}
-
-function normalizeReport(payload) {
-  const source = payload.source && typeof payload.source === "object" ? payload.source : {};
-
-  return {
-    kind: clean(payload.kind, 60) || "Signal",
-    place: clean(payload.place, 180),
-    breakText: clean(payload.break || payload.breakText, 500),
-    line: clean(payload.line, 240),
-    proof: clean(payload.proof, 900),
-    card: clean(payload.card, 5000),
-    source: {
-      drop: clean(source.drop, 40),
-      asset: clean(source.asset, 120),
-      source: clean(source.source, 120),
-      url: clean(source.url || payload.url, 500)
-    }
-  };
-}
-
-function validateReport(report) {
-  if (!report.place) return "Add a real place.";
-  if (!report.breakText) return "Name what is missing.";
-  if (!report.line) return "Add one public line.";
-  if (report.place.length < 3) return "Place is too short.";
-  if (report.line.length < 5) return "Line is too short.";
-  return "";
-}
-
-function tripwireReason(report) {
-  const text = [
-    report.kind,
-    report.place,
-    report.breakText,
-    report.line,
-    report.proof,
-    report.card
-  ].join("\n");
-
-  if (/\b(casino|crypto|airdrop|forex|telegram|whatsapp|seo backlinks?|guest post|loan offer|work from home)\b/i.test(text)) {
-    return "Spam pattern detected.";
-  }
-
-  if (/(BEGIN (RSA|OPENSSH|EC|DSA)? ?PRIVATE KEY|api[_-]?key\s*[:=]|secret\s*[:=]|password\s*[:=]|token\s*[:=]\s*[A-Za-z0-9_\-.]{20,})/i.test(text)) {
-    return "Possible credential detected.";
-  }
-
-  if (/(as an ai language model|i cannot browse the internet|lorem ipsum)/i.test(text)) {
-    return "Placeholder or low-effort dump detected.";
-  }
-
-  return "";
-}
-
-async function verifyTurnstile(token, request, env) {
-  if (!env.TURNSTILE_SECRET) return true;
-  if (!token) return false;
-
-  const form = new URLSearchParams({
-    secret: env.TURNSTILE_SECRET,
-    response: token
-  });
-
-  const ip = request.headers.get("cf-connecting-ip");
-  if (ip) form.set("remoteip", ip);
-
-  const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
-    method: "POST",
-    body: form,
-    signal: AbortSignal.timeout(8000)
-  });
-
-  if (!response.ok) return false;
-  const data = await response.json();
-  return data.success === true && (!env.TURNSTILE_HOSTNAME || data.hostname === env.TURNSTILE_HOSTNAME);
-}
-
-async function createGitHubIssue(report, env) {
-  const repo = env.GITHUB_REPO || DEFAULT_REPO;
-  const labels = (env.GITHUB_LABELS || "field-report,public-submission,needs-review")
-    .split(",")
-    .map((label) => label.trim())
-    .filter(Boolean);
-
-  for (const label of labels) {
-    await ensureGitHubLabel(repo, label, env);
-  }
-
-  const title = `[Field] ${report.kind}: ${report.place}`.slice(0, 240);
-  const body = issueBody(report);
-  const issue = await githubFetch(repo, "/issues", env, {
-    method: "POST",
-    body: JSON.stringify({ title, body, labels })
-  });
-
-  if (issue.status === 422 && labels.length > 0) {
-    return githubFetch(repo, "/issues", env, {
-      method: "POST",
-      body: JSON.stringify({ title, body })
-    }).then(assertGitHubOk);
-  }
-
-  return assertGitHubOk(issue);
-}
-
-async function ensureGitHubLabel(repo, label, env) {
-  const response = await githubFetch(repo, `/labels/${encodeURIComponent(label)}`, env);
-  if (response.ok) return;
-  if (response.status !== 404) return;
-
-  const [color, description] = LABELS[label] || ["E8DDC7", "Full City Columbus label."];
-  await githubFetch(repo, "/labels", env, {
-    method: "POST",
-    body: JSON.stringify({ name: label, color, description })
-  });
-}
-
-async function githubFetch(repo, path, env, options = {}) {
-  const response = await fetch(`https://api.github.com/repos/${repo}${path}`, {
-    method: options.method || "GET",
-    headers: {
-      "accept": "application/vnd.github+json",
-      "authorization": `Bearer ${env.GITHUB_TOKEN}`,
-      "content-type": "application/json",
-      "user-agent": "full-city-columbus-field-api",
-      "x-github-api-version": "2022-11-28"
-    },
-    body: options.body,
-    signal: AbortSignal.timeout(10000)
-  });
-
-  const data = await response.json().catch(() => ({}));
-  return {
-    ok: response.ok,
-    status: response.status,
-    data
-  };
-}
-
-function assertGitHubOk(result) {
-  if (result.ok) return result.data;
-  const message = result.data?.message || `GitHub request failed with status ${result.status}.`;
-  throw new Error(message);
-}
-
-function issueBody(report) {
-  const sourceLines = [
-    report.source.drop ? `- Drop: ${report.source.drop}` : "",
-    report.source.asset ? `- Asset: ${report.source.asset}` : "",
-    report.source.source ? `- Source: ${report.source.source}` : "",
-    report.source.url ? `- URL: ${report.source.url}` : ""
-  ].filter(Boolean).join("\n") || "No source parameters.";
-
-  return [
-    "Submitted through the public field API.",
-    "",
-    "## State",
-    "LEAD / pending verification. Evidence links do not imply review. Not publishable until a maintainer checks the claim and evidence.",
-    "",
-    "## Place",
-    report.place,
-    "",
-    "## Proof",
-    report.proof || "No proof link supplied.",
-    "",
-    "## What Is Missing",
-    report.breakText,
-    "",
-    "## Line",
-    report.line,
-    "",
-    "## Source",
-    sourceLines,
-    "",
-    "## Field Card",
-    "```txt",
-    report.card || "(No field card supplied.)",
-    "```"
-  ].join("\n");
-}

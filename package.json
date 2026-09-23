@@ -16,7 +16,8 @@
     "test:field-api": "node tools/pressure-test-field-api.cjs",
     "test:proof": "node tools/test-proof-publication.cjs",
     "test:launch": "node tools/test-public-launch.cjs",
-    "test:qr": "node tools/test-qr-contract.cjs"
+    "test:qr": "node tools/test-qr-contract.cjs",
+    "field:review": "node tools/field-review.mjs"
   },
   "devDependencies": {
     "pdf-lib": "^1.17.1",

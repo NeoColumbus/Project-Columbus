@@ -1,6 +1,15 @@
 name = "full-city-field-submission"
 main = "worker.mjs"
-compatibility_date = "2026-07-08"
+compatibility_date = "2026-09-23"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "full-city-private-intake"
+# Set the actual database_id after provisioning; never invent a production ID.
+migrations_dir = "migrations"
+
+[triggers]
+crons = ["17 4 * * *"]
 
 [[ratelimits]]
 name = "SUBMISSION_RATE_LIMITER"
@@ -9,5 +18,7 @@ simple = { limit = 5, period = 60 }
 
 [vars]
 GITHUB_REPO = "NeoColumbus/Project-Columbus"
-GITHUB_LABELS = "field-report,public-submission,needs-review"
+TURNSTILE_HOSTNAME = "neocolumbus.github.io"
+CLASSIFIER_ENABLED = "false"
+REVIEWER_ID = "Full City maintainer"
 ALLOWED_ORIGINS = "https://neocolumbus.github.io,http://127.0.0.1:8131,http://127.0.0.1:8132,http://localhost:8131,http://localhost:8132"

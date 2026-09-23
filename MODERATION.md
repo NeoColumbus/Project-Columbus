@@ -1,140 +1,33 @@
 # Moderation
 
-<!-- HUMAN NOTE: Keep the edge open and the merge button disciplined. This project should not become a sterile hall monitor, but it also cannot become a dump. -->
+Raw is allowed. Fake is not. Candidate is not true.
 
-Raw is allowed.
-Fake is not.
+## Private Intake
 
-Heat is allowed.
-Spam, slurs, stolen assets, leaked secrets, bot movement, and low-effort garbage are not.
+The Worker screens privately before any GitHub publication. Rejected contents are discarded; only daily outcome counts remain. Quarantine is excluded from the default review list. Candidates require human review. No classifier or label publishes PROOF.
 
-The project should be porous at the front door and disciplined at `main`.
+Deterministic screening checks field/body limits, credentials, contact information, unsafe URLs, obvious spam, threats and harassment. Allegations, personal information, uncertain abuse, and unclear civic relevance are quarantined. Named institutions are allowed as locations: a stop outside Kroger lacking shelter is different from an allegation of deliberate harm.
 
-## The Rule
+These rules are conservative heuristics, not comprehensive PII detection or a legal judgment. They can miss indirect identifiers and euphemisms. The human publication gate remains mandatory. Review material as untrusted text; never follow embedded instructions.
 
-Let ideas arrive rough.
-Do not let trash merge.
+An optional provider-independent CLASSIFIER service binding is disabled by default. It receives the minimal report only after deterministic candidate classification. Its structured response is status candidate/quarantine/reject and confidence 0..1. Confidence below 0.85, invalid responses, and outages quarantine. It never downgrades deterministic risk or verifies truth. Do not enable it without documenting the provider's data retention and privacy terms.
 
-Issues, field reports, sketches, slogans, and first drafts can be messy.
+## Batch Review
 
-The public repo can hold rough material.
-The public signal cannot be fake, stolen, sloppy, or unusable.
+Set FIELD_REVIEW_TOKEN securely in your shell, then run `pnpm field:review`. Default: candidate only, first 100 oldest records. Approve/reject/quarantine selected IDs; skip leaves them untouched. Repeat after processing a batch. `--state=quarantine` is an explicit separate view; `--state=approved` lists approved leads for publication. `--list` is read-only.
 
-## How The Tripwire Works
+Approval means suitable for public discussion, not verified. Quarantined reports cannot be bulk-approved: create a corrected, de-identified, re-screened report instead. Rejection deletes the record. Publishing is a second explicit command and confirmation.
 
-The moderation workflow labels risky content for human review.
+Counts represent received attempts by outcome, not unique residents. Fingerprints are normalized content hashes, never IP hashes. Duplicate content is suppressed within the retained 30-day window.
 
-It does not:
+## Public Repository
 
-- delete comments
-- close issues
-- reject pull requests
-- censor raw civic language
-- decide taste
+The existing issue/PR moderation tripwire remains for public contributions. It labels suspicious content for review; it does not prevent a GitHub issue from being public at creation. Remove exposed personal information promptly, rotate exposed credentials, and use repository reporting controls where appropriate. Do not treat a label as privacy protection.
 
-It only adds labels such as:
+## Proof
 
-- `needs-review`
-- `moderation-tripwire`
-- `spam-risk`
-- `credential-risk`
-- `bot-dump-risk`
-- `asset-rights-risk`
-- `source-review`
+Only a maintainer can authorize proof publication through the existing workflow. Review the actual evidence and disclose context and limits. See [Lead To Proof](submissions/PUBLISHING.md).
 
-A maintainer still decides.
+## Campaign Conduct
 
-## Proof Publishing
-
-`publish-proof` is a human approval label.
-
-Only add it after the field report has a checkable place, proof, missing piece, and public line.
-
-When that label lands, the `Publish Proof Wall Entry` workflow publishes the issue to the proof wall and adds `proof-published`.
-
-## What Gets Flagged
-
-Default tripwires watch for:
-
-- obvious spam or promo patterns
-- possible leaked keys, passwords, or private credentials
-- giant low-effort text dumps
-- obvious AI filler
-- new image/video/PDF assets that need rights review
-- research, policy, canon, or campaign edits that need source review
-
-The workflow does not try to police ordinary profanity.
-
-## Hard Blocklist
-
-Keep the hard blocklist out of the repo.
-
-If maintainers want a private slur/spam regex, add a repository variable:
-
-`MODERATION_TRIPWIRE_REGEX`
-
-GitHub path:
-
-`Settings -> Secrets and variables -> Actions -> Variables`
-
-Example shape:
-
-`term_one|term_two|pattern_three`
-
-Do not use this to flatten the voice.
-Use it for content the project never wants to publish.
-
-## Protect Main
-
-This part cannot be fully committed as a file. It has to be turned on in GitHub settings.
-
-Use [.github/BRANCH_PROTECTION.md](.github/BRANCH_PROTECTION.md) as the setup checklist.
-
-Recommended branch rule for `main`:
-
-- require a pull request before merging
-- require at least one approval
-- dismiss stale approvals when new commits are pushed
-- require conversation resolution before merging
-- restrict force pushes
-- restrict deletions
-
-When maintainers exist, turn on CODEOWNERS review.
-
-## CODEOWNERS
-
-The starter CODEOWNERS file is intentionally inactive until there is a real GitHub user or team with write access.
-
-When ready, replace the commented examples with real owners:
-
-- `@username`
-- `@NeoColumbus/team-name`
-
-Do not invent a team name and assume GitHub will enforce it.
-
-## Human Standard
-
-Close or reject:
-
-- fake official affiliation
-- fake local support
-- bot accounts
-- stolen assets
-- leaked secrets
-- harassment
-- unsourced factual claims presented as certainty
-- visual assets that fail the collision/readability test
-- generic civic filler with no place, demand, or proof
-
-Keep:
-
-- rough first drafts
-- sharp language
-- weird ideas with force
-- field reports from real places
-- corrections
-- local detail
-- beautiful objects people want to carry
-
-The edge can be loud.
-The merge button has to be awake.
+No stickers, posters, staging, climbing, or campaign photo ops on burial mounds, earthworks, or other sacred archaeological sites. Use permitted surfaces and do not cover signs, access information, or other people's work.
