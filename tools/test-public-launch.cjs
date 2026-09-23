@@ -58,7 +58,21 @@ const server = http.createServer((req, res) => {
         }
         await page.screenshot({ path: path.join(output, `${route.split('/')[2] || 'home'}-${width}.png`), fullPage: true });
         await page.screenshot({ path: path.join(output, `${route.split('/')[2] || 'home'}-${width}-viewport.png`) });
-        if (route === '/site/') await page.locator('#receipts').screenshot({ path: path.join(output, `receipts-${width}.png`) });
+        if (route === '/site/') {
+          const boxes = await page.locator('.receipt-card').evaluateAll(nodes => nodes.map(el => { const r = el.getBoundingClientRect(); return { x:r.x,y:r.y,right:r.right,bottom:r.bottom,width:r.width }; }));
+          assert.equal(boxes.length, 5);
+          for (let i=0;i<boxes.length;i++) for (let j=i+1;j<boxes.length;j++) {
+            const a=boxes[i], b=boxes[j];
+            assert.ok(a.right <= b.x || b.right <= a.x || a.bottom <= b.y || b.bottom <= a.y, `receipt collision at ${width}`);
+          }
+          if (width >= 1100) assert.ok(boxes[4].width > boxes[0].width * 1.9, 'fifth receipt must span the row');
+          await page.locator('#receipts').screenshot({ path: path.join(output, `receipts-${width}.png`) });
+        }
+        if (route === '/site/work/') {
+          assert.equal(await page.locator('#cota-model .publication-pending').count(), 0);
+          assert.equal(await page.locator('#cota-model .button').first().getAttribute('href'), 'https://github.com/ian-gregory94/cota-route-optimization');
+          await page.locator('#cota-model').screenshot({ path: path.join(output, `model-${width}.png`) });
+        }
       }
     }
     await page.goto(base + '/');
@@ -71,8 +85,8 @@ const server = http.createServer((req, res) => {
     for (const key of ['drop', 'asset', 'source']) assert.ok(card.includes(`${key}=${params[key]}`));
     assert.ok(card.includes('STATE: LEAD'));
     const fallback = new URL(await page.locator('#github-field-report').getAttribute('href'));
-    assert.equal(fallback.searchParams.get('body'), card);
-    assert.equal(fallback.pathname, '/NeoColumbus/Project-Columbus/issues/new');
+    assert.equal(fallback.pathname, '/NeoColumbus/Project-Columbus/blob/main/SUBMISSIONS.md');
+    assert.equal(fallback.search, '', 'no public issue intake fallback');
     await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
     await page.locator('#copy-card-link').click();
     const shared = new URL(await page.evaluate(() => navigator.clipboard.readText()));
@@ -103,27 +117,48 @@ const server = http.createServer((req, res) => {
     await page.goto(base + '/site/signal/?kind=Legacy%20Signal&line=Keep%20this');
     assert.equal(await page.locator('#field-kind').inputValue(), 'Legacy Signal');
     assert.equal(await page.locator('#field-line').inputValue(), 'Keep this');
-    await page.route('https://full-city-field-submission.neocolumbus.workers.dev/**', route => route.fulfill({ status: 201, contentType: 'application/json', body: JSON.stringify({ ok: true, state: 'LEAD', issueNumber: 123 }) }));
+    let submissions = 0;
+    await page.route('https://full-city-field-submission.neocolumbus.workers.dev/**', route => { submissions++; return route.fulfill({ status: 202, contentType: 'application/json', body: JSON.stringify({ ok: true, state: 'LEAD', queued: true }) }); });
     await page.locator('#field-place').fill('Test stop');
     await page.locator('#field-break').fill('Missing shelter');
     await page.locator('#submit-field-card').click();
-    await page.waitForFunction(() => document.querySelector('#field-card-status').textContent.includes('123'));
+    await page.waitForFunction(() => document.querySelector('#field-card-status').textContent.includes('opening soon'));
+    assert.equal(submissions, 0, 'unconfigured site never sends to legacy public Worker');
+    await page.addInitScript(() => {
+      window.turnstile = { render(el, options) { options.callback('fixture-token'); return 1; }, reset() {} };
+    });
+    await page.route('**/config.js', route => route.fulfill({ contentType: 'text/javascript', body: 'window.FULL_CITY_CONFIG={fieldSubmissionEnabled:true,turnstileSiteKey:"fixture",fieldSubmissionEndpoint:"https://full-city-field-submission.neocolumbus.workers.dev/field-report"};' }));
+    await page.goto(base + '/site/signal/?kind=Transit&place=Test%20stop&break=Missing%20shelter&line=The%20stop%20is%20a%20room.');
+    await page.locator('#submit-field-card').click();
+    await page.waitForFunction(() => document.querySelector('#field-card-status').textContent.includes('private screening'));
+    assert.equal(submissions, 1);
     await page.route('**/proof-data.json', route => route.fulfill({ contentType: 'application/json', body: JSON.stringify({ entries: [
       { place: 'Unverified lead', status: 'lead', proofUrl: 'https://example.com' },
       { place: 'Unchecked link', status: 'published', proofUrl: 'https://example.com' },
       { place: 'Unsafe link', status: 'published', proofUrl: 'javascript:alert(1)', checkedBy: 'fixture', checkedAt: '2026-09-21', missingPiece: 'Test', line: 'Test' },
-      { place: 'Checked fixture', status: 'published', proofUrl: 'https://example.com/evidence', checkedBy: 'fixture', checkedAt: '2026-09-21', missingPiece: 'Test', line: '<script>unsafe</script>' }
+      { id: 'fixture-checked', placeKey: 'morse-road', place: 'Checked fixture', status: 'published', proofUrl: 'https://example.com/evidence', checkedBy: 'fixture', checkedAt: '2026-09-21', missingPiece: 'Test', line: '<script>unsafe</script>' }
     ], openSlots: [] }) }));
     await page.goto(base + '/site/proof/');
     await page.waitForFunction(() => document.querySelector('[data-proof-status]').textContent === '1 checked proof entry');
     assert.equal(await page.locator('.proof-card-entry').count(), 1);
     assert.equal(await page.locator('.proof-card-entry strong').textContent(), 'Checked fixture');
     assert.equal(await page.locator('.proof-card-entry script').count(), 0);
+    assert.equal(await page.locator('#record-fixture-checked').count(), 1);
+    await page.goto(base + '/site/');
+    await page.waitForSelector('[data-place-key="morse-road"] a');
+    assert.equal(await page.locator('[data-place-key="morse-road"] a').getAttribute('href'), 'proof/#record-fixture-checked');
+    assert.equal(await page.locator('[data-place-key="linden"] a').count(), 0, 'no fabricated links');
     if (process.env.PUBLIC_ROOT) {
       for (const route of ['/signal/', '/proof/', '/work/']) assert.equal((await page.goto(base + '/Project-Columbus' + route)).status(), 200);
     }
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto(base + '/site/');
+    assert.equal(await page.locator('.receipt-card').count(), 5);
+    assert.equal(await page.locator('.receipt-experiment').getAttribute('href'), 'work/#cota-model');
+    const numbers = await page.locator('.kicker').allTextContents();
+    assert.deepEqual(numbers.filter(t => /^\d{2} \//.test(t)).map(t => t.slice(0,2)), Array.from({ length:17 }, (_,i) => String(i).padStart(2,'0')));
+    assert.equal(await page.locator('.marquee-track > span:not([aria-hidden])').count(), 9);
+    assert.equal(await page.locator('.hero-links a').first().getAttribute('href'), 'work/');
     assert.equal(await page.locator('.marquee-track').evaluate(el => getComputedStyle(el).animationName), 'none');
     assert.equal(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior), 'auto');
     assert.deepEqual(errors, []);

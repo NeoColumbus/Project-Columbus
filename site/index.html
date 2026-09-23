@@ -27,6 +27,7 @@
     <meta name="twitter:image" content="https://neocolumbus.github.io/Project-Columbus/site/assets/og-card.jpg" />
     <link rel="stylesheet" href="styles.css" />
     <script src="navigation.js" defer></script>
+    <script src="places.js" defer></script>
   </head>
   <body>
     <!-- HUMAN NOTE: Public page v0.2 is meant to perform first and explain second. Keep sourcing and cautions in the repo, not in the opening blast. -->
@@ -37,21 +38,12 @@
       </a>
       <nav class="nav" aria-label="Page sections">
         <a href="#why">Why</a>
-        <a href="#project">Project</a>
         <a href="work/">Work</a>
-        <a href="#origin">Origin</a>
-        <a href="#body">Body</a>
-        <a href="#places">Places</a>
-        <a href="#aesthetic">Soul</a>
         <a href="#flag">Flag</a>
-        <a href="#drop">Drop 001</a>
         <a href="signal/">Scan</a>
         <a href="proof/">Proof</a>
-        <a href="#civics">Civics</a>
-        <a href="#commons">AI</a>
         <a href="#campaigns">Wall</a>
-        <a href="#fork">Fork</a>
-        <a href="#log">Log</a>
+        <a href="#fork">Contribute</a>
       </nav>
     </header>
 
@@ -79,7 +71,7 @@
             <a class="button primary" href="signal/">Scan the signal</a>
           </div>
           <p class="hero-links" aria-label="Secondary paths">
-            <a href="proof/">Proof wall</a>
+            <a href="work/">Open the work</a>
             <a href="https://github.com/NeoColumbus/Project-Columbus">Enter the repo</a>
             <a href="#campaigns">Hit the wall</a>
           </p>
@@ -105,15 +97,15 @@
           <span>From confluence to metropolis</span>
           <span>The machine pays tribute</span>
           <span>Neo Columbus arrives</span>
-          <span>No more half-city</span>
-          <span>Columbus is a beautiful mess</span>
-          <span>No money no committee</span>
-          <span>The first city was geometry</span>
-          <span>The next city is us</span>
-          <span>From circle to capital</span>
-          <span>From confluence to metropolis</span>
-          <span>The machine pays tribute</span>
-          <span>Neo Columbus arrives</span>
+          <span aria-hidden="true">No more half-city</span>
+          <span aria-hidden="true">Columbus is a beautiful mess</span>
+          <span aria-hidden="true">No money no committee</span>
+          <span aria-hidden="true">The first city was geometry</span>
+          <span aria-hidden="true">The next city is us</span>
+          <span aria-hidden="true">From circle to capital</span>
+          <span aria-hidden="true">From confluence to metropolis</span>
+          <span aria-hidden="true">The machine pays tribute</span>
+          <span aria-hidden="true">Neo Columbus arrives</span>
         </div>
       </div>
 
@@ -198,13 +190,14 @@
           <a class="receipt-card" href="work/#zoning"><span class="maturity">Draft</span><h3>Zoning / growth</h3><p>Put the code next to the street it produces.</p><strong>Open the work</strong></a>
           <a class="receipt-card" href="work/#ai"><span class="maturity">Draft proposal</span><h3>AI infrastructure</h3><p>Public inputs deserve a checkable public return.</p><strong>Open the work</strong></a>
           <a class="receipt-card" href="work/#history"><span class="maturity">Sourced notes</span><h3>History / Second Geometry</h3><p>Regional history, project interpretation, and myth named separately.</p><strong>Open the work</strong></a>
+          <a class="receipt-card receipt-experiment" href="work/#cota-model"><span class="maturity">In progress</span><h3>COTA Route Optimization</h3><p>Independent computational experiment in frequency allocation and network geometry. Working code is public; findings remain provisional.</p><strong>Open the experiment</strong></a>
         </div>
         <a class="button primary" href="work/">Open the receipts</a>
       </section>
 
       <section class="impact arrival-signal" id="origin" aria-labelledby="arrival-title">
         <p class="epistemic-note"><a href="work/#history">Mythic language / documented history and source trail</a></p>
-        <p class="kicker">02 / old place</p>
+        <p class="kicker">03 / old place</p>
         <h2 id="arrival-title">
           Columbus was monumental before Columbus was modern.
         </h2>
@@ -212,17 +205,17 @@
           River, crossing, route, earthwork, grid: the old pressure under the new city.
         </p>
         <p class="impact-line impact-credit">
-          The monumental geometry was Hopewell work, raised two thousand
-          years back. The city stands in their landscape.
+          Ohio holds monumental Hopewell landscapes. Columbus has its own mound history. Different sites, different histories.
+          <a href="work/#history">Documented history / sources</a>
         </p>
       </section>
 
       <section class="body-grid" id="body" aria-labelledby="body-title">
         <div class="body-lead">
-          <p class="kicker">03 / great city</p>
+          <p class="kicker">04 / great city</p>
           <h2 id="body-title">Many parts. One body.</h2>
           <p class="body-phrase">
-            Megalopolis meant Great City. Metropolis means chief city. Neo
+            Megalopolis meant Great City. Metropolis means mother city. Neo
             Columbus is the gathered body of an old charged place.
           </p>
         </div>
@@ -244,7 +237,7 @@
 
       <section class="inhabited-section" id="places" aria-labelledby="places-title">
         <div class="inhabited-head">
-          <p class="kicker">04 / inhabited city</p>
+          <p class="kicker">05 / inhabited city</p>
           <h2 id="places-title">
             The myth needs addresses.
           </h2>
@@ -255,37 +248,38 @@
           </p>
         </div>
         <div class="place-ledger" aria-label="Columbus place texture">
-          <article>
+          <article data-place-key="morse-road">
             <span>Morse Road</span>
             <strong>Shop signs. Bus stops. Languages in motion.</strong>
             <em>Make the corridor visible without sanding it into a brochure.</em>
           </article>
-          <article>
+          <article data-place-key="parsons-avenue">
             <span>Parsons Avenue</span>
             <strong>South side line. Clinics, brick, churches, bars.</strong>
             <em>Name the room before you name the policy.</em>
           </article>
-          <article>
+          <article data-place-key="franklinton">
             <span>Franklinton</span>
             <strong>River memory. Studios. Bridges. Homes that stay.</strong>
             <em>Beauty without displacement is the test.</em>
           </article>
-          <article>
+          <article data-place-key="linden">
             <span>Linden</span>
             <strong>North side artery. Corners, schools, routes, youth rooms.</strong>
             <em>The city is not complete until this place is felt.</em>
           </article>
-          <article>
+          <article data-place-key="the-hilltop">
             <span>The Hilltop</span>
             <strong>West side gravity. Porches, repairs, routes, grit.</strong>
             <em>No fragment language. No pity lens. Build the body.</em>
           </article>
-          <article>
+          <article data-place-key="broad-and-high">
             <span>Broad and High</span>
             <strong>Axis, capital, crossing, signal.</strong>
             <em>The center is not a postcard. It is a public room.</em>
           </article>
         </div>
+        <article class="place-history" data-place-key="mound-and-high"><span>Mound &amp; High</span><strong>A street name with a buried history.</strong><a href="https://github.com/NeoColumbus/Project-Columbus/blob/main/research/columbus-mounds.md">Documented history / source trail</a></article>
         <aside class="field-law" aria-label="Field law">
           <span>Field law</span>
           <strong>Place first. Proof second. Myth third. Then demand.</strong>
@@ -301,7 +295,7 @@
           <span></span>
         </div>
         <div class="geometry-copy">
-          <p class="kicker">05 / second geometry</p>
+          <p class="kicker">06 / second geometry</p>
           <h2 id="geometry-title">
             Before the grid:<br />
             circle. line. river.
@@ -315,7 +309,7 @@
 
       <section class="aesthetic-section" id="aesthetic" aria-labelledby="aesthetic-title">
         <div class="aesthetic-copy">
-          <p class="kicker">06 / earthwork futurism</p>
+          <p class="kicker">07 / earthwork futurism</p>
           <h2 id="aesthetic-title">
             Old ground.<br />
             New machine.<br />
@@ -387,7 +381,7 @@
 
       <section class="flag-section" id="flag" aria-labelledby="flag-title">
         <div class="flag-copy">
-          <p class="kicker">07 / city signal</p>
+          <p class="kicker">08 / city signal</p>
           <h2 id="flag-title">
             The city beneath the city has a flag now.
           </h2>
@@ -410,7 +404,7 @@
 
       <section class="drop-section" id="drop" aria-labelledby="drop-title">
         <div class="drop-copy">
-          <p class="kicker">08 / drop 001</p>
+          <p class="kicker">09 / drop 001</p>
           <h2 id="drop-title">
             The earthworks were first.<br />
             The next city is us.
@@ -458,7 +452,7 @@
 
       <section class="civic-stack" id="civics" aria-labelledby="civics-title">
         <div class="stack-head">
-          <p class="kicker">09 / civic stack</p>
+          <p class="kicker">10 / civic stack</p>
           <h2 id="civics-title">
             Growing anyway.<br />
             Choose city.
@@ -490,7 +484,7 @@
           <li>
             <span>04</span>
             <strong>Make the body safe.</strong>
-            <em>Visible safety, violence interruption, light, youth rooms, clean corridors.</em>
+            <em>Working lights, safe crossings, active public spaces, youth rooms, and violence interruption.</em>
           </li>
           <li>
             <span>05</span>
@@ -520,7 +514,7 @@
           <span></span>
         </div>
         <div class="ai-copy">
-          <p class="kicker">10 / AI civic dividend</p>
+          <p class="kicker">11 / AI civic dividend</p>
           <h2 id="ai-title">
             If the machine lives here, it pays tribute to the city.
           </h2>
@@ -569,11 +563,12 @@
           <span class="stop stop-three"></span>
         </div>
         <div>
-          <p class="kicker">11 / movement</p>
+          <p class="kicker">12 / movement</p>
           <h2 id="transit-title">
             COTA is not charity.<br />
             It is the city's nervous system.
           </h2>
+          <p class="movement-sources"><a href="work/#transit">Transit research</a> <a href="work/#cota-model">Route experiment</a></p>
         </div>
         <ul class="hit-list">
           <li>Frequency is dignity.</li>
@@ -584,7 +579,7 @@
       </section>
 
       <section class="beige-kill" aria-labelledby="beige-title">
-        <p class="kicker">12 / anti-beige law</p>
+        <p class="kicker">13 / anti-beige law</p>
         <h2 id="beige-title">Beige is a sedative.</h2>
         <p>
           More homes. More transit. More public beauty. No dead walls where
@@ -595,7 +590,7 @@
 
       <section class="campaign-wall" id="campaigns" aria-labelledby="campaigns-title">
         <div class="wall-head">
-          <p class="kicker">13 / print this</p>
+          <p class="kicker">14 / print this</p>
           <h2 id="campaigns-title">Campaign wall</h2>
         </div>
         <div class="poster-grid">
@@ -628,7 +623,7 @@
       </section>
 
       <section class="final-call" id="fork" aria-labelledby="fork-title">
-        <p class="kicker">14 / open source signal</p>
+        <p class="kicker">15 / open source signal</p>
         <h2 id="fork-title">
           One person can start the signal.<br />
           A city has to finish it.
@@ -645,7 +640,7 @@
       </section>
 
       <section class="signal-log" id="log" aria-labelledby="log-title">
-        <p class="kicker">15 / signal log</p>
+        <p class="kicker">16 / signal log</p>
         <h2 id="log-title">What has actually happened.</h2>
         <p class="log-note">
           No hype on this ledger. Dated entries only. If it is not on the
@@ -664,9 +659,12 @@
             <span>2026-07-08</span>
             <p>Field submission API deployed and tested end to end. The pipe works.</p>
           </li>
+          <li><span>2026-07-21</span><p>Printer-ready QR pack polished in the repository. This records the print files, not a physical campaign drop.</p></li>
+          <li><span>2026-09-22</span><p>Work / Receipts published. FACT, ANALYSIS, and PROPOSAL separated. Leads held apart from checked proof. Source trails and public voice revised: Started independently. Built in public. Open to correction.</p></li>
+          <li><span>2026-09-23</span><p>COTA route experiment linked as working code under audit, not a finding. Private screening code added; inbox activation awaits Cloudflare configuration.</p></li>
           <li class="log-next">
             <span>Next</span>
-            <p>First corridor drop: posters on real walls, first entries on the proof wall.</p>
+            <p>Activate and test private intake. Then document a real project observation with evidence and a recorded maintainer check.</p>
           </li>
         </ol>
         <div class="log-follow">

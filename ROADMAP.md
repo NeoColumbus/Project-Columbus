@@ -3,12 +3,14 @@
 ## Public-Launch Follow-Through
 
 - Harden the COTA note with dated service baselines and rider review.
-- Publish the COTA optimization experiment only with reproducible inputs, constraints, baseline, limitations, and code. No final result claims before publication.
+- The COTA working repository is linked. Publish no final findings until normalization/resource audits and reproducibility checks pass. First produce a separately reproducible sourced baseline: feed provenance/date, routes, service spans, and headways by route/time band.
 - Add zoning code citations and parcel/corridor examples.
 - Verify current AI infrastructure instruments and deal-level public costs; separate law from proposals.
 - Seek qualified historical review without presenting mythic language as evidence of continuity.
 - Turn field leads into checked proof with public evidence and a recorded maintainer check.
-- Configure Turnstile as a matched frontend/backend pair if needed; verify rate limits after Worker deployment.
+- Before promotion: provision D1 and mandatory Turnstile, deploy private intake, verify real edge rate limits and zero public issues at intake. The site is intentionally in save-card mode until these gates pass.
+- Then document one real project-initiated stop observation, date, location, photograph, and maintainer check. Do not fill this gap with synthetic participation.
+- Reconsider homepage Proof priority only when meaningful checked entries exist. Add Places links only to actual checked records.
 
 The loop is SIGNAL -> RECEIPTS -> FIELD -> PROOF -> RETURN. Myth is the ignition. Policy is the work. Every public work item needs a source trail and visible maturity state.
 

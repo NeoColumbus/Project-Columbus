@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-09-23 / Pre-Public-Launch Hardening
+
+- Locked 26 shipping/compatibility QR URLs in regression tests before backend changes; no printed asset regeneration.
+- Private D1 screening, mandatory Turnstile verification, edge limits, duplicate suppression, retention, authenticated batch review, and separate public LEAD publication. Optional classifier cannot lower deterministic risk or publish proof.
+- Deployment still requires Cloudflare configuration and real end-to-end tests. Site stays in save-card mode, not legacy public intake.
+- Fifth receipt links the working COTA route experiment without performance claims; updated source links, section numbering, Signal Log, navigation, and marquee accessibility.
+- Added local mound source boundaries, sacred-site conduct, artifact-level AI disclosure, and checked-record Places hooks. Empty proof wall remains honest.
+- Updated repository About description, canonical website, and civic topics through GitHub; confirmed Pages uses main.
+- Local QR, SQLite pressure, proof gate, responsive browser, deployment-artifact, and Worker dry-run checks pass. Production private-intake tests remain blocked by expired Cloudflare authentication and missing provisioning.
+
 All notable project changes should be tracked here.
 
 ## Unreleased

@@ -1,5 +1,7 @@
 # Start Here
 
+The loop is SIGNAL -> RECEIPTS -> FIELD -> PROOF -> RETURN. Start with the [work register](site/work/index.html); each item needs sources and a visible maturity state. The private field inbox is awaiting deployment: save a card rather than posting sensitive material to GitHub. [Current submission protocol](SUBMISSIONS.md).
+
 ## Start With The Receipts
 
 SIGNAL -> RECEIPTS -> FIELD -> PROOF -> RETURN.

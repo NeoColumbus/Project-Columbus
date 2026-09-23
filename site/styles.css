@@ -2887,3 +2887,13 @@ h1 {
   .site-header { padding: 12px 18px; }
   .mark-symbol { width: 26px; height: 26px; flex-shrink: 0; }
 }
+/* Launch receipts extend the existing two-column ledger, not the visual system. */
+.receipt-experiment { grid-column: 1 / -1; }
+.receipt-experiment p { max-width: 64ch; }
+.work-actions, .movement-sources { display: flex; flex-wrap: wrap; gap: 12px 24px; }
+.work-actions .button.ghost { color: var(--river-navy); background: transparent; border-color: var(--river-navy); }
+.movement-sources { font: 700 16px/1.5 Arial, sans-serif; }
+.place-history { position: relative; z-index: 2; grid-column: 1 / -1; padding: 24px 0; display: grid; gap: 12px; border-top: 2px solid currentColor; }
+.proof-card-entry[id] { scroll-margin-top: 100px; }
+.place-history strong { font-size: 28px; }
+[data-place-key] > a { font: 700 16px/1.5 Arial, sans-serif; overflow-wrap: anywhere; }

@@ -94,7 +94,7 @@ The stack:
 - domestic violence response
 - youth rooms and after-school life
 - lighting
-- clean corridors
+- working lights, safe crossings, active public spaces, and youth rooms
 - safe crossings
 - accountable policing
 - fast repair of broken public space

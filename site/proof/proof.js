@@ -18,13 +18,14 @@
       : escapeHtml(entry.proof || "Proof held for review");
 
     return `
-      <article class="proof-card proof-card-entry">
+      <article class="proof-card proof-card-entry" ${/^[a-zA-Z0-9_-]+$/.test(entry.id || '') ? `id="record-${entry.id}"` : ''}>
         <span>${escapeHtml(entry.date || `Entry ${String(index + 1).padStart(3, "0")}`)} / ${escapeHtml(entry.type || "Signal")} / checked field proof</span>
         <strong>${escapeHtml(entry.place || "Real place")}</strong>
         <em>${escapeHtml(entry.line || "No fake proof.")}</em>
         <p>${escapeHtml(entry.missingPiece || entry.break || "Missing piece under review.")}</p>
         <p>${proof}</p>
         <p>Submission via public issue / checked ${escapeHtml(entry.checkedAt)}</p>
+        ${entry.context ? `<p>Context / limitations: ${escapeHtml(entry.context)}</p>` : ''}
       </article>
     `;
   }
@@ -57,6 +58,7 @@
 
       if (entries.length > 0) {
         grid.innerHTML = entries.map(entryCard).join("");
+        if (/^#record-[a-zA-Z0-9_-]+$/.test(location.hash)) document.getElementById(location.hash.slice(1))?.scrollIntoView();
       } else if (openSlots.length > 0) {
         grid.innerHTML = openSlots.map(slotCard).join("");
       }

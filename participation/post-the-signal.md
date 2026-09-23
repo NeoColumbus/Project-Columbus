@@ -44,7 +44,7 @@ Then attach it to one Columbus truth.
 
 ## How To Send It Back
 
-Open an issue or pull request with:
+Use the [signal page](https://neocolumbus.github.io/Project-Columbus/site/signal/) to make a card. The private inbox is awaiting activation; save the card until it is available. Do not bypass screening by opening a public issue containing raw field material. Include:
 
 - place
 - photo or short description
@@ -54,3 +54,5 @@ Open an issue or pull request with:
 
 No expertise required.
 Just make it real.
+
+No stickers, posters, staging, climbing, or campaign photo ops on burial mounds, earthworks, or other sacred archaeological sites.

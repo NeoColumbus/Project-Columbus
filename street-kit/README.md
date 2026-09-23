@@ -1,5 +1,7 @@
 # Street Kit
 
+No stickers, posters, staging, climbing, or campaign photo ops on burial mounds, earthworks, or other sacred archaeological sites. Use permitted surfaces. Historical reference is not permission to use sacred ground as a campaign surface.
+
 <!-- HUMAN NOTE: This folder is for printable public artifacts. These should be easy to steal, remix, and make sharper. -->
 
 ## Drop 001 Poster Set

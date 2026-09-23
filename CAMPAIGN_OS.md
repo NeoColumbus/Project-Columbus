@@ -1,5 +1,11 @@
 # Campaign OS
 
+## Launch Gate
+
+SIGNAL -> RECEIPTS -> FIELD -> PROOF -> RETURN. Myth is the ignition. Policy is the work. Public work needs a source trail and visible maturity state. A screened candidate is not evidence; a published LEAD is not PROOF. Private intake must be deployed and checked before broad promotion. See [the deployment gate](api/field-submission/README.md).
+
+No stickers, posters, staging, climbing, or campaign photo ops on burial mounds, earthworks, or other sacred archaeological sites.
+
 <!-- HUMAN NOTE: This is the backstage machinery. Public artifacts should hit first and explain later. Keep the system sharp enough that strangers can act without reading the whole repo. -->
 
 Full City Columbus moves through SIGNAL -> RECEIPTS -> FIELD -> PROOF -> RETURN.
