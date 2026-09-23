@@ -9,6 +9,7 @@
 - Added local mound source boundaries, sacred-site conduct, artifact-level AI disclosure, and checked-record Places hooks. Empty proof wall remains honest.
 - Updated repository About description, canonical website, and civic topics through GitHub; confirmed Pages uses main.
 - Local QR, SQLite pressure, proof gate, responsive browser, deployment-artifact, and Worker dry-run checks pass. Production private-intake tests remain blocked by expired Cloudflare authentication and missing provisioning.
+- Resolved competing Pages builds by setting the repository to GitHub Actions deployment. Verified permanent and legacy public routes return 200 after deployment; public launch CI passed.
 
 All notable project changes should be tracked here.
 
