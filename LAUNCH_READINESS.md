@@ -14,6 +14,10 @@ Pages deployment now depends on the reusable launch checks succeeding. The QR an
 
 ## Production intake dependency
 
+Update, 2026-09-24: GitHub Actions Cloudflare credentials are now configured. Run 36036709903 deployed the private Worker, D1 migration, managed Turnstile, review secret, edge limiter, and retention cron. Real production probes passed unauthorized review, authenticated counts-only summary, malformed/oversized input, invalid verification, and bounded rate-limit rejection. Invalid probes left the private queue unchanged. The old public-issue intake implementation has been replaced. No genuine verified submission has passed yet; public intake stays disabled. The clearly labeled `/site/intake-check/` page permits a human browser test, not a field observation; check and remove that synthetic record before activation. Scheduled retention execution and human publication credentials still require operational verification.
+
+The following describes the initial access blocker, now resolved through Actions:
+
 The Cloudflare OAuth session is expired. Neither local API-token access nor the repository's Cloudflare Actions secrets is configured. A read-only admin probe returns the legacy route response; a malformed JSON request is rejected. No valid report was sent to the legacy Worker.
 
 The old Worker has NOT been replaced or disabled. Disabling the website button does not disable direct requests to it. Before promotion, an authorized operator must restore access to the owning Cloudflare account, replace/disable that deployment, provision the real D1 binding and migration, and configure the managed Turnstile widget and secrets. See [the activation checklist](api/field-submission/README.md).

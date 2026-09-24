@@ -5,7 +5,7 @@ compatibility_date = "2026-09-23"
 [[d1_databases]]
 binding = "DB"
 database_name = "full-city-private-intake"
-# Set the actual database_id after provisioning; never invent a production ID.
+database_id = "62baa265-fe05-4ec6-a713-c50353849323"
 migrations_dir = "migrations"
 
 [triggers]
