@@ -16,6 +16,10 @@ D1 schema: migrations/0001_private_intake.sql. Rejections retain daily counts on
 
 ## Activation Checklist
 
+Remote-browser setup: the manual **Deploy Field Submission API** Actions workflow provisions/reuses the named D1 database and managed Turnstile widget, applies migrations, replaces the legacy Worker, sets secrets, and runs negative production probes. It requires the two Cloudflare repository secrets; it never enables the website or bypasses a real Turnstile receipt test. Provider secret values are masked and not uploaded as artifacts.
+
+Set a dedicated `FIELD_REVIEW_TOKEN` repository secret (32+ random characters) to choose the review credential. Until supplied, deployment derives a stable, domain-separated HMAC review credential from the Cloudflare deployment token; rotating that token and redeploying also rotates review access. The derived value is never printed. Local CLI review requires a separately known dedicated review token. Existing Worker secrets not included in the upload, including any existing GitHub publication credential, are preserved.
+
 Use the account that owns full-city-field-submission.neocolumbus.workers.dev. Supply a Cloudflare API token through environment or the dashboard, never this repository or chat. Account permissions must cover Workers scripts, D1, and Turnstile for provisioning. Do not invent a database ID or widget key.
 
 1. Create a managed Turnstile widget for neocolumbus.github.io. Keep production verification bound to that hostname and action field-report.

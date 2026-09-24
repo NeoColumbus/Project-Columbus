@@ -29,3 +29,4 @@ api/**/.wrangler-dry-run/
 .env.*
 .dev.vars
 api/**/.dev.vars
+api/**/.provisioned.json
