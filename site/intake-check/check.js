@@ -20,9 +20,11 @@
     if (!verification || button.disabled) return;
     button.disabled = true;
     status.textContent = 'Sending technical test...';
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
     try {
       const response = await fetch('https://full-city-field-submission.neocolumbus.workers.dev/field-report', {
-        method: 'POST', headers: { 'content-type': 'application/json' }, signal: AbortSignal.timeout(15000),
+        method: 'POST', headers: { 'content-type': 'application/json' }, signal: controller.signal,
         body: JSON.stringify({
           kind: 'Deployment check', place: 'Synthetic deployment check - not a real place',
           break: 'Technical verification only. Not an observation or participation record.',
@@ -35,9 +37,10 @@
       status.textContent = response.status === 202 && result.ok
         ? 'Test received for private screening. Nothing published. Tell Codex "test received" so the private record can be checked and removed.'
         : `Test not confirmed (HTTP ${response.status}). Refresh, verify again, and retry later. Nothing published.`;
-    } catch {
-      status.textContent = 'Receipt unconfirmed. Refresh and retry later; duplicates are grouped. Tell Codex if this persists.';
+    } catch (error) {
+      status.textContent = `${error.name === 'AbortError' ? 'Request timed out after 15 seconds.' : 'The browser could not complete the connection.'} Receipt is unconfirmed. Open this page in Safari or Chrome rather than an embedded preview, then verify and retry; duplicates are grouped.`;
     } finally {
+      clearTimeout(timeout);
       verification = '';
       window.turnstile.reset(widget);
     }
