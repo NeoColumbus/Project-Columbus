@@ -47,6 +47,7 @@ try {
   else widget = await api('/challenges/widgets', 'POST', { name: 'Full City private intake', domains: ['neocolumbus.github.io'], mode: 'managed' });
   if (!widget.secret || widget.mode !== 'managed' || widget.domains.length !== 1 || widget.domains[0] !== 'neocolumbus.github.io') throw new Error('Existing widget configuration requires private review; refusing to alter it automatically.');
   mask(widget.secret);
+  console.log(`Public configuration: database_id=${db.uuid}; turnstile_site_key=${widget.sitekey}`);
   // Stable across runs; a dedicated secret can decouple review access from token rotation.
   const review = process.env.FIELD_REVIEW_TOKEN || createHmac('sha256', token).update('full-city-private-intake/review/v1').digest('hex');
   if (review.length < 32) throw new Error('FIELD_REVIEW_TOKEN must contain at least 32 characters.');
@@ -72,7 +73,15 @@ try {
   await probe('/field-report', 403, post(JSON.stringify({ turnstileToken: 'invalid-production-probe' })));
   await probe('/field-report', 403, post('{}'));
   await probe('/field-report', 403, post('{}'));
-  await probe('/field-report', 429, post('{}'));
+  // Cloudflare counters are approximate and per edge, not a globally exact sixth-request gate.
+  let limited = false;
+  for (let attempt = 0; attempt < 20 && !limited; attempt++) {
+    const response = await fetch(endpoint + '/field-report', { ...post('{}'), signal: AbortSignal.timeout(15000), redirect: 'error' });
+    if (![403, 429].includes(response.status)) throw new Error(`Rate-limit probe returned unexpected HTTP ${response.status}.`);
+    limited = response.status === 429;
+    await response.arrayBuffer();
+  }
+  if (!limited) throw new Error('No production rate-limit rejection observed within the bounded probe.');
   const after = await probe('/admin/summary', 200, { headers: { authorization: `Bearer ${review}` } });
   if (JSON.stringify(after.summary) !== JSON.stringify(summary.summary)) throw new Error('Queue changed during negative probes; investigate privately.');
   console.log('Production negative probes passed. No valid report or public issue submitted.');
