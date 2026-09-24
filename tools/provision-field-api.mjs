@@ -29,9 +29,15 @@ function wrangler(args, input) {
   console.log(`Wrangler ${args.slice(0, 3).join(' ')} succeeded.`);
 }
 async function probe(path, expected, options = {}) {
-  const response = await fetch(endpoint + path, { ...options, redirect: 'error', signal: AbortSignal.timeout(15000) });
-  if (response.status !== expected) throw new Error(`Production ${path}: expected ${expected}, received ${response.status}.`);
-  return response.json();
+  // Read-only probes may reach an old deployment while secret versions propagate.
+  const attempts = expected === 200 && path.startsWith('/admin/') ? 6 : 1;
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    const response = await fetch(endpoint + path, { ...options, redirect: 'error', signal: AbortSignal.timeout(15000) });
+    if (response.status === expected) return response.json();
+    if (attempt === attempts - 1 || ![401, 503].includes(response.status)) throw new Error(`Production ${path}: expected ${expected}, received ${response.status}.`);
+    await response.arrayBuffer();
+    await new Promise(resolve => setTimeout(resolve, 5000));
+  }
 }
 try {
   if (!token || !/^[a-f0-9]{32}$/i.test(account || '')) throw new Error('Configure a Cloudflare API token and 32-character account ID in Actions secrets.');
