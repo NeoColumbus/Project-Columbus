@@ -185,6 +185,7 @@ const entry = {
   proofUrl,
   sourceIssue: issueUrl,
   context: clean(section("Context")),
+  provenance: clean(section("Provenance")) || "Maintainer-checked record; original contributor provenance not specified",
   placeKey: /^[a-z0-9-]+$/.test(section("Place Key")) ? section("Place Key") : undefined,
   checkedBy: process.env.PROOF_REVIEWER,
   checkedAt: new Date().toISOString().slice(0, 10),

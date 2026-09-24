@@ -3,10 +3,11 @@ const fs = require('node:fs');
 const path = require('node:path');
 const http = require('node:http');
 const { chromium } = require('playwright');
-const root = path.resolve(__dirname, '..');
+const repo = path.resolve(__dirname, '..');
+const root = process.env.PUBLIC_ROOT ? path.resolve(process.env.PUBLIC_ROOT) : repo;
 // These manifests are shipping artifacts, not regenerated fixtures.
 const manifests = ['print-orders/library-sticker-test-drop-001/scan-paths.csv', 'print-orders/drop-001-printer-ready-qr/scan-paths.csv'];
-const urls = [...new Set(manifests.flatMap(file => fs.readFileSync(path.join(root, file), 'utf8').match(/https:\/\/neocolumbus\.github\.io\/Project-Columbus\/site\/signal\/[^"\r\n]+/g) || []))];
+const urls = [...new Set(manifests.flatMap(file => fs.readFileSync(path.join(repo, file), 'utf8').match(/https:\/\/neocolumbus\.github\.io\/Project-Columbus\/site\/signal\/[^"\r\n]+/g) || []))];
 assert.ok(urls.length >= 16, 'shipping QR inventory missing');
 urls.push('https://neocolumbus.github.io/Project-Columbus/site/signal/?drop=001&asset=poster-transit&source=sticker-007&kind=Transit&break=Missing%20shelter&line=The%20stop%20is%20a%20room.&place=Broad%20%26%20High&proof=https%3A%2F%2Fexample.com%2Fevidence#field-card');
 urls.push('https://neocolumbus.github.io/Project-Columbus/site/signal/?kind=Legacy%20Signal&line=Keep%20this');

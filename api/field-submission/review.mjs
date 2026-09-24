@@ -14,6 +14,10 @@ export async function reviewRequest(request, env) {
   if (!(await authorized(request, env))) return json({ ok: false, error: 'Unauthorized.' }, 401);
   if (!env.DB) return json({ ok: false, error: 'Review unavailable.' }, 503);
   const url = new URL(request.url);
+  if (request.method === 'GET' && url.pathname === '/admin/summary') {
+    const summary = await env.DB.prepare("SELECT COUNT(CASE WHEN status='candidate' THEN 1 END) AS candidates, COUNT(CASE WHEN status='quarantine' THEN 1 END) AS quarantine, MIN(CASE WHEN status IN ('candidate','quarantine') THEN created_at END) AS oldestPendingAt FROM submissions").first();
+    return json({ ok: true, summary });
+  }
   if (request.method === 'GET' && url.pathname === '/admin/review') {
     const state = url.searchParams.get('state') || 'candidate';
     if (!['candidate', 'quarantine', 'approved', 'published'].includes(state)) return json({ ok: false }, 400);

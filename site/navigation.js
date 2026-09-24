@@ -1,4 +1,20 @@
 (function () {
+  const pause = document.querySelector('.marquee-pause');
+  const track = document.querySelector('.marquee-track');
+  if (pause && track) {
+    pause.hidden = false;
+    let paused = false;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    function updateMotion() {
+      track.style.animationPlayState = paused || reduced.matches ? 'paused' : 'running';
+      pause.disabled = reduced.matches;
+      pause.setAttribute('aria-pressed', String(paused || reduced.matches));
+      pause.textContent = reduced.matches ? 'Motion off' : paused ? 'Resume slogans' : 'Pause slogans';
+    }
+    pause.addEventListener('click', () => { paused = !paused; updateMotion(); });
+    reduced.addEventListener('change', updateMotion);
+    updateMotion();
+  }
   const header = document.querySelector('.site-header');
   const nav = header?.querySelector('.nav');
   if (!nav) return;

@@ -35,6 +35,8 @@ Use genuine fresh Turnstile tokens from the configured hostname; never a product
 
 ## Review
 
+`pnpm field:review --summary` requests authenticated `GET /admin/summary` and prints only candidate count, quarantine count, and oldest pending date. It uses the same FIELD_REVIEW_TOKEN and rejects browser origins. No notification channel is configured; connect a private, authorized scheduler/channel before promising alerts, and send only these counts/status fields, never report contents.
+
 `pnpm field:review` reads FIELD_REVIEW_TOKEN from environment and uses HTTPS with redirects forbidden. Default candidate listing, up to100 records; process and repeat. Explicit `--state=quarantine` or `--state=approved`. Actions approve/reject/quarantine/skip; multiple IDs allowed. Publish requires separate confirmation and produces a public LEAD, never PROOF.
 
 Admin API: GET /admin/review?state=candidate; POST same route {action,ids}. Bearer REVIEW_TOKEN required; browser origins rejected; no CORS. The response contains private data: do not paste logs into issues or public CI.
@@ -42,6 +44,8 @@ Admin API: GET /admin/review?state=candidate; POST same route {action,ids}. Bear
 Publication uses a compare-and-set lock. If GitHub times out or a Worker terminates, sending/uncertain records are not automatically retried. Inspect GitHub for the private-intake:ID marker. If an issue exists, reconcile issue_url/status in D1. Only reset to pending after confirming no issue was created. Never reset and retry blindly.
 
 ## Checks And References
+
+2026-09-24 access check: local OAuth could not refresh; no local Cloudflare API token or repository Cloudflare Actions credentials were available. The deployed admin probe still returned the legacy route response. Intake remains disabled on the site; the old Worker still needs replacement or route removal. See [launch readiness](../../LAUNCH_READINESS.md).
 
 `pnpm test:qr`, `pnpm test:field-api`, `pnpm test:proof`, `pnpm test:launch`, `pnpm field-api:dry-run`.
 

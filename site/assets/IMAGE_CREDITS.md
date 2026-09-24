@@ -18,6 +18,8 @@ AI-assisted photo edit based on a real Columbus photograph.
 
 The edit preserves the source skyline composition and adds night atmosphere, color grade, reflections, and restrained civic light geometry for the landing page hero.
 
+Delivery variants `neo-columbus-hero.webp`, `neo-columbus-hero.jpg`, `neo-columbus-hero-mobile.webp`, and `neo-columbus-hero-mobile.jpg` are resized/compressed derivatives of the same hero, with no new generated content or composition changes. Same attribution and license; original PNG retained. Rebuild with `node tools/optimize-hero.cjs`.
+
 ## `og-card.jpg`
 
 Social share card: a 1200x630 center crop of `neo-columbus-hero.png`.

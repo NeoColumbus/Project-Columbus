@@ -15,7 +15,10 @@ const server = http.createServer((req, res) => {
     if (fs.statSync(file).isDirectory()) file = path.join(file, 'index.html');
     res.setHeader('Content-Type', mime[path.extname(file)] || 'application/octet-stream');
     fs.createReadStream(file).pipe(res);
-  } catch { res.writeHead(404).end(); }
+  } catch {
+    const notFound = path.join(root, '404.html');
+    res.writeHead(404, { 'content-type': 'text/html' }).end(fs.existsSync(notFound) ? fs.readFileSync(notFound) : 'Not found');
+  }
 });
 
 (async () => {
@@ -36,12 +39,26 @@ const server = http.createServer((req, res) => {
         assert.deepEqual(broken, [], route);
         assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, `overflow ${route} ${width}`);
         assert.ok(await page.locator('meta[property="og:image"]').getAttribute('content'));
+        await page.locator('.skip-link').focus();
+        await page.keyboard.press('Enter');
+        assert.equal(await page.evaluate(() => document.activeElement.tagName), 'MAIN', 'skip link focuses content');
+        const headings = await page.locator('h1,h2,h3,h4,h5,h6').evaluateAll(nodes => nodes.map(n => Number(n.tagName.slice(1))));
+        assert.equal(headings[0], 1);
+        for (let i=1;i<headings.length;i++) assert.ok(headings[i] <= headings[i-1]+1, `heading order ${route}`);
+        const og = new URL(await page.locator('meta[property="og:image"]').getAttribute('content'));
+        assert.equal((await page.request.get(base + og.pathname)).status(), 200, 'social preview asset');
         const links = await page.locator('a[href],link[href],script[src],img[src]').evaluateAll(nodes => nodes.map(n => n.getAttribute('href') || n.getAttribute('src')).filter(Boolean));
         for (const link of links) {
           const url = new URL(link, base + route);
           if (url.origin !== base) continue;
           assert.equal((await page.request.get(url.href)).status(), 200, `${route}: ${link}`);
-          if (url.hash && url.pathname === route) assert.equal(await page.locator(`[id="${decodeURIComponent(url.hash.slice(1))}"]`).count(), 1, link);
+          if (url.hash) {
+            if (url.pathname === route) assert.equal(await page.locator(`[id="${decodeURIComponent(url.hash.slice(1))}"]`).count(), 1, link);
+            else {
+              const html = await (await page.request.get(url.href)).text();
+              assert.ok(html.includes(`id="${decodeURIComponent(url.hash.slice(1))}"`), `cross-page anchor ${link}`);
+            }
+          }
         }
         if (width < 1281) {
           const toggle = page.locator('.nav-toggle');
@@ -59,6 +76,15 @@ const server = http.createServer((req, res) => {
         await page.screenshot({ path: path.join(output, `${route.split('/')[2] || 'home'}-${width}.png`), fullPage: true });
         await page.screenshot({ path: path.join(output, `${route.split('/')[2] || 'home'}-${width}-viewport.png`) });
         if (route === '/site/') {
+          const pause = page.locator('.marquee-pause');
+          await pause.focus(); await page.keyboard.press('Enter');
+          assert.equal(await pause.getAttribute('aria-pressed'), 'true');
+          assert.equal(await page.locator('.marquee-track').evaluate(el => getComputedStyle(el).animationPlayState), 'paused');
+          await pause.click();
+          assert.equal(await pause.getAttribute('aria-pressed'), 'false');
+          const resources = await page.evaluate(() => performance.getEntriesByType('resource').map(r => r.name));
+          assert.ok(resources.some(url => url.endsWith(width <= 600 ? 'neo-columbus-hero-mobile.webp' : 'neo-columbus-hero.webp')), `responsive hero ${width}`);
+          assert.ok(!resources.some(url => url.endsWith('neo-columbus-hero.png')), 'original hero should not download');
           const boxes = await page.locator('.receipt-card').evaluateAll(nodes => nodes.map(el => { const r = el.getBoundingClientRect(); return { x:r.x,y:r.y,right:r.right,bottom:r.bottom,width:r.width }; }));
           assert.equal(boxes.length, 5);
           for (let i=0;i<boxes.length;i++) for (let j=i+1;j<boxes.length;j++) {
@@ -78,6 +104,18 @@ const server = http.createServer((req, res) => {
     await page.goto(base + '/');
     await page.waitForURL('**/site/');
     assert.equal(await page.locator('h1').count(), 1);
+    for (const href of await page.locator('.participation-paths a[href$=".pdf"]').evaluateAll(nodes => nodes.map(n => n.href))) {
+      const url = new URL(href);
+      assert.equal(url.hostname, 'raw.githubusercontent.com');
+      const relative = url.pathname.replace('/NeoColumbus/Project-Columbus/main/', '');
+      const file = path.resolve(__dirname, '..', relative);
+      assert.ok(fs.readFileSync(file).subarray(0,5).equals(Buffer.from('%PDF-')), 'existing downloadable PDF');
+    }
+    if (process.env.PUBLIC_ROOT) {
+      const missing = await page.request.get(base + '/Project-Columbus/missing-page-fixture');
+      assert.equal(missing.status(), 404);
+      assert.ok((await missing.text()).includes('This page is a fragment.'));
+    }
     const params = { drop: '001', asset: 'poster-transit', source: 'sticker-011', kind: 'Transit', break: 'Missing shelter', line: 'The stop is a room.', place: 'Broad & High', proof: 'https://example.com/photo.jpg' };
     await page.goto(base + '/Project-Columbus/site/signal/?' + new URLSearchParams(params));
     for (const key of ['kind', 'break', 'line', 'place', 'proof']) assert.equal(await page.locator(`#field-${key}`).inputValue(), params[key]);
@@ -121,8 +159,8 @@ const server = http.createServer((req, res) => {
     await page.route('https://full-city-field-submission.neocolumbus.workers.dev/**', route => { submissions++; return route.fulfill({ status: 202, contentType: 'application/json', body: JSON.stringify({ ok: true, state: 'LEAD', queued: true }) }); });
     await page.locator('#field-place').fill('Test stop');
     await page.locator('#field-break').fill('Missing shelter');
-    await page.locator('#submit-field-card').click();
-    await page.waitForFunction(() => document.querySelector('#field-card-status').textContent.includes('opening soon'));
+    assert.equal(await page.locator('#submit-field-card').isDisabled(), true);
+    assert.equal(await page.locator('#submit-field-card').textContent(), 'Submissions unavailable');
     assert.equal(submissions, 0, 'unconfigured site never sends to legacy public Worker');
     await page.addInitScript(() => {
       window.turnstile = { render(el, options) { options.callback('fixture-token'); return 1; }, reset() {} };
@@ -132,6 +170,32 @@ const server = http.createServer((req, res) => {
     await page.locator('#submit-field-card').click();
     await page.waitForFunction(() => document.querySelector('#field-card-status').textContent.includes('private screening'));
     assert.equal(submissions, 1);
+    for (const [key, limit] of [['place',180],['break',500],['line',240],['proof',900]]) assert.equal(await page.locator('#field-'+key).getAttribute('maxlength'), String(limit));
+    assert.equal(await page.locator('#field-break').evaluate(el => el.tagName), 'TEXTAREA');
+    await page.unroute('https://full-city-field-submission.neocolumbus.workers.dev/**');
+    await page.route('https://full-city-field-submission.neocolumbus.workers.dev/**', route => route.fulfill({ status: 503, contentType:'application/json', body:'{"error":"SECRET internal failure"}' }));
+    await page.reload();
+    await page.locator('#submit-field-card').click();
+    await page.waitForFunction(() => document.querySelector('#field-card-status').textContent.includes('Inbox unavailable'));
+    assert.equal(await page.locator('#field-place').inputValue(), 'Test stop');
+    assert.equal(await page.locator('#field-card-status').textContent().then(s => s.includes('SECRET')), false);
+    await page.evaluate(() => Object.defineProperty(navigator, 'clipboard', { configurable:true, value:{ writeText:async () => { throw new Error('denied'); } } }));
+    await page.locator('#copy-field-card').click();
+    assert.ok((await page.locator('#field-card-status').textContent()).includes('copy the text below manually'));
+    assert.equal(await page.locator('#manual-copy-output').inputValue(), await page.locator('#field-card-output').inputValue());
+    await page.locator('#copy-card-link').click();
+    assert.ok((await page.locator('#manual-copy-output').inputValue()).includes('/site/signal/?'));
+    await page.unroute('https://full-city-field-submission.neocolumbus.workers.dev/**');
+    await page.route('https://full-city-field-submission.neocolumbus.workers.dev/**', () => {});
+    await page.reload();
+    await page.clock.install();
+    await page.locator('#submit-field-card').click();
+    await page.clock.runFor(16000);
+    await page.waitForFunction(() => document.querySelector('#field-card-status').textContent.includes('timed out'));
+    assert.equal(await page.locator('#field-break').inputValue(), 'Missing shelter');
+    assert.equal(await page.locator('#submit-field-card').isDisabled(), false);
+    await page.unroute('https://full-city-field-submission.neocolumbus.workers.dev/**');
+    await page.clock.resume();
     await page.route('**/proof-data.json', route => route.fulfill({ contentType: 'application/json', body: JSON.stringify({ entries: [
       { place: 'Unverified lead', status: 'lead', proofUrl: 'https://example.com' },
       { place: 'Unchecked link', status: 'published', proofUrl: 'https://example.com' },

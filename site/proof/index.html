@@ -28,8 +28,11 @@
     <link rel="stylesheet" href="../styles.css" />
     <script src="proof.js" defer></script>
     <script src="../navigation.js" defer></script>
+    <script src="../config.js" defer></script>
+    <script src="../intake-status.js" defer></script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header" aria-label="Primary">
       <a class="mark" href="../" aria-label="Full City Columbus home">
         <span class="mark-symbol" aria-hidden="true"></span>
@@ -37,13 +40,14 @@
       </a>
       <nav class="nav" aria-label="Proof sections">
         <a href="../work/">Work</a>
-        <a href="../signal/">Scan</a>
+        <a href="../signal/">Report</a>
+        <a href="../#campaigns">Posters</a>
         <a href="#slots">Slots</a>
         <a href="https://github.com/NeoColumbus/Project-Columbus">Repo</a>
       </nav>
     </header>
 
-    <main class="proof-main">
+    <main class="proof-main" id="main-content" tabindex="-1">
       <section class="proof-hero" aria-labelledby="proof-wall-title">
         <div>
           <p class="kicker">Proof wall / public ledger</p>
@@ -53,8 +57,7 @@
             Only checked claims with public evidence go on the wall.
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="../signal/#field-card">Make a field card</a>
-            <a class="button ghost" href="../signal/#field-card">Send proof upstream</a>
+            <a class="button primary" href="../signal/#field-card" data-intake-action>Make a field card</a>
           </div>
         </div>
       </section>
@@ -75,6 +78,8 @@
         <p class="kicker" data-proof-status>Open slots</p>
         <h2 id="slots-title">Bring back the city.</h2>
         <p class="lead-note">Community field submissions / checked proof only. Open slots below are invitations, not reports received. A submission remains a lead until evidence and context have been checked.</p>
+        <p class="lead-note" data-proof-empty hidden>No checked field records yet. Bring one real place into view; the field-card link above is the starting point.</p>
+        <p class="lead-note" data-intake-note>Private intake is unavailable. You can prepare and save a field card; it will not be submitted.</p>
         <div class="proof-grid" data-proof-grid>
           <article class="proof-card">
             <span>Slot 001</span>
@@ -110,7 +115,6 @@
           building.
         </p>
         <div class="final-actions">
-          <a class="button primary" href="../signal/#field-card">Make a field card</a>
           <a class="button ghost light" href="https://github.com/NeoColumbus/Project-Columbus/blob/main/submissions/proof-wall.md">Open source ledger</a>
         </div>
       </section>

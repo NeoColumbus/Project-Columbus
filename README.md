@@ -19,6 +19,8 @@ Private intake code is ready for deployment, not claimed live. The site currentl
 
 ### Compatibility Checks
 
+Pages deployment requires the reusable launch checks to pass, including QR and browser checks against the built artifact. Production intake tests are separate and cannot be satisfied by mocks. Current access dependencies and the counts-only private queue command are recorded in [launch readiness](LAUNCH_READINESS.md).
+
 `pnpm build:pages` stages only public files in `dist/pages`, with the permanent `/site/` tree and the shorter legacy routes both present. Pages deploys that artifact, not a flattened `site/` folder.
 
 GitHub Pages must use **GitHub Actions** as its build source. The `deploy-pages.yml` workflow deploys from `main`. Do not also enable the legacy branch build: it can overwrite the tested artifact and lose compatibility routes. This setting was corrected and the live routes checked on 2026-09-23.

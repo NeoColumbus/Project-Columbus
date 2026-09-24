@@ -24,7 +24,7 @@
         <em>${escapeHtml(entry.line || "No fake proof.")}</em>
         <p>${escapeHtml(entry.missingPiece || entry.break || "Missing piece under review.")}</p>
         <p>${proof}</p>
-        <p>Submission via public issue / checked ${escapeHtml(entry.checkedAt)}</p>
+        <p>${escapeHtml(entry.provenance || 'Field record; contributor provenance not specified')} / checked ${escapeHtml(entry.checkedAt)}</p>
         ${entry.context ? `<p>Context / limitations: ${escapeHtml(entry.context)}</p>` : ''}
       </article>
     `;
@@ -55,6 +55,8 @@
         } catch { return false; }
       });
       const openSlots = Array.isArray(data.openSlots) ? data.openSlots : [];
+      const empty = document.querySelector('[data-proof-empty]');
+      if (empty) empty.hidden = entries.length > 0;
 
       if (entries.length > 0) {
         grid.innerHTML = entries.map(entryCard).join("");

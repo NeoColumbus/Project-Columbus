@@ -4,6 +4,7 @@
   const config = window.FULL_CITY_CONFIG || {};
   let turnstileToken = "";
   let turnstileWidgetId = null;
+  const intakeAvailable = config.fieldSubmissionEnabled === true && Boolean(config.turnstileSiteKey) && Boolean(config.fieldSubmissionEndpoint);
 
   const fields = {
     kind: document.querySelector("#field-kind"),
@@ -120,6 +121,7 @@
   function updateCard() {
     const card = buildCard();
     fields.output.value = card;
+    fields.line.placeholder = fallback[fields.kind.value]?.line || 'One-sentence summary';
     fields.github.href = "https://github.com/NeoColumbus/Project-Columbus/blob/main/SUBMISSIONS.md";
   }
 
@@ -140,22 +142,31 @@
   function canSubmitPayload(payload) {
     if (!payload.place) return "Add a place first.";
     if (!payload.break) return "Name what is missing.";
-    if (!payload.line) return "Add one public line.";
+    if (!payload.line) return "Add a one-sentence summary.";
+    const limits = { kind: 60, place: 180, break: 500, line: 240, proof: 900 };
+    for (const [key, max] of Object.entries(limits)) if (payload[key].length > max) return `Please shorten ${key === 'break' ? 'the condition description' : key === 'line' ? 'the summary' : key} to ${max} characters.`;
+    if (payload.place.length < 3 || payload.break.length < 3 || payload.line.length < 5) return "Add a place and condition of at least 3 characters, and a summary of at least 5.";
     return "";
   }
 
-  async function copyCard() {
-    const card = buildCard();
+  async function copyText(text, successMessage) {
     try {
-      await navigator.clipboard.writeText(card);
-      fields.status.textContent = "Copied.";
-    } catch (error) {
-      fields.output.focus();
-      fields.output.select();
-      document.execCommand("copy");
-      fields.status.textContent = "Copied.";
+      await navigator.clipboard.writeText(text);
+      fields.status.textContent = successMessage;
+      document.querySelector('#manual-copy-wrap').hidden = true;
+      return true;
+    } catch {
+      const manual = document.querySelector('#manual-copy-output');
+      document.querySelector('#manual-copy-wrap').hidden = false;
+      manual.value = text;
+      manual.focus();
+      manual.select();
+      fields.status.textContent = "Automatic copy unavailable. Select and copy the text below manually. Nothing was submitted.";
+      return false;
     }
   }
+
+  async function copyCard() { return copyText(buildCard(), "Card copied. Nothing submitted."); }
 
   async function shareCard() {
     const card = buildCard();
@@ -173,8 +184,7 @@
       }
     }
 
-    await copyCard();
-    fields.status.textContent = "Share unavailable. Card copied.";
+    await copyText(card, "Sharing unavailable. Card copied instead; nothing submitted.");
   }
 
   async function submitFieldCard() {
@@ -189,11 +199,11 @@
       return;
     }
 
-    if (!endpoint || config.fieldSubmissionEnabled !== true || !config.turnstileSiteKey) {
-      await copyCard();
-      fields.status.textContent = "Private inbox opening soon. Card copied; keep it for later.";
+    if (!intakeAvailable) {
+      fields.status.textContent = "Submissions unavailable. Nothing sent. You can download or copy your card for later.";
       return;
     }
+    if (button.disabled) return;
 
     if (config.turnstileSiteKey && !turnstileToken) {
       fields.status.textContent = "Complete verification first.";
@@ -202,6 +212,8 @@
 
     button.disabled = true;
     fields.status.textContent = "Sending.";
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
 
     try {
       const response = await fetch(endpoint, {
@@ -209,20 +221,22 @@
         headers: {
           "content-type": "application/json"
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+        signal: controller.signal
       });
       const data = await response.json().catch(() => ({}));
 
       if (!response.ok || !data.ok) {
-        throw new Error(data.error || "Submission failed.");
+        const guidance = response.status === 429 ? "Too many attempts. Wait a minute, then verify and retry." : response.status === 403 ? "Verification failed. Complete verification again and retry." : response.status === 422 ? "Report not accepted. Remove personal details or unsupported allegations and check the fields." : "Inbox unavailable. Try again later.";
+        fields.status.textContent = `${guidance} Your entries are still here; you can download a copy. Nothing confirmed received.`;
+        return;
       }
 
       fields.status.textContent = "Lead received for private screening. Nothing published yet.";
-      resetTurnstile();
     } catch (error) {
-      await copyCard();
-      fields.status.textContent = "Submission failed. Card copied.";
+      fields.status.textContent = `${error.name === 'AbortError' ? 'Request timed out.' : 'Connection failed.'} Receipt is unconfirmed. Your entries are still here. Download a copy, or verify again and retry; duplicate reports are grouped.`;
     } finally {
+      clearTimeout(timeout);
       resetTurnstile();
       button.disabled = false;
     }
@@ -239,7 +253,7 @@
   function setupTurnstile() {
     const siteKey = String(config.turnstileSiteKey || "").trim();
 
-    if (!siteKey || !fields.turnstileWrap || !fields.turnstile) return;
+    if (!intakeAvailable || !siteKey || !fields.turnstileWrap || !fields.turnstile) return;
 
     fields.turnstileWrap.hidden = false;
     window.onFullCityTurnstileLoad = () => {
@@ -276,13 +290,7 @@
   }
 
   async function copyCardLink() {
-    try {
-      await navigator.clipboard.writeText(cardUrl());
-      fields.status.textContent = "Card link copied.";
-    } catch (error) {
-      await copyCard();
-      fields.status.textContent = "Link unavailable. Card copied.";
-    }
+    await copyText(cardUrl(), "Card link copied. It contains your entered information. Nothing submitted.");
   }
 
   function downloadCard() {
@@ -301,7 +309,7 @@
     link.click();
     link.remove();
     URL.revokeObjectURL(url);
-    fields.status.textContent = "Downloaded.";
+    fields.status.textContent = "Card download started. Nothing submitted.";
   }
 
   function hydrateFromUrl() {
@@ -373,14 +381,17 @@
   });
 
   document.querySelector("#copy-field-card")?.addEventListener("click", copyCard);
-  document.querySelector("#submit-field-card")?.addEventListener("click", submitFieldCard);
+  document.querySelector('.field-card-form')?.addEventListener('submit', event => { event.preventDefault(); submitFieldCard(); });
   document.querySelector("#share-field-card")?.addEventListener("click", shareCard);
   document.querySelector("#copy-card-link")?.addEventListener("click", copyCardLink);
   document.querySelector("#download-field-card")?.addEventListener("click", downloadCard);
 
   hydrateFromUrl();
   const availability = document.querySelector('#inbox-availability');
-  if (availability && config.fieldSubmissionEnabled === true && config.turnstileSiteKey) availability.hidden = true;
+  const sendButton = document.querySelector('#submit-field-card');
+  sendButton.disabled = !intakeAvailable;
+  sendButton.textContent = intakeAvailable ? 'Send to project' : 'Submissions unavailable';
+  if (availability && intakeAvailable) availability.textContent = 'Private intake is available. Reports wait for screening and human review.';
   setScanContext();
   setupTurnstile();
   updateCard();

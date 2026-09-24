@@ -73,7 +73,7 @@ a {
   justify-content: space-between;
   padding: 20px clamp(18px, 4vw, 54px);
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(5, 6, 6, 0.82), rgba(5, 6, 6, 0));
+  background: rgba(5, 6, 6, 0.97);
 }
 
 .mark,
@@ -145,7 +145,7 @@ a {
   background:
     linear-gradient(90deg, rgba(5, 6, 6, 0.98) 0%, rgba(5, 6, 6, 0.68) 38%, rgba(5, 6, 6, 0.04) 78%),
     linear-gradient(0deg, rgba(5, 6, 6, 0.96) 0%, rgba(5, 6, 6, 0.08) 52%, rgba(5, 6, 6, 0.48) 100%),
-    url("assets/neo-columbus-hero.png") center / cover no-repeat;
+    var(--hero-image) center / cover no-repeat;
 }
 
 .hero::before {
@@ -1848,7 +1848,7 @@ h1 {
   justify-content: center;
   background:
     linear-gradient(90deg, rgba(5, 6, 6, 0.94), rgba(5, 6, 6, 0.48)),
-    url("assets/neo-columbus-hero.png") center / cover no-repeat;
+    var(--hero-image) center / cover no-repeat;
 }
 
 .final-call h2 {
@@ -1996,7 +1996,7 @@ h1 {
   padding: 112px clamp(18px, 5vw, 72px) 70px;
   background:
     linear-gradient(90deg, rgba(5, 6, 6, 0.98), rgba(5, 6, 6, 0.72) 46%, rgba(5, 6, 6, 0.26)),
-    url("assets/neo-columbus-hero.png") center / cover no-repeat;
+    var(--hero-image) center / cover no-repeat;
 }
 
 .signal-hero-page::before {
@@ -2892,6 +2892,37 @@ h1 {
 .receipt-experiment p { max-width: 64ch; }
 .work-actions, .movement-sources { display: flex; flex-wrap: wrap; gap: 12px 24px; }
 .work-actions .button.ghost { color: var(--river-navy); background: transparent; border-color: var(--river-navy); }
+
+:root { --hero-image: url("assets/neo-columbus-hero.jpg"); }
+@supports (background-image: image-set(url("x.webp") type("image/webp"))) {
+  :root { --hero-image: image-set(url("assets/neo-columbus-hero.webp") type("image/webp"), url("assets/neo-columbus-hero.jpg") type("image/jpeg")); }
+}
+@media (max-width: 600px) {
+  :root { --hero-image: url("assets/neo-columbus-hero-mobile.jpg"); }
+  @supports (background-image: image-set(url("x.webp") type("image/webp"))) {
+    :root { --hero-image: image-set(url("assets/neo-columbus-hero-mobile.webp") type("image/webp"), url("assets/neo-columbus-hero-mobile.jpg") type("image/jpeg")); }
+  }
+}
+.skip-link { position: fixed; top: 8px; left: 12px; z-index: 100; padding: 16px; background: var(--amber); color: var(--black); transform: translateY(-160%); }
+.skip-link:focus { transform: translateY(0); }
+.marquee { position: relative; }
+.marquee-pause { position: relative; z-index: 2; min-height: 44px; padding: 10px 16px; border: 2px solid var(--bone); background: var(--black); color: var(--bone); font: 700 14px Arial, sans-serif; cursor: pointer; }
+.marquee-pause:disabled { cursor: default; }
+.marquee:has(.marquee-pause[hidden]) .marquee-track { animation-play-state: paused; }
+.brand-note, .advanced-contribution { font: 18px/1.6 Arial, sans-serif; max-width: 60ch; }
+.participation-paths { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin-top: 32px; }
+.participation-paths > div { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; border-top: 3px solid var(--amber); padding-top: 20px; }
+.participation-paths h3 { font-size: 26px; line-height: 1.2; margin: 0; }
+.participation-paths p, .participation-paths a:not(.button) { font: 18px/1.5 Arial, sans-serif; margin: 0; }
+.participation-paths a { overflow-wrap: anywhere; min-height: 44px; }
+.field-card-form #field-break { min-height: 144px; font: 16px/1.5 Arial, sans-serif; letter-spacing: 0; }
+.field-link-note { grid-column: 1 / -1; font: 16px/1.5 Arial, sans-serif; }
+.field-card-form .field-secondary { border-top: 1px solid var(--amber); padding-top: 16px; }
+.field-card-form [hidden] { display: none; }
+.field-card-form .button:disabled { cursor: not-allowed; opacity: 0.75; }
+.field-card-form label { font-size: 14px; letter-spacing: 0; }
+#manual-copy-output { min-height: 120px; }
+@media (max-width: 900px) { .participation-paths { grid-template-columns: 1fr; } }
 .movement-sources { font: 700 16px/1.5 Arial, sans-serif; }
 .place-history { position: relative; z-index: 2; grid-column: 1 / -1; padding: 24px 0; display: grid; gap: 12px; border-top: 2px solid currentColor; }
 .proof-card-entry[id] { scroll-margin-top: 100px; }

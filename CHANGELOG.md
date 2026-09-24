@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-09-24 / Sticker Visitor Readiness
+
+- Clearer field labels, multiline conditions, matched limits, honest unavailable intake, separate save/share actions, bounded timeout, and manual clipboard recovery.
+- Direct printable PDF downloads, existing update channels, consistent navigation, and neutral record provenance. No new field participation or model results claimed.
+- Responsive WebP/JPEG hero derivatives preserve the original image and attribution; added skip links, keyboard marquee pause, and opaque navigation.
+- Added authenticated counts-only queue summary; notification destination remains unconfigured.
+- Required launch checks now gate Pages deployment and exercise the built artifact. Production private intake remains blocked on Cloudflare access and real provisioning/verification.
+
 ## 2026-09-23 / Pre-Public-Launch Hardening
 
 - Locked 26 shipping/compatibility QR URLs in regression tests before backend changes; no printed asset regeneration.

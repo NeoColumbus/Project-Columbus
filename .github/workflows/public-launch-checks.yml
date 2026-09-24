@@ -1,9 +1,8 @@
 name: Public launch checks
 on:
-  push:
-    branches: [main]
   pull_request:
   workflow_dispatch:
+  workflow_call:
 permissions:
   contents: read
 jobs:
@@ -22,8 +21,10 @@ jobs:
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm test:field-api
       - run: pnpm test:proof
-      - run: pnpm test:qr
       - run: pnpm build:pages
+      - run: pnpm test:qr
+        env:
+          PUBLIC_ROOT: dist/pages
       - run: pnpm test:launch
         env:
           PUBLIC_ROOT: dist/pages

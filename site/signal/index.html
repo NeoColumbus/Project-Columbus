@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="../styles.css" />
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header" aria-label="Primary">
       <a class="mark" href="../" aria-label="Full City Columbus home">
         <span class="mark-symbol" aria-hidden="true"></span>
@@ -37,13 +38,13 @@
         <a href="../work/">Work</a>
         <a href="#actions">Act</a>
         <a href="#field-card">Card</a>
-        <a href="#proof">Proof</a>
-        <a href="../proof/">Wall</a>
+        <a href="../proof/">Proof</a>
+        <a href="../#campaigns">Posters</a>
         <a href="https://github.com/NeoColumbus/Project-Columbus">Repo</a>
       </nav>
     </header>
 
-    <main class="signal-main">
+    <main class="signal-main" id="main-content" tabindex="-1">
       <section class="signal-hero-page" aria-labelledby="signal-title">
         <div class="signal-map" aria-hidden="true">
           <span></span>
@@ -103,7 +104,7 @@
             data-line="Transit is the nervous system."
           >
             <span>Transit</span>
-            <strong>Score a bus stop.</strong>
+            <strong>Report a bus stop.</strong>
             <em>Shelter, shade, crossing, light, route information, dignity.</em>
           </a>
           <a
@@ -136,12 +137,12 @@
           <p class="kicker">02 / field card</p>
           <h2 id="field-card-title">Put a place on record.</h2>
           <p>
-            No login at the front door. Make the card, copy it, share it, then
-            send it upstream when the line is sharp enough.
+            Name the place and describe the condition. Keep the suggested summary
+            or write your own. No campaign copy required.
           </p>
           <p class="lead-note"><strong>LEAD</strong>: place, missing piece, one line. No photo link required. <strong>PROOF</strong>: the same claim with checkable evidence, checked by a maintainer before publication. Sending a card does not put it on the proof wall.</p>
           <p class="lead-note">Reports are screened before anything is published. Submissions begin as leads. Evidence is checked before a lead becomes proof. Keep personal details and secrets out; no visitor profile is created.</p>
-          <p class="lead-note" id="inbox-availability">Private inbox opening soon. You can still make, copy, and save a card.</p>
+          <p class="lead-note" id="inbox-availability">Submissions are unavailable while private intake is configured. You can save a card; saving does not send it to the project.</p>
         </div>
         <form class="field-card-form" aria-label="Field card generator">
           <label>
@@ -155,19 +156,19 @@
           </label>
           <label>
             Place
-            <input id="field-place" name="place" type="text" placeholder="Street, stop, wall, block, building" />
+            <input id="field-place" name="place" type="text" minlength="3" maxlength="180" placeholder="Street, stop, wall, block, building" />
           </label>
           <label>
-            Break
-            <input id="field-break" name="break" type="text" placeholder="What is missing or broken?" />
+            What's missing?
+            <textarea id="field-break" name="break" rows="4" minlength="3" maxlength="500" placeholder="Describe the condition at this place."></textarea>
           </label>
           <label>
-            Line
-            <input id="field-line" name="line" type="text" placeholder="One sentence that hits." />
+            One-sentence summary
+            <input id="field-line" name="line" type="text" minlength="5" maxlength="240" placeholder="Keep the suggested summary or write your own." />
           </label>
           <label class="field-proof-input">
             Evidence (optional for a lead)
-            <input id="field-proof" name="proof" type="text" placeholder="Public photo, document, or post URL" />
+            <input id="field-proof" name="proof" type="url" maxlength="900" placeholder="Public photo, document, or post URL" />
           </label>
           <label class="hp-field" aria-hidden="true">
             Website
@@ -180,14 +181,20 @@
             Card
             <textarea id="field-card-output" readonly rows="10"></textarea>
           </label>
-          <div class="final-actions">
-            <button class="button primary" id="submit-field-card" type="button">Send to project</button>
+          <div class="final-actions field-send">
+            <button class="button primary" id="submit-field-card" type="submit" disabled aria-describedby="inbox-availability">Submissions unavailable</button>
+          </div>
+          <div class="final-actions field-secondary" role="group" aria-label="Save or share a copy">
             <button class="button ghost light" id="copy-field-card" type="button">Copy field card</button>
             <button class="button ghost light" id="share-field-card" type="button">Share field card</button>
             <button class="button ghost light" id="copy-card-link" type="button">Copy card link</button>
             <button class="button ghost light" id="download-field-card" type="button">Download card</button>
             <a class="button ghost light" id="github-field-report" href="https://github.com/NeoColumbus/Project-Columbus/blob/main/SUBMISSIONS.md">Submission protocol</a>
           </div>
+          <p class="field-link-note">Shared card links include your entered information in the URL. Anyone with the link can read it. Keep personal details out.</p>
+          <label class="field-output" id="manual-copy-wrap" hidden>Copy manually
+            <textarea id="manual-copy-output" readonly rows="4"></textarea>
+          </label>
           <p class="field-card-status" id="field-card-status" role="status" aria-live="polite"></p>
         </form>
       </section>

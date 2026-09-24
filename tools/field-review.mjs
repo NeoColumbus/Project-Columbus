@@ -5,6 +5,7 @@ const endpoint = new URL(process.env.FIELD_REVIEW_URL || 'https://full-city-fiel
 if (endpoint.protocol !== 'https:' && !['localhost', '127.0.0.1'].includes(endpoint.hostname)) throw new Error('HTTPS required.');
 if (!process.env.FIELD_REVIEW_TOKEN) throw new Error('Set FIELD_REVIEW_TOKEN in your shell; do not put it in command arguments.');
 const args = process.argv.slice(2);
+if (args.includes('--summary')) endpoint.pathname = '/admin/summary';
 const state = args.find(arg => arg.startsWith('--state='))?.split('=')[1] || 'candidate';
 endpoint.searchParams.set('state', state);
 async function request(body) {
@@ -14,6 +15,7 @@ async function request(body) {
 }
 const printable = value => JSON.stringify(value).replace(/[\u007f-\u009f\u202a-\u202e]/g, '');
 const data = await request();
+if (args.includes('--summary')) { console.log(JSON.stringify(data.summary)); process.exit(0); }
 console.log('Attempts in retained window (not people):', printable(data.counts));
 for (const item of data.items) console.log(printable({ id: item.id, status: item.status, ...item.report, flags: item.flags, duplicateCount: item.duplicate_count, publication: item.publication_state }));
 if (!stdin.isTTY || args.includes('--list')) process.exit(0);
