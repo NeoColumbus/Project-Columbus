@@ -2,6 +2,7 @@ import { createInterface } from 'node:readline/promises';
 import { stdin, stdout } from 'node:process';
 import { readFile } from 'node:fs/promises';
 
+async function main() {
 const endpoint = new URL(process.env.FIELD_REVIEW_URL || 'https://full-city-field-submission.neocolumbus.workers.dev/admin/review');
 if (endpoint.protocol !== 'https:' && !['localhost', '127.0.0.1'].includes(endpoint.hostname)) throw new Error('HTTPS required.');
 if (!process.env.FIELD_REVIEW_TOKEN) throw new Error('Set FIELD_REVIEW_TOKEN in your shell; do not put it in command arguments.');
@@ -20,13 +21,13 @@ if (correction) {
   const target = new URL('/admin/revise', endpoint);
   const body = JSON.parse(await readFile(correction.slice('--revise='.length), 'utf8'));
   console.log(printable(await request(body, target)));
-  process.exit(0);
+  return;
 }
 const data = await request();
-if (args.includes('--summary')) { console.log(JSON.stringify(data.summary)); process.exit(0); }
+if (args.includes('--summary')) { console.log(JSON.stringify(data.summary)); return; }
 console.log('Attempts in retained window (not people):', printable(data.counts));
 for (const item of data.items) console.log(printable({ id: item.id, revision: item.revision, status: item.status, ...item.report, flags: item.flags, duplicateCount: item.duplicate_count, publication: item.publication_state }));
-if (!stdin.isTTY || args.includes('--list')) process.exit(0);
+if (!stdin.isTTY || args.includes('--list')) return;
 const terminal = createInterface({ input: stdin, output: stdout });
 try {
   console.log('Actions: revise ID, or approve / reject / quarantine / publish followed by IDs; skip or q exits. Approve is NOT proof. Publish creates a public LEAD.');
@@ -51,3 +52,5 @@ try {
     console.log(printable(await request({ action, ids })));
   }
 } finally { terminal.close(); }
+}
+await main();

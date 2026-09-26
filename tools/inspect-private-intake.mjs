@@ -35,9 +35,9 @@ try {
     if (!issue && attention) {
       const created=await gh('/issues','POST',{title,body});
       console.log(`Counts-only operations notice: ${created.html_url}`);
-    } else if (issue && (issue.body !== body || issue.state !== (attention?'open':'closed'))) {
-      await gh('/issues/'+issue.number,'PATCH',{body,state:attention?'open':'closed'});
-      if (attention && (issue.state==='closed' || Date.now()-Date.parse(issue.updated_at)>24*3600000)) await gh('/issues/'+issue.number+'/comments','POST',{body});
+    } else if (issue) {
+      if (issue.body !== body || issue.state !== (attention?'open':'closed')) await gh('/issues/'+issue.number,'PATCH',{body,state:attention?'open':'closed'});
+      if (attention && (issue.body !== body || issue.state==='closed' || Date.now()-Date.parse(issue.updated_at)>24*3600000)) await gh('/issues/'+issue.number+'/comments','POST',{body});
     }
   }
   // Fixed aggregate query only: no report bodies, identifiers, evidence URLs or credentials in logs.
