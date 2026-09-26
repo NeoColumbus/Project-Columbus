@@ -1,8 +1,8 @@
 # Private Field Intake
 
-Deployment status: code prepared, **production activation not verified**. The website's `fieldSubmissionEnabled` is false and its Turnstile key is empty. Card generation and printed URLs remain usable.
+Deployment status: private Worker and D1 deployed; real-browser Turnstile receipt verified. The synthetic test entered quarantine, created no publication, and was removed through the narrowly scoped cleanup workflow. The public form is configured to use private intake. Card generation and printed URLs are unchanged.
 
-**Migration warning:** disabling the site button does not disable a previously deployed Worker. The legacy deployment may still create public GitHub issues if called directly. Deploy this fail-closed Worker or disable its route in Cloudflare before public promotion. Do not claim private production intake until the coordinated checks below pass.
+The legacy public-issue intake has been replaced. Disabling the site button alone is not a backend kill switch; retain the private implementation on any rollback. Do not roll back to the historical public-issue Worker.
 
 ## Contract
 
@@ -49,7 +49,7 @@ Publication uses a compare-and-set lock. If GitHub times out or a Worker termina
 
 ## Checks And References
 
-2026-09-24 access check: local OAuth could not refresh; no local Cloudflare API token or repository Cloudflare Actions credentials were available. The deployed admin probe still returned the legacy route response. Intake remains disabled on the site; the old Worker still needs replacement or route removal. See [launch readiness](../../LAUNCH_READINESS.md).
+Production evidence: deployment run 36036709903 passed negative security probes; inspection run 36037871552 confirmed one real-browser synthetic test in quarantine with no publication; cleanup run 36213501873 removed exactly that record and confirmed an empty queue. Local OAuth is not used; Actions secrets authorize deployment. See [launch readiness](../../LAUNCH_READINESS.md).
 
 `pnpm test:qr`, `pnpm test:field-api`, `pnpm test:proof`, `pnpm test:launch`, `pnpm field-api:dry-run`.
 

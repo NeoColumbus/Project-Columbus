@@ -27,6 +27,8 @@ const server = http.createServer((req, res) => {
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
   const errors = [];
+  // Layout/QR tests must never contact production verification or intake.
+  await page.route('**/config.js', route => route.fulfill({ contentType: 'text/javascript', body: 'window.FULL_CITY_CONFIG={fieldSubmissionEnabled:false};' }));
   page.on('pageerror', error => errors.push(error.message));
   try {
     for (const width of [320, 390, 768, 1100, 1440]) {
@@ -163,10 +165,16 @@ const server = http.createServer((req, res) => {
     assert.equal(await page.locator('#submit-field-card').textContent(), 'Submissions unavailable');
     assert.equal(submissions, 0, 'unconfigured site never sends to legacy public Worker');
     await page.addInitScript(() => {
-      window.turnstile = { render(el, options) { options.callback('fixture-token'); return 1; }, reset() {} };
+      window.turnstile = { render(el, options) { const box=document.createElement('div'); box.style.width=options.size==='compact'?'150px':'300px'; box.style.height='65px'; el.appendChild(box); options.callback('fixture-token'); return 1; }, reset() {} };
     });
     await page.route('**/config.js', route => route.fulfill({ contentType: 'text/javascript', body: 'window.FULL_CITY_CONFIG={fieldSubmissionEnabled:true,turnstileSiteKey:"fixture",fieldSubmissionEndpoint:"https://full-city-field-submission.neocolumbus.workers.dev/field-report"};' }));
     await page.goto(base + '/site/signal/?kind=Transit&place=Test%20stop&break=Missing%20shelter&line=The%20stop%20is%20a%20room.');
+    for (const width of [320,390,768,1100,1440]) {
+      await page.setViewportSize({width,height:900});
+      await page.reload();
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, `enabled verification overflow ${width}`);
+      assert.equal(await page.locator('#submit-field-card').textContent(), 'Send to project');
+    }
     await page.locator('#submit-field-card').click();
     await page.waitForFunction(() => document.querySelector('#field-card-status').textContent.includes('private screening'));
     assert.equal(submissions, 1);
@@ -190,7 +198,7 @@ const server = http.createServer((req, res) => {
     await page.reload();
     await page.clock.install();
     await page.locator('#submit-field-card').click();
-    await page.clock.runFor(16000);
+    await page.clock.runFor(46000);
     await page.waitForFunction(() => document.querySelector('#field-card-status').textContent.includes('timed out'));
     assert.equal(await page.locator('#field-break').inputValue(), 'Missing shelter');
     assert.equal(await page.locator('#submit-field-card').isDisabled(), false);

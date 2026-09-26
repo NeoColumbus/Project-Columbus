@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-09-25 / Private Intake Activation
+
+- Confirmed the real-browser technical test reached private quarantine, without a public issue. Removed the synthetic record; no community participation or field evidence claimed.
+- Enabled the verified private submission configuration. Increased the bounded browser wait to 45 seconds after production latency exceeded the previous 15-second window.
+- Added narrow-screen verification sizing, enabled/disabled form regression coverage, and retained all printed QR destinations.
+- Closed the one-time technical test page. Counts-only inspection and narrowly scoped cleanup run through authorized GitHub Actions without logging report contents.
+
 ## 2026-09-24 / Sticker Visitor Readiness
 
 - Clearer field labels, multiline conditions, matched limits, honest unavailable intake, separate save/share actions, bounded timeout, and manual clipboard recovery.

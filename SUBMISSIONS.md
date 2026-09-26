@@ -4,7 +4,7 @@
 
 The permanent [signal page](https://neocolumbus.github.io/Project-Columbus/site/signal/) still makes, copies, downloads, and shares field cards. All existing printed source parameters remain supported.
 
-Private inbox activation is pending Cloudflare configuration. Until then, save a card. The website does not send it to the legacy public-issue endpoint. Do not post private material to GitHub as a workaround.
+Use **Send to project** after browser verification to send a lead into private review. Saving, copying, and sharing a card are separate actions, not submission. Receipt can take up to 45 seconds; if it remains unconfirmed, retain your card and retry later. Duplicate reports are grouped. Do not post private material to GitHub as a workaround.
 
 When enabled, reports enter private D1 screening. Nothing becomes a public issue at intake. A report needs a place, missing piece, and one line. An evidence URL is optional: a useful lead need not have a hosted photograph.
 

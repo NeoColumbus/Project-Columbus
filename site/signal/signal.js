@@ -213,7 +213,7 @@
     button.disabled = true;
     fields.status.textContent = "Sending.";
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 15000);
+    const timeout = setTimeout(() => controller.abort(), 45000);
 
     try {
       const response = await fetch(endpoint, {
@@ -262,6 +262,7 @@
       turnstileWidgetId = window.turnstile.render(fields.turnstile, {
         sitekey: siteKey,
         action: "field-report",
+        size: fields.turnstile.clientWidth < 300 ? 'compact' : 'normal',
         callback(token) {
           turnstileToken = token;
           fields.status.textContent = "Verification ready.";

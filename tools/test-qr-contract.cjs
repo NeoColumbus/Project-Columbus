@@ -26,6 +26,7 @@ const server = http.createServer((req, res) => {
   const browser = await chromium.launch();
   try {
     const page = await browser.newPage();
+    await page.route('**/config.js', route => route.fulfill({ contentType: 'text/javascript', body: 'window.FULL_CITY_CONFIG={fieldSubmissionEnabled:false};' }));
     await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
     for (const original of urls) {
       const url = new URL(original);

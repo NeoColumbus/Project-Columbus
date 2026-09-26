@@ -1,35 +1,27 @@
-# Launch Readiness / 2026-09-24
+# Launch Readiness / 2026-09-25
 
-The website can receive sticker visitors without claiming a working intake. Public submission remains disabled. An empty proof ledger and unfinished COTA model are honest states, not reasons to invent activity.
+Private intake is deployed and the public form is configured for activation. The proof wall remains empty; COTA remains in progress. Neither needs invented activity or results.
 
-## Checks completed locally
+## Production evidence
 
-- Built Pages routes, internal links and cross-page anchors, social images, custom 404, and direct print PDF files.
-- Browser layouts at 320, 390, 768, 1100, and 1440 pixels; mobile menu, skip links, marquee pause/reduced motion, image selection, headings, and horizontal overflow.
-- Shipping QR manifest URLs and compatibility fixtures, including all eight public parameters and shared-card hydration. Printed assets were not regenerated.
-- Disabled intake, successful mocked private receipt, generic server failure, bounded request timeout, preserved field values, and manual clipboard recovery.
-- Private-intake SQL and mocked provider pressure checks; proof publication gates. These are not production verification.
+- Run 36036709903 deployed the private Worker, D1 migration, managed Turnstile widget, review secret, edge limiter, and retention cron. Unauthorized review, authenticated counts-only summary, malformed/oversized input, invalid verification, and bounded rate-limit probes passed. Rate limits are approximate and per edge, not a globally exact sixth-request guarantee.
+- Inspection run 36037871552 confirmed that the user's real-browser Turnstile test reached private quarantine. One synthetic record existed, with no public issue or publication in progress. It was not a field observation or community submission.
+- The browser timed out before confirmation. The public form now allows 45 seconds and preserves entered information on failure; retries are grouped by fingerprint.
+- Cleanup run 36213501873 removed exactly one matching synthetic, quarantined, unpublished record and confirmed zero candidates, zero quarantine records, and no oldest pending date. The technical test page is closed.
+- The legacy public-issue intake is replaced. Keep that backend change on rollback. Disabling the website alone is not a backend kill switch.
 
-Pages deployment now depends on the reusable launch checks succeeding. The QR and browser suites test the built Pages tree, not just source files.
+## Local and CI checks
 
-## Production intake dependency
+Built Pages routes, internal links/anchors, print PDFs, social images, custom 404, QR hydration/shared links, proof gates, and layouts at 320/390/768/1100/1440 pixels are covered. Both enabled and disabled submission states are tested without sending test-runner reports to production. Timeout, generic failure, and manual clipboard recovery tests preserve entered data.
 
-Update, 2026-09-24: GitHub Actions Cloudflare credentials are now configured. Run 36036709903 deployed the private Worker, D1 migration, managed Turnstile, review secret, edge limiter, and retention cron. Real production probes passed unauthorized review, authenticated counts-only summary, malformed/oversized input, invalid verification, and bounded rate-limit rejection. Invalid probes left the private queue unchanged. The old public-issue intake implementation has been replaced. No genuine verified submission has passed yet; public intake stays disabled. The clearly labeled `/site/intake-check/` page permits a human browser test, not a field observation; check and remove that synthetic record before activation. Scheduled retention execution and human publication credentials still require operational verification.
+Pages deployment depends on those checks. Local SQLite/provider mocks are not production evidence; the production runs above are recorded separately. Printed assets were not regenerated.
 
-The following describes the initial access blocker, now resolved through Actions:
+## Review and follow-ups
 
-The Cloudflare OAuth session is expired. Neither local API-token access nor the repository's Cloudflare Actions secrets is configured. A read-only admin probe returns the legacy route response; a malformed JSON request is rejected. No valid report was sent to the legacy Worker.
+The **Inspect Private Intake** workflow returns only counts/status and oldest pending date. Cleanup is opt-in and restricted to the exact synthetic deployment record. No report content appears in workflow logs.
 
-The old Worker has NOT been replaced or disabled. Disabling the website button does not disable direct requests to it. Before promotion, an authorized operator must restore access to the owning Cloudflare account, replace/disable that deployment, provision the real D1 binding and migration, and configure the managed Turnstile widget and secrets. See [the activation checklist](api/field-submission/README.md).
+No notification channel/schedule is configured. Select an authorized private destination before promising alerts; send counts/status only. For local batch review, configure a dedicated 32+ character `FIELD_REVIEW_TOKEN` repository secret and use that same value privately with the review CLI. Until then, the deployment workflow derives a domain-separated review credential from its Cloudflare token, never printed. Cloudflare D1 remains accessible to authorized account maintainers.
 
-Then verify a real Turnstile-verified report enters D1 private review without creating a public issue, invalid verification, edge limits, oversized bodies, unauthorized review, generic failures, and scheduled retention. Only afterward enable `fieldSubmissionEnabled` with the real public site key. Optional AI classification is not required.
+The retention cron is deployed and its SQL has local test coverage; actual scheduled execution still needs operational observation. Human-approved GitHub publication credentials and the complete publication workflow still need an operational check before use. These do not authorize automatic proof or public exposure of leads.
 
-## Private queue and notifications
-
-`pnpm field:review --summary` uses `FIELD_REVIEW_TOKEN` and returns only candidate count, quarantine count, and oldest pending date. Its authenticated endpoint is `GET /admin/summary`; report contents are excluded. Counts are queued records, not unique participants or verified claims.
-
-No authorized notification destination/scheduler is configured. The remaining notification setup is to select a private channel and securely schedule this counts-only summary. Do not send report contents or review credentials to public issues, Actions logs, or notification messages.
-
-## Physical check
-
-Browser tests exercise existing QR destinations. A real phone scan is still required when a device is available; it was not performed during this pass.
+A physical printed-QR scan was not independently repeated during this pass. Existing shipping URLs passed browser regression tests, and the user performed the genuine mobile submission test described above.

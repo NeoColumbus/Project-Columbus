@@ -15,7 +15,7 @@ The permanent printed entry point is **https://neocolumbus.github.io/Project-Col
 
 A field report begins as a LEAD, even when it includes an evidence link. It becomes public PROOF only after a maintainer checks the place, claim, public line, and checkable evidence. Project-initiated document research is labeled separately from community field submissions. See [the publishing protocol](submissions/PUBLISHING.md).
 
-Private intake code is ready for deployment, not claimed live. The site currently saves/copies cards instead of posting to the legacy public-issue Worker. Turnstile, D1, and deployed checks are launch gates: [activation checklist](api/field-submission/README.md). Screening and approval never make proof. The [COTA working repository](https://github.com/ian-gregory94/cota-route-optimization) is public under active audit; no final findings or operational endorsement are claimed.
+Private intake uses Turnstile verification and D1 review, not automatic public GitHub issues. A real-browser technical test reached private quarantine and was removed after checking; it is not community participation. See [production checks and remaining operational follow-ups](LAUNCH_READINESS.md). Screening and approval never make proof. The [COTA working repository](https://github.com/ian-gregory94/cota-route-optimization) is public under active audit; no final findings or operational endorsement are claimed.
 
 ### Compatibility Checks
 
