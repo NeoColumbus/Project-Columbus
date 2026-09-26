@@ -1,6 +1,11 @@
 name: Inspect Private Intake
 on:
   workflow_dispatch:
+    inputs:
+      cleanup_test:
+        description: Remove only the verified synthetic deployment check
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
@@ -18,3 +23,4 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           FIELD_REVIEW_TOKEN: ${{ secrets.FIELD_REVIEW_TOKEN }}
+          CLEANUP_TEST: ${{ inputs.cleanup_test }}

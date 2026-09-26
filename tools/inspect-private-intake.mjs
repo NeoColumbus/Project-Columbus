@@ -23,4 +23,21 @@ try {
   const data = await query.json();
   if (!query.ok || !data.success) throw new Error(`D1 diagnostic failed: HTTP ${query.status}.`);
   console.log(JSON.stringify(data.result[0].results[0]));
+  if (process.env.CLEANUP_TEST === 'true') {
+    if (data.result[0].results[0].published_or_inflight_tests !== 0) throw new Error('Test publication state requires manual review; refusing cleanup.');
+    const cleaned = await fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/d1/database/62baa265-fe05-4ec6-a713-c50353849323/query`, {
+      method: 'POST', redirect: 'error', signal: AbortSignal.timeout(30000),
+      headers: { authorization: `Bearer ${token}`, 'content-type': 'application/json' },
+      body: JSON.stringify({ sql: "DELETE FROM submissions WHERE json_extract(report,'$.source.asset')=? AND json_extract(report,'$.place')=? AND json_extract(report,'$.line')=? AND json_extract(report,'$.kind')='Deployment check' AND status='quarantine' AND issue_url IS NULL AND publication_state='pending'", params: ['deployment-check-2026-09-24', 'Synthetic deployment check - not a real place', 'Synthetic deployment test; remove after private receipt verification.'] })
+    });
+    const result = await cleaned.json();
+    if (!cleaned.ok || !result.success) throw new Error(`Test cleanup failed: HTTP ${cleaned.status}.`);
+    console.log(JSON.stringify({ removed_synthetic_records: result.result[0].meta.changes }));
+    const after = await fetch('https://full-city-field-submission.neocolumbus.workers.dev/admin/summary', {
+      headers: { authorization: `Bearer ${review}` }, redirect: 'error', signal: AbortSignal.timeout(30000)
+    });
+    if (!after.ok) throw new Error('Cleanup complete but post-cleanup summary unavailable.');
+    const { summary } = await after.json();
+    console.log(JSON.stringify({ candidates: summary.candidates, quarantine: summary.quarantine, oldestPendingAt: summary.oldestPendingAt }));
+  }
 } catch (error) { console.error(error.message); process.exitCode = 1; }
