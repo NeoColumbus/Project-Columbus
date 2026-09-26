@@ -7,14 +7,16 @@ const { DatabaseSync } = require('node:sqlite');
   const { default: worker } = await import('../api/field-submission/worker.mjs');
   const { screen, classify, evidenceUrl } = await import('../api/field-submission/screening.mjs');
   const sqlite = new DatabaseSync(':memory:');
-  sqlite.exec(fs.readFileSync(path.join(__dirname, '../api/field-submission/migrations/0001_private_intake.sql'), 'utf8'));
+  sqlite.exec('PRAGMA foreign_keys=ON');
+  for (const file of fs.readdirSync(path.join(__dirname, '../api/field-submission/migrations')).sort()) sqlite.exec(fs.readFileSync(path.join(__dirname, '../api/field-submission/migrations', file), 'utf8'));
   // Actual SQLite executes the production SQL; this adapter mirrors D1's result shape.
   const DB = { prepare(sql) { const stmt = sqlite.prepare(sql); let args = []; const wrapper = {
     bind(...values) { args = values; return wrapper; },
-    async run() { const result = stmt.run(...args); return { meta: { changes: Number(result.changes) } }; },
+    runSync() { const result = stmt.run(...args); return { meta: { changes: Number(result.changes) } }; },
+    async run() { return wrapper.runSync(); },
     async first() { return stmt.get(...args) || null; },
     async all() { return { results: stmt.all(...args) }; }
-  }; return wrapper; }, async batch(statements) { return Promise.all(statements.map(s => s.run())); } };
+  }; return wrapper; }, async batch(statements) { sqlite.exec('BEGIN'); try { const results=statements.map(s=>s.runSync()); sqlite.exec('COMMIT'); return results; } catch(error) { sqlite.exec('ROLLBACK'); throw error; } } };
   const env = { DB, TURNSTILE_SECRET: 'fixture-secret', TURNSTILE_HOSTNAME: 'neocolumbus.github.io', REVIEW_TOKEN: 'fixture-review-token-32-characters-long', GITHUB_TOKEN: 'fixture-github-secret', SUBMISSION_RATE_LIMITER: { limit: async () => ({ success: true }) } };
   const valid = { kind: 'Transit', place: 'Bus stop outside Kroger', break: 'Bus stop has no shelter.', line: 'The stop is a room.', proof: '', source: { drop: '001', asset: '007-transit', source: 'sticker-007' }, turnstileToken: 'fixture' };
   let calls = [], verification = { success: true, hostname: env.TURNSTILE_HOSTNAME, action: 'field-report' }, failGitHub = false;
@@ -81,6 +83,25 @@ const { DatabaseSync } = require('node:sqlite');
     assert.ok(!JSON.stringify(summary).includes('Kroger'), 'summary contains no report content');
     const quarantined = (await (await admin(null, env.REVIEW_TOKEN, '?state=quarantine')).json()).items[0];
     assert.equal((await (await admin({ action:'approve', ids:[quarantined.id] })).json()).results[0].ok, false);
+    const revise = (body, token=env.REVIEW_TOKEN) => worker.fetch(new Request('https://worker.example/admin/revise', { method:'POST',headers:{authorization:'Bearer '+token,'content-type':'application/json'},body:JSON.stringify(body) }),env);
+    const correction = { id:quarantined.id,revision:0,reason:'Removed unsupported allegation; retained observable condition.',report:{...valid,place:'Bus stop at Main Street',break:'Bus stop has no seating.',source:{source:'cannot-replace-original'}} };
+    assert.equal((await revise(correction,'wrong')).status,401);
+    assert.equal((await revise({...correction,reason:'short'})).status,400);
+    assert.equal((await revise({...correction,report:{...valid,line:'password=example'}})).status,422);
+    assert.equal((await revise({...correction,report:valid})).status,409,'cannot collide with another report');
+    assert.equal((await revise(correction)).status,200);
+    const corrected=sqlite.prepare('SELECT * FROM submissions WHERE id=?').get(quarantined.id);
+    assert.equal(corrected.status,'candidate');
+    assert.equal(corrected.reviewer,null,'rescreening does not approve');
+    assert.equal(corrected.revision,1);
+    assert.equal(JSON.parse(corrected.report).source.source,valid.source.source);
+    assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM review_audit').get().n,1);
+    const audit=await worker.fetch(new Request('https://worker.example/admin/audit?id='+quarantined.id,{headers:{authorization:'Bearer '+env.REVIEW_TOKEN}}),env);
+    assert.equal((await audit.json()).items[0].reason,correction.reason);
+    assert.equal((await revise(correction)).status,409,'stale edits rejected');
+    assert.equal(calls.filter(url=>url.includes('github')).length,0,'correction stays private');
+    await admin({action:'reject',ids:[quarantined.id]});
+    assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM review_audit').get().n,0,'audit expires with private record');
     const candidate = screen(valid);
     const low = await classify(candidate, { CLASSIFIER_ENABLED:'true', CLASSIFIER: { fetch: async () => Response.json({ status:'candidate', confidence:0.4 }) } });
     assert.equal(low.status, 'quarantine');
@@ -107,6 +128,11 @@ const { DatabaseSync } = require('node:sqlite');
     sqlite.exec("UPDATE submissions SET created_at='2020-01-01T00:00:00Z'");
     await worker.scheduled({}, env);
     assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM submissions').get().n, 0);
+    const health=await worker.fetch(new Request('https://worker.example/admin/health',{headers:{authorization:'Bearer '+env.REVIEW_TOKEN}}),env);
+    const healthData=await health.json();
+    assert.equal(healthData.overdueRecords,0);
+    assert.ok(healthData.lastRetentionAt);
+    assert.equal((await worker.fetch(new Request('https://worker.example/admin/health'),env)).status,401);
     console.log('Private intake pressure checks passed: SQL, 100 concurrent duplicates, rate limit, verification, screening, private review, once-only LEAD publication, retention. External services mocked; not production verification.');
   } finally { global.fetch = originalFetch; sqlite.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

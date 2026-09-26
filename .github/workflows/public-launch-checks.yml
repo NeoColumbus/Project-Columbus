@@ -21,6 +21,7 @@ jobs:
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm test:field-api
       - run: pnpm test:proof
+      - run: node tools/test-proof-deployment.cjs
       - run: pnpm build:pages
       - run: pnpm test:qr
         env:

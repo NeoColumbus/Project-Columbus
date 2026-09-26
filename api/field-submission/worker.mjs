@@ -77,7 +77,8 @@ export default {
     const cutoff = new Date(Date.now() - 30 * 86400000).toISOString();
     await env.DB.batch([
       env.DB.prepare('DELETE FROM submissions WHERE created_at < ?').bind(cutoff),
-      env.DB.prepare('DELETE FROM intake_counts WHERE day < ?').bind(cutoff.slice(0,10))
+      env.DB.prepare('DELETE FROM intake_counts WHERE day < ?').bind(cutoff.slice(0,10)),
+      env.DB.prepare("INSERT INTO operation_health(name,last_success) VALUES('retention',?) ON CONFLICT(name) DO UPDATE SET last_success=excluded.last_success").bind(new Date().toISOString())
     ]);
   }
 };

@@ -10,9 +10,35 @@ try {
     headers: { authorization: `Bearer ${review}` }, redirect: 'error', signal: AbortSignal.timeout(30000)
   });
   console.log(`Private summary HTTP ${response.status}; ${Date.now() - start}ms`);
-  if (response.ok) {
-    const { summary } = await response.json();
-    console.log(JSON.stringify({ candidates: summary.candidates, quarantine: summary.quarantine, oldestPendingAt: summary.oldestPendingAt }));
+  if (!response.ok) throw new Error('Private summary unavailable.');
+  const { summary } = await response.json();
+  console.log(JSON.stringify({ candidates: summary.candidates, quarantine: summary.quarantine, oldestPendingAt: summary.oldestPendingAt }));
+  const healthResponse = await fetch('https://full-city-field-submission.neocolumbus.workers.dev/admin/health', {
+    headers: { authorization: `Bearer ${review}` }, redirect:'error', signal:AbortSignal.timeout(30000)
+  });
+  if (!healthResponse.ok) throw new Error('Retention health unavailable.');
+  const health = await healthResponse.json();
+  console.log(JSON.stringify({ lastRetentionAt:health.lastRetentionAt, overdueRecords:health.overdueRecords }));
+  if (process.env.GH_OPERATIONS_TOKEN && process.env.CLEANUP_TEST !== 'true') {
+    const last = Date.parse(health.lastRetentionAt);
+    const retention = Number.isFinite(last) && Date.now()-last < 36*3600000 ? 'heartbeat current' : 'heartbeat missing or overdue';
+    const attention = summary.candidates + summary.quarantine > 0 || retention !== 'heartbeat current';
+    const body = `Private intake operations only; not field participation or proof.\n\nCandidates: ${summary.candidates}\nQuarantine: ${summary.quarantine}\nOldest pending: ${summary.oldestPendingAt || 'none'}\nRetention: ${retention}\nRecords past retention cutoff: ${health.overdueRecords}\n\nReview privately. No report contents are included here.`;
+    const gh = async (path, method='GET', data) => {
+      const r=await fetch('https://api.github.com/repos/NeoColumbus/Project-Columbus'+path,{method,headers:{authorization:`Bearer ${process.env.GH_OPERATIONS_TOKEN}`,accept:'application/vnd.github+json','content-type':'application/json'},body:data?JSON.stringify(data):undefined,redirect:'error',signal:AbortSignal.timeout(15000)});
+      if(!r.ok) throw new Error(`Operations notification failed: HTTP ${r.status}.`);
+      return r.json();
+    };
+    const title='[Operations] Private intake review queue';
+    const issues=await gh('/issues?state=all&creator=github-actions%5Bbot%5D&per_page=100');
+    const issue=issues.find(item=>item.title===title && !item.pull_request);
+    if (!issue && attention) {
+      const created=await gh('/issues','POST',{title,body});
+      console.log(`Counts-only operations notice: ${created.html_url}`);
+    } else if (issue && (issue.body !== body || issue.state !== (attention?'open':'closed'))) {
+      await gh('/issues/'+issue.number,'PATCH',{body,state:attention?'open':'closed'});
+      if (attention && (issue.state==='closed' || Date.now()-Date.parse(issue.updated_at)>24*3600000)) await gh('/issues/'+issue.number+'/comments','POST',{body});
+    }
   }
   // Fixed aggregate query only: no report bodies, identifiers, evidence URLs or credentials in logs.
   const query = await fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/d1/database/62baa265-fe05-4ec6-a713-c50353849323/query`, {

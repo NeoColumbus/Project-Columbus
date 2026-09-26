@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-09-26 / Review And Return Operations
+
+- Proof publication now dispatches Pages explicitly and verifies the live reviewed record before announcing publication.
+- Added private correction/rescreening with revision checks, immutable source attribution, audit metadata, and separate approval. Audit records expire with their parent report.
+- Configured a dedicated encrypted reviewer credential and a Windows review launcher. Added six-hour counts-only GitHub operations alerts and retention heartbeat checks.
+- Added private correction and publishing-handoff rehearsals without inventing public participation or proof.
+
 ## 2026-09-25 / Private Intake Activation
 
 - Confirmed the real-browser technical test reached private quarantine, without a public issue. Removed the synthetic record; no community participation or field evidence claimed.

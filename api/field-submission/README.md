@@ -39,6 +39,14 @@ Use genuine fresh Turnstile tokens from the configured hostname; never a product
 
 ## Review
 
+On the configured Windows account, run `./tools/review-field.ps1 -State quarantine` (or `-Summary`). The dedicated reviewer credential is DPAPI-encrypted in the user's LocalAppData FullCity folder, outside this repository. It is also stored as FIELD_REVIEW_TOKEN in Actions for deployment/health checks; it is not derived from the deployment credential anymore on this installation. Another computer needs its own securely provisioned reviewer credential; do not copy secrets into chat.
+
+Interactive `revise ID` prompts for corrections and a reason. Blank keeps a field; `-` clears it. Noninteractive corrections use `--revise=/private/path/correction.json` with `{id,revision,reason,report:{kind,place,break,line,proof}}`. Original source attribution is retained. Rescreening can return candidate or quarantine; rejection leaves the original unchanged. All corrections reset approval, require the current revision, and leave a private metadata/hash audit in GET /admin/audit?id=ID. No correction certifies truth. Keep correction files outside the repository and delete them when no longer needed.
+
+The Inspect Private Intake workflow runs every six hours. It maintains one clearly labeled operations issue when review or retention needs attention; only counts, oldest-pending date and health status are included. GitHub notification delivery follows the maintainer's existing subscription settings. Subscribe to that operations issue for notifications. No submission contents appear in issues or workflow logs.
+
+GET /admin/health reports the last successful retention run and records past the cutoff. The scheduled Worker job records its heartbeat only after deletion succeeds. Review audit metadata expires with its report through a cascading foreign key. A missing/stale heartbeat creates an operations warning rather than claiming retention ran.
+
 `pnpm field:review --summary` requests authenticated `GET /admin/summary` and prints only candidate count, quarantine count, and oldest pending date. It uses the same FIELD_REVIEW_TOKEN and rejects browser origins. No notification channel is configured; connect a private, authorized scheduler/channel before promising alerts, and send only these counts/status fields, never report contents.
 
 `pnpm field:review` reads FIELD_REVIEW_TOKEN from environment and uses HTTPS with redirects forbidden. Default candidate listing, up to100 records; process and repeat. Explicit `--state=quarantine` or `--state=approved`. Actions approve/reject/quarantine/skip; multiple IDs allowed. Publish requires separate confirmation and produces a public LEAD, never PROOF.

@@ -1,4 +1,5 @@
 import { json, readPayload } from './worker.mjs';
+import { screen, classify, fingerprint } from './screening.mjs';
 
 async function authorized(request, env) {
   if (!env.REVIEW_TOKEN || env.REVIEW_TOKEN.length < 32 || request.headers.has('origin')) return false;
@@ -14,6 +15,18 @@ export async function reviewRequest(request, env) {
   if (!(await authorized(request, env))) return json({ ok: false, error: 'Unauthorized.' }, 401);
   if (!env.DB) return json({ ok: false, error: 'Review unavailable.' }, 503);
   const url = new URL(request.url);
+  if (request.method === 'GET' && url.pathname === '/admin/health') {
+    const retention = await env.DB.prepare("SELECT last_success FROM operation_health WHERE name='retention'").first();
+    const overdue = await env.DB.prepare('SELECT COUNT(*) AS count FROM submissions WHERE created_at < ?').bind(new Date(Date.now() - 30 * 86400000).toISOString()).first();
+    return json({ ok: true, lastRetentionAt: retention?.last_success || null, overdueRecords: overdue.count });
+  }
+  if (request.method === 'POST' && url.pathname === '/admin/revise') return revise(request, env);
+  if (request.method === 'GET' && url.pathname === '/admin/audit') {
+    const id = url.searchParams.get('id') || '';
+    if (!/^[a-f0-9-]{36}$/.test(id)) return json({ ok:false },400);
+    const audit = await env.DB.prepare('SELECT * FROM review_audit WHERE submission_id=? ORDER BY revision,created_at').bind(id).all();
+    return json({ ok:true, items:audit.results });
+  }
   if (request.method === 'GET' && url.pathname === '/admin/summary') {
     const summary = await env.DB.prepare("SELECT COUNT(CASE WHEN status='candidate' THEN 1 END) AS candidates, COUNT(CASE WHEN status='quarantine' THEN 1 END) AS quarantine, MIN(CASE WHEN status IN ('candidate','quarantine') THEN created_at END) AS oldestPendingAt FROM submissions").first();
     return json({ ok: true, summary });
@@ -39,6 +52,30 @@ export async function reviewRequest(request, env) {
     results.push({ id, ok: changed.meta.changes === 1 });
   }
   return json({ ok: true, results });
+}
+
+async function revise(request, env) {
+  const body = await readPayload(request);
+  if (!/^[a-f0-9-]{36}$/.test(body.id || '') || !Number.isInteger(body.revision) || body.revision < 0 ||
+      typeof body.reason !== 'string' || body.reason.trim().length < 10 || body.reason.length > 500 ||
+      !body.report || typeof body.report !== 'object' || Array.isArray(body.report)) return json({ ok: false, error: 'Correction requires ID, current revision, full report and a review reason.' }, 400);
+  const row = await env.DB.prepare('SELECT * FROM submissions WHERE id=?').bind(body.id).first();
+  if (!row || row.revision !== body.revision || !['candidate','quarantine','approved'].includes(row.status) || row.publication_state !== 'pending') return json({ ok: false, error: 'Record changed or publication started. Reload before correcting.' }, 409);
+  const original = JSON.parse(row.report);
+  const result = await classify(screen({ ...body.report, source: original.source, reviewReason: body.reason }), env);
+  if (result.status === 'rejected') return json({ ok: false, error: 'Correction failed screening. Original record unchanged.' }, 422);
+  const fp = await fingerprint(result.report);
+  const duplicate = await env.DB.prepare('SELECT id FROM submissions WHERE fingerprint=? AND id!=?').bind(fp, row.id).first();
+  if (duplicate) return json({ ok: false, error: 'Correction matches another record. Review that record instead.' }, 409);
+  const now = new Date().toISOString();
+  const results = await env.DB.batch([
+    env.DB.prepare("INSERT INTO review_audit(id,submission_id,created_at,reviewer,reason,previous_fingerprint,next_fingerprint,previous_status,next_status,revision) SELECT ?,id,?,?,?,?,?,status,?,revision+1 FROM submissions WHERE id=? AND revision=? AND publication_state='pending' AND status=?")
+      .bind(crypto.randomUUID(), now, env.REVIEWER_ID || 'maintainer', body.reason.trim(), row.fingerprint, fp, result.status, row.id, row.revision, row.status),
+    env.DB.prepare("UPDATE submissions SET report=?,fingerprint=?,flags=?,status=?,screening_version=?,revision=revision+1,reviewed_at=NULL,reviewer=NULL WHERE id=? AND revision=? AND publication_state='pending' AND status=?")
+      .bind(JSON.stringify(result.report), fp, JSON.stringify(result.flags), result.status, result.version, row.id, row.revision, row.status)
+  ]);
+  if (results[1].meta.changes !== 1) return json({ ok: false, error: 'Record changed. Reload before correcting.' }, 409);
+  return json({ ok: true, status: result.status, revision: row.revision + 1, state: 'LEAD', approvalRequired: true });
 }
 
 async function publish(id, env) {

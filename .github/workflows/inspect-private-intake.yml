@@ -1,5 +1,7 @@
 name: Inspect Private Intake
 on:
+  schedule:
+    - cron: '37 */6 * * *'
   workflow_dispatch:
     inputs:
       cleanup_test:
@@ -8,6 +10,10 @@ on:
         default: false
 permissions:
   contents: read
+  issues: write
+concurrency:
+  group: private-intake-inspection
+  cancel-in-progress: false
 jobs:
   inspect:
     if: github.ref == 'refs/heads/main'
@@ -24,3 +30,4 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           FIELD_REVIEW_TOKEN: ${{ secrets.FIELD_REVIEW_TOKEN }}
           CLEANUP_TEST: ${{ inputs.cleanup_test }}
+          GH_OPERATIONS_TOKEN: ${{ github.token }}
