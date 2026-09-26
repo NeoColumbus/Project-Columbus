@@ -22,6 +22,7 @@ jobs:
       - run: pnpm test:field-api
       - run: pnpm test:proof
       - run: node tools/test-proof-deployment.cjs
+      - run: node tools/test-intake-monitor.cjs
       - run: pnpm build:pages
       - run: pnpm test:qr
         env:
