@@ -47,7 +47,7 @@
         <p><span class="claim-label">Fact</span> The existing research note points to COTA's service and rider-information sources. It does not yet contain a route-by-route service baseline.</p>
         <p><span class="claim-label">Analysis</span> Frequency, transfers, service hours, and the walk to a stop need to be examined together. The note is still being hardened; no system-wide improvement estimate is published.</p>
         <p><span class="claim-label">Proposal</span> Treat shelter, seating, crossings, and legible route information as basic public-room equipment.</p>
-        <p>A separate computational <a href="#cota-model">route-optimization experiment</a> is being developed and audited in public.</p>
+        <p>The separate computational <a href="#cota-model">route-optimization study</a> now has a frozen research record and a public working paper. Model findings do not replace rider evidence.</p>
         <h3>Evidence / source trail</h3><ul><li><a href="https://github.com/NeoColumbus/Project-Columbus/blob/main/research/cota.md">Full City COTA research and source links</a></li><li><a href="https://github.com/NeoColumbus/Project-Columbus/blob/main/policy/transit.md">Transit policy proposal</a></li><li><a href="https://github.com/NeoColumbus/Project-Columbus/blob/main/participation/bus-stop-audit-card.md">Bus-stop audit card</a></li></ul>
         <h3>Limitations</h3><p>Rider review, dated service data, stop conditions, and funding constraints remain incomplete. This is not a COTA-endorsed study.</p>
         <p class="verification">Last updated: 2026-09-23 / repository note and maturity only. Live service conditions not reverified.</p>
@@ -55,13 +55,18 @@
       </div>
     </section>
     <section class="work-item" id="cota-model" aria-labelledby="model-title">
-      <div class="work-heading"><span class="maturity">In progress</span><h2 id="model-title">COTA Route Optimization</h2></div>
+      <div class="work-heading"><span class="maturity">Working paper / research frozen</span><h2 id="model-title">COTA Route Optimization</h2><p>Frequency before fantasy.</p></div>
       <div class="work-body"><h3>Question</h3><p>How much could Columbus bus service improve through frequency allocation and network changes under explicit constraints?</p>
-        <h3>Status</h3><p>Independent computational experiment under active audit and hardening. The working repository is public. No final system-level finding is claimed here.</p>
-        <h3>Evidence / work</h3><p>Code, experiment structure, audit material, and intermediate outputs are available in the working repository. Public performance claims should wait until normalization, resource-constraint, and reproducibility checks are complete.</p>
-        <h3>Limitations</h3><p>A model is not an operating plan. Data quality, fleet and resource constraints, feasibility, rider impacts, and operational review must be stated before translating model results into a service recommendation. No COTA endorsement or expert review is claimed.</p>
+          <h3>Status</h3><p>The research record is frozen. The independent working paper is public, uncalibrated, and not externally peer reviewed. Research completion is not operational validation.</p>
+          <h3>What the model found</h3>
+          <p><span class="claim-label">Fact</span> The study reports about 680 more modeled weekday trips served after reallocating frequency on existing routes at approximately fixed modeled resources: 3.3% more served trips and 6.65% less unserved demand. Total generalized travel cost rose 0.88%.</p>
+          <p>The fixed-plan gain stayed positive across all 44 pre-specified sensitivity perturbations. Through-routing produced no supportable gain; local route edits had small effects. The best of 200 promoted and certified greenfield candidates remained worse than the lightly edited existing network in matched comparisons.</p>
+          <p><span class="claim-label">Analysis</span> Within this model, allocating service on existing routes was more promising than redrawing the network. That is a reason to investigate frequency, not a promise of 680 actual new trips.</p>
+          <p><span class="claim-label">Proposal</span> Test the frequency finding against observed ridership, rider needs, and actual fleet and staffing constraints before advancing any service recommendation.</p>
+          <h3>Limitations</h3><p>Demand is a commute-flow proxy; non-work trips are absent. No external ridership validation or physical fleet verification is available. Waiting and path-assignment assumptions matter. Optimizer runs disagree on individual route frequencies, and allowing service to switch off exposes unstable ridership conclusions. No route headway is a recommendation. This is not an operating plan or a COTA-endorsed study.</p>
+          <h3>Evidence / source trail</h3><ul><li><a href="https://github.com/ian-gregory94/cota-route-optimization/blob/8c1983b6bb0db1b9fb4ec49f67be7d346e38cf90/docs/PUBLIC_BRIEF.md">Public brief: findings and limits</a></li><li><a href="https://github.com/ian-gregory94/cota-route-optimization/blob/8c1983b6bb0db1b9fb4ec49f67be7d346e38cf90/docs/report/TECHNICAL_REPORT.md">Technical report, limitations, and retractions</a></li><li><a href="https://github.com/ian-gregory94/cota-route-optimization/blob/8c1983b6bb0db1b9fb4ec49f67be7d346e38cf90/docs/REPRODUCE.md">Reproduction record</a></li></ul>
         <div class="work-actions"><a class="button primary" href="https://github.com/ian-gregory94/cota-route-optimization">Open working repository</a><a class="button ghost" href="https://github.com/NeoColumbus/Project-Columbus/blob/main/research/cota.md">Transit research / sources</a></div>
-        <p class="verification">Last updated: 2026-09-23 / publication status only. No model results verified by this page.</p>
+          <p class="verification">Source checked: 2026-10-07 / reporting revision 8c1983b6; frozen research cd03af9c (research-final). This page summarizes the repository, not an independent rerun or peer review.</p>
       </div>
     </section>
     <section class="work-item" id="zoning" aria-labelledby="zoning-title">
