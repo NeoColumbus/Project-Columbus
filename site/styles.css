@@ -2995,6 +2995,47 @@ h1, h2, h3, .brand, .marquee, .hero-stamp, .button, .poster, .word-wall, .hit-li
 .exhibition span { border-top: 1px solid var(--bronze); padding: 12px; font: bold 15px/1.5 Consolas,monospace; }
 .exhibition a:hover span { text-decoration: underline; }
 #field-card { scroll-margin-top: 0; }
+:root {
+  --edition-display:clamp(46px,5rem,84px); --edition-heading:clamp(30px,2.75rem,54px);
+  --edition-body:1.125rem; --edition-meta:.875rem; --measure:65ch;
+  --rule:1px solid var(--bronze); --gutter:clamp(16px,4%,64px);
+  --edition-gap:24px; --reading-width:78rem; --shift-time:160ms;
+}
+.visitor-paths { display:grid; grid-template-columns:1.4fr 1fr 1fr; background:var(--bone); color:var(--river-navy); border-bottom:var(--rule); }
+.visitor-paths a { display:grid; align-content:space-between; gap:18px; padding:24px var(--gutter); border-right:var(--rule); text-decoration:none; }
+.visitor-paths strong { font:normal 28px/1.08 var(--display-font); }
+.visitor-paths span,.edition-links { font:var(--edition-meta)/1.5 Consolas,monospace; }
+.visitor-paths a:first-child { background:var(--amber); }
+.hero-links { display:flex; flex-wrap:wrap; align-items:center; }
+.hero-links a { display:inline-flex; align-items:center; min-height:44px; }
+.marquee:has(.marquee-pause[aria-pressed="true"]),.marquee:has(.marquee-pause[hidden]) { overflow:auto hidden; }
+.marquee:has(.marquee-pause[hidden]) .marquee-track { animation:none; }
+.print-catalogue a img { height:auto; }
+.hero { min-height:0; padding-block:clamp(110px,15vh,170px) 76px; }
+.chapter-line { margin:0; padding:20px var(--gutter); background:var(--river-navy); color:var(--bone); font:normal var(--edition-heading)/1.12 var(--display-font); }
+.why-section .why-copy > p:not(.kicker) { max-width:54ch; font:normal 20px/1.52 Arial,sans-serif; text-transform:none; }
+.why-copy > p:not(.kicker):first-of-type { margin-top:24px; }
+.chapter-band { scroll-margin-top:85px; }
+.receipt-experiment { border-top:6px solid var(--amber); }
+.work-body .verification,.atlas-plate figcaption { font:var(--edition-meta)/1.5 Consolas,monospace; }
+.participation-paths { grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr)); }
+@media(min-width:1000px){ .campaign-wall .print-catalogue a:first-child { grid-column:span 2; grid-row:span 2; } }
+.visitor-paths a:hover strong { text-decoration:underline; }
+.edition-links { padding:6px var(--gutter); background:var(--limestone); color:var(--river-navy); }
+.edition-links summary,.edition-links a { display:inline-block; padding:12px; cursor:pointer; }
+.edition-links summary { display:list-item; }
+.atlas-plate { margin:0; padding:20px; background:var(--river-navy); color:var(--bone); }
+.atlas-plate svg { display:block; width:100%; }
+.atlas-plate figcaption,.print-files { font:var(--edition-meta)/1.5 Consolas,monospace; }
+.atlas-crossings { display:flex; flex-wrap:wrap; gap:14px; }
+.atlas-crossings a { display:inline-flex; align-items:center; min-height:44px; font:700 14px/1.4 Consolas,monospace; color:var(--amber); }
+.atlas-filters { display:flex; flex-wrap:wrap; border-bottom:var(--rule); }
+.atlas-filters button { flex:auto; min-height:44px; border:0; background:var(--limestone); color:var(--river-navy); font-weight:700; cursor:pointer; }
+.atlas-filters [aria-pressed="true"] { background:var(--river-navy); color:var(--bone); }
+.atlas-filters[hidden],#places [data-place-key][hidden] { display:none; }
+.print-files a { color:var(--amber); padding:8px 2px; }
+.publication-index a[aria-current="location"] { background:var(--amber); }
+@media(max-width:700px){.visitor-paths { grid-template-columns:1fr; }.visitor-paths a { grid-template-columns:1fr 1fr; gap:14px; padding:16px; border-bottom:var(--rule); }.visitor-paths strong { font-size:21px; }}
 
 /* The skyline doubles as a civic poster, with its own masthead register. */
 .hero .hero-stamp {

@@ -226,7 +226,7 @@
       });
       const data = await response.json().catch(() => ({}));
 
-      if (!response.ok || !data.ok) {
+      if (!response.ok || data.ok !== true || data.queued !== true || data.state !== 'LEAD') {
         const guidance = response.status === 429 ? "Too many attempts. Wait a minute, then verify and retry." : response.status === 403 ? "Verification failed. Complete verification again and retry." : response.status === 422 ? "Report not accepted. Remove personal details or unsupported allegations and check the fields." : "Inbox unavailable. Try again later.";
         fields.status.textContent = `${guidance} Your entries are still here; you can download a copy. Nothing confirmed received.`;
         return;
@@ -287,6 +287,9 @@
     script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onFullCityTurnstileLoad&render=explicit";
     script.async = true;
     script.defer = true;
+    script.onerror = () => {
+      fields.status.textContent = 'Verification could not load. Refresh to retry, or copy or download your card.';
+    };
     document.head.appendChild(script);
   }
 
@@ -392,6 +395,9 @@
   const sendButton = document.querySelector('#submit-field-card');
   sendButton.disabled = !intakeAvailable;
   sendButton.textContent = intakeAvailable ? 'Send to project' : 'Submissions unavailable';
+  if (availability && !intakeAvailable) availability.textContent = config.fieldSubmissionEnabled === false
+    ? 'Private intake is disabled. You can still copy or download this card.'
+    : 'Intake configuration could not be loaded. Refresh to retry, or save your card locally.';
   if (availability && intakeAvailable) availability.textContent = 'Private intake is available. Reports wait for screening and human review.';
   setScanContext();
   setupTurnstile();

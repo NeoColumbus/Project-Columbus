@@ -82,7 +82,8 @@
           </p>
           <p class="lead-note"><strong>LEAD</strong>: place, missing piece, one line. No photo link required. <strong>PROOF</strong>: the same claim with checkable evidence, checked by a maintainer before publication. Sending a card does not put it on the proof wall.</p>
           <p class="lead-note">Reports are screened before anything is published. Submissions begin as leads. Evidence is checked before a lead becomes proof. Keep personal details and secrets out; no visitor profile is created.</p>
-          <p class="lead-note" id="inbox-availability">Submissions are unavailable while private intake is configured. You can save a card; saving does not send it to the project.</p>
+          <p class="lead-note" id="inbox-availability">Checking private intake availability.</p>
+          <noscript><style>#inbox-availability,#submit-field-card { display:none }</style><p>Private submission and the card generator require JavaScript. You can still <a href="../#campaigns">open the print kit</a> or <a href="../work/">read the research</a>.</p></noscript>
         </div>
         <form class="field-card-form" aria-label="Field card generator">
           <label>
@@ -122,7 +123,7 @@
             <textarea id="field-card-output" readonly rows="10"></textarea>
           </label>
           <div class="final-actions field-send">
-            <button class="button primary" id="submit-field-card" type="submit" disabled aria-describedby="inbox-availability">Submissions unavailable</button>
+            <button class="button primary" id="submit-field-card" type="submit" disabled aria-describedby="inbox-availability">Checking availability</button>
           </div>
           <div class="final-actions field-secondary" role="group" aria-label="Save or share a copy">
             <button class="button ghost light" id="copy-field-card" type="button">Copy field card</button>
@@ -238,6 +239,14 @@
         <a href="https://github.com/NeoColumbus/Project-Columbus">GitHub</a>.
       </p>
     </footer>
+    <script>
+      window.setTimeout(() => {
+        const note = document.getElementById('inbox-availability');
+        if (note?.textContent === 'Checking private intake availability.') {
+          note.textContent = 'Private intake is taking longer to load. Refresh to retry.';
+        }
+      }, 10000);
+    </script>
     <script src="../config.js"></script>
     <script src="../navigation.js" defer></script>
     <script src="signal.js"></script>
