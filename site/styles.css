@@ -2928,3 +2928,70 @@ h1 {
 .proof-card-entry[id] { scroll-margin-top: 100px; }
 .place-history strong { font-size: 28px; }
 [data-place-key] > a { font: 700 16px/1.5 Arial, sans-serif; overflow-wrap: anywhere; }
+
+/* Publication typography. Display faces belong to declarations and signage. */
+body { font-family: Arial, Helvetica, sans-serif; line-height: 1.5; }
+h1, h2, h3, .brand, .marquee, .hero-stamp, .button, .poster, .word-wall, .hit-list {
+  font-family: var(--display-font);
+}
+.kicker, .maturity, .photo-credit, .verification, .claim-label {
+  font-family: Consolas, "Courier New", monospace;
+  line-height: 1.35;
+}
+.hero {
+  background: var(--river-navy) var(--hero-image) center right / cover no-repeat;
+  align-items: end;
+}
+.hero::before {
+  background: linear-gradient(90deg, #061620 0%, #061620ef 28%, #06162088 57%, transparent 85%);
+  mix-blend-mode: normal;
+}
+.hero-noise { display: none; }
+.hero h1 { max-width: 12ch; line-height: .94; text-shadow: none; }
+.hero .project-deck { max-width: 50ch; font: 400 18px/1.55 Arial, sans-serif; text-transform: none; }
+.hero-stamp { border-top: 2px solid var(--amber); color: var(--bone); font-size: 32px; line-height: .98; background: var(--river-navy); padding: 14px; }
+.publication-index { display: flex; flex-wrap: wrap; background: var(--bone); color: var(--river-navy); border-bottom: 1px solid var(--river-navy); }
+.publication-index a { flex: 1 1 9rem; padding: 16px 20px; border-right: 1px solid var(--bronze); font: bold 15px/1.4 Consolas, monospace; text-decoration: none; }
+.publication-index a:hover, .publication-index a:focus-visible { background: var(--amber); }
+.receipts-section, .receipts-intro, .founding-observations { background: var(--bone); color: var(--river-navy); }
+.receipts-grid { gap: 0; border-top: 2px solid var(--river-navy); }
+.receipt-card, .receipt-card:nth-child(2n) {
+  background: var(--bone); color: var(--river-navy); border: 0; border-bottom: 1px solid var(--bronze);
+  padding: 28px 22px; gap: 12px;
+}
+.receipt-card strong { color: var(--brick); }
+.receipt-card.receipt-experiment { background: var(--river-navy); color: var(--bone); border-left: 8px solid var(--amber); padding: 32px; }
+.receipt-experiment h3 { font-size: 36px; }
+.receipt-experiment strong { color: var(--amber); }
+.work-item { border-top: 1px solid var(--bronze); }
+.work-body { max-width: 70ch; }
+.work-body h3 { border-top: 1px solid var(--bronze); padding-top: 14px; }
+#cota-model { background: var(--limestone); }
+.proof-hero, .proof-ledger { background: var(--green); color: var(--bone); }
+.signal-field-card { background: var(--limestone); color: var(--river-navy); padding-block: 44px; }
+.field-card-copy p:not(.kicker) { color: var(--river-navy); font: 400 17px/1.55 Arial,sans-serif; text-transform: none; }
+.field-card-copy .kicker { color: var(--brick); }
+.field-card-copy .scan-context { background: var(--bone); color: var(--river-navy); border-left: 5px solid var(--brick); padding: 12px 16px; margin: 0 0 16px; }
+.field-card-copy .scan-context p { margin: 0; }
+.scan-context a { color: var(--river-navy); }
+.field-card-form { padding: 20px; background: var(--river-navy); }
+.field-card-form :is(input,select,textarea) { border: 1px solid var(--limestone); font-weight: 500; }
+.field-card-form #field-card-output { background: var(--bone); font: 16px/1.55 Consolas, monospace; }
+@media (max-width: 760px) {
+  .hero { padding-top: 104px; }
+  .hero::before { background: linear-gradient(0deg, #061620 8%, #061620eb 57%, transparent 100%); }
+  .hero-stamp { display: none; }
+  .publication-index a { flex-basis: 32%; }
+  .receipt-experiment h3 { font-size: 27px; }
+  .signal-field-card { padding-block: 20px; gap: 16px; }
+  .field-card-copy { display: contents; }
+  .field-card-copy > p.lead-note { order: 2; margin: 0; }
+  .field-card-copy p:not(.kicker) { margin-top: 0; }
+  .field-card-form { padding: 16px; }
+}
+.exhibition { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,220px),1fr)); gap: 24px; margin-block: 32px 48px; }
+.exhibition a { display: grid; background: var(--bone); color: var(--river-navy); text-decoration: none; }
+.exhibition img { width: 100%; height: 300px; object-fit: contain; padding: 20px; }
+.exhibition span { border-top: 1px solid var(--bronze); padding: 12px; font: bold 15px/1.5 Consolas,monospace; }
+.exhibition a:hover span { text-decoration: underline; }
+#field-card { scroll-margin-top: 0; }

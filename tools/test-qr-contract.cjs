@@ -26,12 +26,24 @@ const server = http.createServer((req, res) => {
   const browser = await chromium.launch();
   try {
     const page = await browser.newPage();
+    await page.setViewportSize({width: 390, height: 844});
+    await page.emulateMedia({reducedMotion: 'reduce'});
     await page.route('**/config.js', route => route.fulfill({ contentType: 'text/javascript', body: 'window.FULL_CITY_CONFIG={fieldSubmissionEnabled:false};' }));
     await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
     for (const original of urls) {
       const url = new URL(original);
       assert.equal(url.pathname, '/Project-Columbus/site/signal/');
       await page.goto(`http://127.0.0.1:${server.address().port}${url.pathname}${url.search}${url.hash}`);
+      if (url.hash === '#field-card') {
+        const context = page.locator('#scan-context');
+        if (await context.isVisible()) {
+          const box = await context.boundingBox();
+          const header = await page.locator('header').first().boundingBox();
+          assert.ok(box.y >= header.y + header.height - 2 && box.y + box.height <= 844, 'scan context visible above fold: ' + original);
+          if (process.env.LAUNCH_SCREENSHOTS && url.searchParams.get('source') === 'sticker-007')
+            await page.screenshot({path: path.join(process.env.LAUNCH_SCREENSHOTS, 'transit-field-390.png')});
+        }
+      }
       for (const key of ['kind', 'place', 'break', 'line', 'proof']) {
         if (url.searchParams.has(key)) assert.equal(await page.locator(`#field-${key}`).inputValue(), url.searchParams.get(key), original);
       }
