@@ -166,7 +166,7 @@
     }
   }
 
-  async function copyCard() { return copyText(buildCard(), "Card copied. Nothing submitted."); }
+  async function copyCard() { return copyText(buildCard(), "Copied to clipboard. Nothing submitted."); }
 
   async function shareCard() {
     const card = buildCard();
@@ -393,6 +393,7 @@
   hydrateFromUrl();
   const availability = document.querySelector('#inbox-availability');
   const sendButton = document.querySelector('#submit-field-card');
+  document.querySelector('#inbox-state').textContent = intakeAvailable ? 'Private intake open' : config.fieldSubmissionEnabled === false ? 'Pending setup' : 'Status unavailable';
   sendButton.disabled = !intakeAvailable;
   sendButton.textContent = intakeAvailable ? 'Send to project' : 'Submissions unavailable';
   if (availability && !intakeAvailable) availability.textContent = config.fieldSubmissionEnabled === false

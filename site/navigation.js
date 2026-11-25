@@ -16,6 +16,38 @@
     if (link && link.hash === location.hash) revealFragment();
   });
   revealFragment();
+  const guide = document.querySelector('.chapter-guide');
+  if (guide) {
+    const select = guide.querySelector('select');
+    const entries = [...document.querySelectorAll('#top section[aria-labelledby]')].flatMap(section => {
+      const label = section.querySelector('.kicker')?.textContent.trim();
+      const heading = document.getElementById(section.getAttribute('aria-labelledby'));
+      return heading && /^\d{2} \//.test(label) ? [{heading, label}] : [];
+    });
+    for (const {heading, label} of [...entries].sort((a,b) => a.label.localeCompare(b.label))) {
+      select.add(new Option(label, heading.id));
+    }
+    guide.hidden = false;
+    guide.querySelector('button').addEventListener('click', () => {
+      const target = document.getElementById(select.value);
+      location.hash = target.id;
+      revealFragment();
+      target.tabIndex = -1;
+      target.focus({preventScroll:true});
+      target.scrollIntoView();
+    });
+    let scheduled = false;
+    function reflectChapter() {
+      scheduled = false;
+      if (guide.contains(document.activeElement)) return;
+      const current = entries.filter(({heading}) => heading.getClientRects().length && heading.getBoundingClientRect().top < innerHeight * .45).pop();
+      select.value = (current || entries[0]).heading.id;
+    }
+    window.addEventListener('scroll', () => {
+      if (!scheduled) { scheduled = true; requestAnimationFrame(reflectChapter); }
+    }, {passive:true});
+    reflectChapter();
+  }
   const pause = document.querySelector('.marquee-pause');
   const track = document.querySelector('.marquee-track');
   if (pause && track) {

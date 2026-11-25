@@ -42,12 +42,20 @@ async function main() {
       for (const item of original) {
         // Configuration-dependent messages were replaced by accurate initial states.
         const updated = new Map([
+          ['Print', 'Print Kit'],
+          ['Frequency reallocation served more trips in the model, with a travel-cost trade-off. Frozen research. Not an operating plan.', 'Frequency reallocation served more trips in the model, with a travel-cost trade-off.'],
+          ['Drop 001 · Full City Columbus · 8 × 10 in.', 'Drop 001 · Full City Columbus · 8 × 10 in. · Print at actual size.'],
+          ['Working paper / research frozen', 'Frozen research'],
+          ['Signal', 'Category / Condition'],
+          ['Place', 'Location / Stop / Intersection'],
+          ["What's missing?", "Observation / What's missing?"],
+          ['Card', 'Live card preview'],
           ['Submissions are unavailable while private intake is configured. You can save a card; saving does not send it to the project.', 'Checking private intake availability.'],
           ['Submissions unavailable', 'Checking availability'],
           ['Private intake is unavailable. You can prepare and save a field card; it will not be submitted.', 'Prepare a field card for private review. Saving a card keeps a local copy.'],
           ['A stop, a crossing, a missing piece. Private intake is unavailable; prepare and save your card for later.', 'A stop, a crossing, a missing piece. Record the condition and keep a local copy.']
         ]);
-        const index = built.indexOf(updated.get(item) || item);
+        const index = built.includes(item) ? built.indexOf(item) : built.indexOf(updated.get(item));
         if (index < 0) throw Error(file + ' missing ' + item);
         built.splice(index, 1);
       }
