@@ -46,8 +46,8 @@
         <a href="#chapter-city">Vision</a>
         <a href="work/">Research</a>
         <a href="#places">Places</a>
-        <a href="#campaigns">Print</a>
-        <a href="signal/">Report</a>
+        <a href="#campaigns">Print Kit</a>
+        <a href="#log">Signal Log</a>
       </nav>
     </header>
 
@@ -81,6 +81,10 @@
 
       <div class="chapter-band" id="chapter-city" role="heading" aria-level="2">The city</div>
       <p class="chapter-line">First geometry: earth. Second geometry: city.</p>
+      <nav class="chapter-guide" aria-label="Chapter guide" hidden>
+        <label for="chapter-choice">Edition / chapters</label>
+        <select id="chapter-choice"></select><button type="button">Go</button><a href="#top">Top ↑</a>
+      </nav>
       <section class="why-section" id="why" aria-labelledby="why-title">
         <div class="why-copy">
           <p class="kicker">00 / why this exists</p>
@@ -92,6 +96,7 @@
             streets, suburbs, hospitals, colleges, warehouses, towers, buses,
             empty walls, and fragments of greatness everywhere.
           </p>
+          <details class="city-notes"><summary>The shared signal</summary>
           <p>
             What it lacks is the shared signal. Too often Columbus feels like
             annexed suburbs orbiting a couple blocks of downtown. That is not
@@ -102,6 +107,7 @@
             But first the city needs an ethos people can feel, repeat, and
             improve.
           </p>
+          </details>
         </div>
         <div class="why-banner" aria-label="Project posture">
           <span>No money.</span>
@@ -332,12 +338,12 @@
         <h2 id="receipts-title">The signal has to survive contact with evidence.</h2>
         <p>Full City Columbus is not asking anyone to take the posters on faith. Research, models, field reports, corrections, sources, and unfinished work stay public.</p>
         <div class="receipts-grid">
-          <a class="receipt-card receipt-experiment" href="work/#cota-model"><span class="maturity">Working paper</span><h3>COTA Route Optimization</h3><p>Frequency reallocation served more trips in the model, with a travel-cost trade-off. Frozen research. Not an operating plan.</p><strong>Read the findings</strong></a>
+          <a class="receipt-card receipt-experiment" href="work/#cota-model"><span class="maturity">Working paper</span><span class="maturity">Frozen research</span><h3>COTA Route Optimization</h3><p>Frequency reallocation served more trips in the model, with a travel-cost trade-off.</p><small class="receipt-limit">Limit / Not an operating plan.</small><strong>Read the findings</strong></a>
 <details class="edition-fold"><summary>Other research and source notes</summary>
-<div class="reference-grid">          <a class="receipt-card" href="work/#transit"><span class="maturity">Draft / hardening</span><h3>Transit / COTA</h3><p>Service, stops, and the work between them.</p><strong>Open the work</strong></a>
-          <a class="receipt-card" href="work/#zoning"><span class="maturity">Draft</span><h3>Zoning / growth</h3><p>Put the code next to the street it produces.</p><strong>Open the work</strong></a>
-          <a class="receipt-card" href="work/#ai"><span class="maturity">Draft proposal</span><h3>AI infrastructure</h3><p>Public inputs deserve a checkable public return.</p><strong>Open the work</strong></a>
-          <a class="receipt-card" href="work/#history"><span class="maturity">Sourced notes</span><h3>History / Second Geometry</h3><p>Regional history, project interpretation, and myth named separately.</p><strong>Open the work</strong></a>
+<div class="reference-grid">          <a class="receipt-card" href="work/#transit"><span class="maturity">Draft / hardening</span><h3>Transit / COTA</h3><p>Service, stops, and the work between them.</p><small class="receipt-limit">Limit / Live service not reverified.</small><strong>Open the work</strong></a>
+          <a class="receipt-card" href="work/#zoning"><span class="maturity">Draft</span><h3>Zoning / growth</h3><p>Put the code next to the street it produces.</p><small class="receipt-limit">Limit / Current ordinance status not reverified.</small><strong>Open the work</strong></a>
+          <a class="receipt-card" href="work/#ai"><span class="maturity">Draft proposal</span><h3>AI infrastructure</h3><p>Public inputs deserve a checkable public return.</p><small class="receipt-limit">Limit / Proposal, not adopted policy.</small><strong>Open the work</strong></a>
+          <a class="receipt-card" href="work/#history"><span class="maturity">Sourced notes</span><h3>History / Second Geometry</h3><p>Regional history, project interpretation, and myth named separately.</p><small class="receipt-limit">Limit / Interpretation is not historical evidence.</small><strong>Open the work</strong></a>
 </div>
 </details>
         </div>
@@ -375,37 +381,37 @@
             <button type="button" aria-pressed="true">All</button><button type="button" aria-pressed="false">Corridors</button><button type="button" aria-pressed="false">Neighborhoods</button><button type="button" aria-pressed="false">Civic nodes</button>
           </div>
           <article data-place-key="morse-road">
-            <span>Morse Road</span>
+            <span>Morse Road</span><small class="place-tag">Corridor</small>
             <strong>Shop signs. Bus stops. Languages in motion.</strong>
             <em>Make the corridor visible without sanding it into a brochure.</em>
           </article>
           <article data-place-key="parsons-avenue">
-            <span>Parsons Avenue</span>
+            <span>Parsons Avenue</span><small class="place-tag">Corridor</small>
             <strong>South side line. Clinics, brick, churches, bars.</strong>
             <em>Name the room before you name the policy.</em>
           </article>
           <article data-place-key="franklinton">
-            <span>Franklinton</span>
+            <span>Franklinton</span><small class="place-tag">Neighborhood</small>
             <strong>River memory. Studios. Bridges. Homes that stay.</strong>
             <em>Beauty without displacement is the test.</em>
           </article>
           <article data-place-key="linden">
-            <span>Linden</span>
+            <span>Linden</span><small class="place-tag">Neighborhood</small>
             <strong>North side artery. Corners, schools, routes, youth rooms.</strong>
             <em>The city is not complete until this place is felt.</em>
           </article>
           <article data-place-key="the-hilltop">
-            <span>The Hilltop</span>
+            <span>The Hilltop</span><small class="place-tag">Neighborhood</small>
             <strong>West side gravity. Porches, repairs, routes, grit.</strong>
             <em>No fragment language. No pity lens. Build the body.</em>
           </article>
           <article id="place-broad-high" data-place-key="broad-and-high">
-            <span>Broad and High</span>
+            <span>Broad and High</span><small class="place-tag">Civic node</small>
             <strong>Axis, capital, crossing, signal.</strong>
             <em>The center is not a postcard. It is a public room.</em>
           </article>
+        <article id="place-mound-high" data-place-key="mound-and-high"><span>Mound &amp; High</span><small class="place-tag">Civic node</small><strong>A street name with a buried history.</strong><a href="https://github.com/NeoColumbus/Project-Columbus/blob/main/research/columbus-mounds.md">Documented history / source trail</a></article>
         </div>
-        <article id="place-mound-high" class="place-history" data-place-key="mound-and-high"><span>Mound &amp; High</span><strong>A street name with a buried history.</strong><a href="https://github.com/NeoColumbus/Project-Columbus/blob/main/research/columbus-mounds.md">Documented history / source trail</a></article>
 
 </details>
         <aside class="field-law" aria-label="Field law">
@@ -458,7 +464,7 @@
           <dialog class="print-viewer" aria-label="Campaign poster viewer">
             <form method="dialog"><button aria-label="Close poster viewer">Close</button></form>
             <img class="print-enlargement" src="assets/posters/001-earthworks-were-first.svg" alt="">
-            <p class="print-files">Drop 001 · Full City Columbus · 8 × 10 in. <a data-print-pdf>Print PDF</a> / <a data-print-svg download>Original SVG</a> / <a href="https://github.com/NeoColumbus/Project-Columbus/blob/main/LICENSE.md">License</a></p>
+            <p class="print-files">Drop 001 · Full City Columbus · 8 × 10 in. · Print at actual size. <a data-print-pdf>Print PDF</a> / <a data-print-svg download>Original SVG</a> / <a href="https://github.com/NeoColumbus/Project-Columbus/blob/main/LICENSE.md">License</a></p>
             <div class="print-controls"><button type="button" data-print-step="-1" aria-label="Previous poster">&larr;</button><p id="print-caption" role="status" aria-live="polite" aria-atomic="true"></p><button type="button" data-print-step="1" aria-label="Next poster">&rarr;</button></div>
           </dialog>
           <script src="print-viewer.js" defer></script>
@@ -719,7 +725,7 @@
           <!-- Email list: when a Buttondown (or similar) account exists, add its signup link here as a third button. -->
         </div>
       </section>
-      <details class="edition-links"><summary>Edition index</summary><nav aria-label="Edition resources"><a href="#why">Why</a><a href="#flag">Flag</a><a href="work/">Work</a><a href="proof/">Proof</a><a href="#campaigns">Posters</a><a href="#log">Signal log</a><a href="#top">Back to top</a></nav><nav aria-label="Project resources"><a href="#fork">Contribute</a><a href="https://github.com/NeoColumbus/Project-Columbus">Enter the repo</a><a href="#campaigns">Posters</a><a href="#campaigns">Campaign</a></nav>      <nav class="publication-index" aria-label="Publication chapters">
+      <details class="edition-links"><summary>Edition index</summary><nav aria-label="Edition resources"><a href="signal/">Report</a><a href="#why">Why</a><a href="#flag">Flag</a><a href="work/">Work</a><a href="proof/">Proof</a><a href="#campaigns">Posters</a><a href="#log">Signal log</a><a href="#top">Back to top</a></nav><nav aria-label="Project resources"><a href="#fork">Contribute</a><a href="https://github.com/NeoColumbus/Project-Columbus">Enter the repo</a><a href="#campaigns">Posters</a><a href="#campaigns">Campaign</a></nav>      <nav class="publication-index" aria-label="Publication chapters">
         <a href="#chapter-city">The city</a><a href="#chapter-work">The work</a><a href="#chapter-geography">The geography</a><a href="#chapter-signal">The signal</a><a href="#chapter-people">The people</a>
       </nav>
       <nav class="directory-paths" aria-label="Start here">

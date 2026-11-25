@@ -82,12 +82,13 @@
           </p>
           <p class="lead-note"><strong>LEAD</strong>: place, missing piece, one line. No photo link required. <strong>PROOF</strong>: the same claim with checkable evidence, checked by a maintainer before publication. Sending a card does not put it on the proof wall.</p>
           <p class="lead-note">Reports are screened before anything is published. Submissions begin as leads. Evidence is checked before a lead becomes proof. Keep personal details and secrets out; no visitor profile is created.</p>
+          <span class="maturity" id="inbox-state">Checking intake</span>
           <p class="lead-note" id="inbox-availability">Checking private intake availability.</p>
           <noscript><style>#inbox-availability,#submit-field-card { display:none }</style><p>Private submission and the card generator require JavaScript. You can still <a href="../#campaigns">open the print kit</a> or <a href="../work/">read the research</a>.</p></noscript>
         </div>
         <form class="field-card-form" aria-label="Field card generator">
           <label>
-            Signal
+            Category / Condition
             <select id="field-kind" name="kind">
               <option>Dead Wall</option>
               <option>Transit</option>
@@ -96,11 +97,11 @@
             </select>
           </label>
           <label>
-            Place
+            Location / Stop / Intersection
             <input id="field-place" name="place" type="text" minlength="3" maxlength="180" placeholder="Street, stop, wall, block, building" />
           </label>
           <label>
-            What's missing?
+            Observation / What's missing?
             <textarea id="field-break" name="break" rows="4" minlength="3" maxlength="500" placeholder="Describe the condition at this place."></textarea>
           </label>
           <label>
@@ -119,7 +120,7 @@
             <div id="field-turnstile"></div>
           </div>
           <label class="field-output">
-            Card
+            Live card preview
             <textarea id="field-card-output" readonly rows="10"></textarea>
           </label>
           <div class="final-actions field-send">
