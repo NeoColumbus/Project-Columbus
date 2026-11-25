@@ -3047,5 +3047,60 @@ h1, h2, h3, .brand, .marquee, .hero-stamp, .button, .poster, .word-wall, .hit-li
 .proof-grid .proof-card-entry { border-left:5px solid var(--green); padding-left:20px; }
 .proof-main .proof-hero { min-height:0; padding-block:96px 44px; }
 .proof-main .proof-deck { max-width:58ch; font:400 19px/1.5 Arial,sans-serif; text-transform:none; color:var(--bone); }
+
+/* Field atlas: one photographic plate and a typeset street index. */
+#places { background:var(--bone); align-items:start; }
+#places::before { display:none; }
+.place-photo { margin:32px 0 0; }
+.place-photo img { display:block; width:100%; aspect-ratio:3/2; object-fit:cover; }
+.place-photo figcaption { padding-block:10px; border-bottom:1px solid var(--bronze); font:13px/1.5 Consolas,monospace; }
+#places .place-ledger { display:block; border-top:4px solid var(--river-navy); }
+#places .place-ledger article { display:grid; grid-template-columns:1fr; gap:6px; min-height:0; padding:24px 4px; border:0; border-bottom:1px solid var(--bronze); background:transparent; color:var(--river-navy); }
+#places .place-ledger article::before { display:none; }
+#places .place-ledger span { color:var(--brick); font:700 14px/1.4 Consolas,monospace; }
+#places .place-ledger strong { margin:0; font:normal 27px/1.12 var(--display-font); text-transform:none; }
+#places .place-ledger em { margin:0; color:var(--river-navy); font:17px/1.5 Arial,sans-serif; text-transform:none; }
+.project-primer .primer-grid article { min-height:0; padding:20px 0; background:transparent; color:var(--river-navy); border:0; border-top:4px solid var(--brick); gap:16px; }
+.project-primer .primer-grid article :is(span,strong,em) { color:inherit; }
+.project-primer .primer-grid article em, .stack-grid li em, .dividend-list li span { font:17px/1.5 Arial,sans-serif; text-transform:none; }
+.stack-grid li { border-width:1px; }
+.campaign-wall .print-catalogue { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:32px 16px; margin:48px 0; }
+.print-catalogue a { display:block; color:var(--bone); text-decoration:none; }
+.print-catalogue img { display:block; width:100%; aspect-ratio:4/5; object-fit:contain; background:var(--bone); }
+.print-catalogue span { display:block; padding-block:10px; border-bottom:1px solid var(--bronze); font:700 15px/1.4 Consolas,monospace; }
+.print-catalogue a:hover span { text-decoration:underline; }
+.print-viewer { width:min(580px,94%); max-height:94dvh; margin:auto; padding:12px; border:1px solid var(--bronze); background:var(--river-navy); color:var(--bone); }
+.print-viewer::backdrop { background:#050606ed; }
+.print-viewer form { text-align:right; }
+.print-viewer button { min-width:44px; min-height:44px; background:var(--bone); color:var(--river-navy); border:0; cursor:pointer; font:700 16px/1 Consolas,monospace; }
+.print-viewer .print-enlargement { display:block; width:100%; height:min(64dvh,600px); object-fit:contain; }
+.print-controls { display:flex; align-items:center; justify-content:space-between; gap:8px; border-top:1px solid var(--bronze); padding-top:8px; }
+.print-controls p { font:700 15px/1.35 Consolas,monospace; margin:0; }
+.paper-cover { display:block; width:min(100%,240px); margin-top:24px; }
+.paper-cover img { display:block; width:100%; }
+.work-body .paper-finding { margin-bottom:0; padding:16px 20px 6px; background:var(--river-navy); color:var(--amber); }
+.work-body .paper-finding + p { margin-top:0; padding:8px 20px 20px; background:var(--river-navy); color:var(--bone); }
+.work-body .paper-finding + p .claim-label { background:var(--amber); color:var(--river-navy); }
+.inhabited-head > p:not(.kicker) { max-width:45ch; font:20px/1.55 Arial,sans-serif; text-transform:none; }
+.proof-wall-section [data-proof-status] { display:table; margin-bottom:20px; padding:8px 12px; background:var(--green); color:var(--bone); }
+.work-main #cota-model .work-heading { position:static; }
+.work-main .claim-label { display:inline-block; margin-right:6px; vertical-align:baseline; }
+.signal-action-grid .signal-action { display:grid; grid-template-columns:minmax(72px,32%) 1fr; align-content:center; gap:6px 16px; min-height:0; padding:16px; }
+.signal-action .choice-print { grid-row:span 3; align-self:center; width:100%; aspect-ratio:4/5; object-fit:contain; }
+.signal-action-grid .signal-action strong { font-size:22px; line-height:1.08; margin:0; }
+.signal-action-grid .signal-action em { font:16px/1.45 Arial,sans-serif; text-transform:none; }
+.field-card-form .field-output textarea { border-left:5px solid var(--amber); }
+.proof-main .founding-observations .receipts-grid { display:block; }
+.proof-main .founding-observations .receipt-card { display:grid; grid-template-columns:minmax(145px,.7fr) 1fr 1.35fr; align-items:start; gap:12px 26px; }
+.founding-observations .receipt-card strong { grid-column:2/-1; }
+.proof-main .proof-ledger p:not(.kicker) { max-width:60ch; font:19px/1.6 Arial,sans-serif; text-transform:none; }
+.signal-log .log-list li p,.final-call .participation-paths p { font:18px/1.55 Arial,sans-serif; text-transform:none; }
+@media(max-width:900px){
+  .campaign-wall .print-catalogue { grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px 12px; }
+  .proof-main .founding-observations .receipt-card { grid-template-columns:1fr; }
+  .founding-observations .receipt-card strong { grid-column:auto; }
+  .paper-cover { width:128px; }
+}
+@media(max-width:420px){ .signal-action-grid .signal-action { padding:12px; gap:6px 12px; } }
 @media(min-width:960px){ .work-main .work-heading { position:sticky; top:96px; } }
 @media(max-width:680px){ .proof-grid .proof-card { grid-template-columns:1fr; gap:6px; } }

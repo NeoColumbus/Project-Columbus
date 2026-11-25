@@ -226,6 +226,16 @@ const server = http.createServer((req, res) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto(base + '/site/');
     assert.equal(await page.locator('.receipt-card').count(), 5);
+    const firstPrint = page.locator('.print-catalogue a').first();
+    await firstPrint.click();
+    assert.equal(await page.locator('.print-viewer').isVisible(), true);
+    await page.keyboard.press('ArrowLeft');
+    assert.match(await page.locator('#print-caption').textContent(), /8 \/ 8/);
+    await page.getByRole('button', {name:'Next poster'}).click();
+    assert.match(await page.locator('#print-caption').textContent(), /1 \/ 8/);
+    await page.keyboard.press('Escape');
+    assert.equal(await page.locator('.print-viewer').isVisible(), false);
+    assert.equal(await firstPrint.evaluate(link => document.activeElement === link), true);
     assert.equal(await page.locator('.receipt-experiment').getAttribute('href'), 'work/#cota-model');
     const numbers = await page.locator('.kicker').allTextContents();
     assert.deepEqual(numbers.filter(t => /^\d{2} \//.test(t)).map(t => t.slice(0,2)), Array.from({ length:17 }, (_,i) => String(i).padStart(2,'0')));

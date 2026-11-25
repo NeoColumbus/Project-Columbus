@@ -1,5 +1,7 @@
 # Image Credits
 
+The neighborhood ledger uses `genoa-park-study.webp`, a resized WebP of the credited Genoa Park photograph below. The eight files in `posters/` are the project's original Drop 001 vector posters, reproduced from `street-kit/posters/`.
+
 ## `second-geometry-flag.svg`
 
 Original vector flag asset created for this project.
