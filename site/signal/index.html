@@ -65,75 +65,15 @@
             <a class="button primary" id="scan-action" href="#field-card">Name a place</a>
             <a class="button ghost" href="../work/">See the work</a>
           </div>
-          <div class="scan-context" id="scan-context" hidden><p class="kicker" id="scan-context-title"></p><p id="scan-context-copy"></p><a id="scan-context-link" href="../work/">Open the work</a></div>
         </div>
         <div class="signal-core" aria-hidden="true">
           <span></span>
         </div>
       </section>
 
-      <section class="signal-action-section" id="actions" aria-labelledby="actions-title">
-        <div class="wall-head">
-          <p class="kicker">01 / bring back proof</p>
-          <h2 id="actions-title">Pick one real place.</h2>
-          <p class="signal-gist">
-            Full City Columbus is an open-source signal for the city beneath
-            the city. We are building soul first: flag, myth, posters, tags,
-            photos, and field reports until Columbus feels like one body. Post
-            the mark, tag the place, name the missing piece, and send back
-            proof. The action comes after the city can see itself.
-          </p>
-        </div>
-        <div class="signal-action-grid">
-          <a
-            class="signal-action"
-            href="#field-card"
-            data-kind="Dead Wall"
-            data-break="Blank frontage. Dead street."
-            data-line="Density deserves beauty."
-          >
-            <span>Dead Wall</span>
-            <strong>Report a dead wall.</strong>
-            <em>Blank frontage. Dead street. Density deserves beauty.</em>
-          </a>
-          <a
-            class="signal-action"
-            href="#field-card"
-            data-kind="Transit"
-            data-break="Stop lacks shelter, shade, light, crossing, seating, route information, or dignity."
-            data-line="Transit is the nervous system."
-          >
-            <span>Transit</span>
-            <strong>Report a bus stop.</strong>
-            <em>Shelter, shade, crossing, light, route information, dignity.</em>
-          </a>
-          <a
-            class="signal-action"
-            href="#field-card"
-            data-kind="Neighborhood"
-            data-break="This place is treated like a fragment."
-            data-line="[Place] is not a fragment."
-          >
-            <span>Neighborhood</span>
-            <strong>Name the fragment.</strong>
-            <em>[Place] is not a fragment. It needs the missing piece.</em>
-          </a>
-          <a
-            class="signal-action"
-            href="#field-card"
-            data-kind="Machine"
-            data-break="Water, power, land, tax, compute, or data is being treated as extraction."
-            data-line="The machine pays tribute."
-          >
-            <span>Machine</span>
-            <strong>Make it pay tribute.</strong>
-            <em>Water. Power. Land. Tax. Compute. Data.</em>
-          </a>
-        </div>
-      </section>
-
       <section class="signal-field-card" id="field-card" aria-labelledby="field-card-title">
         <div class="field-card-copy">
+          <div class="scan-context" id="scan-context" hidden><p class="kicker" id="scan-context-title"></p><p id="scan-context-copy"></p><a id="scan-context-link" href="../work/">Open the work</a></div>
           <p class="kicker">02 / field card</p>
           <h2 id="field-card-title">Put a place on record.</h2>
           <p>
@@ -197,6 +137,70 @@
           </label>
           <p class="field-card-status" id="field-card-status" role="status" aria-live="polite"></p>
         </form>
+      </section>
+
+      <section class="signal-action-section" id="actions" aria-labelledby="actions-title">
+        <div class="wall-head">
+          <p class="kicker">01 / bring back proof</p>
+          <h2 id="actions-title">Pick one real place.</h2>
+          <p class="signal-gist">
+            Full City Columbus is an open-source signal for the city beneath
+            the city. We are building soul first: flag, myth, posters, tags,
+            photos, and field reports until Columbus feels like one body. Post
+            the mark, tag the place, name the missing piece, and send back
+            proof. The action comes after the city can see itself.
+          </p>
+        </div>
+        <div class="signal-action-grid">
+          <a
+            class="signal-action"
+            href="#field-card"
+            data-kind="Dead Wall"
+            data-break="Blank frontage. Dead street."
+            data-line="Density deserves beauty."
+          >
+            <img class="choice-print" src="../assets/posters/006-report-dead-wall.svg" alt="">
+            <span>Dead Wall</span>
+            <strong>Report a dead wall.</strong>
+            <em>Blank frontage. Dead street. Density deserves beauty.</em>
+          </a>
+          <a
+            class="signal-action"
+            href="#field-card"
+            data-kind="Transit"
+            data-break="Stop lacks shelter, shade, light, crossing, seating, route information, or dignity."
+            data-line="Transit is the nervous system."
+          >
+            <img class="choice-print" src="../assets/posters/007-cota-nervous-system.svg" alt="">
+            <span>Transit</span>
+            <strong>Report a bus stop.</strong>
+            <em>Shelter, shade, crossing, light, route information, dignity.</em>
+          </a>
+          <a
+            class="signal-action"
+            href="#field-card"
+            data-kind="Neighborhood"
+            data-break="This place is treated like a fragment."
+            data-line="[Place] is not a fragment."
+          >
+            <img class="choice-print" src="../assets/posters/008-no-more-half-city.svg" alt="">
+            <span>Neighborhood</span>
+            <strong>Name the fragment.</strong>
+            <em>[Place] is not a fragment. It needs the missing piece.</em>
+          </a>
+          <a
+            class="signal-action"
+            href="#field-card"
+            data-kind="Machine"
+            data-break="Water, power, land, tax, compute, or data is being treated as extraction."
+            data-line="The machine pays tribute."
+          >
+            <img class="choice-print" src="../assets/posters/005-machine-pays-tribute.svg" alt="">
+            <span>Machine</span>
+            <strong>Make it pay tribute.</strong>
+            <em>Water. Power. Land. Tax. Compute. Data.</em>
+          </a>
+        </div>
       </section>
 
       <section class="signal-proof-band" id="proof" aria-labelledby="proof-title">
