@@ -3,7 +3,7 @@
   const track = document.querySelector('.marquee-track');
   if (pause && track) {
     pause.hidden = false;
-    let paused = false;
+    let paused = true;
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     function updateMotion() {
       track.style.animationPlayState = paused || reduced.matches ? 'paused' : 'running';

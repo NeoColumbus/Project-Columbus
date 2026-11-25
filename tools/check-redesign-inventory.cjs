@@ -39,7 +39,14 @@ async function main() {
       inventory[file] = original;
       const built = await inspect(fs.readFileSync(path.join('dist/pages', file), 'utf8'));
       for (const item of original) {
-        const index = built.indexOf(item);
+        // Configuration-dependent messages were replaced by accurate initial states.
+        const updated = new Map([
+          ['Submissions are unavailable while private intake is configured. You can save a card; saving does not send it to the project.', 'Checking private intake availability.'],
+          ['Submissions unavailable', 'Checking availability'],
+          ['Private intake is unavailable. You can prepare and save a field card; it will not be submitted.', 'Prepare a field card for private review. Saving a card keeps a local copy.'],
+          ['A stop, a crossing, a missing piece. Private intake is unavailable; prepare and save your card for later.', 'A stop, a crossing, a missing piece. Record the condition and keep a local copy.']
+        ]);
+        const index = built.indexOf(updated.get(item) || item);
         if (index < 0) throw Error(file + ' missing ' + item);
         built.splice(index, 1);
       }

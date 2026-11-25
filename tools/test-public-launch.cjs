@@ -31,12 +31,17 @@ const server = http.createServer((req, res) => {
   await page.route('**/config.js', route => route.fulfill({ contentType: 'text/javascript', body: 'window.FULL_CITY_CONFIG={fieldSubmissionEnabled:false};' }));
   page.on('pageerror', error => errors.push(error.message));
   try {
-    for (const width of [320, 390, 768, 1024, 1100, 1440]) {
-      await page.setViewportSize({ width, height: 900 });
+    for (const width of [320, 360, 390, 768, 1024, 1100, 1440, 1920]) {
+      await page.setViewportSize({ width, height: width === 360 ? 640 : 900 });
       for (const route of ['/site/', '/site/work/', '/site/signal/', '/site/proof/']) {
         const response = await page.goto(base + route);
         assert.equal(response.status(), 200);
         await page.evaluate(() => document.fonts.ready);
+        await page.evaluate(async () => {
+          const deferred = Array.from(document.querySelectorAll('img[loading="lazy"]'));
+          for (const image of deferred) image.loading = 'eager';
+          await Promise.all(deferred.map(image => image.decode()));
+        });
         const broken = await page.evaluate(() => [...document.images].filter(img => !img.complete || !img.naturalWidth).map(img => img.src));
         assert.deepEqual(broken, [], route);
         assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, `overflow ${route} ${width}`);
@@ -79,6 +84,8 @@ const server = http.createServer((req, res) => {
         await page.screenshot({ path: path.join(output, `${route.split('/')[2] || 'home'}-${width}-viewport.png`) });
         if (route === '/site/') {
           const pause = page.locator('.marquee-pause');
+          assert.equal(await pause.getAttribute('aria-pressed'), 'true');
+          await pause.click();
           await pause.focus(); await page.keyboard.press('Enter');
           assert.equal(await pause.getAttribute('aria-pressed'), 'true');
           assert.equal(await page.locator('.marquee-track').evaluate(el => getComputedStyle(el).animationPlayState), 'paused');
@@ -93,7 +100,7 @@ const server = http.createServer((req, res) => {
             const a=boxes[i], b=boxes[j];
             assert.ok(a.right <= b.x || b.right <= a.x || a.bottom <= b.y || b.bottom <= a.y, `receipt collision at ${width}`);
           }
-          if (width >= 1100) assert.ok(boxes[4].width > boxes[0].width * 1.9, 'fifth receipt must span the row');
+          if (width >= 1100) assert.ok(boxes[0].width > boxes[1].width * 1.9, 'featured paper must span the opening row');
           await page.locator('#receipts').screenshot({ path: path.join(output, `receipts-${width}.png`) });
         }
         if (route === '/site/work/') {
@@ -158,7 +165,13 @@ const server = http.createServer((req, res) => {
     assert.equal(await page.locator('#field-kind').inputValue(), 'Legacy Signal');
     assert.equal(await page.locator('#field-line').inputValue(), 'Keep this');
     let submissions = 0;
-    await page.route('https://full-city-field-submission.neocolumbus.workers.dev/**', route => { submissions++; return route.fulfill({ status: 202, contentType: 'application/json', body: JSON.stringify({ ok: true, state: 'LEAD', queued: true }) }); });
+    let confirmReceipt;
+    const pendingReceipt = new Promise(resolve => { confirmReceipt = resolve; });
+    await page.route('https://full-city-field-submission.neocolumbus.workers.dev/**', async route => {
+      submissions++;
+      await pendingReceipt;
+      return route.fulfill({ status: 202, contentType: 'application/json', body: JSON.stringify({ ok: true, state: 'LEAD', queued: true }) });
+    });
     await page.locator('#field-place').fill('Test stop');
     await page.locator('#field-break').fill('Missing shelter');
     assert.equal(await page.locator('#submit-field-card').isDisabled(), true);
@@ -176,6 +189,9 @@ const server = http.createServer((req, res) => {
       assert.equal(await page.locator('#submit-field-card').textContent(), 'Send to project');
     }
     await page.locator('#submit-field-card').click();
+    await page.waitForFunction(() => document.querySelector('#field-card-status').textContent === 'Sending.');
+    assert.ok(await page.locator('#submit-field-card').isDisabled());
+    confirmReceipt();
     await page.waitForFunction(() => document.querySelector('#field-card-status').textContent.includes('private screening'));
     assert.equal(submissions, 1);
     for (const [key, limit] of [['place',180],['break',500],['line',240],['proof',900]]) assert.equal(await page.locator('#field-'+key).getAttribute('maxlength'), String(limit));
@@ -226,6 +242,26 @@ const server = http.createServer((req, res) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto(base + '/site/');
     assert.equal(await page.locator('.receipt-card').count(), 5);
+    await page.getByRole('button',{name:'Corridors',exact:true}).click();
+    assert.equal(await page.locator('[data-place-key]:visible').count(),2);
+    await page.getByRole('button',{name:'Civic nodes',exact:true}).click();
+    assert.equal(await page.locator('[data-place-key]:visible').count(),2);
+    await page.getByRole('button',{name:'All',exact:true}).click();
+    assert.equal(await page.locator('[data-place-key]:visible').count(),7);
+    const offline = await browser.newPage({javaScriptEnabled:false});
+    await offline.goto(base+'/site/signal/');
+    assert.ok((await offline.locator('body').innerText()).includes('Private submission and the card generator require JavaScript.'));
+    await offline.close();
+    const checking = await browser.newPage();
+    let releaseScript;
+    const pendingScript = new Promise(resolve => { releaseScript = resolve; });
+    await checking.route('**/signal.js',async route => {await pendingScript;await route.continue();});
+    await checking.goto(base+'/site/signal/',{waitUntil:'commit'});
+    assert.equal(await checking.locator('#inbox-availability').textContent(),'Checking private intake availability.');
+    await checking.route('**/challenges.cloudflare.com/**',route => route.abort());
+    releaseScript();
+    await checking.waitForLoadState('domcontentloaded');
+    await checking.close();
     const firstPrint = page.locator('.print-catalogue a').first();
     await firstPrint.click();
     assert.equal(await page.locator('.print-viewer').isVisible(), true);

@@ -26,6 +26,9 @@
     <meta name="twitter:description" content="Open-source civic myth, flag system, and campaign kit for Columbus." />
     <meta name="twitter:image" content="https://neocolumbus.github.io/Project-Columbus/site/assets/og-card.jpg" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="preload" href="assets/fonts/archivo-black-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" as="image" type="image/webp" media="(max-width:600px)" href="assets/neo-columbus-hero-mobile.webp">
+    <link rel="preload" as="image" type="image/webp" media="(min-width:601px)" href="assets/neo-columbus-hero.webp">
     <script src="navigation.js" defer></script>
     <script src="config.js" defer></script>
     <script src="intake-status.js" defer></script>
@@ -40,13 +43,12 @@
         <span>Full City Columbus</span>
       </a>
       <nav class="nav" aria-label="Page sections">
-        <a href="#why">Why</a>
-        <a href="work/">Work</a>
-        <a href="#flag">Flag</a>
-        <a href="signal/">Report</a>
-        <a href="proof/">Proof</a>
-        <a href="#campaigns">Posters</a>
+        <a href="#chapter-city">Vision</a>
+        <a href="work/">Research</a>
+        <a href="#places">Places</a>
+        <a href="#campaigns">Campaign</a>
         <a href="#fork">Contribute</a>
+        <a href="signal/">Report</a>
       </nav>
     </header>
 
@@ -63,12 +65,6 @@
             self-image of scattered fragments. Full City Columbus is the
             open-source signal: flag, posters, language, and civic pressure for
             the whole body.
-          </p>
-          <p class="declaration">
-            First geometry: earth. Second geometry: city.
-          </p>
-          <p class="signal">
-            Open source. No committee. Go get the city.
           </p>
           <div class="hero-actions" aria-label="Primary action">
             <a class="button primary" href="signal/#field-card">Make a field card</a>
@@ -89,6 +85,11 @@
         </p>
       </section>
 
+      <nav class="visitor-paths" aria-label="Start here">
+        <a href="#chapter-city"><strong>Explore the city</strong><span>Manifesto, places and Second Geometry</span></a>
+        <a href="work/"><strong>Inspect the work</strong><span>Working paper, evidence and sources</span></a>
+        <a href="#print-specs"><strong>Print &amp; build</strong><span>Posters, flag and field cards</span></a>
+      </nav>
       <div class="marquee" aria-label="Core slogans">
         <button class="marquee-pause" type="button" aria-pressed="false" aria-controls="slogan-track" hidden>Pause slogans</button>
         <div class="marquee-track" id="slogan-track">
@@ -116,7 +117,9 @@
       <nav class="publication-index" aria-label="Publication chapters">
         <a href="#chapter-city">The city</a><a href="#chapter-work">The work</a><a href="#chapter-geography">The geography</a><a href="#chapter-signal">The signal</a><a href="#chapter-people">The people</a>
       </nav>
+      <details class="edition-links"><summary>Edition index</summary><nav aria-label="Edition resources"><a href="#why">Why</a><a href="#flag">Flag</a><a href="work/">Work</a><a href="proof/">Proof</a><a href="#campaigns">Posters</a><a href="#log">Signal log</a><a href="#top">Back to top</a></nav></details>
       <div class="chapter-band" id="chapter-city" role="heading" aria-level="2">The city</div>
+      <p class="chapter-line">First geometry: earth. Second geometry: city.</p>
       <section class="why-section" id="why" aria-labelledby="why-title">
         <div class="why-copy">
           <p class="kicker">00 / why this exists</p>
@@ -234,11 +237,11 @@
         <h2 id="receipts-title">The signal has to survive contact with evidence.</h2>
         <p>Full City Columbus is not asking anyone to take the posters on faith. Research, models, field reports, corrections, sources, and unfinished work stay public.</p>
         <div class="receipts-grid">
+          <a class="receipt-card receipt-experiment" href="work/#cota-model"><span class="maturity">Working paper</span><h3>COTA Route Optimization</h3><p>Frequency reallocation served more trips in the model, with a travel-cost trade-off. Frozen research. Not an operating plan.</p><strong>Read the findings</strong></a>
           <a class="receipt-card" href="work/#transit"><span class="maturity">Draft / hardening</span><h3>Transit / COTA</h3><p>Service, stops, and the work between them.</p><strong>Open the work</strong></a>
           <a class="receipt-card" href="work/#zoning"><span class="maturity">Draft</span><h3>Zoning / growth</h3><p>Put the code next to the street it produces.</p><strong>Open the work</strong></a>
           <a class="receipt-card" href="work/#ai"><span class="maturity">Draft proposal</span><h3>AI infrastructure</h3><p>Public inputs deserve a checkable public return.</p><strong>Open the work</strong></a>
           <a class="receipt-card" href="work/#history"><span class="maturity">Sourced notes</span><h3>History / Second Geometry</h3><p>Regional history, project interpretation, and myth named separately.</p><strong>Open the work</strong></a>
-          <a class="receipt-card receipt-experiment" href="work/#cota-model"><span class="maturity">Working paper</span><h3>COTA Route Optimization</h3><p>Frequency reallocation served more trips in the model, with a travel-cost trade-off. Frozen research. Not an operating plan.</p><strong>Read the findings</strong></a>
         </div>
         <a class="button primary" href="work/">Open the receipts</a>
       </section>
@@ -386,6 +389,20 @@
           <figure class="place-photo"><img src="assets/genoa-park-study.webp" alt="Downtown Columbus seen from Genoa Park"><figcaption>View from Genoa Park · <a href="https://commons.wikimedia.org/wiki/File:Skyline_from_Genoa_Park.jpg">puroticorico / CC BY 2.0</a></figcaption></figure>
         </div>
         <div class="place-ledger" aria-label="Columbus place texture">
+          <figure class="atlas-plate">
+            <svg viewBox="0 0 480 150" role="img" aria-labelledby="rivers-title rivers-desc">
+              <title id="rivers-title">Scioto and Olentangy confluence</title>
+              <desc id="rivers-desc">Two named rivers meet and continue as the Scioto. Conceptual diagram, not to scale.</desc>
+              <path d="M8 108 H195 L247 90 H472 M95 14 L172 14 L247 90" fill="none" stroke="#4f8a74" stroke-width="10"/>
+              <circle cx="247" cy="90" r="13" fill="#f4b037" stroke="#061620" stroke-width="4"/>
+              <g fill="#f6f0e4" font-family="Arial,sans-serif" font-size="17"><text x="12" y="91">Scioto</text><text x="26" y="46">Olentangy</text><text x="270" y="126">Confluence</text></g>
+            </svg>
+            <figcaption>River confluence / schematic, not to scale</figcaption>
+            <nav class="atlas-crossings" aria-label="Civic crossings"><a href="#place-broad-high">Broad &amp; High</a><a href="#place-mound-high">Mound &amp; High</a></nav>
+          </figure>
+          <div class="atlas-filters" aria-label="Filter place entries" role="group" hidden>
+            <button type="button" aria-pressed="true">All</button><button type="button" aria-pressed="false">Corridors</button><button type="button" aria-pressed="false">Neighborhoods</button><button type="button" aria-pressed="false">Civic nodes</button>
+          </div>
           <article data-place-key="morse-road">
             <span>Morse Road</span>
             <strong>Shop signs. Bus stops. Languages in motion.</strong>
@@ -411,13 +428,13 @@
             <strong>West side gravity. Porches, repairs, routes, grit.</strong>
             <em>No fragment language. No pity lens. Build the body.</em>
           </article>
-          <article data-place-key="broad-and-high">
+          <article id="place-broad-high" data-place-key="broad-and-high">
             <span>Broad and High</span>
             <strong>Axis, capital, crossing, signal.</strong>
             <em>The center is not a postcard. It is a public room.</em>
           </article>
         </div>
-        <article class="place-history" data-place-key="mound-and-high"><span>Mound &amp; High</span><strong>A street name with a buried history.</strong><a href="https://github.com/NeoColumbus/Project-Columbus/blob/main/research/columbus-mounds.md">Documented history / source trail</a></article>
+        <article id="place-mound-high" class="place-history" data-place-key="mound-and-high"><span>Mound &amp; High</span><strong>A street name with a buried history.</strong><a href="https://github.com/NeoColumbus/Project-Columbus/blob/main/research/columbus-mounds.md">Documented history / source trail</a></article>
         <aside class="field-law" aria-label="Field law">
           <span>Field law</span>
           <strong>Place first. Proof second. Myth third. Then demand.</strong>
@@ -610,18 +627,19 @@
           <a href="assets/drop-001-poster-wall.svg"><img src="assets/drop-001-poster-wall.svg" alt="Drop 001 campaign artwork"><span>Drop 001 / View collection</span></a>
         </div>
         <div class="print-catalogue" aria-label="Individual campaign posters">
-          <a href="assets/posters/001-earthworks-were-first.svg"><img src="assets/posters/001-earthworks-were-first.svg" alt=""><span>Earthworks Were First</span></a>
-          <a href="assets/posters/002-signal-seen-confluence.svg"><img src="assets/posters/002-signal-seen-confluence.svg" alt=""><span>Signal Seen: Confluence</span></a>
-          <a href="assets/posters/003-center-before-seal.svg"><img src="assets/posters/003-center-before-seal.svg" alt=""><span>Center Before Seal</span></a>
-          <a href="assets/posters/004-pile-of-projects.svg"><img src="assets/posters/004-pile-of-projects.svg" alt=""><span>Pile of Projects</span></a>
-          <a href="assets/posters/005-machine-pays-tribute.svg"><img src="assets/posters/005-machine-pays-tribute.svg" alt=""><span>Machine Pays Tribute</span></a>
-          <a href="assets/posters/006-report-dead-wall.svg"><img src="assets/posters/006-report-dead-wall.svg" alt=""><span>Report a Dead Wall</span></a>
-          <a href="assets/posters/007-cota-nervous-system.svg"><img src="assets/posters/007-cota-nervous-system.svg" alt=""><span>COTA Is the Nervous System</span></a>
-          <a href="assets/posters/008-no-more-half-city.svg"><img src="assets/posters/008-no-more-half-city.svg" alt=""><span>No More Half-City</span></a>
+          <a href="assets/posters/001-earthworks-were-first.svg"><img loading="lazy" decoding="async" width="1080" height="1350" src="assets/posters/001-earthworks-were-first.svg" alt=""><span>Earthworks Were First</span></a>
+          <a href="assets/posters/002-signal-seen-confluence.svg"><img loading="lazy" decoding="async" width="1080" height="1350" src="assets/posters/002-signal-seen-confluence.svg" alt=""><span>Signal Seen: Confluence</span></a>
+          <a href="assets/posters/003-center-before-seal.svg"><img loading="lazy" decoding="async" width="1080" height="1350" src="assets/posters/003-center-before-seal.svg" alt=""><span>Center Before Seal</span></a>
+          <a href="assets/posters/004-pile-of-projects.svg"><img loading="lazy" decoding="async" width="1080" height="1350" src="assets/posters/004-pile-of-projects.svg" alt=""><span>Pile of Projects</span></a>
+          <a href="assets/posters/005-machine-pays-tribute.svg"><img loading="lazy" decoding="async" width="1080" height="1350" src="assets/posters/005-machine-pays-tribute.svg" alt=""><span>Machine Pays Tribute</span></a>
+          <a href="assets/posters/006-report-dead-wall.svg"><img loading="lazy" decoding="async" width="1080" height="1350" src="assets/posters/006-report-dead-wall.svg" alt=""><span>Report a Dead Wall</span></a>
+          <a href="assets/posters/007-cota-nervous-system.svg"><img loading="lazy" decoding="async" width="1080" height="1350" src="assets/posters/007-cota-nervous-system.svg" alt=""><span>COTA Is the Nervous System</span></a>
+          <a href="assets/posters/008-no-more-half-city.svg"><img loading="lazy" decoding="async" width="1080" height="1350" src="assets/posters/008-no-more-half-city.svg" alt=""><span>No More Half-City</span></a>
         </div>
           <dialog class="print-viewer" aria-label="Campaign poster viewer">
             <form method="dialog"><button aria-label="Close poster viewer">Close</button></form>
             <img class="print-enlargement" src="assets/posters/001-earthworks-were-first.svg" alt="">
+            <p class="print-files">Drop 001 · Full City Columbus · 8 × 10 in. <a data-print-pdf>Print PDF</a> / <a data-print-svg download>Original SVG</a> / <a href="https://github.com/NeoColumbus/Project-Columbus/blob/main/LICENSE.md">License</a></p>
             <div class="print-controls"><button type="button" data-print-step="-1" aria-label="Previous poster">&larr;</button><p id="print-caption" role="status" aria-live="polite" aria-atomic="true"></p><button type="button" data-print-step="1" aria-label="Next poster">&rarr;</button></div>
           </dialog>
           <script src="print-viewer.js" defer></script>
@@ -655,6 +673,7 @@
       </section>
 
       <div class="chapter-band" id="chapter-people" role="heading" aria-level="2">The people</div>
+      <p class="chapter-line">Open source. No committee. Go get the city.</p>
       <section class="final-call" id="fork" aria-labelledby="fork-title">
         <p class="kicker">15 / open source signal</p>
         <h2 id="fork-title">
@@ -667,12 +686,14 @@
           <span>Fork it. Make it useful. Make it beautiful. Send it back.</span>
         </p>
         <div class="participation-paths">
+          <div id="print-specs"><h3>Print specifications</h3><p>Posters: 8 × 10 inches, individual PDFs. Print at actual size. The vector flag scales independently.</p><a href="assets/second-geometry-flag.svg" download>Download flag SVG</a><a href="#campaigns">Browse individual prints</a></div>
+          <div><h3>Create a field card.</h3><p>Write a description, then copy or download it for your records.</p><a href="signal/#field-card">Open the notebook</a></div>
           <div><h3>Print the signal.</h3><p>Existing QR artwork. Print at actual size.</p>
             <a class="button primary" href="https://raw.githubusercontent.com/NeoColumbus/Project-Columbus/main/print-orders/drop-001-printer-ready-qr/full-city-posters-qr-8x10-all.pdf">Posters / 8 x 10 PDF</a>
             <a href="https://raw.githubusercontent.com/NeoColumbus/Project-Columbus/main/print-orders/drop-001-printer-ready-qr/full-city-stickers-qr-letter-all.pdf">Stickers / letter PDF</a>
             <a href="https://raw.githubusercontent.com/NeoColumbus/Project-Columbus/main/print-orders/drop-001-printer-ready-qr/posters-8x10-pdfs/007-cota-nervous-system-poster-qr-8x10.pdf">Transit poster / individual PDF</a>
           </div>
-          <div><h3>Report a place.</h3><p data-intake-note>A stop, a crossing, a missing piece. Private intake is unavailable; prepare and save your card for later.</p><a class="button primary" href="signal/#field-card" data-intake-action>Make a field card</a></div>
+          <div><h3>Report a place.</h3><p data-intake-note>A stop, a crossing, a missing piece. Record the condition and keep a local copy.</p><a class="button primary" href="signal/#field-card" data-intake-action>Make a field card</a></div>
           <div><h3>Follow the work.</h3><p>Dated changes. No invented momentum.</p><a class="button primary" href="#log">Read the signal log</a><a href="https://github.com/NeoColumbus/Project-Columbus/releases.atom">Release RSS</a><a href="https://github.com/NeoColumbus/Project-Columbus/releases">Project releases</a></div>
         </div>
         <p class="advanced-contribution"><a href="https://github.com/NeoColumbus/Project-Columbus/blob/main/CONTRIBUTING.md">Code, sources, corrections / contribute on GitHub</a></p>

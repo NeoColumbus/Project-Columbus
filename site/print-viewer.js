@@ -8,6 +8,9 @@
   function show(position) {
     index = (position + prints.length) % prints.length;
     image.src = prints[index].href;
+    viewer.querySelector('[data-print-svg]').href = image.src;
+    const basename = new URL(image.src).pathname.split('/').pop().replace('.svg', '');
+    viewer.querySelector('[data-print-pdf]').href = 'https://raw.githubusercontent.com/NeoColumbus/Project-Columbus/main/print-orders/drop-001-printer-ready-qr/posters-8x10-pdfs/' + basename + '-poster-qr-8x10.pdf';
     image.alt = prints[index].textContent.trim();
     caption.textContent = (index + 1) + ' / ' + prints.length + '   ' + image.alt;
   }
