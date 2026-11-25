@@ -31,7 +31,7 @@ const server = http.createServer((req, res) => {
   await page.route('**/config.js', route => route.fulfill({ contentType: 'text/javascript', body: 'window.FULL_CITY_CONFIG={fieldSubmissionEnabled:false};' }));
   page.on('pageerror', error => errors.push(error.message));
   try {
-    for (const width of [320, 390, 768, 1100, 1440]) {
+    for (const width of [320, 390, 768, 1024, 1100, 1440]) {
       await page.setViewportSize({ width, height: 900 });
       for (const route of ['/site/', '/site/work/', '/site/signal/', '/site/proof/']) {
         const response = await page.goto(base + route);

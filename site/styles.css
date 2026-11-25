@@ -2995,3 +2995,22 @@ h1, h2, h3, .brand, .marquee, .hero-stamp, .button, .poster, .word-wall, .hit-li
 .exhibition span { border-top: 1px solid var(--bronze); padding: 12px; font: bold 15px/1.5 Consolas,monospace; }
 .exhibition a:hover span { text-decoration: underline; }
 #field-card { scroll-margin-top: 0; }
+.chapter-band { padding: 16px max(20px,5%); border-block: 1px solid var(--bronze); background: var(--river-navy); color: var(--amber); font: 700 22px/1.25 Consolas,monospace; }
+.research-contents { display:flex; flex-wrap:wrap; padding-inline: max(20px,5%); background:var(--river-navy); color:var(--bone); }
+.research-contents a { padding:16px; border-left:1px solid var(--bronze); text-underline-offset:4px; }
+.work-main .work-heading { align-self:start; border-top:6px solid var(--brick); padding-top:20px; }
+.work-main #cota-model .work-heading { border-color:var(--river-navy); }
+.work-main .work-body p { line-height:1.62; }
+.work-body h3:has(+ p) { color:var(--brick); }
+.proof-wall-section { background:var(--bone); }
+.proof-wall-section .proof-grid { display:grid; grid-template-columns:1fr; gap:0; margin-top:32px; }
+.proof-grid .proof-card { min-height:0; display:grid; grid-template-columns:minmax(7rem,.5fr) 1fr 2fr; align-items:baseline; gap:20px; border:0; border-top:1px solid var(--bronze); padding:24px 0; background:var(--bone); color:var(--river-navy); }
+.proof-grid .proof-card :is(span,em,strong) { color:inherit; }
+.proof-grid .proof-card span { font:700 14px/1.5 Consolas,monospace; }
+.proof-grid .proof-card strong { font-size:28px; }
+.proof-grid .proof-card em { font:18px/1.5 Arial,sans-serif; }
+.proof-grid .proof-card-entry { border-left:5px solid var(--green); padding-left:20px; }
+.proof-main .proof-hero { min-height:0; padding-block:96px 44px; }
+.proof-main .proof-deck { max-width:58ch; font:400 19px/1.5 Arial,sans-serif; text-transform:none; color:var(--bone); }
+@media(min-width:960px){ .work-main .work-heading { position:sticky; top:96px; } }
+@media(max-width:680px){ .proof-grid .proof-card { grid-template-columns:1fr; gap:6px; } }

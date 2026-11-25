@@ -20,8 +20,10 @@ async function main() {
           for (const key of ['id','href','src','content','name','type','value','maxlength','alt'])
             if (element.hasAttribute(key)) entries.push(key + '=' + element.getAttribute(key));
           if (!['SCRIPT','STYLE'].includes(element.tagName))
-            for (const child of element.childNodes) if (child.nodeType === 3 && child.textContent.trim())
-              entries.push(child.textContent.trim().replace(/\s+/g, ' '));
+            for (const child of element.childNodes) if (child.nodeType === 3 && child.textContent.trim()) {
+              const copy = child.textContent.trim().replace(/\s+/g, ' ');
+              entries.push(element.matches('.kicker') ? copy.replace(/^\d{2} \/ /, '') : copy);
+            }
         }
         return entries;
       }, html);
