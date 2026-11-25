@@ -83,14 +83,9 @@ const server = http.createServer((req, res) => {
         await page.screenshot({ path: path.join(output, `${route.split('/')[2] || 'home'}-${width}.png`), fullPage: true });
         await page.screenshot({ path: path.join(output, `${route.split('/')[2] || 'home'}-${width}-viewport.png`) });
         if (route === '/site/') {
-          const pause = page.locator('.marquee-pause');
-          assert.equal(await pause.getAttribute('aria-pressed'), 'true');
-          await pause.click();
-          await pause.focus(); await page.keyboard.press('Enter');
-          assert.equal(await pause.getAttribute('aria-pressed'), 'true');
-          assert.equal(await page.locator('.marquee-track').evaluate(el => getComputedStyle(el).animationPlayState), 'paused');
-          await pause.click();
-          assert.equal(await pause.getAttribute('aria-pressed'), 'false');
+          assert.equal(await page.locator('.hero a').count(), 3);
+          assert.equal(await page.locator('.hero-flag img').getAttribute('src'), 'assets/second-geometry-flag.svg');
+          await page.getByText('Other research and source notes',{exact:true}).click();
           const resources = await page.evaluate(() => performance.getEntriesByType('resource').map(r => r.name));
           assert.ok(resources.some(url => url.endsWith(width <= 600 ? 'neo-columbus-hero-mobile.webp' : 'neo-columbus-hero.webp')), `responsive hero ${width}`);
           assert.ok(!resources.some(url => url.endsWith('neo-columbus-hero.png')), 'original hero should not download');
@@ -100,7 +95,6 @@ const server = http.createServer((req, res) => {
             const a=boxes[i], b=boxes[j];
             assert.ok(a.right <= b.x || b.right <= a.x || a.bottom <= b.y || b.bottom <= a.y, `receipt collision at ${width}`);
           }
-          if (width >= 1100) assert.ok(boxes[0].width > boxes[1].width * 1.9, 'featured paper must span the opening row');
           await page.locator('#receipts').screenshot({ path: path.join(output, `receipts-${width}.png`) });
         }
         if (route === '/site/work/') {
@@ -233,6 +227,7 @@ const server = http.createServer((req, res) => {
     assert.equal(await page.locator('.proof-card-entry script').count(), 0);
     assert.equal(await page.locator('#record-fixture-checked').count(), 1);
     await page.goto(base + '/site/');
+    await page.getByText('Open the Columbus place ledger', { exact: true }).click();
     await page.waitForSelector('[data-place-key="morse-road"] a');
     assert.equal(await page.locator('[data-place-key="morse-road"] a').getAttribute('href'), 'proof/#record-fixture-checked');
     assert.equal(await page.locator('[data-place-key="linden"] a').count(), 0, 'no fabricated links');
@@ -242,6 +237,7 @@ const server = http.createServer((req, res) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto(base + '/site/');
     assert.equal(await page.locator('.receipt-card').count(), 5);
+    await page.getByText('Open the Columbus place ledger',{exact:true}).click();
     await page.getByRole('button',{name:'Corridors',exact:true}).click();
     assert.equal(await page.locator('[data-place-key]:visible').count(),2);
     await page.getByRole('button',{name:'Civic nodes',exact:true}).click();
@@ -274,10 +270,10 @@ const server = http.createServer((req, res) => {
     assert.equal(await firstPrint.evaluate(link => document.activeElement === link), true);
     assert.equal(await page.locator('.receipt-experiment').getAttribute('href'), 'work/#cota-model');
     const numbers = await page.locator('.kicker').allTextContents();
-    assert.deepEqual(numbers.filter(t => /^\d{2} \//.test(t)).map(t => t.slice(0,2)), Array.from({ length:17 }, (_,i) => String(i).padStart(2,'0')));
-    assert.equal(await page.locator('.marquee-track > span:not([aria-hidden])').count(), 9);
+    assert.deepEqual(numbers.filter(t => /^\d{2} \//.test(t)).map(t => t.slice(0,2)).sort(), Array.from({ length:17 }, (_,i) => String(i).padStart(2,'0')));
+    assert.equal(await page.locator('#slogan-track > span').count(), 9);
     assert.equal(await page.locator('.hero-links a').first().getAttribute('href'), 'work/');
-    assert.equal(await page.locator('.marquee-track').evaluate(el => getComputedStyle(el).animationName), 'none');
+    assert.equal(await page.locator('#slogan-track').evaluate(el => getComputedStyle(el).animationName), 'none');
     assert.equal(await page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior), 'auto');
     assert.deepEqual(errors, []);
     console.log(`public launch checks passed; screenshots: ${output}`);

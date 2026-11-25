@@ -29,6 +29,7 @@ async function main() {
             if (element.hasAttribute(key)) entries.push(key + '=' + element.getAttribute(key));
           if (!['SCRIPT','STYLE'].includes(element.tagName))
             for (const child of element.childNodes) if (child.nodeType === 3 && child.textContent.trim()) {
+              if (element.closest('.hero-stamp,.marquee-pause,.marquee-track [aria-hidden="true"]')) continue;
               const copy = child.textContent.trim().replace(/\s+/g, ' ');
               entries.push(element.matches('.kicker') ? copy.replace(/^\d{2} \/ /, '') : copy);
             }

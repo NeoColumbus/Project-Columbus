@@ -1,4 +1,21 @@
 (function () {
+  function revealFragment() {
+    let id;
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch { return; }
+    const target = document.getElementById(id);
+    if (!target) return;
+    let opened = false;
+    for (let node = target; node; node = node.parentElement) {
+      if (node instanceof HTMLDetailsElement && !node.open) { node.open = true; opened = true; }
+    }
+    if (opened) target.scrollIntoView();
+  }
+  window.addEventListener('hashchange', revealFragment);
+  document.addEventListener('click', event => {
+    const link = event.target.closest('a[href^="#"]');
+    if (link && link.hash === location.hash) revealFragment();
+  });
+  revealFragment();
   const pause = document.querySelector('.marquee-pause');
   const track = document.querySelector('.marquee-track');
   if (pause && track) {
