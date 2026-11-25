@@ -6,6 +6,14 @@ const { chromium } = require('playwright');
 const baseline = 'b180185d6c9a95958bd846f6f3edbcd61c83fed7';
 const git = (...args) => execFileSync('git', args, { encoding: 'utf8' });
 async function main() {
+  const originals = 'street-kit/posters';
+  const posters = fs.readdirSync(originals).filter(name => name.endsWith('.svg') && !name.endsWith('-qr.svg')).sort();
+  const destination = 'dist/pages/site/assets/posters';
+  const assert = require('node:assert/strict');
+  assert.deepEqual(fs.readdirSync(destination).sort(), posters, 'Poster inventory changed');
+  for (const name of posters) {
+    assert.ok(fs.readFileSync(path.join(originals, name)).equals(fs.readFileSync(path.join(destination, name))), name + ' differs from its print original');
+  }
   const files = git('ls-tree', '-r', '--name-only', baseline).trim().split('\n')
     .filter(file => file === 'index.html' || /^site\/.*\.html$/.test(file));
   const browser = await chromium.launch();
