@@ -2995,6 +2995,41 @@ h1, h2, h3, .brand, .marquee, .hero-stamp, .button, .poster, .word-wall, .hit-li
 .exhibition span { border-top: 1px solid var(--bronze); padding: 12px; font: bold 15px/1.5 Consolas,monospace; }
 .exhibition a:hover span { text-decoration: underline; }
 #field-card { scroll-margin-top: 0; }
+
+/* The skyline doubles as a civic poster, with its own masthead register. */
+.hero .hero-stamp {
+  position:relative; inset:auto; display:flex; flex-wrap:wrap; align-items:baseline;
+  gap:0 .23em; width:100%; padding:14px 0 0; margin:36px 0 16px;
+  border:0; border-top:2px solid var(--amber); background:transparent;
+  color:var(--bone); font-size:38px; line-height:.98; text-align:left;
+}
+.hero .hero-stamp span:last-child { color:var(--amber); }
+@media(min-width:1150px) {
+  .hero .hero-stamp {
+    position:absolute; right:5%; top:16%; bottom:auto; width:38%; display:grid;
+    grid-template-columns:auto 1fr; column-gap:12px; font-size:58px;
+    text-shadow:0 2px 8px #061620; pointer-events:none;
+  }
+  .hero .hero-stamp span:last-child { grid-column:1/-1; font-size:72px; }
+  .hero .hero-copy { max-width:55%; }
+  .hero h1 { font-size:84px; }
+}
+.publication-index { border-block:1px solid var(--river-navy); }
+.publication-index a { position:relative; display:flex; align-items:center; gap:12px; border-right:0; }
+.publication-index a::before {
+  content:""; width:12px; height:12px; flex:none; border:3px solid var(--river-navy);
+  background:var(--amber); border-radius:50%;
+}
+.publication-index a + a { border-left:1px solid var(--bronze); }
+.exhibition a { border-top:4px solid var(--river-navy); }
+.exhibition a:focus-visible { outline:4px solid var(--amber); outline-offset:2px; }
+@media(max-width:760px) {
+  .hero { padding-top:48px; }
+  .hero .hero-stamp { order:-1; margin:0 0 26px; padding:9px 0; font-size:21px; }
+  .publication-index { display:grid; grid-template-columns:1fr 1fr; }
+  .publication-index a { border-bottom:1px solid var(--bronze); }
+  .publication-index a:last-child { grid-column:1/-1; }
+}
 .chapter-band { padding: 16px max(20px,5%); border-block: 1px solid var(--bronze); background: var(--river-navy); color: var(--amber); font: 700 22px/1.25 Consolas,monospace; }
 .research-contents { display:flex; flex-wrap:wrap; padding-inline: max(20px,5%); background:var(--river-navy); color:var(--bone); }
 .research-contents a { padding:16px; border-left:1px solid var(--bronze); text-underline-offset:4px; }

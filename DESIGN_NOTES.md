@@ -1,5 +1,7 @@
 # Civic publication edition
 
+The [Neutra VDL architecture feature](https://www.awwwards.com/sites/neutra-vdl) informed the open photographic field and ruled masthead. The [RVTA brand study](https://dribbble.com/shots/21677268-RVTA-Brand-Concept) informed the chapter index: a consistent stop marker, a legible destination, and large link targets. Both treatments use the existing Columbus palette and artwork.
+
 The five chapter links now follow the physical reading order. Section numbers follow that order while original section IDs remain available. Work opens with a register and the frozen working paper. The proof ledger precedes founding observations and displays field slots as ruled rows. On the Signal route the notebook follows the introduction, before the campaign action directory.
 
 The November QA pass exercised the built artifact at 320, 390, 768, 1024, 1100 and 1440 pixels. All 44 external link destinations in the primary and utility pages responded successfully to HTTP HEAD requests. This checks reachability. Internal anchor and download checks are in the launch suite.
